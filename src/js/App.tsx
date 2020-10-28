@@ -1,6 +1,7 @@
 // Import React and ReactDOM
 // Import Framework7 Styles
 import 'framework7/css/framework7.bundle.css'
+import 'leaflet/dist/leaflet.css'
 // Import Icons and App Custom Styles
 import '../css/icons.css'
 import '../css/app.scss'
