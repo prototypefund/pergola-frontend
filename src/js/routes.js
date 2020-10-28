@@ -3,6 +3,7 @@ import AboutPage from '../pages/about.jsx'
 import CatalogPage from '../pages/catalog.jsx'
 import DynamicRoutePage from '../pages/dynamic-route.jsx'
 import FormPage from '../pages/form.jsx'
+import GardenPage from '../pages/garden.tsx'
 import HomePage from '../pages/home.tsx'
 import ProductPage from '../pages/product.jsx'
 import RequestAndLoad from '../pages/request-and-load.jsx'
@@ -11,11 +12,15 @@ import SettingsPage from '../pages/settings.jsx'
 const routes = [
   {
     path: '/',
-    component: HomePage,
+    component: GardenPage,
   },
   {
     path: '/about/',
     component: AboutPage,
+  },
+  {
+    path: '/home/',
+    component: HomePage,
   },
   {
     path: '/form/',
