@@ -36,6 +36,7 @@
     "Samsung >= 5"
   ],
   "dependencies": {
+    "@community-garden/osmbuildings": "^4.1.1",
     "dom7": "^2.1.5",
     "framework7": "^5.7.13",
     "framework7-icons": "^3.0.1",
