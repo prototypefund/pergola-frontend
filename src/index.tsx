@@ -1,5 +1,6 @@
 import './css/icons.css'
 import './css/app.scss'
+import 'leaflet/dist/leaflet.css'
 
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
