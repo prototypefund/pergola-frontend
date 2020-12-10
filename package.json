@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "start": "npm run dev",
-    "dev": "cross-env NODE_ENV=development cross-env TARGET=web webpack serve --host 0.0.0.0 --config ./build/config/webpack/dev.js",
+    "dev": "cross-env NODE_ENV=development cross-env TARGET=web webpack serve --host 0.0.0.0 --port 8081 --config ./build/config/webpack/dev.js",
     "codegen": "gql-gen",
     "build-dev": "cross-env NODE_ENV=development node ./build/build.js",
     "build-prod": "cross-env NODE_ENV=production node ./build/build.js",
@@ -36,15 +36,24 @@
     "Samsung >= 5"
   ],
   "dependencies": {
-    "@material-ui/core": "^4.11.0",
+    "@material-ui/core": "^4.11.2",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/styles": "4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.56",
     "dom7": "^2.1.5",
     "framework7": "^5.7.13",
     "framework7-icons": "^3.0.1",
     "framework7-react": "^5.7.13",
+    "localforage": "1.9.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
+    "react-redux": "7.2.2",
+    "react-router-dom": "^5.2.0",
     "react-dom": "^16.13.1",
+    "redux-persist": "6.0.0",
+    "redux-thunk": "2.3.0",
+    "redux-devtools-extension": "2.13.8",
+    "redux-logger": "3.0.6",
     "template7": "^1.4.2"
   },
   "devDependencies": {
@@ -69,6 +78,8 @@
     "@types/react-dom": "^16.9.8",
     "@types/react-router-dom": "^5.1.6",
     "@types/recharts": "^1.8.16",
+    "@types/redux-logger": "3.0.7",
+    "@types/react-redux": "7.1.7",
     "@typescript-eslint/eslint-plugin": "^4.5.0",
     "@typescript-eslint/parser": "^4.5.0",
     "awesome-typescript-loader": "^5.2.1",

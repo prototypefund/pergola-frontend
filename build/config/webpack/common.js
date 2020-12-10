@@ -26,7 +26,7 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.(tsx|jsx)?$/,
+        test: /\.(ts|tsx|jsx)?$/,
         use: ['babel-loader', 'awesome-typescript-loader'],
       },
       {
@@ -61,18 +61,18 @@ module.exports = {
   plugins: [
     new CheckerPlugin(),
     new HtmlWebpackPlugin( {
-        filename: 'index.html',
-        template: resolvePath( 'src/index.ejs' ),
-        inject: true,
-        minify: env === 'production' ? {
-          collapseWhitespace: true,
-          removeComments: true,
-          removeRedundantAttributes: true,
-          removeScriptTypeAttributes: true,
-          removeStyleLinkTypeAttributes: true,
-          useShortDoctype: true
-        } : false,
-      } ),
+      filename: 'index.html',
+      template: resolvePath( 'src/index.ejs' ),
+      inject: true,
+      minify: env === 'production' ? {
+        collapseWhitespace: true,
+        removeComments: true,
+        removeRedundantAttributes: true,
+        removeScriptTypeAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        useShortDoctype: true
+      } : false,
+    } ),
     new CopyWebpackPlugin( {
       patterns: [
         {
@@ -87,11 +87,6 @@ module.exports = {
         },
       ],
     } ),
-    ...( !isCordova ? [
-      new WorkboxPlugin.InjectManifest( {
-        swSrc: resolvePath( 'src/service-worker.js' ),
-      } )
-    ] : [] ),
   ],
   performance: {
     hints: false,
