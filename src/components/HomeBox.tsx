@@ -1,6 +1,9 @@
 import { makeStyles, Paper, Theme, Typography } from '@material-ui/core'
 import * as React from 'react'
 
+import { Calendar } from './calendar'
+import { MyCalendar } from './MyCalendar'
+
 interface Props {
   size: number;
   color: 'red' | 'blue' | string;
@@ -11,11 +14,22 @@ export function HomeBox( props: Props ) {
   const classes = useStyles( props )
 
   return (
-    <Paper className={classes.box} {...other}>
-      <Typography variant="subtitle1" className={classes.text}>
-        I'm an example how to handle dynamic styles based on props
-      </Typography>
-    </Paper>
+    <div>
+      <Calendar />
+      {/* <MyCalendar dates={[
+        new Date( 2021, 4, 1 ),
+        new Date( 2021, 4, 2 ),
+        new Date( 2021, 4, 3 ),
+        new Date( 2021, 4, 4 ),
+        new Date( 2021, 4, 5 ),
+        new Date( 2021, 4, 6 ),
+        new Date( 2021, 4, 7 ),
+        new Date( 2021, 4, 8 ),
+        new Date( 2021, 4, 9 ),
+        new Date( 2021, 4, 10 ),
+        new Date( 2021, 4, 11 )
+      ]} /> */}
+    </div>
   )
 }
 
