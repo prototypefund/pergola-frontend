@@ -122,7 +122,7 @@ const useStyles = makeStyles(( theme: Theme ) => ( {
     alignItems: 'baseline',
     paddingTop: theme.spacing( 1 ),
     paddingBottom: theme.spacing( 1 ),
-    color: theme.palette.primary.light,
+    color: theme.palette.primary.contrastText,
   },
   content: {
     flex: '1 0 auto',
@@ -130,7 +130,7 @@ const useStyles = makeStyles(( theme: Theme ) => ( {
   },
   bottomBar: {
     flexShrink: 0,
-    color: theme.palette.primary.light,
+    color: theme.palette.primary.contrastText,
     background: theme.palette.primary.main,
   },
   appBarLeft: {
