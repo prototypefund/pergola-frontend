@@ -1,6 +1,9 @@
 // prettier-ignore
 import {
   AppBar,
+  BottomNavigation,
+  Container,
+  CssBaseline,
   Tab,
   Tabs,
   Toolbar,
@@ -52,51 +55,55 @@ function App() {
 
   return (
     <Router history={history}>
+      <CssBaseline />
       <div className={classes.root}>
-        <div className={classes.appFrame}>
-          <AppBar className={classes.appBar}>
-            <Toolbar>
-              <div className={classes.leftToolbarContainer}>
-                <Typography className={classes.title} variant="h3" noWrap>
-                  Pergola
-                </Typography>
-                <Typography variant="h6" color="inherit" noWrap={isMobile}>
-                  Wurzelwerk
-                </Typography>
-              </div>
-            </Toolbar>
-          </AppBar>
+        <AppBar className={classes.appBar} position="sticky">
+          <Toolbar className={classes.appBarLeft}>
+            <Typography className={classes.title} variant="h3" noWrap>
+              Pergola
+            </Typography>
+            <Typography variant="h6" color="inherit" noWrap={isMobile}>
+              Wurzelwerk
+            </Typography>
+          </Toolbar>
+          <Toolbar>Login</Toolbar>
+        </AppBar>
+        <Container maxWidth="sm" className={classes.content}>
           <Routes />
-          <AppBar className={classes.bottomBar}>
-            <Tabs centered>
-              <Tab
-                icon={<MapIcon />}
-                aria-label="garden map"
-                {...a11yTabProps( 0, 'map' )}
-              />
-              <Tab
-                icon={<WaterdropIcon />}
-                aria-label="watering"
-                {...a11yTabProps( 1, 'watering' )}
-              />
-              <Tab
-                icon={<CalendarIcon />}
-                aria-label="calendar"
-                {...a11yTabProps( 2, 'home' )}
-              />
-              <Tab
-                icon={<NotificationIcon />}
-                aria-label="mentioned"
-                {...a11yTabProps( 3, 'notifications' )}
-              />
-              <Tab
-                icon={<SettingsIcon />}
-                aria-label="settings"
-                {...a11yTabProps( 4, 'settings' )}
-              />
-            </Tabs>
-          </AppBar>
-        </div>
+        </Container>
+        <BottomNavigation
+          className={classes.bottomBar}
+          component="footer"
+          color="primary"
+        >
+          <Tabs centered>
+            <Tab
+              icon={<MapIcon />}
+              aria-label="garden map"
+              {...a11yTabProps( 0, 'map' )}
+            />
+            <Tab
+              icon={<WaterdropIcon />}
+              aria-label="watering"
+              {...a11yTabProps( 1, 'watering' )}
+            />
+            <Tab
+              icon={<CalendarIcon />}
+              aria-label="calendar"
+              {...a11yTabProps( 2, 'home' )}
+            />
+            <Tab
+              icon={<NotificationIcon />}
+              aria-label="mentioned"
+              {...a11yTabProps( 3, 'notifications' )}
+            />
+            <Tab
+              icon={<SettingsIcon />}
+              aria-label="settings"
+              {...a11yTabProps( 4, 'settings' )}
+            />
+          </Tabs>
+        </BottomNavigation>
       </div>
     </Router>
   )
@@ -105,34 +112,32 @@ function App() {
 const drawerWidth = 240
 const useStyles = makeStyles(( theme: Theme ) => ( {
   root: {
-    width: '100%',
     height: '100%',
-    zIndex: 1,
-    overflow: 'hidden',
-  },
-  appFrame: {
-    position: 'relative',
     display: 'flex',
-    width: '100%',
-    height: '100%',
+    flexDirection: 'column',
   },
-  leftToolbarContainer: {},
   appBar: {
-    minHeight: 128,
-    alignItems: 'flex-start',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'baseline',
     paddingTop: theme.spacing( 1 ),
-    paddingBottom: theme.spacing( 2 ),
-    zIndex: theme.zIndex.drawer + 1,
-    position: 'absolute',
+    paddingBottom: theme.spacing( 1 ),
+    color: theme.palette.primary.light,
+  },
+  content: {
+    flex: '1 0 auto',
+    backgroundColor: theme.palette.background.default,
   },
   bottomBar: {
-    top: 'auto',
-    bottom: 0,
+    flexShrink: 0,
+    color: theme.palette.primary.light,
+    background: theme.palette.primary.main,
   },
-  title: {
-    flexGrow: 1,
-    alignSelf: 'flex-end',
+  appBarLeft: {
+    flexDirection: 'column',
+    alignItems: 'start',
   },
+  title: {},
   navIconHide: {
     [theme.breakpoints.up( 'md' )]: {
       display: 'none',
@@ -146,16 +151,6 @@ const useStyles = makeStyles(( theme: Theme ) => ( {
       width: drawerWidth,
       position: 'relative',
       height: '100%',
-    },
-  },
-  content: {
-    backgroundColor: theme.palette.background.default,
-    width: '100%',
-    height: 'calc(100% - 56px)',
-    marginTop: 128,
-    [theme.breakpoints.up( 'sm' )]: {
-      height: 'calc(100% - 64px)',
-      marginTop: 64,
     },
   },
 } ))
