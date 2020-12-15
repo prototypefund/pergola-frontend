@@ -151,11 +151,11 @@ const useStyles = makeStyles(( theme: Theme ) => ( {
   content: {
     backgroundColor: theme.palette.background.default,
     width: '100%',
-    height: 'calc(100% - 56px)',
+    height: 'calc(100% - 128px)',
     marginTop: 128,
     [theme.breakpoints.up( 'sm' )]: {
-      height: 'calc(100% - 64px)',
-      marginTop: 64,
+      height: 'calc(100% - 128px)',
+      marginTop: 128,
     },
   },
 } ))
