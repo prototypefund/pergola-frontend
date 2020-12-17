@@ -25,3 +25,23 @@ body {
 #app {
   height: 100%;
 }
+
+
+hr.style0 {
+  max-width: 25px;
+  border: 2px solid white;
+  height: 0;
+  border-radius: 4px;
+}
+
+.MuiFilledInput-root {
+  background-color: rgba(255,255,255,0.8) !important;
+}
+
+.MuiTypography-root.MuiTypography-h2.page-title {
+
+  text-align: center;
+  font-family: Oswald, serif;
+  font-size: 1.5em;
+
+}
