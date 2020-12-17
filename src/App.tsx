@@ -23,7 +23,8 @@ import * as React from 'react'
 import { Link, Route, Router } from 'react-router-dom'
 
 import { history } from './configureStore'
-import { HomePage } from './pages'
+import { HomePage, Watering } from './pages'
+import { Login } from './components'
 import { withRoot } from './withRoot'
 
 function Routes() {
@@ -34,6 +35,7 @@ function Routes() {
     <div className={classes.content}>
       <Route exact={true} path="/" component={HomePage} />
       <Route exact={true} path="/home" component={HomePage} />
+      <Route exact={true} path="/watering" component={Watering} />
     </div>
   )
 }
@@ -66,7 +68,7 @@ function App() {
               Wurzelwerk
             </Typography>
           </Toolbar>
-          <Toolbar>Login</Toolbar>
+          <Toolbar><Login /></Toolbar>
         </AppBar>
         <Container maxWidth="sm" className={classes.content}>
           <Routes />

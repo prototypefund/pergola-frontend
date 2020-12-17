@@ -1,1 +1,2 @@
-export * from './HomePage'
+export {HomePage} from './HomePage'
+export {Watering} from './Watering'

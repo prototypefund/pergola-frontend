@@ -3,7 +3,9 @@ import { useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import { GardenSelectAction } from './garden-select'
+import { UserProfileAction } from './userProfile'
 
+export * from './userProfile'
 export * from './garden-select'
 
 export function useActions( actions: any, deps?: any ): any {
@@ -19,4 +21,4 @@ export function useActions( actions: any, deps?: any ): any {
   )
 }
 
-export type Action = GardenSelectAction;
+export type Action = GardenSelectAction | UserProfileAction
