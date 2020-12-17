@@ -25,6 +25,16 @@ const theme = createMuiTheme( {
       '800': '#424242', // dark
     },
   },
+  typography: {
+    fontFamily: [
+      'Open Sans',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join( ',' ),
+  },
 } )
 
 export function withRoot( Component: any ) {
