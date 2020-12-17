@@ -1,13 +1,14 @@
 // @ts-nocheck
 import Leaflet from 'leaflet'
-import React, { useState } from 'react'
+import * as React from 'react'
+import { useState } from 'react'
 import { Map, Marker, Popup, TileLayer, withLeaflet } from 'react-leaflet'
 
 import ReactLeaflet_PixiOverlay from './LeafletPixiOverlay'
 
 const WrappedPixiOverlay = withLeaflet( ReactLeaflet_PixiOverlay )
 
-function GardenMap() {
+export function GardenMap() {
   const [zoom] = useState<number>( 18 )
   const [position] = useState<Leaflet.LatLngExpression>( {
     lat: 51.0833,
@@ -32,6 +33,7 @@ function GardenMap() {
       style={{
         minHeight: '400px',
         height: '100%',
+        width: '100%',
       }}
       center={position}
       zoom={zoom}
@@ -53,5 +55,3 @@ function GardenMap() {
     </Map>
   ) as JSX.Element
 }
-
-export default GardenMap

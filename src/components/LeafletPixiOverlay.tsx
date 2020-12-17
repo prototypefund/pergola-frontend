@@ -4,6 +4,7 @@ import 'leaflet-draw/dist/leaflet.draw-src'
 
 import { Layer } from 'leaflet'
 import * as PIXI from 'pixi.js'
+import React from 'react'
 import { MapLayer, MapLayerProps } from 'react-leaflet'
 
 interface ReactLeaflet_PixiOverlayProps extends MapLayerProps {
