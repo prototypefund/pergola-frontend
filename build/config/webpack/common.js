@@ -52,9 +52,7 @@ module.exports = {
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
-        use: [
-          'file-loader?hash=sha512&digest=hex&name=img/[hash].[ext]',
-        ],
+        loader: 'file-loader',
       },
     ],
   },

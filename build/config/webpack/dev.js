@@ -26,6 +26,9 @@ module.exports = merge( commonConfig, {
   },
   devServer: {
     hot: true, // enable HMR on the server
+    historyApiFallback: {
+      index: 'index.html'
+    }
   },
   devtool: 'eval',
   plugins: [
