@@ -15,14 +15,6 @@ export function HomePage() {
     <div className={classes.root}>
       <div className={classes.centerContainer}>
         <HomeBox size={300} color={boxColor} />
-        <Button
-          className={classes.button}
-          onClick={onButtonClick}
-          variant="outlined"
-          color="primary"
-        >
-          Change Color
-        </Button>
       </div>
     </div>
   )
@@ -33,8 +25,8 @@ const useStyles = makeStyles( {
     height: '100%',
     textAlign: 'center',
     paddingTop: 20,
-    paddingLeft: 15,
-    paddingRight: 15,
+    paddingLeft: 10,
+    paddingRight: 10,
   },
 
   centerContainer: {
