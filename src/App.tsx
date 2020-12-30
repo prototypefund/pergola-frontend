@@ -20,6 +20,7 @@ import {
 } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/styles'
 import * as React from 'react'
+import {withLocalize} from 'react-localize-redux'
 import { Link, Route, Router } from 'react-router-dom'
 
 import { history } from './configureStore'
@@ -154,4 +155,4 @@ const useStyles = makeStyles(( theme: Theme ) => ( {
   },
 } ))
 
-export default withRoot( App )
+export default withLocalize( withRoot( App  ))
