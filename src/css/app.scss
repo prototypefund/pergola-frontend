@@ -13,6 +13,14 @@
   url('../fonts/oswald-regular-subset.svg#Oswald') format('svg'); /* Legacy iOS */
 }
 
+@font-face {
+  font-family: 'Pacifico';
+  src: url('../fonts/pacifico-regular-subset.eot');
+  src: url('../fonts/pacifico-regular-subset.eot?#iefix') format('embedded-opentype'), url('../fonts/pacifico-regular-subset.woff') format('woff'), url('../fonts/pacifico-regular-subset.ttf') format('truetype'), url('../fonts/pacifico-regular-subset.svg#Pacifico') format('svg');
+  font-style: normal;
+  font-weight: normal;
+}
+
 // Base
 //
 //
