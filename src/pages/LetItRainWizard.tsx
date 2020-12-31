@@ -1,3 +1,5 @@
+import 'dayjs/plugin/weekday'
+
 import {
   Box, Button, Container,
   Dialog, DialogActions,
@@ -9,6 +11,7 @@ import {
   Typography, useMediaQuery, useTheme
 } from '@material-ui/core'
 import {ArrowBack as ArrowBackIcon} from '@material-ui/icons'
+import dayjs from 'dayjs'
 import * as React from 'react'
 import {useState} from 'react'
 import {Link, RouteComponentProps, useHistory, useParams} from 'react-router-dom'
@@ -25,6 +28,8 @@ interface StepDesc {
   StepComponent: JSX.Element
 }
 
+const DAYS_COUNT = 14
+
 export function LetItRainWizard( {match}: RouteComponentProps ) {
   const theme = useTheme()
   const classes = useStyles()
@@ -32,8 +37,12 @@ export function LetItRainWizard( {match}: RouteComponentProps ) {
   const {stepNumber} = useParams<LetItRainWizardRouterProps>()
   const fullscreenDialog = useMediaQuery( theme.breakpoints.down( 'md' ))
 
+  const lastMondayDate = dayjs().weekday( -7 )
+  const calendarDates =  ( new Array( DAYS_COUNT )).fill( undefined )
+    .map(( _, i ) => lastMondayDate.add( i, 'day' ).toDate())
+
   const steps: StepDesc[] = [
-    {title: 'Termine', headline: 'Giessdienst eintragen', StepComponent: <Calendar/>},
+    {title: 'Termine', headline: 'Giessdienst eintragen', StepComponent: <Calendar dates={calendarDates}/>},
     {title: 'Hauefigekeit', headline: 'Giessdienst eintragen', StepComponent: <LetItRainFrequency/>},
     {title: 'Erinnerung', headline: 'Giessdienst eintragen', StepComponent: <Container>Bla</Container>},
   ]
