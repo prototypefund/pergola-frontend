@@ -1,4 +1,4 @@
-import {makeStyles, Paper, Theme, Typography} from '@material-ui/core'
+import {makeStyles, Theme, Typography} from '@material-ui/core'
 import * as React from 'react'
 
 export interface StepProps {
@@ -36,6 +36,7 @@ export function HorizontalStepper( {steps, activeStep}: StepperProps ) {
     <div className={classes.timeline}>
       <div className={classes.steps}>
         {steps.map(( title, i ) => ( <Step
+          key={i}
           first={i === 0}
           last={i === steps.length - 1}
           title={title}
