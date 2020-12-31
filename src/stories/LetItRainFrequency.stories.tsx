@@ -1,7 +1,7 @@
 import {Meta, Story} from '@storybook/react/types-6-0'
 import React from 'react'
 
-import { LetItRainFrequency } from '../pages/LetItRainFrequency'
+import { LetItRainFrequency } from '../components/LetItRainFrequency'
 
 export default {
   title: 'Pergola/LetItRainFrequency',
