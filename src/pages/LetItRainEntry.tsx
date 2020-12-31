@@ -1,8 +1,11 @@
-import {Box, Button, Container, Divider, makeStyles, Paper, Theme, Typography} from '@material-ui/core'
+import {Box, Button, Container, makeStyles, Paper, Typography} from '@material-ui/core'
 import {FormatColorReset as NoDropIcon, Opacity as DropIcon} from '@material-ui/icons'
 import dayjs, {Dayjs} from 'dayjs'
 import * as React from 'react'
 import {CSSProperties} from 'react'
+import {Link, Route, Switch} from 'react-router-dom'
+
+import {LetItRainWizard} from './LetItRainWizard'
 
 
 export function LetItRainEntry() {
@@ -65,8 +68,13 @@ export function LetItRainEntry() {
           <TinyDateBox date={today.add( 1, 'day' )} style={{backgroundColor: '#F6E6A2'}}/>
           <TinyDateBox date={today.add( 2, 'day' )} helpNeeded={true} style={{backgroundColor: '#FFBD4A'}}/>
         </Box>
+        <Switch>
+          <Route path='/watering/wizard/:stepNumber' component={LetItRainWizard} />
+        </Switch>
         <Box display='flex' flexDirection='column' justifyContent='flex-end' alignItems='center'>
-          <Button variant='contained' color='primary'>Giessdienst eintragen</Button>
+          <Link to='/watering/wizard/0' >
+            <Button variant='contained' color='primary'>Giessdienst eintragen</Button>
+          </Link>
           <Button>Kalender anschauen</Button>
         </Box>
       </Paper>

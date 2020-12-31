@@ -24,7 +24,8 @@ import {withLocalize} from 'react-localize-redux'
 import { Link, Route, Router } from 'react-router-dom'
 
 import { history } from './configureStore'
-import { HomePage, LandingPage } from './pages'
+import {GardenOverviewPage, HomePage, LandingPage} from './pages'
+import {LetItRainEntry} from './pages/LetItRainEntry'
 import { withRoot } from './withRoot'
 
 function Routes() {
@@ -33,9 +34,10 @@ function Routes() {
   // @ts-ignore
   return (
     <div className={classes.content}>
-      <Route exact={true} path="/" component={HomePage} />
-      <Route exact={true} path="/home" component={HomePage} />
-      <Route exact={true} path="/watering" component={LandingPage} />
+      <Route exact={true} path="/" component={LandingPage} />
+      <Route exact={true} path="/map" component={GardenOverviewPage} />
+      <Route exact={true} path="/home" component={LandingPage} />
+      <Route path="/watering" component={LetItRainEntry} />
     </div>
   )
 }

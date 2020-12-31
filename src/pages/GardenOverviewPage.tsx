@@ -13,7 +13,7 @@ export function GardenOverviewPage() {
         Wurzelwerk von oben
       </Typography>
       <hr className="style0" />
-      <Paper elevation={0}>
+      <Paper elevation={0} style={{height: 'calc(100% - 56px)'}}>
         <GardenMap />
       </Paper>
     </div>
@@ -23,5 +23,8 @@ export function GardenOverviewPage() {
 const useStyles = makeStyles(( theme: Theme ) => ( {
   page: {
     backgroundImage: `url(${BackgroundImage})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'fixed',
+    height: '100%'
   },
 } ))

@@ -48,7 +48,7 @@ export function LandingPage() {
   ]
 
   return (
-    <div className={classes.landingPage}>
+    <div className={classes.page}>
       <Container className={classes.titleAndChooser}>
         <Typography variant="h2">Pergola</Typography>
         <Typography variant="h5">Gemeinsam Gärtnern</Typography>
@@ -95,10 +95,11 @@ export function LandingPage() {
 }
 
 const useStyles = makeStyles(( theme: Theme ) => ( {
-  landingPage: {
+  page: {
     backgroundImage: `url(${BackgroundImage})`,
     backgroundSize: 'cover',
     backgroundPosition: 'fixed',
+    height: '100%'
   },
   gardenSelectContainer: {
     marginTop: '23px',
