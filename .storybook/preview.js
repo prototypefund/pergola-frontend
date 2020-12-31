@@ -5,10 +5,12 @@ import dayjs from "dayjs";
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import 'dayjs/locale/de'
 import 'dayjs/locale/en'
+import weekday from "dayjs/plugin/weekday";
 
 
 
 dayjs.extend(localizedFormat)
+dayjs.extend( weekday )
 
 
 // Import App Component

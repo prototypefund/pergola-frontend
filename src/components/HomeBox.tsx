@@ -1,8 +1,7 @@
 import { makeStyles, Paper, Theme, Typography } from '@material-ui/core'
 import * as React from 'react'
 
-import { Calendar } from './calendar'
-import { MyCalendar } from './MyCalendar'
+import { Calendar } from './Calendar'
 
 interface Props {
   size: number;
@@ -15,20 +14,24 @@ export function HomeBox( props: Props ) {
 
   return (
     <div>
-      <Calendar />
-      {/* <MyCalendar dates={[
-        new Date( 2021, 4, 1 ),
-        new Date( 2021, 4, 2 ),
-        new Date( 2021, 4, 3 ),
-        new Date( 2021, 4, 4 ),
-        new Date( 2021, 4, 5 ),
-        new Date( 2021, 4, 6 ),
-        new Date( 2021, 4, 7 ),
-        new Date( 2021, 4, 8 ),
-        new Date( 2021, 4, 9 ),
-        new Date( 2021, 4, 10 ),
-        new Date( 2021, 4, 11 )
-      ]} /> */}
+      <Calendar
+        dates={[
+          new Date( 2021, 4, 31 ),
+          new Date( 2021, 5, 1 ),
+          new Date( 2021, 5, 2 ),
+          new Date( 2021, 5, 3 ),
+          new Date( 2021, 5, 4 ),
+          new Date( 2021, 5, 5 ),
+          new Date( 2021, 5, 6 ),
+          new Date( 2021, 5, 7 ),
+          new Date( 2021, 5, 8 ),
+          new Date( 2021, 5, 9 ),
+          new Date( 2021, 5, 10 ),
+          new Date( 2021, 5, 11 ),
+          new Date( 2021, 5, 12 ),
+          new Date( 2021, 5, 13 ),
+        ]}
+      />
     </div>
   )
 }
