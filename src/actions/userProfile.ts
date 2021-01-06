@@ -1,7 +1,7 @@
-import {KeycloakProfile} from "keycloak-js"
+import {KeycloakProfile} from 'keycloak-js'
 
 export enum UserProfileActions {
-	SET_USER_PROFILE = "SET_USER_PROFILE"
+	SET_USER_PROFILE = 'SET_USER_PROFILE'
 }
 
 interface UserProfileActionType<T,P> {
@@ -10,9 +10,9 @@ interface UserProfileActionType<T,P> {
 }
 
 export type UserProfileAction =
-	UserProfileActionType<typeof UserProfileActions.SET_USER_PROFILE, KeycloakProfile>
+	UserProfileActionType<typeof UserProfileActions.SET_USER_PROFILE, KeycloakProfile | null>
 
-export function setUserProfile(profile: null|KeycloakProfile): UserProfileAction {
+export function setUserProfile( profile: null|KeycloakProfile ): UserProfileAction {
   return {type: UserProfileActions.SET_USER_PROFILE,
-          payload: profile}
+    payload: profile}
 }
