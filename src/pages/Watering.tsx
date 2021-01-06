@@ -1,10 +1,10 @@
-import * as React from 'react'
 import { gql, useQuery } from '@apollo/client'
 import { useKeycloak } from '@react-keycloak/web'
+import * as React from 'react'
 
 export function Watering() {
   const { keycloak } = useKeycloak()
-  const GET_WATERINGTASK = keycloak.hasRealmRole("developer") ?
+  const GET_WATERINGTASK = keycloak.hasRealmRole( 'developer' ) ?
     gql`
       {
         WateringTask {
@@ -22,16 +22,16 @@ export function Watering() {
         }
       }
     `
-  const { loading, data, error } = useQuery(GET_WATERINGTASK)
+  const { loading, data, error } = useQuery( GET_WATERINGTASK )
 
   return (
     <div>
       {loading && <p>Loading...</p>}
-      {error && console.log(error) && <p>Error</p>}
+      {error && console.log( error ) && <p>Error</p>}
       {data && !loading && !error && (
         <div>
-          <p> {JSON.stringify(data)} </p>
-      </div>
+          <p> {JSON.stringify( data )} </p>
+        </div>
       )}
     </div>
   )

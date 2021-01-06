@@ -22,10 +22,10 @@ import * as React from 'react'
 import {withLocalize} from 'react-localize-redux'
 import { Link, Route, Router } from 'react-router-dom'
 
+import { Login } from './components'
 import { history } from './configureStore'
 import {GardenOverviewPage, LandingPage} from './pages'
 import {LetItRainEntry} from './pages/LetItRainEntry'
-import { Login } from './components'
 import { withRoot } from './withRoot'
 
 function Routes() {
