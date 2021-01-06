@@ -6,6 +6,7 @@ import {CSSProperties} from 'react'
 import {Link, Route, Switch} from 'react-router-dom'
 
 import {LetItRainWizard} from './LetItRainWizard'
+import {Watering} from './Watering'
 
 
 export function LetItRainEntry() {
@@ -76,6 +77,7 @@ export function LetItRainEntry() {
             <Button variant='contained' color='primary'>Giessdienst eintragen</Button>
           </Link>
           <Button>Kalender anschauen</Button>
+          <Container><Watering/></Container>
         </Box>
       </Paper>
     </Container>
