@@ -1,13 +1,14 @@
 import 'dayjs/locale/de'
 import 'dayjs/locale/en'
 
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
+import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client'
+import { setContext } from '@apollo/client/link/context';
 import { Typography } from '@material-ui/core'
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import weekday from 'dayjs/plugin/weekday'
 import * as React from 'react'
-import { Provider } from 'react-redux'
+import { Provider, useDispatch } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 
 import App from './App'
@@ -16,28 +17,76 @@ import configureStore from './configureStore'
 dayjs.extend( localizedFormat )
 dayjs.extend( weekday )
 
+import Keycloak from 'keycloak-js'
+import { ReactKeycloakProvider, useKeycloak } from '@react-keycloak/web'
+
+import {setUserProfile} from './actions'
+
+//import {key} from 'localforage';
+
+const keycloak = Keycloak({
+  realm: "keycloak-connect-graphql", // process.env.REACT_APP_KEYCLOAK_REALM,
+  url: "http://localhost:8080/auth/", // process.env.REACT_APP_KEYCLOAK_URL,
+  clientId: "keycloak-connect-graphql-public" // process.env.REACT_APP_KEYCLOAK_CLIENT_ID
+})
+
 const uri =
   process.env.REACT_APP_GRAPHQL_URI || 'http://localhost:4001/graphql'
 const cache = new InMemoryCache()
 
-export const client = new ApolloClient( {
-  uri,
-  cache,
-} )
+function ApolloRoot({persistor}) {
+  const { keycloak } = useKeycloak()
+  const authLink = setContext((_, { headers }) => {
+    return {
+      headers: {
+        ...headers,
+        authorization: keycloak.token ? `Bearer ${keycloak.token}` : "",
+      }
+    }
+  });
+  const client = new ApolloClient({
+    link: authLink.concat(createHttpLink({uri})),
+    cache,
+  })
 
-const { persistor, store } = configureStore()
-
-export function ReduxRoot() {
   return (
     <ApolloProvider client={client}>
-      <Provider store={store}>
         <PersistGate
           loading={<Typography>Loading...</Typography>}
           persistor={persistor}
         >
           <App />
         </PersistGate>
-      </Provider>
     </ApolloProvider>
+  )
+}
+
+export function KeycloakRoot({persistor}) {
+  const dispatch = useDispatch()
+
+  return (
+    <ReactKeycloakProvider
+      authClient={keycloak}
+      onEvent={(event, error) => {
+        console.log('onKeycloakEvent', event, error)
+	if(event === "onAuthSuccess") {
+	  keycloak.loadUserProfile()
+                  .then(function(profile) {
+	            dispatch(setUserProfile(profile))
+                  })
+	}
+      }}>
+      <ApolloRoot persistor={persistor} />
+    </ReactKeycloakProvider>
+  )
+}
+
+export function ReduxRoot() {
+  const { persistor, store } = configureStore()
+
+  return (
+      <Provider store={store}>
+        <KeycloakRoot persistor={persistor} />
+      </Provider>
   )
 }

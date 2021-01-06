@@ -2,7 +2,6 @@
 import {
   AppBar,
   BottomNavigation,
-  Container,
   CssBaseline,
   Tab,
   Tabs,
@@ -24,8 +23,9 @@ import {withLocalize} from 'react-localize-redux'
 import { Link, Route, Router } from 'react-router-dom'
 
 import { history } from './configureStore'
-import {GardenOverviewPage, HomePage, LandingPage} from './pages'
+import {GardenOverviewPage, LandingPage} from './pages'
 import {LetItRainEntry} from './pages/LetItRainEntry'
+import { Login } from './components'
 import { withRoot } from './withRoot'
 
 function Routes() {
@@ -70,7 +70,7 @@ function App() {
               Wurzelwerk
             </Typography>
           </Toolbar>
-          <Toolbar>Login</Toolbar>
+          <Toolbar><Login /></Toolbar>
         </AppBar>
         <Routes />
         <BottomNavigation
