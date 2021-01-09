@@ -1,5 +1,6 @@
 import 'dayjs/plugin/weekday'
 
+import {gql, useMutation} from '@apollo/client'
 import {
   Box, Button, Container,
   Dialog, DialogActions,
@@ -30,22 +31,51 @@ interface StepDesc {
 
 const DAYS_COUNT = 14
 
+const SET_USER_AVAILABLITY_FOR_WATERING_PERIOD = gql`
+mutation  setUserAvailability($dates: [_Neo4jDateInput]!) { 
+  setUserAvailability(
+    dates: $dates
+  )
+}
+`
+
 export function LetItRainWizard( {match}: RouteComponentProps ) {
   const theme = useTheme()
   const classes = useStyles()
   const history = useHistory()
   const {stepNumber} = useParams<LetItRainWizardRouterProps>()
   const fullscreenDialog = useMediaQuery( theme.breakpoints.down( 'md' ))
+  const [availableDates, setAvailableDates] = useState<Array<Date>>( [] )
+
+  const [setUserAvailabilityMutation] =
+      useMutation<{ dates: Array<Date> }, any>( SET_USER_AVAILABLITY_FOR_WATERING_PERIOD,
+        {variables: {dates: availableDates.map( d => {
+          return {
+            year: d.getFullYear(),
+            month: d.getMonth(),
+            day: d.getDate()
+          }} )}} )
+
 
   const lastMondayDate = dayjs().weekday( -7 )
-  const calendarDates =  ( new Array( DAYS_COUNT )).fill( undefined )
+  const calendarDates = ( new Array( DAYS_COUNT )).fill( undefined )
     .map(( _, i ) => lastMondayDate.add( i, 'day' ).toDate())
 
   const steps: StepDesc[] = [
-    {title: 'Termine', headline: 'Giessdienst eintragen', StepComponent: <Calendar dates={calendarDates}/>},
+    {
+      title: 'Termine',
+      headline: 'Giessdienst eintragen',
+      StepComponent: <Calendar dates={calendarDates} onChange={( dates ) => {setAvailableDates( dates )}}/>
+    },
     {title: 'Hauefigekeit', headline: 'Giessdienst eintragen', StepComponent: <LetItRainFrequency/>},
     {title: 'Erinnerung', headline: 'Giessdienst eintragen', StepComponent: <Container>Bla</Container>},
   ]
+
+  const finishWizard = async () => {
+    const success = await setUserAvailabilityMutation()
+    console.log( success )
+    history.push( '/watering/thanks' )
+  }
 
 
   const getCurrentStepIndex = ( numStr: string ) => {
@@ -57,11 +87,12 @@ export function LetItRainWizard( {match}: RouteComponentProps ) {
   const currentStep = steps[currentStepIndex]
 
   return (
-    <Dialog fullScreen={fullscreenDialog} className={classes.dialog + ( fullscreenDialog ? '' : ' noFullscreen' )} open={true}>
+    <Dialog fullScreen={fullscreenDialog} className={classes.dialog + ( fullscreenDialog ? '' : ' noFullscreen' )}
+      open={true}>
       <DialogTitle>
         <Toolbar>
           <IconButton onClick={() => history.goBack()}><ArrowBackIcon/></IconButton>
-          <Typography variant="h6" >{currentStep.headline}</Typography>
+          <Typography variant="h6">{currentStep.headline}</Typography>
         </Toolbar>
       </DialogTitle>
       <DialogContent>
@@ -72,9 +103,7 @@ export function LetItRainWizard( {match}: RouteComponentProps ) {
       </DialogContent>
       <DialogActions>
         {currentStepIndex >= steps.length - 1
-          ? <Link to={ '/watering/thanks'} style={{width: '100%'}}>
-            <Button fullWidth variant='contained' color='primary'>fertig</Button>
-          </Link>
+          ? <Button fullWidth variant='contained' color='primary' onClick={() => finishWizard()}>fertig</Button>
           : <Link to={`/watering/wizard/${currentStepIndex + 1}`} style={{width: '100%'}}>
             <Button fullWidth variant='contained' color='primary'>weiter</Button>
           </Link>
