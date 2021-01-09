@@ -5,16 +5,33 @@ import {
   makeStyles,
   Theme,
 } from '@material-ui/core'
+import dayjs from 'dayjs'
 import React from 'react'
 
 interface Props {
   dates: Array<Date>;
+  onChange?: ( dates: Array<Date> ) => void;
 }
 
-export function Calendar( { dates = [] }: Props ) {
+export function Calendar( { dates = [], onChange }: Props ) {
   const classes = useStyles()
 
   const [dateCheckState, setDateCheckState] = React.useState( {} )
+  const [selectedDates, setSelectedDates] = React.useState<Array<Date>>( [] )
+
+  const _setDateCheckState = ( _dateCheckState: Object ) => {
+    setDateCheckState( _dateCheckState )
+    setSelectedDates( Object.keys( _dateCheckState )
+      .filter( checkDate => !!_dateCheckState[checkDate] )
+      .map( checkDate => new Date( checkDate )))
+    if( typeof onChange === 'function' )
+      onChange( selectedDates )
+  }
+
+  const dateIncluded: ( dates: Array<Date>, date: Date ) => boolean = ( dates, date ) => {
+    const dateStr = dayjs( date ).format( 'YYYY-MM-DD' )
+    return dates.map( d => dayjs( d ).format( 'YYYY-MM-DD' )).includes( dateStr )
+  }
 
   const daysOfWeek = new Map( [
     [1, 'Monday'],
@@ -68,7 +85,7 @@ export function Calendar( { dates = [] }: Props ) {
       const date = dates[key]
       relatedDateCheckStates[date.toString()] = event.target.checked
     } )
-    setDateCheckState( { ...dateCheckState, ...relatedDateCheckStates } )
+    _setDateCheckState( { ...dateCheckState, ...relatedDateCheckStates } )
   }
 
   const handleDayChange = ( event, dayOfWeek: number ) => {
@@ -80,7 +97,7 @@ export function Calendar( { dates = [] }: Props ) {
         relatedDateCheckStates[date.toString()] = event.target.checked
       }
     } )
-    setDateCheckState( { ...dateCheckState, ...relatedDateCheckStates } )
+    _setDateCheckState( { ...dateCheckState, ...relatedDateCheckStates } )
   }
 
   const handleCwChange = ( event, cw: number ) => {
@@ -97,11 +114,11 @@ export function Calendar( { dates = [] }: Props ) {
         relatedDateCheckStates[date.toString()] = event.target.checked
       }
     } )
-    setDateCheckState( { ...dateCheckState, ...relatedDateCheckStates } )
+    _setDateCheckState( { ...dateCheckState, ...relatedDateCheckStates } )
   }
 
   const handleDateChange = ( event, date: Date ) => {
-    setDateCheckState( {
+    _setDateCheckState( {
       ...dateCheckState,
       [date.toString()]: event.target.checked,
     } )
@@ -109,13 +126,13 @@ export function Calendar( { dates = [] }: Props ) {
 
   const AllDatesChecked = (): boolean => {
     return !dates.some(( date ) => {
-      return !dateCheckState[date.toString()]
+      return !dateIncluded( selectedDates, date )
     } )
   }
 
   const DayDatesChecked = ( dayOfWeek: number ): boolean => {
     return !dates.some(( date ) => {
-      return date.getDay() == dayOfWeek && !dateCheckState[date.toString()]
+      return date.getDay() == dayOfWeek && !dateIncluded( selectedDates, date )
     } )
   }
 
@@ -126,7 +143,7 @@ export function Calendar( { dates = [] }: Props ) {
         date.getMonth(),
         date.getDate()
       )
-      return dateCw == cw && !dateCheckState[date.toString()]
+      return dateCw == cw && !dateIncluded( selectedDates, date )
     } )
   }
 
@@ -180,19 +197,21 @@ export function Calendar( { dates = [] }: Props ) {
     )
   }
 
-  function DateCheckBox( props: { date: Date } ): React.ReactElement<any, any> {
+  function DateCheckBox( { date } ): React.ReactElement<{ date: Date }> {
     return (
-      <Checkbox
-        classes={{
-          root: classes.checkBox,
-          checked: classes.checkBoxChecked,
-        }}
-        checkedIcon={<CheckBoxIcon checked />}
-        icon={<CheckBoxIcon />}
-        color="primary"
-        onChange={( e ) => handleDateChange( e, props.date )}
-        checked={dateCheckState[props.date.toString()] || false}
-      />
+      <div>
+        <Checkbox
+          classes={{
+            root: classes.checkBox,
+            checked: classes.checkBoxChecked,
+          }}
+          checkedIcon={<CheckBoxIcon checked />}
+          icon={<CheckBoxIcon />}
+          color="primary"
+          onChange={( e ) => handleDateChange( e, date )}
+          checked={dateIncluded( selectedDates, date )}
+        />
+      </div>
     )
   }
 
