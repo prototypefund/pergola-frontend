@@ -16,21 +16,28 @@ interface Props {
 export function Calendar( { dates = [], onChange }: Props ) {
   const classes = useStyles()
 
-  const [dateCheckState, setDateCheckState] = React.useState( {} )
   const [selectedDates, setSelectedDates] = React.useState<Array<Date>>( [] )
 
-  const _setDateCheckState = ( _dateCheckState: Object ) => {
-    setDateCheckState( _dateCheckState )
-    setSelectedDates( Object.keys( _dateCheckState )
-      .filter( checkDate => !!_dateCheckState[checkDate] )
-      .map( checkDate => new Date( checkDate )))
-    if( typeof onChange === 'function' )
+  const toggleDates = ( dates: Array<Date>, selected: Boolean ) => {
+    // remove or add given dates from selected dates
+    const _selectedDates = selected
+      ? [
+        ...selectedDates,
+        ...dates.filter(( date ) => !dateIncluded( selectedDates, date )),
+      ]
+      : selectedDates.filter(( date ) => !dateIncluded( dates, date ))
+    setSelectedDates( _selectedDates )
+    if ( typeof onChange === 'function' ) {
       onChange( selectedDates )
+    }
   }
 
-  const dateIncluded: ( dates: Array<Date>, date: Date ) => boolean = ( dates, date ) => {
+  const dateIncluded: ( dates: Array<Date>, date: Date ) => boolean = (
+    dates,
+    date
+  ) => {
     const dateStr = dayjs( date ).format( 'YYYY-MM-DD' )
-    return dates.map( d => dayjs( d ).format( 'YYYY-MM-DD' )).includes( dateStr )
+    return dates.map(( d ) => dayjs( d ).format( 'YYYY-MM-DD' )).includes( dateStr )
   }
 
   const daysOfWeek = new Map( [
@@ -80,29 +87,29 @@ export function Calendar( { dates = [], onChange }: Props ) {
 
   const handleAllChange = ( event ) => {
     // (un)check all dates
-    const relatedDateCheckStates = {}
+    const relatedDates: Array<Date> = []
     Object.keys( dates ).forEach( function ( key ) {
       const date = dates[key]
-      relatedDateCheckStates[date.toString()] = event.target.checked
+      relatedDates.push( date )
     } )
-    _setDateCheckState( { ...dateCheckState, ...relatedDateCheckStates } )
+    toggleDates( relatedDates, event.target.checked )
   }
 
   const handleDayChange = ( event, dayOfWeek: number ) => {
     // (un)check each date with same day
-    const relatedDateCheckStates = {}
+    const relatedDates: Array<Date> = []
     Object.keys( dates ).forEach( function ( key ) {
       const date = dates[key]
       if ( date.getDay() == dayOfWeek ) {
-        relatedDateCheckStates[date.toString()] = event.target.checked
+        relatedDates.push( date )
       }
     } )
-    _setDateCheckState( { ...dateCheckState, ...relatedDateCheckStates } )
+    toggleDates( relatedDates, event.target.checked )
   }
 
   const handleCwChange = ( event, cw: number ) => {
     // (un)check date of this calendar week
-    const relatedDateCheckStates = {}
+    const relatedDates: Array<Date> = []
     Object.keys( dates ).forEach( function ( key ) {
       const date = dates[key]
       const dateCW = getCalendarWeekNumber(
@@ -111,17 +118,14 @@ export function Calendar( { dates = [], onChange }: Props ) {
         date.getDate()
       )
       if ( dateCW == cw ) {
-        relatedDateCheckStates[date.toString()] = event.target.checked
+        relatedDates.push( date )
       }
     } )
-    _setDateCheckState( { ...dateCheckState, ...relatedDateCheckStates } )
+    toggleDates( relatedDates, event.target.checked )
   }
 
   const handleDateChange = ( event, date: Date ) => {
-    _setDateCheckState( {
-      ...dateCheckState,
-      [date.toString()]: event.target.checked,
-    } )
+    toggleDates( [date], event.target.checked )
   }
 
   const AllDatesChecked = (): boolean => {
