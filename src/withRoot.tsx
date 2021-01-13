@@ -8,19 +8,21 @@ import * as React from 'react'
 const theme = createMuiTheme( {
   palette: {
     primary: {
-      light: '#e5e5e5',
-      main: '#13AB8C',
-      dark: '#363839',
+      light: '#b1e5d6',
+      main: '#009e7e',
+      dark: '#006f52',
       contrastText: '#fff',
     },
     secondary: {
-      light: '#ff5e50',
-      main: '#ffa200',
-      dark: '#a90000',
+      light: '#ffbd4e',
+      main: '#eb8d17',
+      dark: '#b35f00',
       contrastText: '#fff',
     },
     grey: {
-      '400': '#b4b4b4',
+      '200': '#eee', // light
+      '400': '#bdbdbd', // main
+      '800': '#424242', // dark
     },
   },
 } )
