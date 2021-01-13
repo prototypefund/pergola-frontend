@@ -9,7 +9,7 @@ import * as React from 'react'
 import { ReactNode } from 'react'
 
 type Props = {
-  children: ReactNode;
+  children?: ReactNode;
 };
 
 export function PaperDrop( { children }: Props ) {
