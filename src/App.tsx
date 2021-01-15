@@ -26,6 +26,7 @@ import { Login } from './components'
 import { history } from './configureStore'
 import {GardenOverviewPage, LandingPage} from './pages'
 import {LetItRainEntry} from './pages/LetItRainEntry'
+import { CalendarAndNotifications } from './pages/CalendarAndNotifications'
 import { withRoot } from './withRoot'
 
 function Routes() {
@@ -38,6 +39,7 @@ function Routes() {
       <Route exact={true} path="/map" component={GardenOverviewPage} />
       <Route exact={true} path="/home" component={LandingPage} />
       <Route path="/watering" component={LetItRainEntry} />
+      <Route path="/notifications" component={CalendarAndNotifications} />
     </div>
   )
 }
