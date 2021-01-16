@@ -10,7 +10,7 @@ export default {
   component: GardenMap,
 } as Meta
 
-const Template: Story<object> = ( args ) => <GardenMap />
+const Template: Story<object> = () => <GardenMap />
 
 export const GardenMapDefault = Template.bind( {} )
 GardenMapDefault.args = {}

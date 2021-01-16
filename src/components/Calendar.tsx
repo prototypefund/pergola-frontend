@@ -9,16 +9,16 @@ import dayjs from 'dayjs'
 import React from 'react'
 
 interface Props {
-  dates: Array<Date>;
-  onChange?: ( dates: Array<Date> ) => void;
+  dates: Date[];
+  onChange?: ( dates: Date[] ) => void;
 }
 
 export function Calendar( { dates = [], onChange }: Props ) {
   const classes = useStyles()
 
-  const [selectedDates, setSelectedDates] = React.useState<Array<Date>>( [] )
+  const [selectedDates, setSelectedDates] = React.useState<Date[]>( [] )
 
-  const toggleDates = ( dates: Array<Date>, selected: Boolean ) => {
+  const toggleDates = ( dates: Date[], selected: Boolean ) => {
     // remove or add given dates from selected dates
     const _selectedDates = selected
       ? [
@@ -27,12 +27,10 @@ export function Calendar( { dates = [], onChange }: Props ) {
       ]
       : selectedDates.filter(( date ) => !dateIncluded( dates, date ))
     setSelectedDates( _selectedDates )
-    if ( typeof onChange === 'function' ) {
-      onChange( selectedDates )
-    }
+    onChange?.( selectedDates )
   }
 
-  const dateIncluded: ( dates: Array<Date>, date: Date ) => boolean = (
+  const dateIncluded: ( dates: Date[], date: Date ) => boolean = (
     dates,
     date
   ) => {
@@ -50,7 +48,7 @@ export function Calendar( { dates = [], onChange }: Props ) {
     [0, 'Sunday'],
   ] )
 
-  const firstDate = dates[0]
+  const [firstDate] = dates
   const lastDate = dates[dates.length - 1]
 
   // TODO: Currently each calendar week needs 7 dates, otherwise we get wrong/missing checkboxes. How to fix this?
@@ -87,40 +85,40 @@ export function Calendar( { dates = [], onChange }: Props ) {
 
   const handleAllChange = ( event ) => {
     // (un)check all dates
-    const relatedDates: Array<Date> = []
-    Object.keys( dates ).forEach( function ( key ) {
+    const relatedDates: Date[] = []
+    for ( const key of Object.keys( dates )) {
       const date = dates[key]
       relatedDates.push( date )
-    } )
+    }
     toggleDates( relatedDates, event.target.checked )
   }
 
   const handleDayChange = ( event, dayOfWeek: number ) => {
     // (un)check each date with same day
-    const relatedDates: Array<Date> = []
-    Object.keys( dates ).forEach( function ( key ) {
+    const relatedDates: Date[] = []
+    for ( const key of Object.keys( dates )) {
       const date = dates[key]
-      if ( date.getDay() == dayOfWeek ) {
+      if ( date.getDay() === dayOfWeek ) {
         relatedDates.push( date )
       }
-    } )
+    }
     toggleDates( relatedDates, event.target.checked )
   }
 
   const handleCwChange = ( event, cw: number ) => {
     // (un)check date of this calendar week
-    const relatedDates: Array<Date> = []
-    Object.keys( dates ).forEach( function ( key ) {
+    const relatedDates: Date[] = []
+    for ( const key of Object.keys( dates )) {
       const date = dates[key]
       const dateCW = getCalendarWeekNumber(
         date.getFullYear(),
         date.getMonth(),
         date.getDate()
       )
-      if ( dateCW == cw ) {
+      if ( dateCW === cw ) {
         relatedDates.push( date )
       }
-    } )
+    }
     toggleDates( relatedDates, event.target.checked )
   }
 
@@ -136,7 +134,7 @@ export function Calendar( { dates = [], onChange }: Props ) {
 
   const DayDatesChecked = ( dayOfWeek: number ): boolean => {
     return !dates.some(( date ) => {
-      return date.getDay() == dayOfWeek && !dateIncluded( selectedDates, date )
+      return date.getDay() === dayOfWeek && !dateIncluded( selectedDates, date )
     } )
   }
 
@@ -147,7 +145,7 @@ export function Calendar( { dates = [], onChange }: Props ) {
         date.getMonth(),
         date.getDate()
       )
-      return dateCw == cw && !dateIncluded( selectedDates, date )
+      return dateCw === cw && !dateIncluded( selectedDates, date )
     } )
   }
 
@@ -228,7 +226,7 @@ export function Calendar( { dates = [], onChange }: Props ) {
   }
 
   return (
-    <div className={`${classes.wrapper}`}>
+    <div className={String( classes.wrapper )}>
       {/* TODO: Use js library to handle time span format including floating month and year */}
       <p>
         Zeitraum: {firstDate.getDate()}. -{' '}
@@ -242,7 +240,7 @@ export function Calendar( { dates = [], onChange }: Props ) {
         <FormControlLabel
           classes={{
             root: `${classes.checkBoxLabel} ${classes.headCheckBox}`,
-            label: `${classes.checkBoxLabelText}`,
+            label: String( classes.checkBoxLabelText ),
           }}
           control={<AllCheckBox />}
           label={'✓'}
@@ -252,7 +250,7 @@ export function Calendar( { dates = [], onChange }: Props ) {
             key={dayOfWeek}
             classes={{
               root: `${classes.checkBoxLabel} ${classes.headCheckBox}`,
-              label: `${classes.checkBoxLabelText}`,
+              label: String( classes.checkBoxLabelText ),
             }}
             control={<DayCheckBox dayOfWeek={dayOfWeek} />}
             label={daysOfWeek.get( dayOfWeek )}
@@ -264,7 +262,7 @@ export function Calendar( { dates = [], onChange }: Props ) {
           <FormControlLabel
             classes={{
               root: `${classes.checkBoxLabel} ${classes.headCheckBox}`,
-              label: `${classes.checkBoxLabelText}`,
+              label: String( classes.checkBoxLabelText ),
             }}
             control={<CwCheckBox cw={cw} />}
             label={`CW ${cw}`}

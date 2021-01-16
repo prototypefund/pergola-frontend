@@ -1,4 +1,6 @@
 // prettier-ignore
+import './css/app.scss'
+
 import {
   AppBar,
   BottomNavigation,
@@ -46,6 +48,7 @@ function Routes() {
 
 function a11yTabProps( index, route ) {
   return {
+    showLabel: false,
     component: Link,
     to: `/${route}`,
     id: `scrollable-prevent-tab-${index}`,
@@ -147,7 +150,7 @@ const useStyles = makeStyles(( theme: Theme ) => ( {
       display: 'none',
     },
   },
-  drawerHeader: { ...theme.mixins.toolbar },
+  drawerHeader: theme.mixins.toolbar,
   drawerPaper: {
     width: 250,
     backgroundColor: theme.palette.background.default,

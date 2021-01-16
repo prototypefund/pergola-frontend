@@ -106,7 +106,7 @@ export type AnalyticPlatformOsInput = {
 export type Analytics = {
   __typename?: 'Analytics';
   cursor?: Maybe<Scalars['ID']>;
-  list?: Maybe<Array<Maybe<Analytic>>>;
+  list?: Maybe<Maybe<Analytic>[]>;
 };
 
 export type AnalyticScreen = {
@@ -136,7 +136,7 @@ export type BankInput = {
 export type Companies = {
   __typename?: 'Companies';
   cursor?: Maybe<Scalars['ID']>;
-  list?: Maybe<Array<Maybe<Company>>>;
+  list?: Maybe<Maybe<Company>[]>;
 };
 
 export type Company = Node & {
@@ -148,7 +148,7 @@ export type Company = Node & {
   companyName: Scalars['String'];
   address: Address;
   taxNumber: Scalars['String'];
-  phones: Array<Scalars['String']>;
+  phones: Scalars['String'][];
   bank?: Maybe<Bank>;
   approved: Scalars['Boolean'];
   open: TimeWindow;
@@ -196,7 +196,7 @@ export type CompanyUpdate = {
   companyName: Scalars['String'];
   address: AddressInput;
   taxNumber: Scalars['String'];
-  phones: Array<Maybe<Scalars['String']>>;
+  phones: Maybe<Scalars['String']>[];
   bank?: Maybe<BankInput>;
   open: TimeWindowInput;
   website?: Maybe<Scalars['String']>;
@@ -228,11 +228,11 @@ export type Customer = Node & {
   vat?: Maybe<Scalars['String']>;
   notes?: Maybe<Scalars['String']>;
   invoiceNotesRequired?: Maybe<Scalars['Boolean']>;
-  contacts: Array<CustomerContact>;
+  contacts: CustomerContact[];
   cash?: Maybe<Scalars['Boolean']>;
   since?: Maybe<Scalars['Date']>;
   defaultPriceCategory?: Maybe<Scalars['ID']>;
-  categories?: Maybe<Array<Maybe<Scalars['String']>>>;
+  categories?: Maybe<Maybe<Scalars['String']>[]>;
 };
 
 export type CustomerContact = Contact & {
@@ -246,8 +246,8 @@ export type CustomerContact = Contact & {
   department?: Maybe<Scalars['String']>;
   building?: Maybe<Scalars['String']>;
   notes?: Maybe<Scalars['String']>;
-  type?: Maybe<Array<Maybe<CustomerContactType>>>;
-  invoiceVia?: Maybe<Array<Maybe<CustomerContactInvoiceVia>>>;
+  type?: Maybe<Maybe<CustomerContactType>[]>;
+  invoiceVia?: Maybe<Maybe<CustomerContactInvoiceVia>[]>;
 };
 
 export type CustomerContactInput = {
@@ -260,8 +260,8 @@ export type CustomerContactInput = {
   department?: Maybe<Scalars['String']>;
   building?: Maybe<Scalars['String']>;
   notes?: Maybe<Scalars['String']>;
-  type?: Maybe<Array<Maybe<CustomerContactType>>>;
-  invoiceVia?: Maybe<Array<Maybe<CustomerContactInvoiceVia>>>;
+  type?: Maybe<Maybe<CustomerContactType>[]>;
+  invoiceVia?: Maybe<Maybe<CustomerContactInvoiceVia>[]>;
 };
 
 export enum CustomerContactInvoiceVia {
@@ -283,17 +283,17 @@ export type CustomerCreate = {
   vat?: Maybe<Scalars['String']>;
   notes?: Maybe<Scalars['String']>;
   invoiceNotesRequired?: Maybe<Scalars['Boolean']>;
-  contacts: Array<CustomerContactInput>;
+  contacts: CustomerContactInput[];
   cash?: Maybe<Scalars['Boolean']>;
   since?: Maybe<Scalars['Date']>;
   defaultPriceCategory?: Maybe<Scalars['ID']>;
-  categories?: Maybe<Array<Maybe<Scalars['String']>>>;
+  categories?: Maybe<Maybe<Scalars['String']>[]>;
 };
 
 export type Customers = {
   __typename?: 'Customers';
   cursor?: Maybe<Scalars['ID']>;
-  list?: Maybe<Array<Maybe<Customer>>>;
+  list?: Maybe<Maybe<Customer>[]>;
 };
 
 export type CustomerUpdate = {
@@ -306,11 +306,11 @@ export type CustomerUpdate = {
   vat?: Maybe<Scalars['String']>;
   notes?: Maybe<Scalars['String']>;
   invoiceNotesRequired?: Maybe<Scalars['Boolean']>;
-  contacts: Array<CustomerContactInput>;
+  contacts: CustomerContactInput[];
   cash?: Maybe<Scalars['Boolean']>;
   since?: Maybe<Scalars['Date']>;
   defaultPriceCategory?: Maybe<Scalars['ID']>;
-  categories?: Maybe<Array<Maybe<Scalars['String']>>>;
+  categories?: Maybe<Maybe<Scalars['String']>[]>;
 };
 
 export type Distance = Node & {
@@ -340,7 +340,7 @@ export type Invitation = Node & {
 export type Invitations = {
   __typename?: 'Invitations';
   cursor?: Maybe<Scalars['ID']>;
-  list?: Maybe<Array<Maybe<Invitation>>>;
+  list?: Maybe<Maybe<Invitation>[]>;
 };
 
 export type Invoice = Node & {
@@ -356,8 +356,8 @@ export type Invoice = Node & {
   sent?: Maybe<Scalars['Boolean']>;
   paid?: Maybe<Scalars['Boolean']>;
   deleted?: Maybe<Scalars['Boolean']>;
-  activity?: Maybe<Array<Maybe<InvoiceActivity>>>;
-  creditNotes?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  activity?: Maybe<Maybe<InvoiceActivity>[]>;
+  creditNotes?: Maybe<Maybe<Scalars['ID']>[]>;
   creditNote?: Maybe<InvoiceCreditNote>;
 };
 
@@ -369,7 +369,7 @@ export type InvoiceActivity = {
   /** orders: [Order] */
   pdf?: Maybe<Scalars['String']>;
   sentVia?: Maybe<CustomerContactInvoiceVia>;
-  emails?: Maybe<Array<Maybe<Scalars['String']>>>;
+  emails?: Maybe<Maybe<Scalars['String']>[]>;
 };
 
 export enum InvoiceActivityAction {
@@ -412,13 +412,13 @@ export type InvoicePeriodInput = {
 
 export type InvoicePrices = {
   __typename?: 'InvoicePrices';
-  nettoByTaxRate?: Maybe<Array<Maybe<PriceByTaxRate>>>;
+  nettoByTaxRate?: Maybe<Maybe<PriceByTaxRate>[]>;
   netto?: Maybe<Scalars['Float']>;
   brutto?: Maybe<Scalars['Float']>;
 };
 
 export type InvoicePricesInput = {
-  nettoByTaxRate?: Maybe<Array<Maybe<PriceByTaxRateInput>>>;
+  nettoByTaxRate?: Maybe<Maybe<PriceByTaxRateInput>[]>;
   netto?: Maybe<Scalars['Float']>;
   brutto?: Maybe<Scalars['Float']>;
 };
@@ -426,7 +426,7 @@ export type InvoicePricesInput = {
 export type Invoices = {
   __typename?: 'Invoices';
   cursor?: Maybe<Scalars['ID']>;
-  list?: Maybe<Array<Maybe<Invoice>>>;
+  list?: Maybe<Maybe<Invoice>[]>;
 };
 
 export type InvoicesCreate = {
@@ -446,8 +446,8 @@ export type Me = {
   /** vehicle: Vehicle */
   bank?: Maybe<Bank>;
   role: UserRole;
-  invitations?: Maybe<Array<Maybe<Invitation>>>;
-  members?: Maybe<Array<Maybe<Member>>>;
+  invitations?: Maybe<Maybe<Invitation>[]>;
+  members?: Maybe<Maybe<Member>[]>;
   token: Scalars['String'];
 };
 
@@ -461,7 +461,7 @@ export type Member = Node & {
   id: Scalars['ID'];
   company: Company;
   user: User;
-  roles: Array<MemberRole>;
+  roles: MemberRole[];
   nickname: Scalars['String'];
 };
 
@@ -474,12 +474,12 @@ export enum MemberRole {
 export type Members = {
   __typename?: 'Members';
   cursor?: Maybe<Scalars['ID']>;
-  list?: Maybe<Array<Maybe<Member>>>;
+  list?: Maybe<Maybe<Member>[]>;
 };
 
 export type MemberUpdate = {
   id: Scalars['ID'];
-  roles: Array<MemberRole>;
+  roles: MemberRole[];
   nickname: Scalars['String'];
 };
 
@@ -529,7 +529,7 @@ export type Mutation = {
   invitationResend?: Maybe<Invitation>;
   invitationAccept?: Maybe<Invitation>;
   invitationDecline?: Maybe<Invitation>;
-  invoicesCreate?: Maybe<Array<Maybe<Invoice>>>;
+  invoicesCreate?: Maybe<Maybe<Invoice>[]>;
   invoiceUpdatePaid?: Maybe<Invoice>;
   invoiceSend?: Maybe<Invoice>;
   invoiceUpdate?: Maybe<Invoice>;
@@ -628,7 +628,7 @@ export type MutationInvoiceUpdatePaidArgs = {
 
 export type MutationInvoiceSendArgs = {
   id: Scalars['ID'];
-  emails?: Maybe<Array<Maybe<Scalars['String']>>>;
+  emails?: Maybe<Maybe<Scalars['String']>[]>;
 };
 
 export type MutationInvoiceUpdateArgs = {
@@ -710,7 +710,7 @@ export type MutationOrderTemplatePublishArgs = {
 
 export type MutationOrderTemplateScheduleArgs = {
   id: Scalars['ID'];
-  schedule: Array<Maybe<Scalars['Date']>>;
+  schedule: Maybe<Scalars['Date']>[];
 };
 
 export type MutationOrderTemplateUpdateArgs = {
@@ -767,9 +767,9 @@ export type Order = Node & {
   company: Company;
   customer?: Maybe<Customer>;
   cash?: Maybe<Scalars['Boolean']>;
-  points: Array<OrderPoint>;
+  points: OrderPoint[];
   priceCategory?: Maybe<Scalars['JSON']>;
-  fees: Array<Scalars['JSON']>;
+  fees: Scalars['JSON'][];
   courier?: Maybe<Member>;
   courierPayment?: Maybe<Scalars['Float']>;
   notes?: Maybe<Scalars['String']>;
@@ -781,21 +781,21 @@ export type Order = Node & {
    */
   prices?: Maybe<Scalars['JSON']>;
   status?: Maybe<OrderStatus>;
-  schedule?: Maybe<Array<Maybe<Scalars['Date']>>>;
+  schedule?: Maybe<Maybe<Scalars['Date']>[]>;
 };
 
 export type OrderCreate = {
   customer?: Maybe<Scalars['ID']>;
   cash?: Maybe<Scalars['Boolean']>;
-  points: Array<OrderPointInput>;
+  points: OrderPointInput[];
   priceCategory: Scalars['ID'];
-  fees: Array<Scalars['JSON']>;
+  fees: Scalars['JSON'][];
   courier?: Maybe<Scalars['ID']>;
   courierPayment?: Maybe<Scalars['Float']>;
   notes?: Maybe<Scalars['String']>;
   notesInternal?: Maybe<Scalars['String']>;
   prices?: Maybe<Scalars['JSON']>;
-  savePointsAsCocs?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  savePointsAsCocs?: Maybe<Maybe<Scalars['ID']>[]>;
 };
 
 export type OrderPoint = {
@@ -843,7 +843,7 @@ export type OrderPointInput = {
 export type Orders = {
   __typename?: 'Orders';
   cursor?: Maybe<Scalars['ID']>;
-  list?: Maybe<Array<Maybe<Order>>>;
+  list?: Maybe<Maybe<Order>[]>;
 };
 
 export enum OrderStatus {
@@ -861,15 +861,15 @@ export type OrderUpdate = {
   id: Scalars['ID'];
   customer?: Maybe<Scalars['ID']>;
   cash?: Maybe<Scalars['Boolean']>;
-  points: Array<OrderPointInput>;
+  points: OrderPointInput[];
   priceCategory: Scalars['ID'];
-  fees: Array<Scalars['JSON']>;
+  fees: Scalars['JSON'][];
   courier?: Maybe<Scalars['ID']>;
   courierPayment?: Maybe<Scalars['Float']>;
   notes?: Maybe<Scalars['String']>;
   notesInternal?: Maybe<Scalars['String']>;
   prices?: Maybe<Scalars['JSON']>;
-  savePointsAsCocs?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  savePointsAsCocs?: Maybe<Maybe<Scalars['ID']>[]>;
 };
 
 export type PriceByTaxRate = {
@@ -892,7 +892,7 @@ export type Query = {
   company?: Maybe<Company>;
   companies?: Maybe<Companies>;
   companiesForGuest?: Maybe<Companies>;
-  companiesSearchByCity?: Maybe<Array<Maybe<Company>>>;
+  companiesSearchByCity?: Maybe<Maybe<Company>[]>;
   customer?: Maybe<Customer>;
   customers?: Maybe<Customers>;
   invitation?: Maybe<Invitation>;
@@ -900,15 +900,15 @@ export type Query = {
   invoices?: Maybe<Invoices>;
   member?: Maybe<Member>;
   members?: Maybe<Members>;
-  priceCategories?: Maybe<Array<Maybe<Scalars['JSON']>>>;
-  priceCategoriesForGuest?: Maybe<Array<Maybe<Scalars['JSON']>>>;
+  priceCategories?: Maybe<Maybe<Scalars['JSON']>[]>;
+  priceCategoriesForGuest?: Maybe<Maybe<Scalars['JSON']>[]>;
   order?: Maybe<Order>;
   orders?: Maybe<Orders>;
   /** orderSchedule(orderId: ID!, pointId: ID!): OrderSchedule */
-  ordersForInvoices?: Maybe<Array<Maybe<Order>>>;
+  ordersForInvoices?: Maybe<Maybe<Order>[]>;
   orderTemplate?: Maybe<Order>;
   orderTemplates?: Maybe<Orders>;
-  orderTemplatesForCustomer?: Maybe<Array<Maybe<Order>>>;
+  orderTemplatesForCustomer?: Maybe<Maybe<Order>[]>;
   me?: Maybe<Me>;
   user?: Maybe<User>;
   users?: Maybe<Users>;
@@ -1089,7 +1089,7 @@ export enum UserRole {
 export type Users = {
   __typename?: 'Users';
   cursor?: Maybe<Scalars['ID']>;
-  list?: Maybe<Array<Maybe<User>>>;
+  list?: Maybe<Maybe<User>[]>;
 };
 
 export type UserUpdate = {
@@ -1196,9 +1196,7 @@ export type SubscriptionResolver<
   TContext = {},
   TArgs = {}
 > =
-  | ((
-      ...args: any[]
-    ) => SubscriptionObject<TResult, TKey, TParent, TContext, TArgs> )
+  | (() => SubscriptionObject<TResult, TKey, TParent, TContext, TArgs> )
   | SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>;
 
 export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
@@ -1510,7 +1508,7 @@ export type AnalyticsResolvers<
 > = {
   cursor?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   list?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['Analytic']>>>,
+    Maybe<Maybe<ResolversTypes['Analytic']>[]>,
     ParentType,
     ContextType
   >;
@@ -1542,7 +1540,7 @@ export type CompaniesResolvers<
 > = {
   cursor?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   list?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['Company']>>>,
+    Maybe<Maybe<ResolversTypes['Company']>[]>,
     ParentType,
     ContextType
   >;
@@ -1564,7 +1562,7 @@ export type CompanyResolvers<
   companyName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   address?: Resolver<ResolversTypes['Address'], ParentType, ContextType>;
   taxNumber?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  phones?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  phones?: Resolver<ResolversTypes['String'][], ParentType, ContextType>;
   bank?: Resolver<Maybe<ResolversTypes['Bank']>, ParentType, ContextType>;
   approved?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   open?: Resolver<ResolversTypes['TimeWindow'], ParentType, ContextType>;
@@ -1663,11 +1661,7 @@ export type CustomerResolvers<
     ParentType,
     ContextType
   >;
-  contacts?: Resolver<
-    Array<ResolversTypes['CustomerContact']>,
-    ParentType,
-    ContextType
-  >;
+  contacts?: Resolver<ResolversTypes['CustomerContact'][], ParentType, ContextType>;
   cash?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   since?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   defaultPriceCategory?: Resolver<
@@ -1676,7 +1670,7 @@ export type CustomerResolvers<
     ContextType
   >;
   categories?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['String']>>>,
+    Maybe<Maybe<ResolversTypes['String']>[]>,
     ParentType,
     ContextType
   >;
@@ -1701,12 +1695,12 @@ export type CustomerContactResolvers<
   building?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   notes?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   type?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['CustomerContactType']>>>,
+    Maybe<Maybe<ResolversTypes['CustomerContactType']>[]>,
     ParentType,
     ContextType
   >;
   invoiceVia?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['CustomerContactInvoiceVia']>>>,
+    Maybe<Maybe<ResolversTypes['CustomerContactInvoiceVia']>[]>,
     ParentType,
     ContextType
   >;
@@ -1719,7 +1713,7 @@ export type CustomersResolvers<
 > = {
   cursor?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   list?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['Customer']>>>,
+    Maybe<Maybe<ResolversTypes['Customer']>[]>,
     ParentType,
     ContextType
   >;
@@ -1774,7 +1768,7 @@ export type InvitationsResolvers<
 > = {
   cursor?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   list?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['Invitation']>>>,
+    Maybe<Maybe<ResolversTypes['Invitation']>[]>,
     ParentType,
     ContextType
   >;
@@ -1801,12 +1795,12 @@ export type InvoiceResolvers<
   paid?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   deleted?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   activity?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['InvoiceActivity']>>>,
+    Maybe<Maybe<ResolversTypes['InvoiceActivity']>[]>,
     ParentType,
     ContextType
   >;
   creditNotes?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['ID']>>>,
+    Maybe<Maybe<ResolversTypes['ID']>[]>,
     ParentType,
     ContextType
   >;
@@ -1836,7 +1830,7 @@ export type InvoiceActivityResolvers<
     ContextType
   >;
   emails?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['String']>>>,
+    Maybe<Maybe<ResolversTypes['String']>[]>,
     ParentType,
     ContextType
   >;
@@ -1876,7 +1870,7 @@ export type InvoicePricesResolvers<
   ParentType extends ResolversParentTypes['InvoicePrices'] = ResolversParentTypes['InvoicePrices']
 > = {
   nettoByTaxRate?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['PriceByTaxRate']>>>,
+    Maybe<Maybe<ResolversTypes['PriceByTaxRate']>[]>,
     ParentType,
     ContextType
   >;
@@ -1891,7 +1885,7 @@ export type InvoicesResolvers<
 > = {
   cursor?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   list?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['Invoice']>>>,
+    Maybe<Maybe<ResolversTypes['Invoice']>[]>,
     ParentType,
     ContextType
   >;
@@ -1920,12 +1914,12 @@ export type MeResolvers<
   bank?: Resolver<Maybe<ResolversTypes['Bank']>, ParentType, ContextType>;
   role?: Resolver<ResolversTypes['UserRole'], ParentType, ContextType>;
   invitations?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['Invitation']>>>,
+    Maybe<Maybe<ResolversTypes['Invitation']>[]>,
     ParentType,
     ContextType
   >;
   members?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['Member']>>>,
+    Maybe<Maybe<ResolversTypes['Member']>[]>,
     ParentType,
     ContextType
   >;
@@ -1940,11 +1934,7 @@ export type MemberResolvers<
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   company?: Resolver<ResolversTypes['Company'], ParentType, ContextType>;
   user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
-  roles?: Resolver<
-    Array<ResolversTypes['MemberRole']>,
-    ParentType,
-    ContextType
-  >;
+  roles?: Resolver<ResolversTypes['MemberRole'][], ParentType, ContextType>;
   nickname?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -1955,7 +1945,7 @@ export type MembersResolvers<
 > = {
   cursor?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   list?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['Member']>>>,
+    Maybe<Maybe<ResolversTypes['Member']>[]>,
     ParentType,
     ContextType
   >;
@@ -2049,7 +2039,7 @@ export type MutationResolvers<
     RequireFields<MutationInvitationDeclineArgs, 'id'>
   >;
   invoicesCreate?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['Invoice']>>>,
+    Maybe<Maybe<ResolversTypes['Invoice']>[]>,
     ParentType,
     ContextType,
     RequireFields<MutationInvoicesCreateArgs, 'input'>
@@ -2283,17 +2273,13 @@ export type OrderResolvers<
     ContextType
   >;
   cash?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  points?: Resolver<
-    Array<ResolversTypes['OrderPoint']>,
-    ParentType,
-    ContextType
-  >;
+  points?: Resolver<ResolversTypes['OrderPoint'][], ParentType, ContextType>;
   priceCategory?: Resolver<
     Maybe<ResolversTypes['JSON']>,
     ParentType,
     ContextType
   >;
-  fees?: Resolver<Array<ResolversTypes['JSON']>, ParentType, ContextType>;
+  fees?: Resolver<ResolversTypes['JSON'][], ParentType, ContextType>;
   courier?: Resolver<Maybe<ResolversTypes['Member']>, ParentType, ContextType>;
   courierPayment?: Resolver<
     Maybe<ResolversTypes['Float']>,
@@ -2313,7 +2299,7 @@ export type OrderResolvers<
     ContextType
   >;
   schedule?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['Date']>>>,
+    Maybe<Maybe<ResolversTypes['Date']>[]>,
     ParentType,
     ContextType
   >;
@@ -2362,7 +2348,7 @@ export type OrdersResolvers<
 > = {
   cursor?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   list?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['Order']>>>,
+    Maybe<Maybe<ResolversTypes['Order']>[]>,
     ParentType,
     ContextType
   >;
@@ -2425,7 +2411,7 @@ export type QueryResolvers<
     RequireFields<QueryCompaniesForGuestArgs, never>
   >;
   companiesSearchByCity?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['Company']>>>,
+    Maybe<Maybe<ResolversTypes['Company']>[]>,
     ParentType,
     ContextType,
     RequireFields<QueryCompaniesSearchByCityArgs, 'city'>
@@ -2473,12 +2459,12 @@ export type QueryResolvers<
     RequireFields<QueryMembersArgs, never>
   >;
   priceCategories?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['JSON']>>>,
+    Maybe<Maybe<ResolversTypes['JSON']>[]>,
     ParentType,
     ContextType
   >;
   priceCategoriesForGuest?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['JSON']>>>,
+    Maybe<Maybe<ResolversTypes['JSON']>[]>,
     ParentType,
     ContextType,
     RequireFields<QueryPriceCategoriesForGuestArgs, 'company'>
@@ -2496,7 +2482,7 @@ export type QueryResolvers<
     RequireFields<QueryOrdersArgs, never>
   >;
   ordersForInvoices?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['Order']>>>,
+    Maybe<Maybe<ResolversTypes['Order']>[]>,
     ParentType,
     ContextType,
     RequireFields<QueryOrdersForInvoicesArgs, never>
@@ -2514,7 +2500,7 @@ export type QueryResolvers<
     RequireFields<QueryOrderTemplatesArgs, never>
   >;
   orderTemplatesForCustomer?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['Order']>>>,
+    Maybe<Maybe<ResolversTypes['Order']>[]>,
     ParentType,
     ContextType,
     RequireFields<QueryOrderTemplatesForCustomerArgs, 'customer'>
@@ -2579,7 +2565,7 @@ export type UsersResolvers<
 > = {
   cursor?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   list?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['User']>>>,
+    Maybe<Maybe<ResolversTypes['User']>[]>,
     ParentType,
     ContextType
   >;

@@ -1,5 +1,5 @@
-import { makeStyles, Paper, Theme, Typography } from '@material-ui/core'
-import React, { useState } from 'react'
+import {makeStyles, Paper, Typography} from '@material-ui/core'
+import React from 'react'
 
 import { GardenMap } from '../components'
 import BackgroundImage from '../static/background_full_grey_02.jpg'
@@ -20,7 +20,7 @@ export function GardenOverviewPage() {
   )
 }
 
-const useStyles = makeStyles(( theme: Theme ) => ( {
+const useStyles = makeStyles(() => ( {
   page: {
     backgroundImage: `url(${BackgroundImage})`,
     backgroundSize: 'cover',

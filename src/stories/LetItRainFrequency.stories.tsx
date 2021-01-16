@@ -8,7 +8,7 @@ export default {
   component: LetItRainFrequency,
 } as Meta
 
-const Template: Story<object> = ( args ) => <LetItRainFrequency/>
+const Template: Story<object> = () => <LetItRainFrequency/>
 
 export const LetItRainFrequencyDefault = Template.bind( {} )
 LetItRainFrequencyDefault.args = {}

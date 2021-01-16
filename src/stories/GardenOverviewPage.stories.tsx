@@ -8,7 +8,7 @@ export default {
   component: GardenOverviewPage,
 } as Meta
 
-const Template: Story<object> = ( args ) => <GardenOverviewPage />
+const Template: Story<object> = () => <GardenOverviewPage />
 
 export const GardenOverviewPageDefault = Template.bind( {} )
 GardenOverviewPageDefault.args = {}

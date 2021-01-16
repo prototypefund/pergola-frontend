@@ -1,21 +1,9 @@
-import 'dayjs/plugin/weekday'
-
-import {gql, useMutation} from '@apollo/client'
-import {
-  Box, Button, Container,
-  Dialog, DialogActions,
-  DialogContent,
-  DialogTitle,
-  IconButton,
-  makeStyles,
-  Theme, Toolbar,
-  Typography, useMediaQuery, useTheme
-} from '@material-ui/core'
+import {Box, Button, Container, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, makeStyles, Toolbar, Typography, useMediaQuery, useTheme} from '@material-ui/core'
 import {ArrowBack as ArrowBackIcon} from '@material-ui/icons'
 import dayjs from 'dayjs'
 import * as React from 'react'
 import {useState} from 'react'
-import {Link, RouteComponentProps, useHistory, useParams} from 'react-router-dom'
+import {Link, useHistory, useParams} from 'react-router-dom'
 
 import {Calendar, HorizontalStepper, LetItRainFrequency} from '../components'
 
@@ -31,31 +19,13 @@ interface StepDesc {
 
 const DAYS_COUNT = 14
 
-const SET_USER_AVAILABLITY_FOR_WATERING_PERIOD = gql`
-mutation  setUserAvailability($dates: [_Neo4jDateInput]!) { 
-  setUserAvailability(
-    dates: $dates
-  )
-}
-`
-
-export function LetItRainWizard( {match}: RouteComponentProps ) {
+export function LetItRainWizard() {
   const theme = useTheme()
   const classes = useStyles()
   const history = useHistory()
   const {stepNumber} = useParams<LetItRainWizardRouterProps>()
   const fullscreenDialog = useMediaQuery( theme.breakpoints.down( 'md' ))
-  const [availableDates, setAvailableDates] = useState<Array<Date>>( [] )
-  console.log( availableDates )  // TODO: This contains one date less than selected
-
-  const [setUserAvailabilityMutation] =
-      useMutation<{ dates: Array<Date> }, any>( SET_USER_AVAILABLITY_FOR_WATERING_PERIOD,
-        {variables: {dates: availableDates.map( d => {
-          return {
-            year: d.getFullYear(),
-            month: d.getMonth()+1,
-            day: d.getDate()
-          }} )}} )
+  const [, setAvailableDates] = useState<Date[]>( [] )
 
 
   const lastMondayDate = dayjs().weekday( -7 )
@@ -72,9 +42,7 @@ export function LetItRainWizard( {match}: RouteComponentProps ) {
     {title: 'Erinnerung', headline: 'Giessdienst eintragen', StepComponent: <Container>Bla</Container>},
   ]
 
-  const finishWizard = async () => {
-    const success = await setUserAvailabilityMutation()
-    console.log( success )
+  const finishWizard = () => {
     history.push( '/watering/thanks' )
   }
 
@@ -114,7 +82,7 @@ export function LetItRainWizard( {match}: RouteComponentProps ) {
   )
 }
 
-const useStyles = makeStyles(( theme: Theme ) => ( {
+const useStyles = makeStyles(() => ( {
   dialog: {
     '&.noFullscreen .MuiDialog-paper': {
       minHeight: '800px',

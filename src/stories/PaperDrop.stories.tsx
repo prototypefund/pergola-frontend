@@ -9,13 +9,11 @@ export default {
   component: PaperDrop,
 } as Meta
 
-const Template: Story<object> = ( args ) => (
-  <Container style={{ backgroundColor: 'black' }}>
-    <PaperDrop>
-      <WeekSelector />
-    </PaperDrop>
-  </Container>
-)
+const Template: Story<object> = () => <Container style={{ backgroundColor: 'black' }}>
+  <PaperDrop>
+    <WeekSelector />
+  </PaperDrop>
+</Container>
 
 export const PaperDropDefault = Template.bind( {} )
 PaperDropDefault.args = {}

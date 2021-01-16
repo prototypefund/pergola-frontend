@@ -1,9 +1,6 @@
-import {Box, Button, Container, makeStyles, Paper, Typography} from '@material-ui/core'
-import {FormatColorReset as NoDropIcon, Opacity as DropIcon} from '@material-ui/icons'
-import dayjs, {Dayjs} from 'dayjs'
-import {divIcon} from 'leaflet'
+import {Box, Button, Container, makeStyles, Typography} from '@material-ui/core'
+import dayjs from 'dayjs'
 import * as React from 'react'
-import {CSSProperties} from 'react'
 import {Link, Route, Switch} from 'react-router-dom'
 
 import {PaperDrop, WeekSelector} from '../components'
@@ -50,7 +47,7 @@ export function LetItRainEntry() {
 }
 
 
-const useStyles = makeStyles(( theme ) => ( {
+const useStyles = makeStyles(() => ( {
   main: {
     minHeight:  '500px'
 

@@ -1,4 +1,3 @@
-export * from './HomePage'
 export * from './LandingPage'
 export * from './GardenOverviewPage'
 export * from './LetItRainEntry'

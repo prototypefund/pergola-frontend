@@ -27,7 +27,7 @@ if ( dev ) {
   middleware = composeWithDevTools( applyMiddleware( thunk, logger ))
 }
 
-const persistedReducer = persistReducer( persistConfig, rootReducer( history ))
+const persistedReducer = persistReducer( persistConfig, rootReducer())
 
 export default () => {
   const store = createStore( persistedReducer, {}, middleware ) as any

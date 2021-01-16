@@ -8,7 +8,7 @@ export default {
   component: LandingPage,
 } as Meta
 
-const Template: Story<object> = ( args ) => <LandingPage />
+const Template: Story<object> = () => <LandingPage />
 
 export const LandingPageDefault = Template.bind( {} )
 LandingPageDefault.args = {}

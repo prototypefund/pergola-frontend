@@ -23,7 +23,6 @@ export function GardenMap() {
   function whenMapReady() {
     setInterval(() => {
       this.invalidateSize()
-      console.log( 'inval size' )
     }, 1000 )
   }
 

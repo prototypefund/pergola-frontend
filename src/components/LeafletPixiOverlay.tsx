@@ -66,8 +66,11 @@ export default class ReactLeaflet_PixiOverlay
     map.addControl( drawControl )
     // @ts-ignore
     map.on( L.Draw.Event.CREATED, ( e ) => {
-      const type = e.layerType,
-        layer = e.layer
+      const type = e.layerType
+
+      const {
+        layer
+      } = e
 
       if ( type === 'marker' ) {
         layer.bindPopup( 'A popup!' )
@@ -78,7 +81,6 @@ export default class ReactLeaflet_PixiOverlay
   }
 
   componentWillUnmount() {
-    console.log( this.context )
     const { layerContainer, map } = this.props.leaflet || this.context
     map.removeLayer( this.leafletElement )
     layerContainer.removeLayer( this.leafletElement )

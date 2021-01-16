@@ -29,7 +29,11 @@ export const WateringTinyInfoBox: ( {date, helpNeeded}: { date: Date | Dayjs, he
     </Paper> )
 }
 
-export const WateringateInfoBox: ( {date, helpNeeded}: { date: Date | Dayjs, helpNeeded?: Boolean, style?: CSSProperties, dropCount?: number } ) => JSX.Element = ( {date, helpNeeded, style, dropCount} ) => {
+export const WateringateInfoBox: ( {date, helpNeeded}: { date: Date | Dayjs, helpNeeded?: Boolean, style?: CSSProperties, dropCount?: number } ) => JSX.Element = ( {
+  date,
+  style,
+  dropCount
+} ) => {
 
   const classes = useStyles()
 
@@ -54,7 +58,7 @@ export const WateringateInfoBox: ( {date, helpNeeded}: { date: Date | Dayjs, hel
     </Paper>
   )}
 
-const useStyles = makeStyles(( theme ) => ( {
+const useStyles = makeStyles(() => ( {
   todayContainerToday: {
     fontSize: '16pt',
     textTransform: 'uppercase'

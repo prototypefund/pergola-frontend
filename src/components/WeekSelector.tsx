@@ -1,9 +1,8 @@
-import { IconButton, makeStyles, Theme, Typography } from '@material-ui/core'
+import {IconButton, makeStyles, Typography} from '@material-ui/core'
 import { ChevronLeft, ChevronRight } from '@material-ui/icons'
 import dayjs from 'dayjs'
 import * as React from 'react'
-import {ReactNode, useState} from 'react'
-import {RouteChildrenProps} from 'react-router'
+import {useState} from 'react'
 
 type DateRangeStruct = {
   startDate: dayjs.Dayjs;
@@ -53,7 +52,7 @@ export function WeekSelector( {children}: Props ) {
   )
 }
 
-const useStyles = makeStyles(( theme: Theme ) => ( {
+const useStyles = makeStyles(() => ( {
   container: {
     display: 'flex',
     flexDirection: 'row',

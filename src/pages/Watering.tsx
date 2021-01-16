@@ -27,7 +27,7 @@ export function Watering() {
   return (
     <div>
       {loading && <p>Loading...</p>}
-      {error && console.log( error ) && <p>Error</p>}
+      {error && <p>Error</p>}
       {data && !loading && !error && (
         <div>
           <p> {JSON.stringify( data )} </p>

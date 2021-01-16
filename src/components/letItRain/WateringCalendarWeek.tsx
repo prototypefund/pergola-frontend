@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Container,
-  Drawer,
-  Link,
-  makeStyles,
-  Theme,
-  Typography} from '@material-ui/core'
+import {Box, Button, Container, Drawer, Link, makeStyles, Typography} from '@material-ui/core'
 import {
   AddCircle
 } from '@material-ui/icons'
@@ -110,7 +102,7 @@ const WateringCalendarWeek = ( { startDate, dayCount} : WateringCalendarWeekProp
   )
 }
 
-const useStyles = makeStyles(( theme: Theme ) => ( {
+const useStyles = makeStyles(() => ( {
   dayContainer: {
     '&.active': {
       backgroundColor: 'rgba(180, 180, 180, 0.26)',

@@ -1,10 +1,4 @@
-import {
-  Container,
-  makeStyles,
-  Paper,
-  Theme,
-  Typography,
-} from '@material-ui/core'
+import {Container, makeStyles, Paper} from '@material-ui/core'
 import * as React from 'react'
 import { ReactNode } from 'react'
 
@@ -58,7 +52,7 @@ export function PaperDrop( { children }: Props ) {
   )
 }
 
-const useStyles = makeStyles(( theme: Theme ) => ( {
+const useStyles = makeStyles(() => ( {
   paperlike: {
     borderRadius: '0 0 4px 4px',
   },

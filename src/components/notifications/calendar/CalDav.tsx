@@ -36,7 +36,7 @@ export function CalDav( props:CalDavProps ) {
     loadCalDav( props, jcal => {
       setJcalData( jcal )
       setLoading( false )
-    } )
+    } ).catch()
   }
 
   return (

@@ -1,6 +1,3 @@
-import 'dayjs/locale/de'
-import 'dayjs/locale/en'
-
 import { ApolloClient, ApolloProvider, createHttpLink,InMemoryCache } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 import { Typography } from '@material-ui/core'
@@ -65,8 +62,7 @@ export function KeycloakRoot( {persistor} ) {
   return (
     <ReactKeycloakProvider
       authClient={keycloak}
-      onEvent={( event, error ) => {
-        console.log( 'onKeycloakEvent', event, error )
+      onEvent={event => {
         if( event === 'onAuthSuccess' ) {
 	  keycloak.loadUserProfile()
             .then( function( profile ) {

@@ -54,12 +54,12 @@ export type _AddUserReviewsPayload = {
 };
 
 export type _BusinessFilter = {
-  AND?: Maybe<Array<_BusinessFilter>>;
-  OR?: Maybe<Array<_BusinessFilter>>;
+  AND?: Maybe<_BusinessFilter[]>;
+  OR?: Maybe<_BusinessFilter[]>;
   businessId?: Maybe<Scalars['ID']>;
   businessId_not?: Maybe<Scalars['ID']>;
-  businessId_in?: Maybe<Array<Scalars['ID']>>;
-  businessId_not_in?: Maybe<Array<Scalars['ID']>>;
+  businessId_in?: Maybe<Scalars['ID'][]>;
+  businessId_not_in?: Maybe<Scalars['ID'][]>;
   businessId_contains?: Maybe<Scalars['ID']>;
   businessId_not_contains?: Maybe<Scalars['ID']>;
   businessId_starts_with?: Maybe<Scalars['ID']>;
@@ -68,8 +68,8 @@ export type _BusinessFilter = {
   businessId_not_ends_with?: Maybe<Scalars['ID']>;
   name?: Maybe<Scalars['String']>;
   name_not?: Maybe<Scalars['String']>;
-  name_in?: Maybe<Array<Scalars['String']>>;
-  name_not_in?: Maybe<Array<Scalars['String']>>;
+  name_in?: Maybe<Scalars['String'][]>;
+  name_not_in?: Maybe<Scalars['String'][]>;
   name_contains?: Maybe<Scalars['String']>;
   name_not_contains?: Maybe<Scalars['String']>;
   name_starts_with?: Maybe<Scalars['String']>;
@@ -78,8 +78,8 @@ export type _BusinessFilter = {
   name_not_ends_with?: Maybe<Scalars['String']>;
   address?: Maybe<Scalars['String']>;
   address_not?: Maybe<Scalars['String']>;
-  address_in?: Maybe<Array<Scalars['String']>>;
-  address_not_in?: Maybe<Array<Scalars['String']>>;
+  address_in?: Maybe<Scalars['String'][]>;
+  address_not_in?: Maybe<Scalars['String'][]>;
   address_contains?: Maybe<Scalars['String']>;
   address_not_contains?: Maybe<Scalars['String']>;
   address_starts_with?: Maybe<Scalars['String']>;
@@ -88,8 +88,8 @@ export type _BusinessFilter = {
   address_not_ends_with?: Maybe<Scalars['String']>;
   city?: Maybe<Scalars['String']>;
   city_not?: Maybe<Scalars['String']>;
-  city_in?: Maybe<Array<Scalars['String']>>;
-  city_not_in?: Maybe<Array<Scalars['String']>>;
+  city_in?: Maybe<Scalars['String'][]>;
+  city_not_in?: Maybe<Scalars['String'][]>;
   city_contains?: Maybe<Scalars['String']>;
   city_not_contains?: Maybe<Scalars['String']>;
   city_starts_with?: Maybe<Scalars['String']>;
@@ -98,8 +98,8 @@ export type _BusinessFilter = {
   city_not_ends_with?: Maybe<Scalars['String']>;
   state?: Maybe<Scalars['String']>;
   state_not?: Maybe<Scalars['String']>;
-  state_in?: Maybe<Array<Scalars['String']>>;
-  state_not_in?: Maybe<Array<Scalars['String']>>;
+  state_in?: Maybe<Scalars['String'][]>;
+  state_not_in?: Maybe<Scalars['String'][]>;
   state_contains?: Maybe<Scalars['String']>;
   state_not_contains?: Maybe<Scalars['String']>;
   state_starts_with?: Maybe<Scalars['String']>;
@@ -115,16 +115,16 @@ export type _BusinessFilter = {
   location_distance_gte?: Maybe<_Neo4jPointDistanceFilter>;
   reviews?: Maybe<_ReviewFilter>;
   reviews_not?: Maybe<_ReviewFilter>;
-  reviews_in?: Maybe<Array<_ReviewFilter>>;
-  reviews_not_in?: Maybe<Array<_ReviewFilter>>;
+  reviews_in?: Maybe<_ReviewFilter[]>;
+  reviews_not_in?: Maybe<_ReviewFilter[]>;
   reviews_some?: Maybe<_ReviewFilter>;
   reviews_none?: Maybe<_ReviewFilter>;
   reviews_single?: Maybe<_ReviewFilter>;
   reviews_every?: Maybe<_ReviewFilter>;
   categories?: Maybe<_CategoryFilter>;
   categories_not?: Maybe<_CategoryFilter>;
-  categories_in?: Maybe<Array<_CategoryFilter>>;
-  categories_not_in?: Maybe<Array<_CategoryFilter>>;
+  categories_in?: Maybe<_CategoryFilter[]>;
+  categories_not_in?: Maybe<_CategoryFilter[]>;
   categories_some?: Maybe<_CategoryFilter>;
   categories_none?: Maybe<_CategoryFilter>;
   categories_single?: Maybe<_CategoryFilter>;
@@ -153,12 +153,12 @@ export enum _BusinessOrdering {
 }
 
 export type _CategoryFilter = {
-  AND?: Maybe<Array<_CategoryFilter>>;
-  OR?: Maybe<Array<_CategoryFilter>>;
+  AND?: Maybe<_CategoryFilter[]>;
+  OR?: Maybe<_CategoryFilter[]>;
   name?: Maybe<Scalars['ID']>;
   name_not?: Maybe<Scalars['ID']>;
-  name_in?: Maybe<Array<Scalars['ID']>>;
-  name_not_in?: Maybe<Array<Scalars['ID']>>;
+  name_in?: Maybe<Scalars['ID'][]>;
+  name_not_in?: Maybe<Scalars['ID'][]>;
   name_contains?: Maybe<Scalars['ID']>;
   name_not_contains?: Maybe<Scalars['ID']>;
   name_starts_with?: Maybe<Scalars['ID']>;
@@ -167,8 +167,8 @@ export type _CategoryFilter = {
   name_not_ends_with?: Maybe<Scalars['ID']>;
   businesses?: Maybe<_BusinessFilter>;
   businesses_not?: Maybe<_BusinessFilter>;
-  businesses_in?: Maybe<Array<_BusinessFilter>>;
-  businesses_not_in?: Maybe<Array<_BusinessFilter>>;
+  businesses_in?: Maybe<_BusinessFilter[]>;
+  businesses_not_in?: Maybe<_BusinessFilter[]>;
   businesses_some?: Maybe<_BusinessFilter>;
   businesses_none?: Maybe<_BusinessFilter>;
   businesses_single?: Maybe<_BusinessFilter>;
@@ -407,12 +407,12 @@ export type _RemoveUserReviewsPayload = {
 };
 
 export type _ReviewFilter = {
-  AND?: Maybe<Array<_ReviewFilter>>;
-  OR?: Maybe<Array<_ReviewFilter>>;
+  AND?: Maybe<_ReviewFilter[]>;
+  OR?: Maybe<_ReviewFilter[]>;
   reviewId?: Maybe<Scalars['ID']>;
   reviewId_not?: Maybe<Scalars['ID']>;
-  reviewId_in?: Maybe<Array<Scalars['ID']>>;
-  reviewId_not_in?: Maybe<Array<Scalars['ID']>>;
+  reviewId_in?: Maybe<Scalars['ID'][]>;
+  reviewId_not_in?: Maybe<Scalars['ID'][]>;
   reviewId_contains?: Maybe<Scalars['ID']>;
   reviewId_not_contains?: Maybe<Scalars['ID']>;
   reviewId_starts_with?: Maybe<Scalars['ID']>;
@@ -421,16 +421,16 @@ export type _ReviewFilter = {
   reviewId_not_ends_with?: Maybe<Scalars['ID']>;
   stars?: Maybe<Scalars['Float']>;
   stars_not?: Maybe<Scalars['Float']>;
-  stars_in?: Maybe<Array<Scalars['Float']>>;
-  stars_not_in?: Maybe<Array<Scalars['Float']>>;
+  stars_in?: Maybe<Scalars['Float'][]>;
+  stars_not_in?: Maybe<Scalars['Float'][]>;
   stars_lt?: Maybe<Scalars['Float']>;
   stars_lte?: Maybe<Scalars['Float']>;
   stars_gt?: Maybe<Scalars['Float']>;
   stars_gte?: Maybe<Scalars['Float']>;
   text?: Maybe<Scalars['String']>;
   text_not?: Maybe<Scalars['String']>;
-  text_in?: Maybe<Array<Scalars['String']>>;
-  text_not_in?: Maybe<Array<Scalars['String']>>;
+  text_in?: Maybe<Scalars['String'][]>;
+  text_not_in?: Maybe<Scalars['String'][]>;
   text_contains?: Maybe<Scalars['String']>;
   text_not_contains?: Maybe<Scalars['String']>;
   text_starts_with?: Maybe<Scalars['String']>;
@@ -439,20 +439,20 @@ export type _ReviewFilter = {
   text_not_ends_with?: Maybe<Scalars['String']>;
   date?: Maybe<_Neo4jDateInput>;
   date_not?: Maybe<_Neo4jDateInput>;
-  date_in?: Maybe<Array<_Neo4jDateInput>>;
-  date_not_in?: Maybe<Array<_Neo4jDateInput>>;
+  date_in?: Maybe<_Neo4jDateInput[]>;
+  date_not_in?: Maybe<_Neo4jDateInput[]>;
   date_lt?: Maybe<_Neo4jDateInput>;
   date_lte?: Maybe<_Neo4jDateInput>;
   date_gt?: Maybe<_Neo4jDateInput>;
   date_gte?: Maybe<_Neo4jDateInput>;
   business?: Maybe<_BusinessFilter>;
   business_not?: Maybe<_BusinessFilter>;
-  business_in?: Maybe<Array<_BusinessFilter>>;
-  business_not_in?: Maybe<Array<_BusinessFilter>>;
+  business_in?: Maybe<_BusinessFilter[]>;
+  business_not_in?: Maybe<_BusinessFilter[]>;
   user?: Maybe<_UserFilter>;
   user_not?: Maybe<_UserFilter>;
-  user_in?: Maybe<Array<_UserFilter>>;
-  user_not_in?: Maybe<Array<_UserFilter>>;
+  user_in?: Maybe<_UserFilter[]>;
+  user_not_in?: Maybe<_UserFilter[]>;
 };
 
 export type _ReviewInput = {
@@ -473,12 +473,12 @@ export enum _ReviewOrdering {
 }
 
 export type _UserFilter = {
-  AND?: Maybe<Array<_UserFilter>>;
-  OR?: Maybe<Array<_UserFilter>>;
+  AND?: Maybe<_UserFilter[]>;
+  OR?: Maybe<_UserFilter[]>;
   userId?: Maybe<Scalars['ID']>;
   userId_not?: Maybe<Scalars['ID']>;
-  userId_in?: Maybe<Array<Scalars['ID']>>;
-  userId_not_in?: Maybe<Array<Scalars['ID']>>;
+  userId_in?: Maybe<Scalars['ID'][]>;
+  userId_not_in?: Maybe<Scalars['ID'][]>;
   userId_contains?: Maybe<Scalars['ID']>;
   userId_not_contains?: Maybe<Scalars['ID']>;
   userId_starts_with?: Maybe<Scalars['ID']>;
@@ -487,8 +487,8 @@ export type _UserFilter = {
   userId_not_ends_with?: Maybe<Scalars['ID']>;
   name?: Maybe<Scalars['String']>;
   name_not?: Maybe<Scalars['String']>;
-  name_in?: Maybe<Array<Scalars['String']>>;
-  name_not_in?: Maybe<Array<Scalars['String']>>;
+  name_in?: Maybe<Scalars['String'][]>;
+  name_not_in?: Maybe<Scalars['String'][]>;
   name_contains?: Maybe<Scalars['String']>;
   name_not_contains?: Maybe<Scalars['String']>;
   name_starts_with?: Maybe<Scalars['String']>;
@@ -497,8 +497,8 @@ export type _UserFilter = {
   name_not_ends_with?: Maybe<Scalars['String']>;
   reviews?: Maybe<_ReviewFilter>;
   reviews_not?: Maybe<_ReviewFilter>;
-  reviews_in?: Maybe<Array<_ReviewFilter>>;
-  reviews_not_in?: Maybe<Array<_ReviewFilter>>;
+  reviews_in?: Maybe<_ReviewFilter[]>;
+  reviews_not_in?: Maybe<_ReviewFilter[]>;
   reviews_some?: Maybe<_ReviewFilter>;
   reviews_none?: Maybe<_ReviewFilter>;
   reviews_single?: Maybe<_ReviewFilter>;
@@ -531,36 +531,36 @@ export type Business = {
   state?: Maybe<Scalars['String']>;
   location?: Maybe<_Neo4jPoint>;
   avgStars?: Maybe<Scalars['Float']>;
-  reviews?: Maybe<Array<Maybe<Review>>>;
-  categories?: Maybe<Array<Maybe<Category>>>;
+  reviews?: Maybe<Maybe<Review>[]>;
+  categories?: Maybe<Maybe<Category>[]>;
   _id?: Maybe<Scalars['String']>;
 };
 
 export type BusinessReviewsArgs = {
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<Maybe<_ReviewOrdering>>>;
+  orderBy?: Maybe<Maybe<_ReviewOrdering>[]>;
   filter?: Maybe<_ReviewFilter>;
 };
 
 export type BusinessCategoriesArgs = {
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<Maybe<_CategoryOrdering>>>;
+  orderBy?: Maybe<Maybe<_CategoryOrdering>[]>;
   filter?: Maybe<_CategoryFilter>;
 };
 
 export type Category = {
   __typename?: 'Category';
   name: Scalars['ID'];
-  businesses?: Maybe<Array<Maybe<Business>>>;
+  businesses?: Maybe<Maybe<Business>[]>;
   _id?: Maybe<Scalars['String']>;
 };
 
 export type CategoryBusinessesArgs = {
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<Maybe<_BusinessOrdering>>>;
+  orderBy?: Maybe<Maybe<_BusinessOrdering>[]>;
   filter?: Maybe<_BusinessFilter>;
 };
 
@@ -602,7 +602,7 @@ export type Mutation = {
 };
 
 export type MutationMergeBusinessCategoryArgs = {
-  categories: Array<Scalars['String']>;
+  categories: Scalars['String'][];
   businessId: Scalars['ID'];
 };
 
@@ -782,11 +782,11 @@ export type MutationDeleteCategoryArgs = {
 export type Query = {
   __typename?: 'Query';
   userCount: Scalars['Int'];
-  ratingsCount?: Maybe<Array<Maybe<RatingCount>>>;
-  User?: Maybe<Array<Maybe<User>>>;
-  Business?: Maybe<Array<Maybe<Business>>>;
-  Review?: Maybe<Array<Maybe<Review>>>;
-  Category?: Maybe<Array<Maybe<Category>>>;
+  ratingsCount?: Maybe<Maybe<RatingCount>[]>;
+  User?: Maybe<Maybe<User>[]>;
+  Business?: Maybe<Maybe<Business>[]>;
+  Review?: Maybe<Maybe<Review>[]>;
+  Category?: Maybe<Maybe<Category>[]>;
 };
 
 export type QueryUserArgs = {
@@ -797,7 +797,7 @@ export type QueryUserArgs = {
   _id?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<Maybe<_UserOrdering>>>;
+  orderBy?: Maybe<Maybe<_UserOrdering>[]>;
   filter?: Maybe<_UserFilter>;
 };
 
@@ -812,7 +812,7 @@ export type QueryBusinessArgs = {
   _id?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<Maybe<_BusinessOrdering>>>;
+  orderBy?: Maybe<Maybe<_BusinessOrdering>[]>;
   filter?: Maybe<_BusinessFilter>;
 };
 
@@ -824,7 +824,7 @@ export type QueryReviewArgs = {
   _id?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<Maybe<_ReviewOrdering>>>;
+  orderBy?: Maybe<Maybe<_ReviewOrdering>[]>;
   filter?: Maybe<_ReviewFilter>;
 };
 
@@ -833,7 +833,7 @@ export type QueryCategoryArgs = {
   _id?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<Maybe<_CategoryOrdering>>>;
+  orderBy?: Maybe<Maybe<_CategoryOrdering>[]>;
   filter?: Maybe<_CategoryFilter>;
 };
 
@@ -866,24 +866,24 @@ export type User = {
   __typename?: 'User';
   userId: Scalars['ID'];
   name?: Maybe<Scalars['String']>;
-  reviews?: Maybe<Array<Maybe<Review>>>;
+  reviews?: Maybe<Maybe<Review>[]>;
   avgStars?: Maybe<Scalars['Float']>;
   numReviews?: Maybe<Scalars['Int']>;
-  recommendations?: Maybe<Array<Maybe<Business>>>;
+  recommendations?: Maybe<Maybe<Business>[]>;
   _id?: Maybe<Scalars['String']>;
 };
 
 export type UserReviewsArgs = {
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<Maybe<_ReviewOrdering>>>;
+  orderBy?: Maybe<Maybe<_ReviewOrdering>[]>;
   filter?: Maybe<_ReviewFilter>;
 };
 
 export type UserRecommendationsArgs = {
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<Maybe<_BusinessOrdering>>>;
+  orderBy?: Maybe<Maybe<_BusinessOrdering>[]>;
 };
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -968,9 +968,7 @@ export type SubscriptionResolver<
   TContext = {},
   TArgs = {}
 > =
-  | ((
-      ...args: any[]
-    ) => SubscriptionObject<TResult, TKey, TParent, TContext, TArgs> )
+  | (() => SubscriptionObject<TResult, TKey, TParent, TContext, TArgs> )
   | SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>;
 
 export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
@@ -1421,13 +1419,13 @@ export type BusinessResolvers<
   >;
   avgStars?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   reviews?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['Review']>>>,
+    Maybe<Maybe<ResolversTypes['Review']>[]>,
     ParentType,
     ContextType,
     RequireFields<BusinessReviewsArgs, never>
   >;
   categories?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['Category']>>>,
+    Maybe<Maybe<ResolversTypes['Category']>[]>,
     ParentType,
     ContextType,
     RequireFields<BusinessCategoriesArgs, never>
@@ -1442,7 +1440,7 @@ export type CategoryResolvers<
 > = {
   name?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   businesses?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['Business']>>>,
+    Maybe<Maybe<ResolversTypes['Business']>[]>,
     ParentType,
     ContextType,
     RequireFields<CategoryBusinessesArgs, never>
@@ -1664,30 +1662,30 @@ export type QueryResolvers<
 > = {
   userCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   ratingsCount?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['RatingCount']>>>,
+    Maybe<Maybe<ResolversTypes['RatingCount']>[]>,
     ParentType,
     ContextType
   >;
   User?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['User']>>>,
+    Maybe<Maybe<ResolversTypes['User']>[]>,
     ParentType,
     ContextType,
     RequireFields<QueryUserArgs, never>
   >;
   Business?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['Business']>>>,
+    Maybe<Maybe<ResolversTypes['Business']>[]>,
     ParentType,
     ContextType,
     RequireFields<QueryBusinessArgs, never>
   >;
   Review?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['Review']>>>,
+    Maybe<Maybe<ResolversTypes['Review']>[]>,
     ParentType,
     ContextType,
     RequireFields<QueryReviewArgs, never>
   >;
   Category?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['Category']>>>,
+    Maybe<Maybe<ResolversTypes['Category']>[]>,
     ParentType,
     ContextType,
     RequireFields<QueryCategoryArgs, never>
@@ -1734,7 +1732,7 @@ export type UserResolvers<
   userId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   reviews?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['Review']>>>,
+    Maybe<Maybe<ResolversTypes['Review']>[]>,
     ParentType,
     ContextType,
     RequireFields<UserReviewsArgs, never>
@@ -1742,7 +1740,7 @@ export type UserResolvers<
   avgStars?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   numReviews?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   recommendations?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes['Business']>>>,
+    Maybe<Maybe<ResolversTypes['Business']>[]>,
     ParentType,
     ContextType,
     RequireFields<UserRecommendationsArgs, 'first'>
