@@ -6,14 +6,11 @@ import {Link, Route, Switch} from 'react-router-dom'
 import {PaperDrop, WeekSelector} from '../components'
 import WateringCalendarWeek from '../components/letItRain/WateringCalendarWeek'
 import {LetItRainWizard} from './LetItRainWizard'
-import {Watering} from './Watering'
 
 
 export function LetItRainEntry() {
   const classes = useStyles()
   dayjs.locale( 'de' )
-
-
   const today = dayjs()
 
   return (
@@ -39,9 +36,6 @@ export function LetItRainEntry() {
       <Switch>
         <Route path='/watering/wizard/:stepNumber' component={LetItRainWizard} />
       </Switch>
-      <Box display='flex' flexDirection='column' justifyContent='flex-end' alignItems='center'>
-        <Container><Watering/></Container>
-      </Box>
     </Container>
   )
 }
