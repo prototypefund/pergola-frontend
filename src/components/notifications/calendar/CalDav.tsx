@@ -1,17 +1,18 @@
-import * as React from 'react'
 import ICAL from 'ical.js'
+import * as React from 'react'
 import { createClient } from 'webdav'
-import { VEvent, Event, JCal } from './ical.types'
+
+import { Event, JCal,VEvent } from './ical.types'
 
 interface JCalHandlerFn {
-  (jcal: JCal): any
+  ( jcal: JCal ): any
 }
 
-async function loadCalDav({root, path}, callback:JCalHandlerFn) {
-  const client = createClient(root)
-  const iCalendarData = await client.getFileContents(path, {format: "text"})
-  const jcalData = ICAL.parse(iCalendarData)
-  callback(jcalData)
+async function loadCalDav( {root, path}, callback:JCalHandlerFn ) {
+  const client = createClient( root )
+  const iCalendarData = await client.getFileContents( path, {format: 'text'} )
+  const jcalData = ICAL.parse( iCalendarData )
+  callback( jcalData )
 }
 
 
@@ -26,35 +27,35 @@ interface CalDavProps {
   path: string
 }
 
-export function CalDav(props:CalDavProps) {
+export function CalDav( props:CalDavProps ) {
   const [jcalData, setJcalData] = React.useState()
-  const [loading, setLoading] = React.useState(false)
+  const [loading, setLoading] = React.useState( false )
 
-  if(!jcalData && ! loading) {
-    setLoading(true)
-    loadCalDav(props, jcal => {
-      setJcalData(jcal)
-      setLoading(false)
-    })
+  if( !jcalData && ! loading ) {
+    setLoading( true )
+    loadCalDav( props, jcal => {
+      setJcalData( jcal )
+      setLoading( false )
+    } )
   }
 
   return (
     <>
       {loading && props.loader}
       { {...props.children,
-         props: {...props.children.props,
+        props: {...props.children.props,
 	         /** We pass through the jcalData for usage with arbitrary children.
 		  *  For trivial usage of rsuite.Calendar as child, renderCell is wrapped. **/ 
-                 renderCell: (date:Date) => props.children.props.renderCell(date, jcalData) }}}
+          renderCell: ( date:Date ) => props.children.props.renderCell( date, jcalData ) }}}
     </>
   )
 }
 
 
-export function getEventsOfDay(date:Date, jcalData:JCal):Event[] {
-  if(!jcalData?.length) return []
-  const comp = new ICAL.Component(jcalData)
-  const vevents = comp.getAllSubcomponents("vevent")
-  const events = vevents.map((vevent:VEvent) => new ICAL.Event(vevent))
-  return events.filter((event:Event) => event.startDate.toJSDate().toDateString() === date.toDateString())
+export function getEventsOfDay( date:Date, jcalData:JCal ):Event[] {
+  if( !jcalData?.length ) return []
+  const comp = new ICAL.Component( jcalData )
+  const vevents = comp.getAllSubcomponents( 'vevent' )
+  const events = vevents.map(( vevent:VEvent ) => new ICAL.Event( vevent ))
+  return events.filter(( event:Event ) => event.startDate.toJSDate().toDateString() === date.toDateString())
 }

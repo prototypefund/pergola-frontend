@@ -46,7 +46,7 @@ export function LetItRainWizard( {match}: RouteComponentProps ) {
   const {stepNumber} = useParams<LetItRainWizardRouterProps>()
   const fullscreenDialog = useMediaQuery( theme.breakpoints.down( 'md' ))
   const [availableDates, setAvailableDates] = useState<Array<Date>>( [] )
-  console.log(availableDates)  // TODO: This contains one date less than selected
+  console.log( availableDates )  // TODO: This contains one date less than selected
 
   const [setUserAvailabilityMutation] =
       useMutation<{ dates: Array<Date> }, any>( SET_USER_AVAILABLITY_FOR_WATERING_PERIOD,

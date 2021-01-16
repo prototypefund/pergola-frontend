@@ -1,15 +1,17 @@
+import 'rsuite/dist/styles/rsuite-default.css'
+
 import * as React from 'react'
 import { Calendar } from 'rsuite'
-import 'rsuite/dist/styles/rsuite-default.css'
+
 import { CalDav, getEventsOfDay } from './CalDav'
 
 /** a renderer to display availabilities of wateringTasks **/
-function renderCell(date:Date, jcalData=undefined) {
-  const events = (getEventsOfDay(date, jcalData))
-  return events.map(event => {
-    const assignees = event.component.getFirstPropertyValue('x-pergola-watering-assigned-count')
+function renderCell( date:Date, jcalData=undefined ) {
+  const events = ( getEventsOfDay( date, jcalData ))
+  return events.map( event => {
+    const assignees = event.component.getFirstPropertyValue( 'x-pergola-watering-assigned-count' )
     const color = {0:'#FFBD4A',1:'#F6E6A2'}[assignees] || '#BDE3DC'
-    return (<div key={event.uid} style={{background: color}}>{event.summary}</div>)})
+    return ( <div key={event.uid} style={{background: color}}>{event.summary}</div> )} )
 }
 
 export function ExampleCalendar() {

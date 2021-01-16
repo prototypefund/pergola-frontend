@@ -25,8 +25,8 @@ import { Link, Route, Router } from 'react-router-dom'
 import { Login } from './components'
 import { history } from './configureStore'
 import {GardenOverviewPage, LandingPage} from './pages'
-import {LetItRainEntry} from './pages/LetItRainEntry'
 import { CalendarAndNotifications } from './pages/CalendarAndNotifications'
+import {LetItRainEntry} from './pages/LetItRainEntry'
 import { withRoot } from './withRoot'
 
 function Routes() {
