@@ -6,7 +6,10 @@ import {
   Theme,
 } from '@material-ui/core'
 import dayjs from 'dayjs'
+import weekOfYear from 'dayjs/plugin/weekOfYear'
 import React from 'react'
+
+dayjs.extend( weekOfYear )
 
 interface Props {
   dates: Date[];
@@ -38,50 +41,17 @@ export function Calendar( { dates = [], onChange }: Props ) {
     return dates.map(( d ) => dayjs( d ).format( 'YYYY-MM-DD' )).includes( dateStr )
   }
 
-  const daysOfWeek = new Map( [
-    [1, 'Monday'],
-    [2, 'Tuesday'],
-    [3, 'Wednesday'],
-    [4, 'Thursday'],
-    [5, 'Friday'],
-    [6, 'Saturday'],
-    [0, 'Sunday'],
-  ] )
-
   const [firstDate] = dates
   const lastDate = dates[dates.length - 1]
 
   // TODO: Currently each calendar week needs 7 dates, otherwise we get wrong/missing checkboxes. How to fix this?
   const datesByWeeks = dates.reduce(( map, date ) => {
-    const cw = getCalendarWeekNumber(
-      date.getFullYear(),
-      date.getMonth(),
-      date.getDate()
-    )
+    const cw = dayjs( date ).week()
     map.has( cw ) || map.set( cw, [] )
     map.get( cw ).push( date )
 
     return map
   }, new Map())
-
-  function getCalendarWeekNumber( year: number, month: number, date: number ) {
-    const d = new Date( year, month, date )
-    d.setHours( 0, 0, 0, 0 )
-    // Thursday in current week decides the year.
-    d.setDate( d.getDate() + 3 - (( d.getDay() + 6 ) % 7 ))
-    // January 4 is always in week 1.
-    const weekOne = new Date( d.getFullYear(), 0, 4 )
-    // Adjust to thursday in week 1 and count number of weeks from date to weekOne.
-    return (
-      1 +
-      Math.round(
-        (( d.getTime() - weekOne.getTime()) / 86400000 -
-          3 +
-          (( weekOne.getDay() + 6 ) % 7 )) /
-          7
-      )
-    )
-  }
 
   const handleAllChange = ( event ) => {
     // (un)check all dates
@@ -98,7 +68,7 @@ export function Calendar( { dates = [], onChange }: Props ) {
     const relatedDates: Date[] = []
     for ( const key of Object.keys( dates )) {
       const date = dates[key]
-      if ( date.getDay() === dayOfWeek ) {
+      if ( dayjs( date ).weekday() === dayOfWeek ) {
         relatedDates.push( date )
       }
     }
@@ -110,11 +80,7 @@ export function Calendar( { dates = [], onChange }: Props ) {
     const relatedDates: Date[] = []
     for ( const key of Object.keys( dates )) {
       const date = dates[key]
-      const dateCW = getCalendarWeekNumber(
-        date.getFullYear(),
-        date.getMonth(),
-        date.getDate()
-      )
+      const dateCW = dayjs( date ).week()
       if ( dateCW === cw ) {
         relatedDates.push( date )
       }
@@ -134,17 +100,16 @@ export function Calendar( { dates = [], onChange }: Props ) {
 
   const DayDatesChecked = ( dayOfWeek: number ): boolean => {
     return !dates.some(( date ) => {
-      return date.getDay() === dayOfWeek && !dateIncluded( selectedDates, date )
+      return (
+        dayjs( date ).weekday() === dayOfWeek &&
+        !dateIncluded( selectedDates, date )
+      )
     } )
   }
 
   const CwDatesChecked = ( cw: number ): boolean => {
     return !dates.some(( date ) => {
-      const dateCw = getCalendarWeekNumber(
-        date.getFullYear(),
-        date.getMonth(),
-        date.getDate()
-      )
+      const dateCw = dayjs( date ).week()
       return dateCw === cw && !dateIncluded( selectedDates, date )
     } )
   }
@@ -227,14 +192,16 @@ export function Calendar( { dates = [], onChange }: Props ) {
 
   return (
     <div className={String( classes.wrapper )}>
-      {/* TODO: Use js library to handle time span format including floating month and year */}
       <p>
-        Zeitraum: {firstDate.getDate()}. -{' '}
-        {lastDate.toLocaleDateString( 'de-DE', {
-          year: 'numeric',
-          month: 'short',
-          day: 'numeric',
-        } )}
+        Zeitraum:
+        {dayjs( firstDate ).format(
+          firstDate.getMonth() === lastDate.getMonth()
+            ? 'D.'
+            : 'D. MMMM' +
+                ( firstDate.getFullYear() !== lastDate.getFullYear()) ?? ' YYYY'
+        )}
+        &nbsp;-&nbsp;
+        {dayjs( lastDate ).format( 'D. MMMM YYYY' )}
       </p>
       <FormGroup row>
         <FormControlLabel
@@ -245,15 +212,15 @@ export function Calendar( { dates = [], onChange }: Props ) {
           control={<AllCheckBox />}
           label={'✓'}
         />
-        {Array.from( daysOfWeek.keys()).map(( dayOfWeek ) => (
+        {[...new Array( 7 )].map(( e, index ) => (
           <FormControlLabel
-            key={dayOfWeek}
+            key={index}
             classes={{
               root: `${classes.checkBoxLabel} ${classes.headCheckBox}`,
               label: String( classes.checkBoxLabelText ),
             }}
-            control={<DayCheckBox dayOfWeek={dayOfWeek} />}
-            label={daysOfWeek.get( dayOfWeek )}
+            control={<DayCheckBox dayOfWeek={index} />}
+            label={dayjs().weekday( index ).format( 'dddd' )}
           />
         ))}
       </FormGroup>
