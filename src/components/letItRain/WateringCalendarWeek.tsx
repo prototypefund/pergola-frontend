@@ -1,9 +1,12 @@
 import {Box, Button, Container, Drawer, Link, makeStyles, Typography} from '@material-ui/core'
+import {gql, useQuery} from '@apollo/client'
 import {
   AddCircle
 } from '@material-ui/icons'
 import dayjs from 'dayjs'
 import React, { useState } from 'react'
+
+import {_Neo4jDate} from '../../types/graphql'
 
 interface WateringDayProps {
   date: Date;
@@ -12,7 +15,7 @@ interface WateringDayProps {
   active?: Boolean;
 }
 
-const WateringDay = ( { date, recruiterCount, onSelect, active }: WateringDayProps ) => {
+const WateringDay = ( {date, recruiterCount, onSelect, active}: WateringDayProps ) => {
   const d = dayjs( date )
   const classes = useStyles()
 
@@ -35,11 +38,11 @@ const WateringDay = ( { date, recruiterCount, onSelect, active }: WateringDayPro
 
           <Typography component="h4">{d.format( 'dd' )}</Typography>
         </div>
-        <div className={`dayInMonth ${droughtWarningClass}`} >
+        <div className={`dayInMonth ${droughtWarningClass}`}>
 
           <Typography component="h4">{d.format( 'D' )}</Typography>
         </div>
-        <div>{recruiterMissingCount > 0 && <AddCircle />}</div>
+        <div>{recruiterMissingCount > 0 && <AddCircle/>}</div>
       </Container>
     </Link>
   )
@@ -50,10 +53,44 @@ interface WateringCalendarWeekProps {
   dayCount: number;
 }
 
-const WateringCalendarWeek = ( { startDate, dayCount} : WateringCalendarWeekProps ) => {
+
+interface WateringTaskGQLReturn {
+  date: _Neo4jDate;
+  user_assigned: { label: string }
+  user_available: { label: string }
+}
+
+
+const GET_WATERING_TASKS = gql`
+query WateringTask($dateFrom: _Neo4jDateInput, $dateTo: _Neo4jDateInput) {
+  WateringTask(filter: 
+    { AND: [
+      { date_gt: $dateFrom },
+      { date_lte: $dateTo } ]
+    }) {
+    date { day month year} 
+    users_assigned { label }
+    users_available { label }
+  }
+}
+`
+
+const toNeo4JDate: ( date: Date ) => _Neo4jDate = date => ( {
+  day: date.getDate(),
+  month: date.getMonth() + 1,
+  year: date.getFullYear(),
+} )
+
+const WateringCalendarWeek = ( {startDate, dayCount}: WateringCalendarWeekProps ) => {
   const classes = useStyles()
   const [selectedDay, selectDay] = useState<number>( -1 )
   const [drawerWateringDay, setDrawerWateringDay] = useState<boolean>( false )
+  const {loading, data, error} = useQuery<WateringTaskGQLReturn, { dateFrom: _Neo4jDate, dateTo: _Neo4jDate }>( GET_WATERING_TASKS, {
+    variables: {
+      dateFrom: toNeo4JDate( startDate ),
+      dateTo: toNeo4JDate( dayjs( startDate ).add( dayCount, 'day' ).toDate())
+    }
+  } )
 
   const d = dayjs( startDate )
   const calendarDates = new Array( dayCount )
