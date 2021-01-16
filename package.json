@@ -146,7 +146,9 @@
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
-      "putout --fix src"
+      "prettier --write",
+      "eslint --fix",
+      "putout src"
     ]
   }
 }
