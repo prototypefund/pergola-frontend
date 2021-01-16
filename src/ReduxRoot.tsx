@@ -28,9 +28,9 @@ dayjs.locale( { ...de, weekStart: 1 } )
 //import {key} from 'localforage';
 
 const keycloak = Keycloak( {
-  realm: 'keycloak-connect-graphql', // process.env.REACT_APP_KEYCLOAK_REALM,
-  url: 'http://localhost:8080/auth/', // process.env.REACT_APP_KEYCLOAK_URL,
-  clientId: 'keycloak-connect-graphql-public', // process.env.REACT_APP_KEYCLOAK_CLIENT_ID
+  realm: process.env.REACT_APP_KEYCLOAK_REALM || 'keycloak-connect-graphql',
+  url: process.env.REACT_APP_KEYCLOAK_URL || 'http://localhost:8080/auth/',
+  clientId: process.env.REACT_APP_KEYCLOAK_CLIENT_ID || 'keycloak-connect-graphql-public'
 } )
 
 const uri =
