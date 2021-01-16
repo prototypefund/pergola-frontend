@@ -80,7 +80,7 @@ module.exports = {
         },
         {
           noErrorOnMissing: false,
-          from: resolvePath( 'src/manifest.json' ),
+          from: resolvePath( 'public/manifest.json' ),
           to: resolvePath( 'www/manifest.json' ),
         },
       ],
