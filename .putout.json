@@ -1,5 +1,6 @@
 {
   "rules": {
-    "remove-empty/import":  false
+    "remove-empty/import":  false,
+    "convert-array-copy-to-slice": "off"
   }
 }

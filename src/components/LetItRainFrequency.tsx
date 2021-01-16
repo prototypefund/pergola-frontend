@@ -23,7 +23,7 @@ export function LetItRainFrequency() {
     />
     <Typography variant="body1">{daysPerWeek} mal pro Woche</Typography>
     <div className={classes.bed}>
-      {Array( 7 ).slice().map(( e, index ) => (
+      {[...new Array( 7 )].map(( e, index ) => (
         <svg
           key={index}
           xmlns="http://www.w3.org/2000/svg"
