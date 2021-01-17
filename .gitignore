@@ -41,3 +41,8 @@ cordova/www/
 
 # Production build
 www/
+
+# Nix build
+package-lock.json
+supplement.json
+result*
