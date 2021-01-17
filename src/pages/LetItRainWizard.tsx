@@ -106,12 +106,13 @@ export function LetItRainWizard() {
           {currentStep.StepComponent}
         </Box>
       </DialogContent>
-      <DialogActions>
+      <DialogActions className={classes.dialogActions}>
         {currentStepIndex >= steps.length - 1 ? (
           <Button
             fullWidth
             variant="contained"
             color="primary"
+            className={classes.dialogActionButton}
             onClick={() => finishWizard()}
           >
             fertig
@@ -121,7 +122,12 @@ export function LetItRainWizard() {
             to={`/watering/wizard/${currentStepIndex + 1}`}
             style={{ width: '100%' }}
           >
-            <Button fullWidth variant="contained" color="primary">
+            <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.dialogActionButton}
+            >
               weiter
             </Button>
           </Link>
@@ -137,5 +143,15 @@ const useStyles = makeStyles(() => ( {
       minHeight: '800px',
       minWidth: '700px',
     },
+  },
+  dialogActions: {
+    padding: 0, // TODO: set this global?
+  },
+  dialogActionButton: {
+    padding: '1.083rem',
+    borderRadius: 0,
+    textTransform: 'uppercase',
+    fontSize: '1.333rem',
+    fontWeight: 'bold',
   },
 } ))
