@@ -13,11 +13,11 @@ export function LetItRainFrequency() {
       </Typography>
       <p>Wir planen dich ein für höchstens &hellip;</p>
       <Slider
-        min={2}
-        max={6}
+        min={1}
+        max={7}
         value={daysPerWeek}
         onChange={( _, value ) =>
-          setDaysPerWeek( typeof value === 'number' ? value : 2 )
+          setDaysPerWeek( typeof value === 'number' ? value : 1 )
         }
         aria-labelledby="discrete-slider-always"
         step={1}
