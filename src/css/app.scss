@@ -53,7 +53,7 @@
 }
 
 // oswald-regular - latin
-// https://google-webfonts-helper.herokuapp.com/fonts/oswald?subsets=latin
+// Source https://google-webfonts-helper.herokuapp.com/fonts/oswald?subsets=latin
 @font-face {
   font-family: 'Oswald';
   font-style: normal;
@@ -76,13 +76,21 @@
   font-weight: normal;
 }
 
+// alegreya-regular - latin
+// Source https://google-webfonts-helper.herokuapp.com/fonts/alegreya?subsets=latin
 @font-face {
   font-family: 'Alegreya';
-  src: url('../fonts/alegreya-regular-subset.eot');
-  src: url('../fonts/alegreya-regular-subset.eot?#iefix') format('embedded-opentype'), url('../fonts/alegreya-regular-subset.woff') format('woff'), url('../fonts/alegreya-regular-subset.ttf') format('truetype'), url('../fonts/alegreya-regular-subset.svg#Alegreya') format('svg');
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
+  src: url('../fonts/alegreya-v16-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local(''),
+  url('../fonts/alegreya-v16-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../fonts/alegreya-v16-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+  url('../fonts/alegreya-v16-latin-regular.woff') format('woff'), /* Modern Browsers */
+  url('../fonts/alegreya-v16-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+  url('../fonts/alegreya-v16-latin-regular.svg#Alegreya') format('svg'); /* Legacy iOS */
 }
+
 
 // Base
 //
