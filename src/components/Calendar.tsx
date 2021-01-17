@@ -191,63 +191,67 @@ export function Calendar( { dates = [], onChange }: Props ) {
   }
 
   return (
-    <div className={String( classes.wrapper )}>
-      <p>
-        Zeitraum:
-        {dayjs( firstDate ).format(
-          firstDate.getMonth() === lastDate.getMonth()
-            ? 'D.'
-            : 'D. MMMM' +
-                ( firstDate.getFullYear() !== lastDate.getFullYear()) ?? ' YYYY'
-        )}
-        &nbsp;-&nbsp;
-        {dayjs( lastDate ).format( 'D. MMMM YYYY' )}
-      </p>
-      <FormGroup row>
-        <FormControlLabel
-          classes={{
-            root: `${classes.checkBoxLabel} ${classes.headCheckBox}`,
-            label: String( classes.checkBoxLabelText ),
-          }}
-          control={<AllCheckBox />}
-          label={'✓'}
-        />
-        {[...new Array( 7 )].map(( e, index ) => (
-          <FormControlLabel
-            key={index}
-            classes={{
-              root: `${classes.checkBoxLabel} ${classes.headCheckBox}`,
-              label: String( classes.checkBoxLabelText ),
-            }}
-            control={<DayCheckBox dayOfWeek={index} />}
-            label={dayjs().weekday( index ).format( 'dddd' )}
-          />
-        ))}
-      </FormGroup>
-      {Array.from( datesByWeeks.keys()).map(( cw ) => (
-        <FormGroup row key={cw}>
+    <>
+      <h2>Wann hast du Zeit?</h2>
+      <div className={String( classes.wrapper )}>
+        <p>
+          Zeitraum:
+          {dayjs( firstDate ).format(
+            firstDate.getMonth() === lastDate.getMonth()
+              ? 'D.'
+              : 'D. MMMM' +
+                  ( firstDate.getFullYear() !== lastDate.getFullYear()) ??
+                  ' YYYY'
+          )}
+          &nbsp;-&nbsp;
+          {dayjs( lastDate ).format( 'D. MMMM YYYY' )}
+        </p>
+        <FormGroup row>
           <FormControlLabel
             classes={{
               root: `${classes.checkBoxLabel} ${classes.headCheckBox}`,
               label: String( classes.checkBoxLabelText ),
             }}
-            control={<CwCheckBox cw={cw} />}
-            label={`CW ${cw}`}
+            control={<AllCheckBox />}
+            label={'✓'}
           />
-          {datesByWeeks.get( cw ).map(( date: Date, dateIndex: number ) => (
+          {[...new Array( 7 )].map(( e, index ) => (
             <FormControlLabel
-              key={dateIndex}
+              key={index}
               classes={{
-                root: classes.checkBoxLabel,
-                label: classes.checkBoxLabelText,
+                root: `${classes.checkBoxLabel} ${classes.headCheckBox}`,
+                label: String( classes.checkBoxLabelText ),
               }}
-              control={<DateCheckBox date={date} />}
-              label={date.getDate()}
+              control={<DayCheckBox dayOfWeek={index} />}
+              label={dayjs().weekday( index ).format( 'dddd' )}
             />
           ))}
         </FormGroup>
-      ))}
-    </div>
+        {Array.from( datesByWeeks.keys()).map(( cw ) => (
+          <FormGroup row key={cw}>
+            <FormControlLabel
+              classes={{
+                root: `${classes.checkBoxLabel} ${classes.headCheckBox}`,
+                label: String( classes.checkBoxLabelText ),
+              }}
+              control={<CwCheckBox cw={cw} />}
+              label={`CW ${cw}`}
+            />
+            {datesByWeeks.get( cw ).map(( date: Date, dateIndex: number ) => (
+              <FormControlLabel
+                key={dateIndex}
+                classes={{
+                  root: classes.checkBoxLabel,
+                  label: classes.checkBoxLabelText,
+                }}
+                control={<DateCheckBox date={date} />}
+                label={date.getDate()}
+              />
+            ))}
+          </FormGroup>
+        ))}
+      </div>
+    </>
   )
 }
 
