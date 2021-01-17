@@ -9,7 +9,7 @@ export function LetItRainFrequency() {
   return (
     <>
       <Typography variant="h2" className={classes.question}>
-        Wie oft moechtest du maximal giessen?
+        Wie oft möchtest du maximal gießen?
       </Typography>
       <p>Wir planen dich ein für höchstens &hellip;</p>
       <Slider
@@ -69,7 +69,6 @@ export function LetItRainFrequency() {
 const useStyles = makeStyles(() => ( {
   question: {
     textAlign: 'center',
-    fontFamily: 'Alegreya',
     width: '70%',
     margin: '38px 0 58px 0',
   },

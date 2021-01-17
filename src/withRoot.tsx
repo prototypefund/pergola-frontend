@@ -3,6 +3,15 @@ import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/styles'
 import * as React from 'react'
 
+const headingsFontFamily = [
+  'oswald',
+  'Arial',
+  'sans-serif',
+  '"Apple Color Emoji"',
+  '"Segoe UI Emoji"',
+  '"Segoe UI Symbol"',
+].join( ',' )
+
 // A theme with custom primary and secondary color.
 // It's optional.
 const theme = createMuiTheme( {
@@ -26,6 +35,7 @@ const theme = createMuiTheme( {
     },
   },
   typography: {
+    fontSize: 18.594061,
     fontFamily: [
       'Open Sans',
       'Arial',
@@ -34,6 +44,17 @@ const theme = createMuiTheme( {
       '"Segoe UI Emoji"',
       '"Segoe UI Symbol"',
     ].join( ',' ),
+    h2: {
+      fontSize: '2.625rem',
+      lineHeight: '1.483',
+      fontFamily: headingsFontFamily,
+    },
+    h6: {
+      textTransform: 'uppercase',
+      fontSize: '1.15rem',
+      fontWeight: 600,
+      color: '#006f52', // TODO: use previous defined palette color
+    },
   },
 } )
 

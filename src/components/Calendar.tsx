@@ -4,6 +4,7 @@ import {
   FormGroup,
   makeStyles,
   Theme,
+  Typography,
 } from '@material-ui/core'
 import dayjs from 'dayjs'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
@@ -192,7 +193,7 @@ export function Calendar( { dates = [], onChange }: Props ) {
 
   return (
     <>
-      <h2>Wann hast du Zeit?</h2>
+      <Typography variant="h2">Wann hast du Zeit?</Typography>
       <div className={String( classes.wrapper )}>
         <p>
           Zeitraum:
