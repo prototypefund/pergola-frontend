@@ -12,6 +12,7 @@
   in
   rec {
     legacyPackages.x86_64-linux = {
+      pkgs = pkgs;
       jq = pkgs.jq;
       node2nix = pkgs.nodePackages.node2nix;
 

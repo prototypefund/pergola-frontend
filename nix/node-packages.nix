@@ -1048,6 +1048,15 @@ let
         sha1 = "86480b483bb97f75036e8864fe404cc782cc311b";
       };
     };
+    "@babel/preset-typescript-7.12.7" = {
+      name = "_at_babel_slash_preset-typescript";
+      packageName = "@babel/preset-typescript";
+      version = "7.12.7";
+      src = fetchurl {
+        url = "https://registry.yarnpkg.com/@babel/preset-typescript/-/preset-typescript-7.12.7.tgz";
+        sha1 = "fc7df8199d6aae747896f1e6c61fc872056632a3";
+      };
+    };
     "@babel/runtime-7.12.1" = {
       name = "_at_babel_slash_runtime";
       packageName = "@babel/runtime";
@@ -15990,6 +15999,7 @@ let
       sources."@babel/plugin-syntax-optional-catch-binding-7.8.3"
       sources."@babel/plugin-syntax-optional-chaining-7.8.3"
       sources."@babel/plugin-syntax-top-level-await-7.12.1"
+      sources."@babel/plugin-syntax-typescript-7.12.1"
       sources."@babel/plugin-transform-arrow-functions-7.12.1"
       sources."@babel/plugin-transform-async-to-generator-7.12.1"
       sources."@babel/plugin-transform-block-scoped-functions-7.12.1"
@@ -16026,11 +16036,13 @@ let
       sources."@babel/plugin-transform-sticky-regex-7.12.7"
       sources."@babel/plugin-transform-template-literals-7.12.1"
       sources."@babel/plugin-transform-typeof-symbol-7.12.10"
+      sources."@babel/plugin-transform-typescript-7.12.1"
       sources."@babel/plugin-transform-unicode-escapes-7.12.1"
       sources."@babel/plugin-transform-unicode-regex-7.12.1"
       sources."@babel/preset-env-7.12.11"
       sources."@babel/preset-modules-0.1.4"
       sources."@babel/preset-react-7.12.10"
+      sources."@babel/preset-typescript-7.12.7"
       sources."@babel/runtime-7.12.5"
       sources."@babel/runtime-corejs3-7.12.5"
       sources."@babel/template-7.12.7"
@@ -16445,12 +16457,10 @@ let
           sources."@babel/plugin-proposal-optional-chaining-7.12.1"
           sources."@babel/plugin-syntax-decorators-7.12.1"
           sources."@babel/plugin-syntax-flow-7.12.1"
-          sources."@babel/plugin-syntax-typescript-7.12.1"
           sources."@babel/plugin-transform-flow-strip-types-7.12.1"
           sources."@babel/plugin-transform-react-jsx-self-7.12.1"
           sources."@babel/plugin-transform-react-jsx-source-7.12.1"
           sources."@babel/plugin-transform-runtime-7.12.1"
-          sources."@babel/plugin-transform-typescript-7.12.1"
           (sources."@babel/preset-env-7.12.1" // {
             dependencies = [
               (sources."@babel/plugin-proposal-numeric-separator-7.12.7" // {
