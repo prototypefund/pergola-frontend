@@ -1,7 +1,7 @@
 import {gql, useQuery} from '@apollo/client'
-import {Box, Container, Drawer, IconButton, Link, makeStyles, Typography} from '@material-ui/core'
+import {Box, Container, IconButton, Link, makeStyles, Typography} from '@material-ui/core'
 import {
-  AddCircle, ArrowBack as ArrowBackIcon, ArrowForward as ArrowForwardIcon
+  AddCircle, ChevronLeft as ArrowBackIcon, ChevronRight as ArrowForwardIcon
 } from '@material-ui/icons'
 import dayjs from 'dayjs'
 import {KeycloakProfile} from 'keycloak-js'
@@ -11,6 +11,7 @@ import {useSelector} from 'react-redux'
 import {equalsNeo4jDate, fromNeo4JDate, toNeo4JDate} from '../../helper'
 import {RootState} from '../../reducers'
 import {_Neo4jDate, WateringPeriod, WateringTask} from '../../types/graphql'
+import {BottomDrawer} from '../basic'
 import {WateringDetailDrawer} from './WateringDetailDrawer'
 
 interface WateringDayProps {
@@ -204,27 +205,22 @@ const WateringCalendarWeek = ( {startDate, dayCount, onNextPageRequested, onPrev
           />
         ))}
       </Box>
-      <Drawer
-        variant="persistent"
-        anchor="bottom"
+      <BottomDrawer
         open={drawerWateringDay}
-        onClose={() => setDrawerWateringDay( false )}>
-        <Box className={classes.drawerToolbar} display='flex' flexDirection='row' justifyContent='space-between'>
-          <IconButton onClick={selectPreviousDay}><ArrowBackIcon/></IconButton>
-          <Typography variant="h6">{selectedDay && selectedDay.date?.toLocaleDateString()}</Typography>
-          <IconButton onClick={selectNextDay}><ArrowForwardIcon/></IconButton>
-        </Box>
+        onClose={() => setDrawerWateringDay( false )}
+        toolbar={(
+          <>
+            <IconButton onClick={selectPreviousDay}><ArrowBackIcon/></IconButton>
+            <Typography variant="h4">{selectedDay && selectedDay.date?.toLocaleDateString()}</Typography>
+            <IconButton onClick={selectNextDay}><ArrowForwardIcon/></IconButton>
+          </> )}>
         { selectedDay.date && <WateringDetailDrawer date={selectedDay.date} onDrawerClose={() => setDrawerWateringDay( false )}/> }
-      </Drawer>
+      </BottomDrawer>
     </>
   )
 }
 
 const useStyles = makeStyles(( theme ) => ( {
-  drawerToolbar: {
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.getContrastText( theme.palette.primary.main )
-  },
   dayContainer: {
     '&.notInPeriod': {
       '& .dayInMonth': {
