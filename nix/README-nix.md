@@ -18,14 +18,20 @@ Finally we can generate the lockfiles used by nix:
 node2nix -l package-lock.json --supplement-input supplement.json --strip-optional-dependencies
 ```
 
-Now we can open a reproducable build dev-shell for development:
+Now we can open a reproducible shell for development including all dependencies, even when we delete `./node_modules`:
 
 ```
-nix-shell -A shell
+nix shell .#pergola-frontend-deps.shell  ## or nix-shell ./nix -A shell
 
 > npm rebuild node-sass
 > npm run dev
 > npm run build-prod
+```
+
+And have a reproducible production build (used by CI/CD):
+
+```
+nix build .#pergola-frontend
 ```
 
 ## Optimization
