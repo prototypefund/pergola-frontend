@@ -1,9 +1,8 @@
 // @flow
 import {gql, useQuery} from '@apollo/client'
-import {Box, Button, Container, DialogTitle, Drawer, IconButton, Toolbar, Typography} from '@material-ui/core'
-import {AddCircle, ArrowBack as ArrowBackIcon, ArrowForward as ArrowForwardIcon} from '@material-ui/icons'
-import {useKeycloak} from '@react-keycloak/web'
-import AvatarComponent, {Avatar} from 'avataaars'
+import {Box, Button, Container, Typography} from '@material-ui/core'
+import {AddCircle} from '@material-ui/icons'
+import AvatarComponent from 'avataaars'
 import {KeycloakProfile} from 'keycloak-js'
 import * as React from 'react'
 import {useSelector} from 'react-redux'
