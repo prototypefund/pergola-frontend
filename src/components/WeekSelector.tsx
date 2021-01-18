@@ -19,13 +19,14 @@ const makeDateRange: ( startDate: dayjs.Dayjs ) => DateRangeStruct = (
 } )
 
 interface Props {
-  children?: (( props: {startDate: Date, dayCount: number} ) => React.ReactNode ) | React.ReactNode;
+  date?: Date,
+  children?: (( props: {startDate: Date, dayCount: number, nextPage: () => void, prevPage: () => void} ) => React.ReactNode ) | React.ReactNode;
 }
 
-export function WeekSelector( {children}: Props ) {
+export function WeekSelector( {date, children}: Props ) {
   const classes = useStyles()
 
-  const initialRange = makeDateRange( dayjs().startOf( 'week' ))
+  const initialRange = makeDateRange( dayjs( date ).startOf( 'week' ))
   const [dateRange, setDateRange] = useState<DateRangeStruct>( initialRange )
 
   const handleJumpWeek = ( weekCount ) =>
@@ -36,18 +37,21 @@ export function WeekSelector( {children}: Props ) {
     endDate
   } ) => `${startDate.format( 'DD.MMM.' )}. - ${endDate.format( 'DD.MMM.' )} ${endDate.format( 'YYYY' )}`
 
+  const nextPage = ()  => handleJumpWeek( 1 )
+  const prevPage = ()  => handleJumpWeek( -1 )
+
   return (
     <>
       <div className={classes.container}>
-        <IconButton onClick={() => handleJumpWeek( -1 )}>
+        <IconButton onClick={prevPage}>
           <ChevronLeft />
         </IconButton>
         <Typography>{getDateRangeString( dateRange )}</Typography>
-        <IconButton onClick={() => handleJumpWeek( 1 )}>
+        <IconButton onClick={nextPage}>
           <ChevronRight />
         </IconButton>
       </div>
-      {children && ( typeof children === 'function' ? children( {startDate: dateRange.startDate.toDate(), dayCount: DAYS_PER_WEEK } ) : children )}
+      {children && ( typeof children === 'function' ? children( {startDate: dateRange.startDate.toDate(), dayCount: DAYS_PER_WEEK, nextPage, prevPage } ) : children )}
     </>
   )
 }

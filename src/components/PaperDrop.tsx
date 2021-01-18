@@ -55,13 +55,14 @@ export function PaperDrop( { children }: Props ) {
 const useStyles = makeStyles(() => ( {
   paperlike: {
     borderRadius: '0 0 4px 4px',
+    padding: '16px'
   },
   drop: {
     marginBottom: '0px',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'flex-end',
-    padding: 0,
+    padding: 0
   },
   drop_svg: {
     flexGrow: 0,
