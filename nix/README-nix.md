@@ -39,5 +39,9 @@ nix build .#pergola-frontend
 Dependencies provided by `ǹode2nix --supplement-input` seem to be pinpointed without considering the lockfile.
 For speedup, we could either fix this, or simply merge the `devDependencies` into `dependencies` by `jq`.
 
+```
+(cd ..; npx yarn && npx synp -s yarn.lock -f && npm i) && nix shell ..#node2nix --command node2nix -l ../package-lock.json -i ../package.json --strip-optional-dependencies && nix-shell -A shell
+```
+
 At he moment we use a single package for all the dependencies. Any little change in the code causes `nix-shell -A shell` to completely reavaluate everything. For quickly building a development shell, we want a build excluding the source directory.
 To speedup the build, we should split the package into separate packages for each dependency and merge them into a top level only by setting the joined `NODE_PATH`.
