@@ -1,7 +1,7 @@
 import {gql, useQuery} from '@apollo/client'
 import {Box, Container, IconButton, Link, makeStyles, Typography} from '@material-ui/core'
 import {
-  AddCircle, ChevronLeft as ArrowBackIcon, ChevronRight as ArrowForwardIcon
+  ChevronLeft as ArrowBackIcon, ChevronRight as ArrowForwardIcon
 } from '@material-ui/icons'
 import dayjs from 'dayjs'
 import {KeycloakProfile} from 'keycloak-js'
@@ -12,6 +12,7 @@ import {equalsNeo4jDate, fromNeo4JDate, toNeo4JDate} from '../../helper'
 import {RootState} from '../../reducers'
 import {_Neo4jDate, WateringPeriod, WateringTask} from '../../types/graphql'
 import {BottomDrawer} from '../basic'
+import { ItsMyTurnIcon,IWillHelpIcon} from './icons'
 import {WateringDetailDrawer} from './WateringDetailDrawer'
 
 interface WateringDayProps {
@@ -49,7 +50,7 @@ const WateringDay = ( {date, recruiterCount, onSelect, active, notInPeriod, itsM
 
           <Typography component="h4">{d.format( 'D' )}</Typography>
         </div>
-        <div>{recruiterMissingCount > 0 && !itsMyTurn && !notInPeriod && <AddCircle/>}</div>
+        <div>{itsMyTurn && <ItsMyTurnIcon/> || recruiterMissingCount > 0 && !notInPeriod && <IWillHelpIcon/>}</div>
       </Container>
     </Link>
   )
@@ -220,7 +221,7 @@ const WateringCalendarWeek = ( {startDate, dayCount, onNextPageRequested, onPrev
   )
 }
 
-const useStyles = makeStyles(( theme ) => ( {
+const useStyles = makeStyles(() => ( {
   dayContainer: {
     '&.notInPeriod': {
       '& .dayInMonth': {

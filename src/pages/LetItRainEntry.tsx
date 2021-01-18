@@ -46,7 +46,7 @@ export function LetItRainEntry() {
 }
 
 
-const useStyles = makeStyles(( theme ) => ( {
+const useStyles = makeStyles(() => ( {
   main: {
     backgroundImage: `url(${BackgroundImage})`,
     backgroundSize: 'cover',
