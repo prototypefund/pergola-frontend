@@ -42,16 +42,16 @@ export function WateringDetailDrawer( {date, onDrawerClose}: Props ) {
       && wateringTask.users_assigned.findIndex(( user ) => userProfile && user && userProfile.username === user.label ) >= 0
 
   return (
-    <Container>
-      <Box display='flex' flexDirection='row' justifyContent='center'>
+    <Container style={{backgroundColor: 'white'}}>
+      <Box display='flex' flexDirection='row' justifyContent='center' minHeight='130px'>
         {wateringTask && wateringTask.users_assigned && wateringTask.users_assigned
           .map( user => user && (
-            <Box display='flex' flexDirection='column' alignItems='center'>
+            <Box display='flex' flexDirection='column' alignItems='center' justifyContent='center'>
               <AvatarComponent
                 style={{width: '100px', height: '100px'}}
                 {...randomAvatarProps()}
               />
-              <Typography>{user.label}</Typography>
+              <Typography  variant='h5'>{user.label}</Typography>
             </Box>
           )
           )
