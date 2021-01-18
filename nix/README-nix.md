@@ -45,3 +45,7 @@ For speedup, we could either fix this, or simply merge the `devDependencies` int
 
 At he moment we use a single package for all the dependencies. Any little change in the code causes `nix-shell -A shell` to completely reavaluate everything. For quickly building a development shell, we want a build excluding the source directory.
 To speedup the build, we should split the package into separate packages for each dependency and merge them into a top level only by setting the joined `NODE_PATH`.
+
+## Known Issues
+
+`babel` doesn't evaluate `$NODE_PATH`, so we need to symlink it to `./node_modules`

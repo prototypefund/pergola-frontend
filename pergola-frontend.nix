@@ -1,29 +1,20 @@
 { pkgs ? import <nixpkgs> {}, lib ? pkgs.stdenv.lib }:
 let
-  #nodeDependencies = (pkgs.callPackage ./nix/default.nix {}).shell.nodeDependencies;
-  #args = (pkgs.callPackage ./nix/default.nix {}).args;
-  buildInputs = lib.lists.sublist 1 10 (pkgs.callPackage ./nix/default.nix {}).package.buildInputs;  ## TODO
-  buildInputs_node_path = lib.strings.makeSearchPathOutput "" "lib/node_modules" buildInputs;
+  nodeDependencies = (pkgs.callPackage ./nix/default.nix {}).shell.nodeDependencies;
+  ## when using supplement.json, you get the additional paths like this:
+  #buildInputs = lib.lists.sublist 1 10 (pkgs.callPackage ./nix/default.nix {}).package.buildInputs;
+  #buildInputs_node_path = lib.strings.makeSearchPathOutput "" "lib/node_modules" buildInputs;
 in
 pkgs.stdenv.mkDerivation {
   name = "pergola-frontend";
   src = ./.;
-  buildInputs = with pkgs; [nodejs];
+  buildInputs = with pkgs; [nodejs python2];
   buildPhase = ''
-    ${#ln -s ${nodeDependencies}/lib/node_modules ./node_modules
-    #export NODE_PATH="${nodeDependencies}/lib/node_modules:${buildInputs_node_path}"
-    #export PATH="${nodeDependencies}/bin:$PATH"
-    "ls"}
-    echo ${buildInputs_node_path}
-    echo $NODE_PATH
+    ln -s ${nodeDependencies}/lib/node_modules ./node_modules
 
-    echo "${builtins.toJSON buildInputs}"
-
-    exit
-
+    echo 'SOOOOOOOOOOOOOOOOOOOOOOOOO :)'
     npm rebuild node-sass
-    #npm rebuild sass-loader
-    rm src/stories/
+    rm -r ./src/stories
     npm run build-prod 
 
     #SKIP_PREFLIGHT_CHECK=true npm run dev
