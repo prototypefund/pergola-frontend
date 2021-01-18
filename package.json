@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "start": "npm run dev",
-    "dev": "cross-env NODE_ENV=development react-scripts start",
+    "dev": "cross-env PORT=8081 cross-env NODE_ENV=development react-scripts start",
     "codegen": "gql-gen",
     "build-dev": "cross-env NODE_ENV=development node ./build/build.js",
     "build-prod": "cross-env NODE_ENV=production node ./build/build.js",
@@ -43,6 +43,7 @@
     "@material-ui/lab": "^4.0.0-alpha.56",
     "@material-ui/styles": "4.11.2",
     "@react-keycloak/web": "^3.4.0",
+    "avataaars": "^1.2.1",
     "dayjs": "^1.9.7",
     "graphql": "15.0.0",
     "ical.js": "^1.4.0",

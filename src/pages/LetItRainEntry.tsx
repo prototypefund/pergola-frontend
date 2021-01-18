@@ -1,6 +1,9 @@
-import {Box, Button, Container, makeStyles, Typography} from '@material-ui/core'
-import dayjs from 'dayjs'
+import {Box, Button, Container, makeStyles, Paper, Typography} from '@material-ui/core'
+import {FormatColorReset as NoDropIcon, Opacity as DropIcon} from '@material-ui/icons'
+import dayjs, {Dayjs} from 'dayjs'
+import {divIcon} from 'leaflet'
 import * as React from 'react'
+import {CSSProperties} from 'react'
 import {Link, Route, Switch} from 'react-router-dom'
 
 import {PaperDrop, WeekSelector} from '../components'
@@ -20,11 +23,11 @@ export function LetItRainEntry() {
         <hr className={classes.titleDivider} />
       </Box>
       <PaperDrop>
-        <WeekSelector>
-          {( {startDate, dayCount} ) => (
+        <WeekSelector date={today.toDate()}>
+          {( {startDate, dayCount, nextPage, prevPage} ) => (
             <Box display='flex' alignItems='center' flexDirection='column'>
-              <WateringCalendarWeek startDate={startDate} dayCount={dayCount} />
-              {dayjs( startDate ).isAfter( today.add( 3, 'week' )) &&
+              <WateringCalendarWeek startDate={startDate} dayCount={dayCount} onNextPageRequested={nextPage} onPrevPageRequested={prevPage} />
+              {dayjs( startDate ).isAfter( today ) &&
                 <Link to='/watering/wizard/0' >
                   <Button variant='contained' color='primary'>Verfügbarkeit eintragen</Button>
                 </Link>
@@ -41,7 +44,7 @@ export function LetItRainEntry() {
 }
 
 
-const useStyles = makeStyles(() => ( {
+const useStyles = makeStyles(( theme ) => ( {
   main: {
     minHeight:  '500px'
 
