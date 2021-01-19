@@ -1,4 +1,9 @@
-import { ApolloClient, ApolloProvider, createHttpLink,InMemoryCache } from '@apollo/client'
+import {
+  ApolloClient,
+  ApolloProvider,
+  createHttpLink,
+  InMemoryCache,
+} from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 import { Typography } from '@material-ui/core'
 import { ReactKeycloakProvider, useKeycloak } from '@react-keycloak/web'
@@ -10,7 +15,7 @@ import * as React from 'react'
 import { Provider, useDispatch } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 
-import {setUserProfile} from './actions'
+import { setUserProfile } from './actions'
 import App from './App'
 import configureStore from './configureStore'
 
@@ -20,27 +25,28 @@ dayjs.extend( weekday )
 //import {key} from 'localforage';
 
 const keycloak = Keycloak( {
-  realm: 'keycloak-connect-graphql', // process.env.REACT_APP_KEYCLOAK_REALM,
-  url: 'http://localhost:8080/auth/', // process.env.REACT_APP_KEYCLOAK_URL,
-  clientId: 'keycloak-connect-graphql-public' // process.env.REACT_APP_KEYCLOAK_CLIENT_ID
+  realm: process.env.REACT_APP_KEYCLOAK_REALM || 'keycloak-connect-graphql',
+  url: process.env.REACT_APP_KEYCLOAK_URL || 'http://localhost:8080/auth/',
+  clientId:
+    process.env.REACT_APP_KEYCLOAK_CLIENT_ID ||
+    'keycloak-connect-graphql-public',
 } )
 
-const uri =
-  process.env.REACT_APP_GRAPHQL_URI || 'http://localhost:4001/graphql'
+const uri = process.env.GRAPHQL_SERVER_HOST || 'http://localhost:4001/graphql'
 const cache = new InMemoryCache()
 
-function ApolloRoot( {persistor} ) {
+function ApolloRoot( { persistor } ) {
   const { keycloak } = useKeycloak()
   const authLink = setContext(( _, { headers } ) => {
     return {
       headers: {
         ...headers,
         authorization: keycloak.token ? `Bearer ${keycloak.token}` : '',
-      }
+      },
     }
   } )
   const client = new ApolloClient( {
-    link: authLink.concat( createHttpLink( {uri} )),
+    link: authLink.concat( createHttpLink( { uri } )),
     cache,
   } )
 
@@ -56,20 +62,20 @@ function ApolloRoot( {persistor} ) {
   )
 }
 
-export function KeycloakRoot( {persistor} ) {
+export function KeycloakRoot( { persistor } ) {
   const dispatch = useDispatch()
 
   return (
     <ReactKeycloakProvider
       authClient={keycloak}
-      onEvent={event => {
-        if( event === 'onAuthSuccess' ) {
-	  keycloak.loadUserProfile()
-            .then( function( profile ) {
-	            dispatch( setUserProfile( profile ))
-            } )
+      onEvent={( event ) => {
+        if ( event === 'onAuthSuccess' ) {
+          keycloak.loadUserProfile().then( function ( profile ) {
+            dispatch( setUserProfile( profile ))
+          } )
         }
-      }}>
+      }}
+    >
       <ApolloRoot persistor={persistor} />
     </ReactKeycloakProvider>
   )
