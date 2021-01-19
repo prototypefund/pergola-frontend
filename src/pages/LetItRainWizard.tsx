@@ -1,20 +1,34 @@
-import {Box, Button, Container, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, makeStyles, Toolbar, Typography, useMediaQuery, useTheme} from '@material-ui/core'
-import {ArrowBack as ArrowBackIcon} from '@material-ui/icons'
+import {
+  Box,
+  Button,
+  Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+  makeStyles,
+  Toolbar,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@material-ui/core'
+import { ArrowBack as ArrowBackIcon } from '@material-ui/icons'
 import dayjs from 'dayjs'
 import * as React from 'react'
-import {useState} from 'react'
-import {Link, useHistory, useParams} from 'react-router-dom'
+import { useState } from 'react'
+import { Link, useHistory, useParams } from 'react-router-dom'
 
-import {Calendar, HorizontalStepper, LetItRainFrequency} from '../components'
+import { Calendar, HorizontalStepper, LetItRainFrequency } from '../components'
 
 export interface LetItRainWizardRouterProps {
-  stepNumber: string
+  stepNumber: string;
 }
 
 interface StepDesc {
-  title: String,
-  headline: String,
-  StepComponent: JSX.Element
+  title: String;
+  headline: String;
+  StepComponent: JSX.Element;
 }
 
 const DAYS_COUNT = 14
@@ -23,29 +37,43 @@ export function LetItRainWizard() {
   const theme = useTheme()
   const classes = useStyles()
   const history = useHistory()
-  const {stepNumber} = useParams<LetItRainWizardRouterProps>()
+  const { stepNumber } = useParams<LetItRainWizardRouterProps>()
   const fullscreenDialog = useMediaQuery( theme.breakpoints.down( 'md' ))
   const [, setAvailableDates] = useState<Date[]>( [] )
 
-
   const lastMondayDate = dayjs().weekday( -7 )
-  const calendarDates = ( new Array( DAYS_COUNT )).fill( undefined )
+  const calendarDates = new Array( DAYS_COUNT )
+    .fill( undefined )
     .map(( _, i ) => lastMondayDate.add( i, 'day' ).toDate())
 
   const steps: StepDesc[] = [
     {
-      title: 'Termine',
-      headline: 'Giessdienst eintragen',
-      StepComponent: <Calendar dates={calendarDates} onChange={( dates ) => {setAvailableDates( dates )}}/>
+      title: 'Häufigkeit',
+      headline: 'Häufigkeit angeben',
+      StepComponent: <LetItRainFrequency />,
     },
-    {title: 'Hauefigekeit', headline: 'Giessdienst eintragen', StepComponent: <LetItRainFrequency/>},
-    {title: 'Erinnerung', headline: 'Giessdienst eintragen', StepComponent: <Container>Bla</Container>},
+    {
+      title: 'Verfügbarkeit',
+      headline: 'Verfügbarkeit angeben',
+      StepComponent: (
+        <Calendar
+          dates={calendarDates}
+          onChange={( dates ) => {
+            setAvailableDates( dates )
+          }}
+        />
+      ),
+    },
+    {
+      title: 'Erinnerung',
+      headline: 'Erinnerung angeben',
+      StepComponent: <Container>Bla</Container>,
+    },
   ]
 
   const finishWizard = () => {
     history.push( '/watering/thanks' )
   }
-
 
   const getCurrentStepIndex = ( numStr: string ) => {
     let currentStepNum = parseInt( numStr ) || 0
@@ -56,27 +84,54 @@ export function LetItRainWizard() {
   const currentStep = steps[currentStepIndex]
 
   return (
-    <Dialog fullScreen={fullscreenDialog} className={classes.dialog + ( fullscreenDialog ? '' : ' noFullscreen' )}
-      open={true}>
+    <Dialog
+      fullScreen={fullscreenDialog}
+      className={classes.dialog + ( fullscreenDialog ? '' : ' noFullscreen' )}
+      open={true}
+    >
       <DialogTitle>
         <Toolbar>
-          <IconButton onClick={() => history.goBack()}><ArrowBackIcon/></IconButton>
+          <IconButton onClick={() => history.goBack()}>
+            <ArrowBackIcon />
+          </IconButton>
           <Typography variant="h6">{currentStep.headline}</Typography>
         </Toolbar>
       </DialogTitle>
       <DialogContent>
-        <Box my={2} display='flex' flexDirection='column' alignItems='center'>
-          <HorizontalStepper steps={steps.map(( {title} ) => title )} activeStep={currentStepIndex}/>
+        <Box my={2} display="flex" flexDirection="column" alignItems="center">
+          <HorizontalStepper
+            steps={steps.map(( { title } ) => title )}
+            activeStep={currentStepIndex}
+          />
           {currentStep.StepComponent}
         </Box>
       </DialogContent>
-      <DialogActions>
-        {currentStepIndex >= steps.length - 1
-          ? <Button fullWidth variant='contained' color='primary' onClick={() => finishWizard()}>fertig</Button>
-          : <Link to={`/watering/wizard/${currentStepIndex + 1}`} style={{width: '100%'}}>
-            <Button fullWidth variant='contained' color='primary'>weiter</Button>
+      <DialogActions className={classes.dialogActions}>
+        {currentStepIndex >= steps.length - 1 ? (
+          <Button
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.dialogActionButton}
+            onClick={() => finishWizard()}
+          >
+            fertig
+          </Button>
+        ) : (
+          <Link
+            to={`/watering/wizard/${currentStepIndex + 1}`}
+            style={{ width: '100%' }}
+          >
+            <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.dialogActionButton}
+            >
+              weiter
+            </Button>
           </Link>
-        }
+        )}
       </DialogActions>
     </Dialog>
   )
@@ -86,7 +141,17 @@ const useStyles = makeStyles(() => ( {
   dialog: {
     '&.noFullscreen .MuiDialog-paper': {
       minHeight: '800px',
-      minWidth: '700px'
-    }
-  }
+      minWidth: '700px',
+    },
+  },
+  dialogActions: {
+    padding: 0, // TODO: set this global?
+  },
+  dialogActionButton: {
+    padding: '1.083rem',
+    borderRadius: 0,
+    textTransform: 'uppercase',
+    fontSize: '1.333rem',
+    fontWeight: 'bold',
+  },
 } ))

@@ -8,6 +8,7 @@ import { setContext } from '@apollo/client/link/context'
 import { Typography } from '@material-ui/core'
 import { ReactKeycloakProvider, useKeycloak } from '@react-keycloak/web'
 import dayjs from 'dayjs'
+import de from 'dayjs/locale/de'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import weekday from 'dayjs/plugin/weekday'
 import Keycloak from 'keycloak-js'
@@ -21,6 +22,8 @@ import configureStore from './configureStore'
 
 dayjs.extend( localizedFormat )
 dayjs.extend( weekday )
+// TODO: time locale according to browser or user settings
+dayjs.locale( { ...de, weekStart: 1 } )
 
 //import {key} from 'localforage';
 
