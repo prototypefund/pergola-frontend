@@ -4,6 +4,7 @@ const {CheckerPlugin} = require( 'awesome-typescript-loader' )
 const HtmlWebpackPlugin = require( 'html-webpack-plugin' )
 const CopyWebpackPlugin = require( 'copy-webpack-plugin' )
 const WorkboxPlugin = require( 'workbox-webpack-plugin' )
+const EnvironmentPlugin = require( 'webpack/lib/EnvironmentPlugin' )
 
 const env = process.env.NODE_ENV || 'development'
 
@@ -57,6 +58,14 @@ module.exports = {
     ],
   },
   plugins: [
+    new EnvironmentPlugin( [
+      'REACT_APP_KEYCLOAK_REALM',
+      'REACT_APP_KEYCLOAK_URL',
+      'REACT_APP_KEYCLOAK_CLIENT_ID',
+      'PERGOLA_API_URL',
+      'NODE_ENV',
+      'WEBDAV_URL'
+    ] ),
     new CheckerPlugin(),
     new HtmlWebpackPlugin( {
       filename: 'index.html',
