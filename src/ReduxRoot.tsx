@@ -35,7 +35,7 @@ const keycloak = Keycloak( {
     'keycloak-connect-graphql-public',
 } )
 
-const uri = process.env.GRAPHQL_SERVER_HOST || 'http://localhost:4001/graphql'
+const uri = process.env.PERGOLA_API_URL || 'http://localhost:4001/graphql'
 const cache = new InMemoryCache()
 
 function ApolloRoot( { persistor } ) {
