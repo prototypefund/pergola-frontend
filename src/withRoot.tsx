@@ -55,6 +55,18 @@ const theme = createMuiTheme( {
       color: '#006f52', // TODO: use previous defined palette color
     },
   },
+  overrides: {
+    MuiDialogContent: {
+      root: {
+        // padding: 0
+      }
+    },
+    MuiDialogActions: {
+      root: {
+        padding: 0
+      }
+    }
+  }
 } )
 
 export function withRoot( Component: any ) {

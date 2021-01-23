@@ -97,8 +97,8 @@ export function LetItRainWizard() {
           <Typography variant="h6">{currentStep.headline}</Typography>
         </Toolbar>
       </DialogTitle>
-      <DialogContent>
-        <Box my={2} display="flex" flexDirection="column" alignItems="center">
+      <DialogContent className={classes.dialogContent}>
+        <Box display="flex" flexDirection="column" alignItems="center">
           <HorizontalStepper
             steps={steps.map(( { title } ) => title )}
             activeStep={currentStepIndex}
@@ -106,7 +106,7 @@ export function LetItRainWizard() {
           {currentStep.StepComponent}
         </Box>
       </DialogContent>
-      <DialogActions className={classes.dialogActions}>
+      <DialogActions>
         {currentStepIndex >= steps.length - 1 ? (
           <Button
             fullWidth
@@ -144,8 +144,8 @@ const useStyles = makeStyles(() => ( {
       minWidth: '700px',
     },
   },
-  dialogActions: {
-    padding: 0, // TODO: set this global?
+  dialogContent: {
+    position: 'relative'
   },
   dialogActionButton: {
     padding: '1.083rem',
@@ -153,5 +153,5 @@ const useStyles = makeStyles(() => ( {
     textTransform: 'uppercase',
     fontSize: '1.333rem',
     fontWeight: 'bold',
-  },
+  }
 } ))

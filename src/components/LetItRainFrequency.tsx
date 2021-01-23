@@ -53,7 +53,7 @@ export function LetItRainFrequency() {
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className={classes.soil}
-          viewBox="0 0 500 75"
+          viewBox="0 0 500 85"
         >
           <path
             d="M-0.28,39.97 C242.94,51.80 242.37,30.08 500.84,37.98 L500.00,150.00 L0.00,150.00 Z"
@@ -73,10 +73,11 @@ const useStyles = makeStyles(() => ( {
     margin: '38px 0 58px 0',
   },
   bed: {
-    position: 'relative',
+    position: 'absolute',
+    right: 0,
+    bottom: 0,
+    left: 0,
     display: 'flex',
-    width: '100%',
-    marginTop: '50px',
     justifyContent: 'space-around',
     alignItems: 'center',
   },
@@ -97,7 +98,7 @@ const useStyles = makeStyles(() => ( {
       transform: 'scaleX(-1) rotate(-7deg) scale(0.8)',
       '&.active': {
         transform: 'scaleX(-1) rotate(7deg) scale(1.1)',
-        top: '-18px',
+        top: '-31px',
       },
     },
     '&:nth-child(2)': {
@@ -105,15 +106,15 @@ const useStyles = makeStyles(() => ( {
       transform: 'rotate(6deg) scale(0.8)',
       '&.active': {
         transform: 'rotate(-6deg) scale(1.1)',
-        top: '-15px',
+        top: '-39px',
       },
     },
     '&:nth-child(3)': {
       order: 1,
-      transform: 'rotate(-3deg) scale(0.8)',
+      transform: 'rotate(-8deg) scale(0.8)',
       '&.active': {
         transform: 'rotate(3deg) scale(1.1)',
-        top: '-21px',
+        top: '-25px',
       },
     },
     '&:nth-child(4)': {
@@ -121,7 +122,7 @@ const useStyles = makeStyles(() => ( {
       transform: 'rotate(-7deg) scale(0.8)',
       '&.active': {
         transform: 'rotate(7deg) scale(1.1)',
-        top: '-12px',
+        top: '-29px',
       },
     },
     '&:nth-child(5)': {
@@ -137,7 +138,7 @@ const useStyles = makeStyles(() => ( {
       transform: 'scale(0.8)',
       '&.active': {
         transform: 'scale(1.1)',
-        top: '-25px',
+        top: '-31px',
       },
     },
     '&:nth-child(7)': {
