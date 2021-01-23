@@ -35,7 +35,7 @@ const theme = createMuiTheme( {
     },
   },
   typography: {
-    fontSize: 18.594061,
+    fontSize: 16,
     fontFamily: [
       'Open Sans',
       'Arial',
@@ -45,13 +45,12 @@ const theme = createMuiTheme( {
       '"Segoe UI Symbol"',
     ].join( ',' ),
     h2: {
-      fontSize: '2.625rem',
-      lineHeight: '1.483',
+      fontSize: '2.25rem',
       fontFamily: headingsFontFamily,
     },
     h6: {
       textTransform: 'uppercase',
-      fontSize: '1.15rem',
+      fontSize: '1.125rem',
       fontWeight: 600,
       color: '#006f52', // TODO: use previous defined palette color
     },
