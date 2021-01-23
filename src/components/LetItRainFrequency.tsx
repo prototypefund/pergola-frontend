@@ -22,6 +22,7 @@ export function LetItRainFrequency() {
         aria-labelledby="discrete-slider-always"
         step={1}
         valueLabelDisplay="on"
+        marks={true}
       />
       <Typography variant="body1">{daysPerWeek} mal pro Woche</Typography>
       <div className={classes.bed}>

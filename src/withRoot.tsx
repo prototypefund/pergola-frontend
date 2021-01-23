@@ -56,14 +56,63 @@ const theme = createMuiTheme( {
     },
   },
   overrides: {
-    MuiDialogContent: {
-      root: {
-        // padding: 0
-      }
-    },
     MuiDialogActions: {
       root: {
         padding: 0
+      }
+    },
+    MuiSlider: {
+      root: {
+        width: '75%',
+        height: '10px',
+        margin: '3rem 0 1rem',
+      },
+      rail: {
+        height: '10px',
+        '&:before,&:after': {
+          content: '""',
+          position: 'absolute',
+          display: 'inline-block',
+          width: '12px',
+          height: '10px',
+          borderRadius: '5px',
+        },
+        '&:before': {
+          left: '-4px',
+          background: 'currentColor'
+        },
+        '&:after': {
+          right: '-9px',
+          background: 'currentColor'
+        }
+      },
+      track: {
+        height: '10px',
+        '&:before': {
+          content: '""',
+          position: 'absolute',
+          left: '-4px',
+          display: 'inline-block',
+          width: '12px',
+          height: '10px',
+          borderRadius: '5px',
+          background: 'currentColor'
+        }
+      },
+      mark: {
+        width: '4px',
+        height: '4px',
+        marginTop: '3px',
+        borderRadius: '100%',
+      },
+      thumb: {
+        width: '18px',
+        height: '18px',
+        marginTop: '-4px',
+        border: '2px solid #fff',
+      },
+      valueLabel: {
+        left: 'calc(-50% - 2px)'
       }
     }
   }
