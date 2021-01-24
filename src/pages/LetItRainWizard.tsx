@@ -89,16 +89,14 @@ export function LetItRainWizard() {
       className={classes.dialog + ( fullscreenDialog ? '' : ' noFullscreen' )}
       open={true}
     >
-      <DialogTitle>
-        <Toolbar>
-          <IconButton onClick={() => history.goBack()}>
-            <ArrowBackIcon />
-          </IconButton>
-          <Typography variant="h6">{currentStep.headline}</Typography>
-        </Toolbar>
+      <DialogTitle className={classes.dialogTitle}>
+        <IconButton onClick={() => history.goBack()}>
+          <ArrowBackIcon />
+        </IconButton>
+        <span>{currentStep.headline}</span>
       </DialogTitle>
-      <DialogContent>
-        <Box my={2} display="flex" flexDirection="column" alignItems="center">
+      <DialogContent className={classes.dialogContent}>
+        <Box display="flex" flexDirection="column" flexWrap="wrap" alignItems="center" justifyContent="space-between" className={classes.box}>
           <HorizontalStepper
             steps={steps.map(( { title } ) => title )}
             activeStep={currentStepIndex}
@@ -106,7 +104,7 @@ export function LetItRainWizard() {
           {currentStep.StepComponent}
         </Box>
       </DialogContent>
-      <DialogActions className={classes.dialogActions}>
+      <DialogActions>
         {currentStepIndex >= steps.length - 1 ? (
           <Button
             fullWidth
@@ -144,14 +142,26 @@ const useStyles = makeStyles(() => ( {
       minWidth: '700px',
     },
   },
-  dialogActions: {
-    padding: 0, // TODO: set this global?
+  dialogTitle: {
+    '& h2': {
+      display: 'flex',
+      alignItems: 'center',
+    },
+    '& span': {
+      position: 'relative',
+      margin: '0 auto',
+      left: '-20px',
+    },
+  },
+  dialogContent: {
+    position: 'relative'
   },
   dialogActionButton: {
-    padding: '1.083rem',
+    padding: '1rem',
     borderRadius: 0,
-    textTransform: 'uppercase',
-    fontSize: '1.333rem',
-    fontWeight: 'bold',
   },
+  box: {
+    height: '75%',
+    maxHeight: '450px',
+  }
 } ))

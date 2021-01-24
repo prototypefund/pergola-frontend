@@ -195,8 +195,8 @@ export function Calendar( { dates = [], onChange }: Props ) {
     <>
       <Typography variant="h2">Wann hast du Zeit?</Typography>
       <div className={String( classes.wrapper )}>
-        <p>
-          Zeitraum:
+        <Typography variant="body1" align="center" gutterBottom={true}>
+          Zeitraum:&nbsp;
           {dayjs( firstDate ).format(
             firstDate.getMonth() === lastDate.getMonth()
               ? 'D.'
@@ -206,7 +206,7 @@ export function Calendar( { dates = [], onChange }: Props ) {
           )}
           &nbsp;-&nbsp;
           {dayjs( lastDate ).format( 'D. MMMM YYYY' )}
-        </p>
+        </Typography>
         <FormGroup row>
           <FormControlLabel
             classes={{
@@ -258,8 +258,14 @@ export function Calendar( { dates = [], onChange }: Props ) {
 
 const useStyles = makeStyles(( theme: Theme ) => ( {
   wrapper: {
-    padding: '10px',
+    padding: '6px 2px 2px',
     background: '#f7f7f7',
+    '@media (max-width:320px)': {
+      padding: '6px 1px 1px',
+    },
+    [theme.breakpoints.up( 'sm' )]: {
+      padding: '10px',
+    }
   },
   legend: {
     // todo: get rid of fixed dimensions
@@ -270,6 +276,9 @@ const useStyles = makeStyles(( theme: Theme ) => ( {
   headCheckBox: {},
   checkBox: {
     padding: '2px',
+    '@media (max-width:320px)': {
+      padding: '1px',
+    },
   },
   checkBoxChecked: {
     color: theme.palette.primary.contrastText,
@@ -282,6 +291,10 @@ const useStyles = makeStyles(( theme: Theme ) => ( {
     background: '#fff',
     '$headCheckBox &': {
       border: '1px solid ' + theme.palette.primary.main,
+    },
+    '@media (max-width:320px)': {
+      width: '32px',
+      height: '32px',
     },
   },
   checkBoxIconChecked: {
@@ -306,8 +319,9 @@ const useStyles = makeStyles(( theme: Theme ) => ( {
     fontFamily: 'Consolas, monaco, monospace',
     fontSize: '14px',
     lineHeight: '1.2',
+    textAlign: 'center',
     // show first two chars
-    width: '2.1ch',
+    width: '2.01ch',
     overflow: 'hidden',
     '$headCheckBox &': {
       color: theme.palette.primary.main,
