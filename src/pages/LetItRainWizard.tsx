@@ -89,13 +89,11 @@ export function LetItRainWizard() {
       className={classes.dialog + ( fullscreenDialog ? '' : ' noFullscreen' )}
       open={true}
     >
-      <DialogTitle>
-        <Toolbar>
-          <IconButton onClick={() => history.goBack()}>
-            <ArrowBackIcon />
-          </IconButton>
-          <Typography variant="h6">{currentStep.headline}</Typography>
-        </Toolbar>
+      <DialogTitle className={classes.dialogTitle}>
+        <IconButton onClick={() => history.goBack()}>
+          <ArrowBackIcon />
+        </IconButton>
+        <span>{currentStep.headline}</span>
       </DialogTitle>
       <DialogContent className={classes.dialogContent}>
         <Box display="flex" flexDirection="column" flexWrap="wrap" alignItems="center" justifyContent="space-between" className={classes.box}>
@@ -142,6 +140,17 @@ const useStyles = makeStyles(() => ( {
     '&.noFullscreen .MuiDialog-paper': {
       minHeight: '800px',
       minWidth: '700px',
+    },
+  },
+  dialogTitle: {
+    '& h2': {
+      display: 'flex',
+      alignItems: 'center',
+    },
+    '& span': {
+      position: 'relative',
+      margin: '0 auto',
+      left: '-20px',
     },
   },
   dialogContent: {
