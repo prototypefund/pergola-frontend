@@ -11,7 +11,7 @@ export function LetItRainFrequency() {
       <Typography variant="h2" className={classes.question}>
         Wie oft möchtest du maximal gießen?
       </Typography>
-      <p>Wir planen dich ein für höchstens &hellip;</p>
+      <Typography variant="body1">Wir planen dich ein für höchstens &hellip;</Typography>
       <Slider
         min={1}
         max={7}
@@ -51,17 +51,6 @@ export function LetItRainFrequency() {
             </g>
           </svg>
         ))}
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className={classes.soil}
-          viewBox="0 0 500 85"
-        >
-          <path
-            d="M-0.28,39.97 C242.94,51.80 242.37,30.08 500.84,37.98 L500.00,150.00 L0.00,150.00 Z"
-            stroke="none"
-            fill="#8b4513"
-          />
-        </svg>
       </div>
     </>
   )
@@ -81,17 +70,22 @@ const useStyles = makeStyles(() => ( {
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'center',
-  },
-  soil: {
-    position: 'absolute',
-    zIndex: 1,
-    left: 0,
-    right: 0,
-    bottom: 0,
+    padding: '0 10%',
+    '&:after': {
+      content: '""',
+      position: 'absolute',
+      zIndex: 1,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      display: 'block',
+      background: '#8b4513',
+      height: '60px',
+    }
   },
   carrot: {
     position: 'relative',
-    maxWidth: '14.285%',
+    width: '50px',
     transition: 'all .5s ease',
     top: 0,
     '&:nth-child(1)': {
@@ -99,7 +93,7 @@ const useStyles = makeStyles(() => ( {
       transform: 'scaleX(-1) rotate(-7deg) scale(0.8)',
       '&.active': {
         transform: 'scaleX(-1) rotate(7deg) scale(1.1)',
-        top: '-31px',
+        top: '-18px',
       },
     },
     '&:nth-child(2)': {
@@ -107,7 +101,7 @@ const useStyles = makeStyles(() => ( {
       transform: 'rotate(6deg) scale(0.8)',
       '&.active': {
         transform: 'rotate(-6deg) scale(1.1)',
-        top: '-39px',
+        top: '-13px',
       },
     },
     '&:nth-child(3)': {
@@ -115,7 +109,7 @@ const useStyles = makeStyles(() => ( {
       transform: 'rotate(-8deg) scale(0.8)',
       '&.active': {
         transform: 'rotate(3deg) scale(1.1)',
-        top: '-25px',
+        top: '-16px',
       },
     },
     '&:nth-child(4)': {
@@ -123,14 +117,14 @@ const useStyles = makeStyles(() => ( {
       transform: 'rotate(-7deg) scale(0.8)',
       '&.active': {
         transform: 'rotate(7deg) scale(1.1)',
-        top: '-29px',
+        top: '-15px',
       },
     },
     '&:nth-child(5)': {
       order: 2,
-      transform: 'rotate(-9deg) scale(0.8)',
+      transform: 'rotate(7deg) scale(0.8)',
       '&.active': {
-        transform: 'rotate(7deg) scale(1.1)',
+        transform: 'rotate(-9deg) scale(1.1)',
         top: '-18px',
       },
     },
@@ -139,7 +133,7 @@ const useStyles = makeStyles(() => ( {
       transform: 'scale(0.8)',
       '&.active': {
         transform: 'scale(1.1)',
-        top: '-31px',
+        top: '-17px',
       },
     },
     '&:nth-child(7)': {
@@ -147,7 +141,7 @@ const useStyles = makeStyles(() => ( {
       transform: 'rotate(-7deg) scale(0.8)',
       '&.active': {
         transform: 'rotate(7deg) scale(1.1)',
-        top: '-21px',
+        top: '-13px',
       },
     },
   },
