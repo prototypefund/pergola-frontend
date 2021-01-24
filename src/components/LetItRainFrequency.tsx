@@ -60,7 +60,10 @@ const useStyles = makeStyles(() => ( {
   question: {
     textAlign: 'center',
     width: '70%',
-    margin: '38px 0 58px 0',
+    marginBottom: '2rem',
+    '@media (max-width:320px)': {
+      marginBottom: '1rem',
+    },
   },
   bed: {
     position: 'absolute',

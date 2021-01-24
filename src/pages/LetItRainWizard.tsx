@@ -98,7 +98,7 @@ export function LetItRainWizard() {
         </Toolbar>
       </DialogTitle>
       <DialogContent className={classes.dialogContent}>
-        <Box display="flex" flexDirection="column" alignItems="center">
+        <Box display="flex" flexDirection="column" flexWrap="wrap" alignItems="center" justifyContent="space-between" className={classes.box}>
           <HorizontalStepper
             steps={steps.map(( { title } ) => title )}
             activeStep={currentStepIndex}
@@ -148,10 +148,11 @@ const useStyles = makeStyles(() => ( {
     position: 'relative'
   },
   dialogActionButton: {
-    padding: '1.083rem',
+    padding: '1rem',
     borderRadius: 0,
-    textTransform: 'uppercase',
-    fontSize: '1.333rem',
-    fontWeight: 'bold',
+  },
+  box: {
+    height: '75%',
+    maxHeight: '450px',
   }
 } ))

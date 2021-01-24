@@ -106,9 +106,11 @@ const useStyles = makeStyles(( theme: Theme ) => ( {
     }
   },
   timeline: {
-    height: '100px',
     width: '90%',
     maxWidth: '800px',
-    margin: '0 auto'
+    marginBottom: '2rem',
+    '@media (max-width:320px)': {
+      marginBottom: '1rem',
+    },
   },
 } ))

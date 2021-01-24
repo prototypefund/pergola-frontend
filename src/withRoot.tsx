@@ -1,5 +1,5 @@
 import { CssBaseline } from '@material-ui/core'
-import { createMuiTheme } from '@material-ui/core/styles'
+import { createMuiTheme, responsiveFontSizes  } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/styles'
 import * as React from 'react'
 
@@ -14,7 +14,7 @@ const headingsFontFamily = [
 
 // A theme with custom primary and secondary color.
 // It's optional.
-const theme = createMuiTheme( {
+let theme = createMuiTheme( {
   palette: {
     primary: {
       light: '#b1e5d6',
@@ -56,6 +56,19 @@ const theme = createMuiTheme( {
     },
   },
   overrides: {
+    MuiButton: {
+      label: {
+        textTransform: 'uppercase',
+        fontWeight: 'bold',
+      }
+    },
+    MuiDialogContent: {
+      root: {
+        '@media (max-width:320px)': {
+          padding: '0 1rem',
+        },
+      },
+    },
     MuiDialogActions: {
       root: {
         padding: 0
@@ -117,6 +130,8 @@ const theme = createMuiTheme( {
     }
   }
 } )
+
+theme = responsiveFontSizes( theme )
 
 export function withRoot( Component: any ) {
   function WithRoot( props: object ) {
