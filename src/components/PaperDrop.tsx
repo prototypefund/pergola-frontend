@@ -11,7 +11,7 @@ export function PaperDrop( { children }: Props ) {
 
   return (
     <div>
-      <Container className={classes.drop}>
+      <div className={classes.drop}>
         <div
           className={[classes.drop__filler_dropleft, classes.drop__filler].join(
             ' '
@@ -46,7 +46,7 @@ export function PaperDrop( { children }: Props ) {
             classes.drop__filler,
           ].join( ' ' )}
         />
-      </Container>
+      </div>
       <Paper className={classes.paperlike}>{children}</Paper>
     </div>
   )

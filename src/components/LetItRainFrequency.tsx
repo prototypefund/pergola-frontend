@@ -2,7 +2,11 @@ import { makeStyles, Slider, Typography } from '@material-ui/core'
 import * as React from 'react'
 import { useState } from 'react'
 
-export function LetItRainFrequency() {
+interface Props {
+  onChange?: ( frequency: number ) => void;
+}
+
+export function LetItRainFrequency( { onChange }: Props ) {
   const classes = useStyles()
   const [daysPerWeek, setDaysPerWeek] = useState( 2 )
 
@@ -16,8 +20,11 @@ export function LetItRainFrequency() {
         min={1}
         max={7}
         value={daysPerWeek}
-        onChange={( _, value ) =>
-          setDaysPerWeek( typeof value === 'number' ? value : 1 )
+        onChange={( _, value ) => {
+          const v = typeof value === 'number' ? value : 1
+          setDaysPerWeek( v )
+          onChange?.( v )
+        }
         }
         aria-labelledby="discrete-slider-always"
         step={1}

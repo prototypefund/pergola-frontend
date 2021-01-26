@@ -42,30 +42,31 @@ export function WateringDetailDrawer( {date, onDrawerClose}: Props ) {
       && wateringTask.users_assigned.findIndex(( user ) => userProfile && user && userProfile.username === user.label ) >= 0
 
   return (
-    <Container style={{backgroundColor: 'white'}}>
-      <Box display='flex' flexDirection='row' justifyContent='center' minHeight='130px'>
-        {wateringTask && wateringTask.users_assigned && wateringTask.users_assigned
-          .map( user => user && (
-            <Box display='flex' flexDirection='column' alignItems='center' justifyContent='center'>
-              <AvatarComponent
-                style={{width: '100px', height: '100px'}}
-                {...randomAvatarProps()}
-              />
-              <Typography  variant='h5'>{user.label}</Typography>
-            </Box>
-          )
-          )
-        }
-        <AddCircle/>
-        {!itsMyTurn &&
+    <div style={{backgroundColor: 'white'}}>
+      <Container>
+        <Box display='flex' flexDirection='row' justifyContent='center' minHeight='130px'>
+          {wateringTask && wateringTask.users_assigned && wateringTask.users_assigned
+            .map( user => user && (
+              <Box display='flex' flexDirection='column' alignItems='center' justifyContent='center'>
+                <AvatarComponent
+                  style={{width: '100px', height: '100px'}}
+                  {...randomAvatarProps()}
+                />
+                <Typography  variant='h5'>{user.label}</Typography>
+              </Box>
+            )
+            )
+          }
+          <AddCircle/>
+          {!itsMyTurn &&
           <Typography>Helfen!</Typography>}
-      </Box>
-      <Box display='flex' flexDirection='row' justifyContent='space-between'>
-        <Button style={{color: 'red'}} > absagen</Button>
-        <Button onClick={onDrawerClose}>zurück</Button>
-      </Box>
-
-    </Container>
+        </Box>
+        <Box display='flex' flexDirection='row' justifyContent='space-between'>
+          <Button style={{color: 'red'}} > absagen</Button>
+          <Button onClick={onDrawerClose}>zurück</Button>
+        </Box>
+      </Container>
+    </div>
   )
 };
 
