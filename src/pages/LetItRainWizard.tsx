@@ -1,25 +1,13 @@
-import {
-  Box,
-  Button,
-  Container,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  IconButton,
-  makeStyles,
-  Toolbar,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from '@material-ui/core'
-import { ArrowBack as ArrowBackIcon } from '@material-ui/icons'
+import {gql, useMutation} from '@apollo/client'
+import {Box, Button, Container, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, makeStyles, Toolbar, Typography, useMediaQuery, useTheme} from '@material-ui/core'
+import {ArrowBack as ArrowBackIcon} from '@material-ui/icons'
 import dayjs from 'dayjs'
 import * as React from 'react'
-import { useState } from 'react'
-import { Link, useHistory, useParams } from 'react-router-dom'
+import {useState} from 'react'
+import {Link, useHistory, useParams} from 'react-router-dom'
 
 import { Calendar, HorizontalStepper, LetItRainFrequency } from '../components'
+import {_Neo4jDateInput, UserSettings, UserSettingsInput} from '../types/graphql'
 
 export interface LetItRainWizardRouterProps {
   stepNumber: string;
@@ -33,13 +21,43 @@ interface StepDesc {
 
 const DAYS_COUNT = 14
 
+const SET_USER_AVAILABLITY_FOR_WATERING_PERIOD = gql`
+mutation  setUserAvailability($dates: [_Neo4jDateInput]!) { 
+  setUserAvailability(
+    dates: $dates
+  )
+}
+`
+
+const MERGE_USER_SETTINGS = gql`
+mutation mergeUserSettings($settings: UserSettingsInput!) {
+    mergeUserSettings (
+        settings: $settings
+    ) { letitrain_maximum_tasks }
+}
+`
+
 export function LetItRainWizard() {
   const theme = useTheme()
   const classes = useStyles()
   const history = useHistory()
   const { stepNumber } = useParams<LetItRainWizardRouterProps>()
   const fullscreenDialog = useMediaQuery( theme.breakpoints.down( 'md' ))
-  const [, setAvailableDates] = useState<Date[]>( [] )
+  const [availableDates, setAvailableDates] = useState<Array<Date>>( [] )
+  const [userWantsMaximumTasks, setUserWantsMaximumTasks] = useState( 1 )
+
+  const [setUserAvailabilityMutation] =
+      useMutation<Boolean, { dates: Array<_Neo4jDateInput> }>( SET_USER_AVAILABLITY_FOR_WATERING_PERIOD,
+        {variables: {dates: availableDates.map( d => {
+          return {
+            year: d.getFullYear(),
+            month: d.getMonth()+1,
+            day: d.getDate()
+          }} )}} )
+
+  const [ mergeUserSettings ] =
+      useMutation<UserSettings, {settings: UserSettingsInput}>( MERGE_USER_SETTINGS,
+        {variables: { settings: { letitrain_maximum_tasks: userWantsMaximumTasks }} } )
 
   const lastMondayDate = dayjs().weekday( -7 )
   const calendarDates = new Array( DAYS_COUNT )
@@ -50,7 +68,7 @@ export function LetItRainWizard() {
     {
       title: 'Häufigkeit',
       headline: 'Häufigkeit angeben',
-      StepComponent: <LetItRainFrequency />,
+      StepComponent: <LetItRainFrequency onChange={ frequency => setUserWantsMaximumTasks( frequency )} />,
     },
     {
       title: 'Verfügbarkeit',
@@ -71,7 +89,9 @@ export function LetItRainWizard() {
     },
   ]
 
-  const finishWizard = () => {
+  const finishWizard = async () => {
+    await setUserAvailabilityMutation()
+    await mergeUserSettings()
     history.push( '/watering/thanks' )
   }
 
