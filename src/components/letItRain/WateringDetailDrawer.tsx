@@ -41,6 +41,11 @@ export function WateringDetailDrawer( {date, onDrawerClose}: Props ) {
       && wateringTask.users_assigned
       && wateringTask.users_assigned.findIndex(( user ) => userProfile && user && userProfile.username === user.label ) >= 0
 
+
+  const handleAssign = () => {
+    console.log( 'assign' )
+  }
+
   return (
     <div style={{backgroundColor: 'white'}}>
       <Container>
@@ -57,9 +62,12 @@ export function WateringDetailDrawer( {date, onDrawerClose}: Props ) {
             )
             )
           }
-          <AddCircle/>
           {!itsMyTurn &&
-          <Typography>Helfen!</Typography>}
+            <Button
+              startIcon={<AddCircle />}
+              onClick={handleAssign}>
+            Helfen!
+            </Button>}
         </Box>
         <Box display='flex' flexDirection='row' justifyContent='space-between'>
           <Button style={{color: 'red'}} > absagen</Button>

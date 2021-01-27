@@ -1,4 +1,4 @@
-import {gql, useMutation} from '@apollo/client'
+import {gql, useMutation, useQuery} from '@apollo/client'
 import {Box, Button, Container, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, makeStyles, Toolbar, Typography, useMediaQuery, useTheme} from '@material-ui/core'
 import {ArrowBack as ArrowBackIcon} from '@material-ui/icons'
 import dayjs from 'dayjs'
@@ -6,8 +6,9 @@ import * as React from 'react'
 import {useState} from 'react'
 import {Link, useHistory, useParams} from 'react-router-dom'
 
-import { Calendar, HorizontalStepper, LetItRainFrequency } from '../components'
-import {_Neo4jDateInput, UserSettings, UserSettingsInput} from '../types/graphql'
+import {Calendar, HorizontalStepper, LetItRainFrequency, NotificationSettings} from '../components'
+import {fromNeo4JDate} from '../helper'
+import {_Neo4jDateInput, UserSettings, UserSettingsInput, WateringPeriod} from '../types/graphql'
 
 export interface LetItRainWizardRouterProps {
   stepNumber: string;
@@ -37,6 +38,16 @@ mutation mergeUserSettings($settings: UserSettingsInput!) {
 }
 `
 
+const ASSIGNABLE_WATERING_PERIOD = gql`
+  query assignableWateringPeriod {
+      assignableWateringPeriod {
+          wateringtasks { date { day year month } } 
+          from { year, month, day }
+          till { year, month, day }
+      }
+  }
+`
+
 export function LetItRainWizard() {
   const theme = useTheme()
   const classes = useStyles()
@@ -45,6 +56,7 @@ export function LetItRainWizard() {
   const fullscreenDialog = useMediaQuery( theme.breakpoints.down( 'md' ))
   const [availableDates, setAvailableDates] = useState<Array<Date>>( [] )
   const [userWantsMaximumTasks, setUserWantsMaximumTasks] = useState( 1 )
+  const {data: assignableWateringPeriodData } = useQuery<{assignableWateringPeriod: WateringPeriod}>( ASSIGNABLE_WATERING_PERIOD )
 
   const [setUserAvailabilityMutation] =
       useMutation<Boolean, { dates: Array<_Neo4jDateInput> }>( SET_USER_AVAILABLITY_FOR_WATERING_PERIOD,
@@ -60,9 +72,15 @@ export function LetItRainWizard() {
         {variables: { settings: { letitrain_maximum_tasks: userWantsMaximumTasks }} } )
 
   const lastMondayDate = dayjs().weekday( -7 )
-  const calendarDates = new Array( DAYS_COUNT )
-    .fill( undefined )
-    .map(( _, i ) => lastMondayDate.add( i, 'day' ).toDate())
+
+  //const {  } = assignableWateringPeriodData
+  const tasks =  assignableWateringPeriodData?.assignableWateringPeriod?.wateringtasks || []
+  const calendarDates = tasks.length === 0
+    ? [...Array( DAYS_COUNT )]
+      .map(( _, i ) => lastMondayDate.add( i, 'day' ).toDate())
+    :  tasks.map( t => t ? fromNeo4JDate( t.date ) : new Date())
+
+
 
   const steps: StepDesc[] = [
     {
@@ -85,7 +103,7 @@ export function LetItRainWizard() {
     {
       title: 'Erinnerung',
       headline: 'Erinnerung angeben',
-      StepComponent: <Container>Bla</Container>,
+      StepComponent: <NotificationSettings />,
     },
   ]
 

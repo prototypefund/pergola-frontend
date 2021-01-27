@@ -12,612 +12,110 @@ export type Scalars = {
   JSON: any;
 };
 
-export type _AddChangeRequestRequested_ByPayload = {
-  __typename?: '_AddChangeRequestRequested_byPayload';
-  /**
-   * Field for the ChangeRequest node this requested_by
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<ChangeRequest>;
-  /**
-   * Field for the User node this requested_by
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<User>;
+export type Query = {
+  __typename?: 'Query';
+  assignableWateringPeriod?: Maybe<WateringPeriod>;
+  /** [Generated query](https://grandstack.io/docs/graphql-schema-generation-augmentation#generated-queries) for User type nodes. */
+  User?: Maybe<Array<Maybe<User>>>;
+  /** [Generated query](https://grandstack.io/docs/graphql-schema-generation-augmentation#generated-queries) for WateringTask type nodes. */
+  WateringTask?: Maybe<Array<Maybe<WateringTask>>>;
+  /** [Generated query](https://grandstack.io/docs/graphql-schema-generation-augmentation#generated-queries) for WateringPeriod type nodes. */
+  WateringPeriod?: Maybe<Array<Maybe<WateringPeriod>>>;
+  /** [Generated query](https://grandstack.io/docs/graphql-schema-generation-augmentation#generated-queries) for ChangeRequest type nodes. */
+  ChangeRequest?: Maybe<Array<Maybe<ChangeRequest>>>;
+  /** [Generated query](https://grandstack.io/docs/graphql-schema-generation-augmentation#generated-queries) for LogEvent type nodes. */
+  LogEvent?: Maybe<Array<Maybe<LogEvent>>>;
+  /** [Generated query](https://grandstack.io/docs/graphql-schema-generation-augmentation#generated-queries) for UserSettings type nodes. */
+  UserSettings?: Maybe<Array<Maybe<UserSettings>>>;
 };
 
-export type _AddChangeRequestRequested_ForPayload = {
-  __typename?: '_AddChangeRequestRequested_forPayload';
-  /**
-   * Field for the ChangeRequest node this requested_for
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<ChangeRequest>;
-  /**
-   * Field for the WateringTask node this requested_for
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<WateringTask>;
-};
 
-export type _AddChangeRequestRequested_New_TaskPayload = {
-  __typename?: '_AddChangeRequestRequested_new_taskPayload';
-  /**
-   * Field for the ChangeRequest node this requested_new_task
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<ChangeRequest>;
-  /**
-   * Field for the WateringTask node this requested_new_task
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<WateringTask>;
-};
-
-export type _AddChangeRequestRequested_ToPayload = {
-  __typename?: '_AddChangeRequestRequested_toPayload';
-  /**
-   * Field for the ChangeRequest node this requested_to
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<ChangeRequest>;
-  /**
-   * Field for the User node this requested_to
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<User>;
-};
-
-export type _AddLogEventRefers_ToPayload = {
-  __typename?: '_AddLogEventRefers_toPayload';
-  /**
-   * Field for the LogEvent node this refers_to
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<LogEvent>;
-  /**
-   * Field for the WateringTask node this refers_to
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<WateringTask>;
-};
-
-export type _AddLogEventTriggered_ByPayload = {
-  __typename?: '_AddLogEventTriggered_byPayload';
-  /**
-   * Field for the LogEvent node this triggered_by
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<LogEvent>;
-  /**
-   * Field for the User node this triggered_by
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<User>;
-};
-
-export type _AddUserAssignedPayload = {
-  __typename?: '_AddUserAssignedPayload';
-  /**
-   * Field for the User node this assigned
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<User>;
-  /**
-   * Field for the WateringTask node this assigned
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<WateringTask>;
-};
-
-export type _AddUserAvailablePayload = {
-  __typename?: '_AddUserAvailablePayload';
-  /**
-   * Field for the User node this available
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<User>;
-  /**
-   * Field for the WateringTask node this available
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<WateringTask>;
-};
-
-export type _AddUserChangerequests_Requested_ByPayload = {
-  __typename?: '_AddUserChangerequests_requested_byPayload';
-  /**
-   * Field for the ChangeRequest node this requested_by
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<ChangeRequest>;
-  /**
-   * Field for the User node this requested_by
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<User>;
-};
-
-export type _AddUserChangerequests_Requested_ToPayload = {
-  __typename?: '_AddUserChangerequests_requested_toPayload';
-  /**
-   * Field for the ChangeRequest node this requested_to
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<ChangeRequest>;
-  /**
-   * Field for the User node this requested_to
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<User>;
-};
-
-export type _AddUserLogevents_Triggered_ByPayload = {
-  __typename?: '_AddUserLogevents_triggered_byPayload';
-  /**
-   * Field for the LogEvent node this triggered_by
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<LogEvent>;
-  /**
-   * Field for the User node this triggered_by
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<User>;
-};
-
-export type _AddWateringTaskChangerequests_Requested_ForPayload = {
-  __typename?: '_AddWateringTaskChangerequests_requested_forPayload';
-  /**
-   * Field for the ChangeRequest node this requested_for
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<ChangeRequest>;
-  /**
-   * Field for the WateringTask node this requested_for
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<WateringTask>;
-};
-
-export type _AddWateringTaskChangerequests_Requested_New_TaskPayload = {
-  __typename?: '_AddWateringTaskChangerequests_requested_new_taskPayload';
-  /**
-   * Field for the ChangeRequest node this requested_new_task
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<ChangeRequest>;
-  /**
-   * Field for the WateringTask node this requested_new_task
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<WateringTask>;
-};
-
-export type _AddWateringTaskLogevents_Refers_ToPayload = {
-  __typename?: '_AddWateringTaskLogevents_refers_toPayload';
-  /**
-   * Field for the LogEvent node this refers_to
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<LogEvent>;
-  /**
-   * Field for the WateringTask node this refers_to
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<WateringTask>;
-};
-
-export type _AddWateringTaskUsers_AssignedPayload = {
-  __typename?: '_AddWateringTaskUsers_assignedPayload';
-  /**
-   * Field for the User node this assigned
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<User>;
-  /**
-   * Field for the WateringTask node this assigned
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<WateringTask>;
-};
-
-export type _AddWateringTaskUsers_AvailablePayload = {
-  __typename?: '_AddWateringTaskUsers_availablePayload';
-  /**
-   * Field for the User node this available
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<User>;
-  /**
-   * Field for the WateringTask node this available
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<WateringTask>;
-};
-
-export type _ChangeRequestFilter = {
-  AND?: Maybe<Array<_ChangeRequestFilter>>;
-  OR?: Maybe<Array<_ChangeRequestFilter>>;
+export type QueryUserArgs = {
   label?: Maybe<Scalars['String']>;
-  label_not?: Maybe<Scalars['String']>;
-  label_in?: Maybe<Array<Scalars['String']>>;
-  label_not_in?: Maybe<Array<Scalars['String']>>;
-  label_contains?: Maybe<Scalars['String']>;
-  label_not_contains?: Maybe<Scalars['String']>;
-  label_starts_with?: Maybe<Scalars['String']>;
-  label_not_starts_with?: Maybe<Scalars['String']>;
-  label_ends_with?: Maybe<Scalars['String']>;
-  label_not_ends_with?: Maybe<Scalars['String']>;
   neo4jImportId?: Maybe<Scalars['String']>;
-  neo4jImportId_not?: Maybe<Scalars['String']>;
-  neo4jImportId_in?: Maybe<Array<Scalars['String']>>;
-  neo4jImportId_not_in?: Maybe<Array<Scalars['String']>>;
-  neo4jImportId_contains?: Maybe<Scalars['String']>;
-  neo4jImportId_not_contains?: Maybe<Scalars['String']>;
-  neo4jImportId_starts_with?: Maybe<Scalars['String']>;
-  neo4jImportId_not_starts_with?: Maybe<Scalars['String']>;
-  neo4jImportId_ends_with?: Maybe<Scalars['String']>;
-  neo4jImportId_not_ends_with?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
-  type_not?: Maybe<Scalars['String']>;
-  type_in?: Maybe<Array<Scalars['String']>>;
-  type_not_in?: Maybe<Array<Scalars['String']>>;
-  type_contains?: Maybe<Scalars['String']>;
-  type_not_contains?: Maybe<Scalars['String']>;
-  type_starts_with?: Maybe<Scalars['String']>;
-  type_not_starts_with?: Maybe<Scalars['String']>;
-  type_ends_with?: Maybe<Scalars['String']>;
-  type_not_ends_with?: Maybe<Scalars['String']>;
-  requested_by?: Maybe<_UserFilter>;
-  requested_by_not?: Maybe<_UserFilter>;
-  requested_by_in?: Maybe<Array<_UserFilter>>;
-  requested_by_not_in?: Maybe<Array<_UserFilter>>;
-  requested_by_some?: Maybe<_UserFilter>;
-  requested_by_none?: Maybe<_UserFilter>;
-  requested_by_single?: Maybe<_UserFilter>;
-  requested_by_every?: Maybe<_UserFilter>;
-  requested_for?: Maybe<_WateringTaskFilter>;
-  requested_for_not?: Maybe<_WateringTaskFilter>;
-  requested_for_in?: Maybe<Array<_WateringTaskFilter>>;
-  requested_for_not_in?: Maybe<Array<_WateringTaskFilter>>;
-  requested_for_some?: Maybe<_WateringTaskFilter>;
-  requested_for_none?: Maybe<_WateringTaskFilter>;
-  requested_for_single?: Maybe<_WateringTaskFilter>;
-  requested_for_every?: Maybe<_WateringTaskFilter>;
-  requested_to?: Maybe<_UserFilter>;
-  requested_to_not?: Maybe<_UserFilter>;
-  requested_to_in?: Maybe<Array<_UserFilter>>;
-  requested_to_not_in?: Maybe<Array<_UserFilter>>;
-  requested_to_some?: Maybe<_UserFilter>;
-  requested_to_none?: Maybe<_UserFilter>;
-  requested_to_single?: Maybe<_UserFilter>;
-  requested_to_every?: Maybe<_UserFilter>;
-  requested_new_task?: Maybe<_WateringTaskFilter>;
-  requested_new_task_not?: Maybe<_WateringTaskFilter>;
-  requested_new_task_in?: Maybe<Array<_WateringTaskFilter>>;
-  requested_new_task_not_in?: Maybe<Array<_WateringTaskFilter>>;
-  requested_new_task_some?: Maybe<_WateringTaskFilter>;
-  requested_new_task_none?: Maybe<_WateringTaskFilter>;
-  requested_new_task_single?: Maybe<_WateringTaskFilter>;
-  requested_new_task_every?: Maybe<_WateringTaskFilter>;
+  _id?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<Maybe<_UserOrdering>>>;
+  filter?: Maybe<_UserFilter>;
 };
 
-export type _ChangeRequestInput = {
-  label: Scalars['String'];
+
+export type QueryWateringTaskArgs = {
+  date?: Maybe<_Neo4jDateInput>;
+  done?: Maybe<Scalars['Boolean']>;
+  neo4jImportId?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  _id?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<Maybe<_WateringTaskOrdering>>>;
+  filter?: Maybe<_WateringTaskFilter>;
 };
 
-export enum _ChangeRequestOrdering {
-  LabelAsc = 'label_asc',
-  LabelDesc = 'label_desc',
-  Neo4jImportIdAsc = 'neo4jImportId_asc',
-  Neo4jImportIdDesc = 'neo4jImportId_desc',
-  TypeAsc = 'type_asc',
-  TypeDesc = 'type_desc',
-  IdAsc = '_id_asc',
-  IdDesc = '_id_desc'
-}
 
-export type _LogEventFilter = {
-  AND?: Maybe<Array<_LogEventFilter>>;
-  OR?: Maybe<Array<_LogEventFilter>>;
+export type QueryWateringPeriodArgs = {
+  from?: Maybe<_Neo4jDateInput>;
+  till?: Maybe<_Neo4jDateInput>;
+  _id?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<Maybe<_WateringPeriodOrdering>>>;
+  filter?: Maybe<_WateringPeriodFilter>;
+};
+
+
+export type QueryChangeRequestArgs = {
+  label?: Maybe<Scalars['String']>;
+  neo4jImportId?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  _id?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<Maybe<_ChangeRequestOrdering>>>;
+  filter?: Maybe<_ChangeRequestFilter>;
+};
+
+
+export type QueryLogEventArgs = {
   date?: Maybe<Scalars['String']>;
-  date_not?: Maybe<Scalars['String']>;
-  date_in?: Maybe<Array<Scalars['String']>>;
-  date_not_in?: Maybe<Array<Scalars['String']>>;
-  date_contains?: Maybe<Scalars['String']>;
-  date_not_contains?: Maybe<Scalars['String']>;
-  date_starts_with?: Maybe<Scalars['String']>;
-  date_not_starts_with?: Maybe<Scalars['String']>;
-  date_ends_with?: Maybe<Scalars['String']>;
-  date_not_ends_with?: Maybe<Scalars['String']>;
   label?: Maybe<Scalars['String']>;
-  label_not?: Maybe<Scalars['String']>;
-  label_in?: Maybe<Array<Scalars['String']>>;
-  label_not_in?: Maybe<Array<Scalars['String']>>;
-  label_contains?: Maybe<Scalars['String']>;
-  label_not_contains?: Maybe<Scalars['String']>;
-  label_starts_with?: Maybe<Scalars['String']>;
-  label_not_starts_with?: Maybe<Scalars['String']>;
-  label_ends_with?: Maybe<Scalars['String']>;
-  label_not_ends_with?: Maybe<Scalars['String']>;
   neo4jImportId?: Maybe<Scalars['String']>;
-  neo4jImportId_not?: Maybe<Scalars['String']>;
-  neo4jImportId_in?: Maybe<Array<Scalars['String']>>;
-  neo4jImportId_not_in?: Maybe<Array<Scalars['String']>>;
-  neo4jImportId_contains?: Maybe<Scalars['String']>;
-  neo4jImportId_not_contains?: Maybe<Scalars['String']>;
-  neo4jImportId_starts_with?: Maybe<Scalars['String']>;
-  neo4jImportId_not_starts_with?: Maybe<Scalars['String']>;
-  neo4jImportId_ends_with?: Maybe<Scalars['String']>;
-  neo4jImportId_not_ends_with?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
-  type_not?: Maybe<Scalars['String']>;
-  type_in?: Maybe<Array<Scalars['String']>>;
-  type_not_in?: Maybe<Array<Scalars['String']>>;
-  type_contains?: Maybe<Scalars['String']>;
-  type_not_contains?: Maybe<Scalars['String']>;
-  type_starts_with?: Maybe<Scalars['String']>;
-  type_not_starts_with?: Maybe<Scalars['String']>;
-  type_ends_with?: Maybe<Scalars['String']>;
-  type_not_ends_with?: Maybe<Scalars['String']>;
-  triggered_by?: Maybe<_UserFilter>;
-  triggered_by_not?: Maybe<_UserFilter>;
-  triggered_by_in?: Maybe<Array<_UserFilter>>;
-  triggered_by_not_in?: Maybe<Array<_UserFilter>>;
-  triggered_by_some?: Maybe<_UserFilter>;
-  triggered_by_none?: Maybe<_UserFilter>;
-  triggered_by_single?: Maybe<_UserFilter>;
-  triggered_by_every?: Maybe<_UserFilter>;
-  refers_to?: Maybe<_WateringTaskFilter>;
-  refers_to_not?: Maybe<_WateringTaskFilter>;
-  refers_to_in?: Maybe<Array<_WateringTaskFilter>>;
-  refers_to_not_in?: Maybe<Array<_WateringTaskFilter>>;
-  refers_to_some?: Maybe<_WateringTaskFilter>;
-  refers_to_none?: Maybe<_WateringTaskFilter>;
-  refers_to_single?: Maybe<_WateringTaskFilter>;
-  refers_to_every?: Maybe<_WateringTaskFilter>;
+  _id?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<Maybe<_LogEventOrdering>>>;
+  filter?: Maybe<_LogEventFilter>;
 };
 
-export type _LogEventInput = {
-  date: Scalars['String'];
+
+export type QueryUserSettingsArgs = {
+  ui_locale?: Maybe<Scalars['String']>;
+  letitrain_maximum_tasks?: Maybe<Scalars['Int']>;
+  _id?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<Maybe<_UserSettingsOrdering>>>;
+  filter?: Maybe<_UserSettingsFilter>;
 };
 
-export enum _LogEventOrdering {
-  DateAsc = 'date_asc',
-  DateDesc = 'date_desc',
-  LabelAsc = 'label_asc',
-  LabelDesc = 'label_desc',
-  Neo4jImportIdAsc = 'neo4jImportId_asc',
-  Neo4jImportIdDesc = 'neo4jImportId_desc',
-  TypeAsc = 'type_asc',
-  TypeDesc = 'type_desc',
-  IdAsc = '_id_asc',
-  IdDesc = '_id_desc'
-}
-
-export type _MergeChangeRequestRequested_ByPayload = {
-  __typename?: '_MergeChangeRequestRequested_byPayload';
-  /**
-   * Field for the ChangeRequest node this requested_by
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<ChangeRequest>;
-  /**
-   * Field for the User node this requested_by
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<User>;
+export type WateringPeriod = {
+  __typename?: 'WateringPeriod';
+  /** Generated field for querying the Neo4j [system id](https://neo4j.com/docs/cypher-manual/current/functions/scalar/#functions-id) of this node. */
+  _id?: Maybe<Scalars['String']>;
+  from: _Neo4jDate;
+  till: _Neo4jDate;
+  wateringtasks?: Maybe<Array<Maybe<WateringTask>>>;
 };
 
-export type _MergeChangeRequestRequested_ForPayload = {
-  __typename?: '_MergeChangeRequestRequested_forPayload';
-  /**
-   * Field for the ChangeRequest node this requested_for
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<ChangeRequest>;
-  /**
-   * Field for the WateringTask node this requested_for
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<WateringTask>;
-};
 
-export type _MergeChangeRequestRequested_New_TaskPayload = {
-  __typename?: '_MergeChangeRequestRequested_new_taskPayload';
-  /**
-   * Field for the ChangeRequest node this requested_new_task
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<ChangeRequest>;
-  /**
-   * Field for the WateringTask node this requested_new_task
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<WateringTask>;
-};
-
-export type _MergeChangeRequestRequested_ToPayload = {
-  __typename?: '_MergeChangeRequestRequested_toPayload';
-  /**
-   * Field for the ChangeRequest node this requested_to
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<ChangeRequest>;
-  /**
-   * Field for the User node this requested_to
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<User>;
-};
-
-export type _MergeLogEventRefers_ToPayload = {
-  __typename?: '_MergeLogEventRefers_toPayload';
-  /**
-   * Field for the LogEvent node this refers_to
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<LogEvent>;
-  /**
-   * Field for the WateringTask node this refers_to
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<WateringTask>;
-};
-
-export type _MergeLogEventTriggered_ByPayload = {
-  __typename?: '_MergeLogEventTriggered_byPayload';
-  /**
-   * Field for the LogEvent node this triggered_by
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<LogEvent>;
-  /**
-   * Field for the User node this triggered_by
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<User>;
-};
-
-export type _MergeUserAssignedPayload = {
-  __typename?: '_MergeUserAssignedPayload';
-  /**
-   * Field for the User node this assigned
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<User>;
-  /**
-   * Field for the WateringTask node this assigned
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<WateringTask>;
-};
-
-export type _MergeUserAvailablePayload = {
-  __typename?: '_MergeUserAvailablePayload';
-  /**
-   * Field for the User node this available
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<User>;
-  /**
-   * Field for the WateringTask node this available
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<WateringTask>;
-};
-
-export type _MergeUserChangerequests_Requested_ByPayload = {
-  __typename?: '_MergeUserChangerequests_requested_byPayload';
-  /**
-   * Field for the ChangeRequest node this requested_by
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<ChangeRequest>;
-  /**
-   * Field for the User node this requested_by
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<User>;
-};
-
-export type _MergeUserChangerequests_Requested_ToPayload = {
-  __typename?: '_MergeUserChangerequests_requested_toPayload';
-  /**
-   * Field for the ChangeRequest node this requested_to
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<ChangeRequest>;
-  /**
-   * Field for the User node this requested_to
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<User>;
-};
-
-export type _MergeUserLogevents_Triggered_ByPayload = {
-  __typename?: '_MergeUserLogevents_triggered_byPayload';
-  /**
-   * Field for the LogEvent node this triggered_by
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<LogEvent>;
-  /**
-   * Field for the User node this triggered_by
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<User>;
-};
-
-export type _MergeWateringTaskChangerequests_Requested_ForPayload = {
-  __typename?: '_MergeWateringTaskChangerequests_requested_forPayload';
-  /**
-   * Field for the ChangeRequest node this requested_for
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<ChangeRequest>;
-  /**
-   * Field for the WateringTask node this requested_for
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<WateringTask>;
-};
-
-export type _MergeWateringTaskChangerequests_Requested_New_TaskPayload = {
-  __typename?: '_MergeWateringTaskChangerequests_requested_new_taskPayload';
-  /**
-   * Field for the ChangeRequest node this requested_new_task
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<ChangeRequest>;
-  /**
-   * Field for the WateringTask node this requested_new_task
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<WateringTask>;
-};
-
-export type _MergeWateringTaskLogevents_Refers_ToPayload = {
-  __typename?: '_MergeWateringTaskLogevents_refers_toPayload';
-  /**
-   * Field for the LogEvent node this refers_to
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<LogEvent>;
-  /**
-   * Field for the WateringTask node this refers_to
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<WateringTask>;
-};
-
-export type _MergeWateringTaskUsers_AssignedPayload = {
-  __typename?: '_MergeWateringTaskUsers_assignedPayload';
-  /**
-   * Field for the User node this assigned
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<User>;
-  /**
-   * Field for the WateringTask node this assigned
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<WateringTask>;
-};
-
-export type _MergeWateringTaskUsers_AvailablePayload = {
-  __typename?: '_MergeWateringTaskUsers_availablePayload';
-  /**
-   * Field for the User node this available
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<User>;
-  /**
-   * Field for the WateringTask node this available
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<WateringTask>;
+export type WateringPeriodWateringtasksArgs = {
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<Maybe<_WateringTaskOrdering>>>;
+  filter?: Maybe<_WateringTaskFilter>;
 };
 
 /** Generated Date object type for Neo4j [Temporal fields](https://grandstack.io/docs/graphql-temporal-types-datetime#using-temporal-fields-in-queries). */
@@ -626,589 +124,19 @@ export type _Neo4jDate = {
   year?: Maybe<Scalars['Int']>;
   month?: Maybe<Scalars['Int']>;
   day?: Maybe<Scalars['Int']>;
-  /**
-   * Outputs a Neo4j [Temporal](https://grandstack.io/docs/graphql-temporal-types-datetime#using-temporal-fields-in-queries)
-   * Date value as a String type by using the [toString](https://neo4j.com/docs/cypher-manual/current/functions/string/#functions-tostring)
-   * Cypher function.
-   */
+  /** Outputs a Neo4j [Temporal](https://grandstack.io/docs/graphql-temporal-types-datetime#using-temporal-fields-in-queries) Date value as a String type by using the [toString](https://neo4j.com/docs/cypher-manual/current/functions/string/#functions-tostring) Cypher function. */
   formatted?: Maybe<Scalars['String']>;
 };
 
-/** Generated Date input object for Neo4j [Temporal field arguments](https://grandstack.io/docs/graphql-temporal-types-datetime/#temporal-query-arguments). */
-export type _Neo4jDateInput = {
-  year?: Maybe<Scalars['Int']>;
-  month?: Maybe<Scalars['Int']>;
-  day?: Maybe<Scalars['Int']>;
-  /**
-   * Creates a Neo4j [Temporal](https://grandstack.io/docs/graphql-temporal-types-datetime/#using-temporal-fields-in-mutations)
-   * Date value using a [String format](https://neo4j.com/docs/cypher-manual/current/functions/temporal/date/#functions-date-create-string).
-   */
-  formatted?: Maybe<Scalars['String']>;
-};
-
-/** Generated DateTime object type for Neo4j [Temporal fields](https://grandstack.io/docs/graphql-temporal-types-datetime#using-temporal-fields-in-queries). */
-export type _Neo4jDateTime = {
-  __typename?: '_Neo4jDateTime';
-  year?: Maybe<Scalars['Int']>;
-  month?: Maybe<Scalars['Int']>;
-  day?: Maybe<Scalars['Int']>;
-  hour?: Maybe<Scalars['Int']>;
-  minute?: Maybe<Scalars['Int']>;
-  second?: Maybe<Scalars['Int']>;
-  millisecond?: Maybe<Scalars['Int']>;
-  microsecond?: Maybe<Scalars['Int']>;
-  nanosecond?: Maybe<Scalars['Int']>;
-  timezone?: Maybe<Scalars['String']>;
-  /**
-   * Outputs a Neo4j [Temporal](https://grandstack.io/docs/graphql-temporal-types-datetime#using-temporal-fields-in-queries)
-   * DateTime value as a String type by using the [toString](https://neo4j.com/docs/cypher-manual/current/functions/string/#functions-tostring)
-   * Cypher function.
-   */
-  formatted?: Maybe<Scalars['String']>;
-};
-
-/** Generated DateTime input object for Neo4j [Temporal field arguments](https://grandstack.io/docs/graphql-temporal-types-datetime/#temporal-query-arguments). */
-export type _Neo4jDateTimeInput = {
-  year?: Maybe<Scalars['Int']>;
-  month?: Maybe<Scalars['Int']>;
-  day?: Maybe<Scalars['Int']>;
-  hour?: Maybe<Scalars['Int']>;
-  minute?: Maybe<Scalars['Int']>;
-  second?: Maybe<Scalars['Int']>;
-  millisecond?: Maybe<Scalars['Int']>;
-  microsecond?: Maybe<Scalars['Int']>;
-  nanosecond?: Maybe<Scalars['Int']>;
-  timezone?: Maybe<Scalars['String']>;
-  /**
-   * Creates a Neo4j [Temporal](https://grandstack.io/docs/graphql-temporal-types-datetime/#using-temporal-fields-in-mutations)
-   * DateTime value using a [String format](https://neo4j.com/docs/cypher-manual/current/functions/temporal/datetime/#functions-datetime-create-string).
-   */
-  formatted?: Maybe<Scalars['String']>;
-};
-
-/** Generated LocalDateTime object type for Neo4j [Temporal fields](https://grandstack.io/docs/graphql-temporal-types-datetime#using-temporal-fields-in-queries). */
-export type _Neo4jLocalDateTime = {
-  __typename?: '_Neo4jLocalDateTime';
-  year?: Maybe<Scalars['Int']>;
-  month?: Maybe<Scalars['Int']>;
-  day?: Maybe<Scalars['Int']>;
-  hour?: Maybe<Scalars['Int']>;
-  minute?: Maybe<Scalars['Int']>;
-  second?: Maybe<Scalars['Int']>;
-  millisecond?: Maybe<Scalars['Int']>;
-  microsecond?: Maybe<Scalars['Int']>;
-  nanosecond?: Maybe<Scalars['Int']>;
-  /**
-   * Outputs a Neo4j [Temporal](https://grandstack.io/docs/graphql-temporal-types-datetime#using-temporal-fields-in-queries)
-   * LocalDateTime value as a String type by using the [toString](https://neo4j.com/docs/cypher-manual/current/functions/string/#functions-tostring)
-   * Cypher function.
-   */
-  formatted?: Maybe<Scalars['String']>;
-};
-
-/** Generated LocalDateTime input object for Neo4j [Temporal field arguments](https://grandstack.io/docs/graphql-temporal-types-datetime/#temporal-query-arguments). */
-export type _Neo4jLocalDateTimeInput = {
-  year?: Maybe<Scalars['Int']>;
-  month?: Maybe<Scalars['Int']>;
-  day?: Maybe<Scalars['Int']>;
-  hour?: Maybe<Scalars['Int']>;
-  minute?: Maybe<Scalars['Int']>;
-  second?: Maybe<Scalars['Int']>;
-  millisecond?: Maybe<Scalars['Int']>;
-  microsecond?: Maybe<Scalars['Int']>;
-  nanosecond?: Maybe<Scalars['Int']>;
-  /**
-   * Creates a Neo4j [Temporal](https://grandstack.io/docs/graphql-temporal-types-datetime/#using-temporal-fields-in-mutations)
-   * LocalDateTime value using a [String format](https://neo4j.com/docs/cypher-manual/current/functions/temporal/localdatetime/#functions-localdatetime-create-string).
-   */
-  formatted?: Maybe<Scalars['String']>;
-};
-
-/** Generated LocalTime object type for Neo4j [Temporal fields](https://grandstack.io/docs/graphql-temporal-types-datetime#using-temporal-fields-in-queries). */
-export type _Neo4jLocalTime = {
-  __typename?: '_Neo4jLocalTime';
-  hour?: Maybe<Scalars['Int']>;
-  minute?: Maybe<Scalars['Int']>;
-  second?: Maybe<Scalars['Int']>;
-  millisecond?: Maybe<Scalars['Int']>;
-  microsecond?: Maybe<Scalars['Int']>;
-  nanosecond?: Maybe<Scalars['Int']>;
-  /**
-   * Outputs a Neo4j [Temporal](https://grandstack.io/docs/graphql-temporal-types-datetime#using-temporal-fields-in-queries)
-   * LocalTime value as a String type by using the [toString](https://neo4j.com/docs/cypher-manual/current/functions/string/#functions-tostring)
-   * Cypher function.
-   */
-  formatted?: Maybe<Scalars['String']>;
-};
-
-/** Generated LocalTime input object for Neo4j [Temporal field arguments](https://grandstack.io/docs/graphql-temporal-types-datetime/#temporal-query-arguments). */
-export type _Neo4jLocalTimeInput = {
-  hour?: Maybe<Scalars['Int']>;
-  minute?: Maybe<Scalars['Int']>;
-  second?: Maybe<Scalars['Int']>;
-  millisecond?: Maybe<Scalars['Int']>;
-  microsecond?: Maybe<Scalars['Int']>;
-  nanosecond?: Maybe<Scalars['Int']>;
-  /**
-   * Creates a Neo4j [Temporal](https://grandstack.io/docs/graphql-temporal-types-datetime/#using-temporal-fields-in-mutations)
-   * LocalTime value using a [String format](https://neo4j.com/docs/cypher-manual/current/functions/temporal/localtime/#functions-localtime-create-string).
-   */
-  formatted?: Maybe<Scalars['String']>;
-};
-
-/** Generated Point object type for Neo4j [Spatial fields](https://grandstack.io/docs/graphql-spatial-types#using-point-in-queries). */
-export type _Neo4jPoint = {
-  __typename?: '_Neo4jPoint';
-  x?: Maybe<Scalars['Float']>;
-  y?: Maybe<Scalars['Float']>;
-  z?: Maybe<Scalars['Float']>;
-  longitude?: Maybe<Scalars['Float']>;
-  latitude?: Maybe<Scalars['Float']>;
-  height?: Maybe<Scalars['Float']>;
-  crs?: Maybe<Scalars['String']>;
-  srid?: Maybe<Scalars['Int']>;
-};
-
-export type _Neo4jPointDistanceFilter = {
-  point: _Neo4jPointInput;
-  distance: Scalars['Float'];
-};
-
-/** Generated Point input object for Neo4j [Spatial field arguments](https://grandstack.io/docs/graphql-spatial-types/#point-query-arguments). */
-export type _Neo4jPointInput = {
-  x?: Maybe<Scalars['Float']>;
-  y?: Maybe<Scalars['Float']>;
-  z?: Maybe<Scalars['Float']>;
-  longitude?: Maybe<Scalars['Float']>;
-  latitude?: Maybe<Scalars['Float']>;
-  height?: Maybe<Scalars['Float']>;
-  crs?: Maybe<Scalars['String']>;
-  srid?: Maybe<Scalars['Int']>;
-};
-
-/** Generated Time object type for Neo4j [Temporal fields](https://grandstack.io/docs/graphql-temporal-types-datetime#using-temporal-fields-in-queries). */
-export type _Neo4jTime = {
-  __typename?: '_Neo4jTime';
-  hour?: Maybe<Scalars['Int']>;
-  minute?: Maybe<Scalars['Int']>;
-  second?: Maybe<Scalars['Int']>;
-  millisecond?: Maybe<Scalars['Int']>;
-  microsecond?: Maybe<Scalars['Int']>;
-  nanosecond?: Maybe<Scalars['Int']>;
-  timezone?: Maybe<Scalars['String']>;
-  /**
-   * Outputs a Neo4j [Temporal](https://grandstack.io/docs/graphql-temporal-types-datetime#using-temporal-fields-in-queries)
-   * Time value as a String type by using the [toString](https://neo4j.com/docs/cypher-manual/current/functions/string/#functions-tostring)
-   * Cypher function.
-   */
-  formatted?: Maybe<Scalars['String']>;
-};
-
-/** Generated Time input object for Neo4j [Temporal field arguments](https://grandstack.io/docs/graphql-temporal-types-datetime/#temporal-query-arguments). */
-export type _Neo4jTimeInput = {
-  hour?: Maybe<Scalars['Int']>;
-  minute?: Maybe<Scalars['Int']>;
-  second?: Maybe<Scalars['Int']>;
-  millisecond?: Maybe<Scalars['Int']>;
-  microsecond?: Maybe<Scalars['Int']>;
-  nanosecond?: Maybe<Scalars['Int']>;
-  timezone?: Maybe<Scalars['String']>;
-  /**
-   * Creates a Neo4j [Temporal](https://grandstack.io/docs/graphql-temporal-types-datetime/#using-temporal-fields-in-mutations)
-   * Time value using a [String format](https://neo4j.com/docs/cypher-manual/current/functions/temporal/time/#functions-time-create-string).
-   */
-  formatted?: Maybe<Scalars['String']>;
-};
-
-export enum _RelationDirections {
-  In = 'IN',
-  Out = 'OUT'
-}
-
-export type _RemoveChangeRequestRequested_ByPayload = {
-  __typename?: '_RemoveChangeRequestRequested_byPayload';
-  /**
-   * Field for the ChangeRequest node this requested_by
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<ChangeRequest>;
-  /**
-   * Field for the User node this requested_by
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<User>;
-};
-
-export type _RemoveChangeRequestRequested_ForPayload = {
-  __typename?: '_RemoveChangeRequestRequested_forPayload';
-  /**
-   * Field for the ChangeRequest node this requested_for
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<ChangeRequest>;
-  /**
-   * Field for the WateringTask node this requested_for
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<WateringTask>;
-};
-
-export type _RemoveChangeRequestRequested_New_TaskPayload = {
-  __typename?: '_RemoveChangeRequestRequested_new_taskPayload';
-  /**
-   * Field for the ChangeRequest node this requested_new_task
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<ChangeRequest>;
-  /**
-   * Field for the WateringTask node this requested_new_task
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<WateringTask>;
-};
-
-export type _RemoveChangeRequestRequested_ToPayload = {
-  __typename?: '_RemoveChangeRequestRequested_toPayload';
-  /**
-   * Field for the ChangeRequest node this requested_to
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<ChangeRequest>;
-  /**
-   * Field for the User node this requested_to
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<User>;
-};
-
-export type _RemoveLogEventRefers_ToPayload = {
-  __typename?: '_RemoveLogEventRefers_toPayload';
-  /**
-   * Field for the LogEvent node this refers_to
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<LogEvent>;
-  /**
-   * Field for the WateringTask node this refers_to
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<WateringTask>;
-};
-
-export type _RemoveLogEventTriggered_ByPayload = {
-  __typename?: '_RemoveLogEventTriggered_byPayload';
-  /**
-   * Field for the LogEvent node this triggered_by
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<LogEvent>;
-  /**
-   * Field for the User node this triggered_by
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<User>;
-};
-
-export type _RemoveUserAssignedPayload = {
-  __typename?: '_RemoveUserAssignedPayload';
-  /**
-   * Field for the User node this assigned
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<User>;
-  /**
-   * Field for the WateringTask node this assigned
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<WateringTask>;
-};
-
-export type _RemoveUserAvailablePayload = {
-  __typename?: '_RemoveUserAvailablePayload';
-  /**
-   * Field for the User node this available
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<User>;
-  /**
-   * Field for the WateringTask node this available
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<WateringTask>;
-};
-
-export type _RemoveUserChangerequests_Requested_ByPayload = {
-  __typename?: '_RemoveUserChangerequests_requested_byPayload';
-  /**
-   * Field for the ChangeRequest node this requested_by
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<ChangeRequest>;
-  /**
-   * Field for the User node this requested_by
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<User>;
-};
-
-export type _RemoveUserChangerequests_Requested_ToPayload = {
-  __typename?: '_RemoveUserChangerequests_requested_toPayload';
-  /**
-   * Field for the ChangeRequest node this requested_to
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<ChangeRequest>;
-  /**
-   * Field for the User node this requested_to
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<User>;
-};
-
-export type _RemoveUserLogevents_Triggered_ByPayload = {
-  __typename?: '_RemoveUserLogevents_triggered_byPayload';
-  /**
-   * Field for the LogEvent node this triggered_by
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<LogEvent>;
-  /**
-   * Field for the User node this triggered_by
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<User>;
-};
-
-export type _RemoveWateringTaskChangerequests_Requested_ForPayload = {
-  __typename?: '_RemoveWateringTaskChangerequests_requested_forPayload';
-  /**
-   * Field for the ChangeRequest node this requested_for
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<ChangeRequest>;
-  /**
-   * Field for the WateringTask node this requested_for
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<WateringTask>;
-};
-
-export type _RemoveWateringTaskChangerequests_Requested_New_TaskPayload = {
-  __typename?: '_RemoveWateringTaskChangerequests_requested_new_taskPayload';
-  /**
-   * Field for the ChangeRequest node this requested_new_task
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<ChangeRequest>;
-  /**
-   * Field for the WateringTask node this requested_new_task
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<WateringTask>;
-};
-
-export type _RemoveWateringTaskLogevents_Refers_ToPayload = {
-  __typename?: '_RemoveWateringTaskLogevents_refers_toPayload';
-  /**
-   * Field for the LogEvent node this refers_to
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<LogEvent>;
-  /**
-   * Field for the WateringTask node this refers_to
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<WateringTask>;
-};
-
-export type _RemoveWateringTaskUsers_AssignedPayload = {
-  __typename?: '_RemoveWateringTaskUsers_assignedPayload';
-  /**
-   * Field for the User node this assigned
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<User>;
-  /**
-   * Field for the WateringTask node this assigned
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<WateringTask>;
-};
-
-export type _RemoveWateringTaskUsers_AvailablePayload = {
-  __typename?: '_RemoveWateringTaskUsers_availablePayload';
-  /**
-   * Field for the User node this available
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from.
-   */
-  from?: Maybe<User>;
-  /**
-   * Field for the WateringTask node this available
-   * [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to.
-   */
-  to?: Maybe<WateringTask>;
-};
-
-export type _UserFilter = {
-  AND?: Maybe<Array<_UserFilter>>;
-  OR?: Maybe<Array<_UserFilter>>;
-  label?: Maybe<Scalars['String']>;
-  label_not?: Maybe<Scalars['String']>;
-  label_in?: Maybe<Array<Scalars['String']>>;
-  label_not_in?: Maybe<Array<Scalars['String']>>;
-  label_contains?: Maybe<Scalars['String']>;
-  label_not_contains?: Maybe<Scalars['String']>;
-  label_starts_with?: Maybe<Scalars['String']>;
-  label_not_starts_with?: Maybe<Scalars['String']>;
-  label_ends_with?: Maybe<Scalars['String']>;
-  label_not_ends_with?: Maybe<Scalars['String']>;
-  neo4jImportId?: Maybe<Scalars['String']>;
-  neo4jImportId_not?: Maybe<Scalars['String']>;
-  neo4jImportId_in?: Maybe<Array<Scalars['String']>>;
-  neo4jImportId_not_in?: Maybe<Array<Scalars['String']>>;
-  neo4jImportId_contains?: Maybe<Scalars['String']>;
-  neo4jImportId_not_contains?: Maybe<Scalars['String']>;
-  neo4jImportId_starts_with?: Maybe<Scalars['String']>;
-  neo4jImportId_not_starts_with?: Maybe<Scalars['String']>;
-  neo4jImportId_ends_with?: Maybe<Scalars['String']>;
-  neo4jImportId_not_ends_with?: Maybe<Scalars['String']>;
-  type?: Maybe<Scalars['String']>;
-  type_not?: Maybe<Scalars['String']>;
-  type_in?: Maybe<Array<Scalars['String']>>;
-  type_not_in?: Maybe<Array<Scalars['String']>>;
-  type_contains?: Maybe<Scalars['String']>;
-  type_not_contains?: Maybe<Scalars['String']>;
-  type_starts_with?: Maybe<Scalars['String']>;
-  type_not_starts_with?: Maybe<Scalars['String']>;
-  type_ends_with?: Maybe<Scalars['String']>;
-  type_not_ends_with?: Maybe<Scalars['String']>;
-  assigned?: Maybe<_WateringTaskFilter>;
-  assigned_not?: Maybe<_WateringTaskFilter>;
-  assigned_in?: Maybe<Array<_WateringTaskFilter>>;
-  assigned_not_in?: Maybe<Array<_WateringTaskFilter>>;
-  assigned_some?: Maybe<_WateringTaskFilter>;
-  assigned_none?: Maybe<_WateringTaskFilter>;
-  assigned_single?: Maybe<_WateringTaskFilter>;
-  assigned_every?: Maybe<_WateringTaskFilter>;
-  available?: Maybe<_WateringTaskFilter>;
-  available_not?: Maybe<_WateringTaskFilter>;
-  available_in?: Maybe<Array<_WateringTaskFilter>>;
-  available_not_in?: Maybe<Array<_WateringTaskFilter>>;
-  available_some?: Maybe<_WateringTaskFilter>;
-  available_none?: Maybe<_WateringTaskFilter>;
-  available_single?: Maybe<_WateringTaskFilter>;
-  available_every?: Maybe<_WateringTaskFilter>;
-  changerequests_requested_by?: Maybe<_ChangeRequestFilter>;
-  changerequests_requested_by_not?: Maybe<_ChangeRequestFilter>;
-  changerequests_requested_by_in?: Maybe<Array<_ChangeRequestFilter>>;
-  changerequests_requested_by_not_in?: Maybe<Array<_ChangeRequestFilter>>;
-  changerequests_requested_by_some?: Maybe<_ChangeRequestFilter>;
-  changerequests_requested_by_none?: Maybe<_ChangeRequestFilter>;
-  changerequests_requested_by_single?: Maybe<_ChangeRequestFilter>;
-  changerequests_requested_by_every?: Maybe<_ChangeRequestFilter>;
-  changerequests_requested_to?: Maybe<_ChangeRequestFilter>;
-  changerequests_requested_to_not?: Maybe<_ChangeRequestFilter>;
-  changerequests_requested_to_in?: Maybe<Array<_ChangeRequestFilter>>;
-  changerequests_requested_to_not_in?: Maybe<Array<_ChangeRequestFilter>>;
-  changerequests_requested_to_some?: Maybe<_ChangeRequestFilter>;
-  changerequests_requested_to_none?: Maybe<_ChangeRequestFilter>;
-  changerequests_requested_to_single?: Maybe<_ChangeRequestFilter>;
-  changerequests_requested_to_every?: Maybe<_ChangeRequestFilter>;
-  logevents_triggered_by?: Maybe<_LogEventFilter>;
-  logevents_triggered_by_not?: Maybe<_LogEventFilter>;
-  logevents_triggered_by_in?: Maybe<Array<_LogEventFilter>>;
-  logevents_triggered_by_not_in?: Maybe<Array<_LogEventFilter>>;
-  logevents_triggered_by_some?: Maybe<_LogEventFilter>;
-  logevents_triggered_by_none?: Maybe<_LogEventFilter>;
-  logevents_triggered_by_single?: Maybe<_LogEventFilter>;
-  logevents_triggered_by_every?: Maybe<_LogEventFilter>;
-};
-
-export type _UserInput = {
-  label: Scalars['String'];
-};
-
-export enum _UserOrdering {
-  LabelAsc = 'label_asc',
-  LabelDesc = 'label_desc',
+export enum _WateringTaskOrdering {
+  DateAsc = 'date_asc',
+  DateDesc = 'date_desc',
+  DoneAsc = 'done_asc',
+  DoneDesc = 'done_desc',
   Neo4jImportIdAsc = 'neo4jImportId_asc',
   Neo4jImportIdDesc = 'neo4jImportId_desc',
   TypeAsc = 'type_asc',
   TypeDesc = 'type_desc',
-  IdAsc = '_id_asc',
-  IdDesc = '_id_desc'
-}
-
-export type _UserSettingsFilter = {
-  AND?: Maybe<Array<_UserSettingsFilter>>;
-  OR?: Maybe<Array<_UserSettingsFilter>>;
-  ui_locale?: Maybe<Scalars['String']>;
-  ui_locale_not?: Maybe<Scalars['String']>;
-  ui_locale_in?: Maybe<Array<Scalars['String']>>;
-  ui_locale_not_in?: Maybe<Array<Scalars['String']>>;
-  ui_locale_contains?: Maybe<Scalars['String']>;
-  ui_locale_not_contains?: Maybe<Scalars['String']>;
-  ui_locale_starts_with?: Maybe<Scalars['String']>;
-  ui_locale_not_starts_with?: Maybe<Scalars['String']>;
-  ui_locale_ends_with?: Maybe<Scalars['String']>;
-  ui_locale_not_ends_with?: Maybe<Scalars['String']>;
-  letitrain_maximum_tasks?: Maybe<Scalars['Int']>;
-  letitrain_maximum_tasks_not?: Maybe<Scalars['Int']>;
-  letitrain_maximum_tasks_in?: Maybe<Array<Scalars['Int']>>;
-  letitrain_maximum_tasks_not_in?: Maybe<Array<Scalars['Int']>>;
-  letitrain_maximum_tasks_lt?: Maybe<Scalars['Int']>;
-  letitrain_maximum_tasks_lte?: Maybe<Scalars['Int']>;
-  letitrain_maximum_tasks_gt?: Maybe<Scalars['Int']>;
-  letitrain_maximum_tasks_gte?: Maybe<Scalars['Int']>;
-};
-
-export type _UserSettingsInput = {
-  ui_locale: Scalars['String'];
-};
-
-export enum _UserSettingsOrdering {
-  UiLocaleAsc = 'ui_locale_asc',
-  UiLocaleDesc = 'ui_locale_desc',
-  LetitrainMaximumTasksAsc = 'letitrain_maximum_tasks_asc',
-  LetitrainMaximumTasksDesc = 'letitrain_maximum_tasks_desc',
-  IdAsc = '_id_asc',
-  IdDesc = '_id_desc'
-}
-
-export type _WateringPeriodFilter = {
-  AND?: Maybe<Array<_WateringPeriodFilter>>;
-  OR?: Maybe<Array<_WateringPeriodFilter>>;
-  from?: Maybe<_Neo4jDateInput>;
-  from_not?: Maybe<_Neo4jDateInput>;
-  from_in?: Maybe<Array<_Neo4jDateInput>>;
-  from_not_in?: Maybe<Array<_Neo4jDateInput>>;
-  from_lt?: Maybe<_Neo4jDateInput>;
-  from_lte?: Maybe<_Neo4jDateInput>;
-  from_gt?: Maybe<_Neo4jDateInput>;
-  from_gte?: Maybe<_Neo4jDateInput>;
-  till?: Maybe<_Neo4jDateInput>;
-  till_not?: Maybe<_Neo4jDateInput>;
-  till_in?: Maybe<Array<_Neo4jDateInput>>;
-  till_not_in?: Maybe<Array<_Neo4jDateInput>>;
-  till_lt?: Maybe<_Neo4jDateInput>;
-  till_lte?: Maybe<_Neo4jDateInput>;
-  till_gt?: Maybe<_Neo4jDateInput>;
-  till_gte?: Maybe<_Neo4jDateInput>;
-  wateringtasks?: Maybe<_WateringTaskFilter>;
-  wateringtasks_not?: Maybe<_WateringTaskFilter>;
-  wateringtasks_in?: Maybe<Array<_WateringTaskFilter>>;
-  wateringtasks_not_in?: Maybe<Array<_WateringTaskFilter>>;
-  wateringtasks_some?: Maybe<_WateringTaskFilter>;
-  wateringtasks_none?: Maybe<_WateringTaskFilter>;
-  wateringtasks_single?: Maybe<_WateringTaskFilter>;
-  wateringtasks_every?: Maybe<_WateringTaskFilter>;
-};
-
-export enum _WateringPeriodOrdering {
-  FromAsc = 'from_asc',
-  FromDesc = 'from_desc',
-  TillAsc = 'till_asc',
-  TillDesc = 'till_desc',
   IdAsc = '_id_asc',
   IdDesc = '_id_desc'
 }
@@ -1288,15 +216,341 @@ export type _WateringTaskFilter = {
   users_available_every?: Maybe<_UserFilter>;
 };
 
-export type _WateringTaskInput = {
-  neo4jImportId: Scalars['String'];
+/** Generated Date input object for Neo4j [Temporal field arguments](https://grandstack.io/docs/graphql-temporal-types-datetime/#temporal-query-arguments). */
+export type _Neo4jDateInput = {
+  year?: Maybe<Scalars['Int']>;
+  month?: Maybe<Scalars['Int']>;
+  day?: Maybe<Scalars['Int']>;
+  /** Creates a Neo4j [Temporal](https://grandstack.io/docs/graphql-temporal-types-datetime/#using-temporal-fields-in-mutations) Date value using a [String format](https://neo4j.com/docs/cypher-manual/current/functions/temporal/date/#functions-date-create-string). */
+  formatted?: Maybe<Scalars['String']>;
 };
 
-export enum _WateringTaskOrdering {
-  DateAsc = 'date_asc',
-  DateDesc = 'date_desc',
-  DoneAsc = 'done_asc',
-  DoneDesc = 'done_desc',
+export type _UserFilter = {
+  AND?: Maybe<Array<_UserFilter>>;
+  OR?: Maybe<Array<_UserFilter>>;
+  label?: Maybe<Scalars['String']>;
+  label_not?: Maybe<Scalars['String']>;
+  label_in?: Maybe<Array<Scalars['String']>>;
+  label_not_in?: Maybe<Array<Scalars['String']>>;
+  label_contains?: Maybe<Scalars['String']>;
+  label_not_contains?: Maybe<Scalars['String']>;
+  label_starts_with?: Maybe<Scalars['String']>;
+  label_not_starts_with?: Maybe<Scalars['String']>;
+  label_ends_with?: Maybe<Scalars['String']>;
+  label_not_ends_with?: Maybe<Scalars['String']>;
+  neo4jImportId?: Maybe<Scalars['String']>;
+  neo4jImportId_not?: Maybe<Scalars['String']>;
+  neo4jImportId_in?: Maybe<Array<Scalars['String']>>;
+  neo4jImportId_not_in?: Maybe<Array<Scalars['String']>>;
+  neo4jImportId_contains?: Maybe<Scalars['String']>;
+  neo4jImportId_not_contains?: Maybe<Scalars['String']>;
+  neo4jImportId_starts_with?: Maybe<Scalars['String']>;
+  neo4jImportId_not_starts_with?: Maybe<Scalars['String']>;
+  neo4jImportId_ends_with?: Maybe<Scalars['String']>;
+  neo4jImportId_not_ends_with?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  type_not?: Maybe<Scalars['String']>;
+  type_in?: Maybe<Array<Scalars['String']>>;
+  type_not_in?: Maybe<Array<Scalars['String']>>;
+  type_contains?: Maybe<Scalars['String']>;
+  type_not_contains?: Maybe<Scalars['String']>;
+  type_starts_with?: Maybe<Scalars['String']>;
+  type_not_starts_with?: Maybe<Scalars['String']>;
+  type_ends_with?: Maybe<Scalars['String']>;
+  type_not_ends_with?: Maybe<Scalars['String']>;
+  assigned?: Maybe<_WateringTaskFilter>;
+  assigned_not?: Maybe<_WateringTaskFilter>;
+  assigned_in?: Maybe<Array<_WateringTaskFilter>>;
+  assigned_not_in?: Maybe<Array<_WateringTaskFilter>>;
+  assigned_some?: Maybe<_WateringTaskFilter>;
+  assigned_none?: Maybe<_WateringTaskFilter>;
+  assigned_single?: Maybe<_WateringTaskFilter>;
+  assigned_every?: Maybe<_WateringTaskFilter>;
+  available?: Maybe<_WateringTaskFilter>;
+  available_not?: Maybe<_WateringTaskFilter>;
+  available_in?: Maybe<Array<_WateringTaskFilter>>;
+  available_not_in?: Maybe<Array<_WateringTaskFilter>>;
+  available_some?: Maybe<_WateringTaskFilter>;
+  available_none?: Maybe<_WateringTaskFilter>;
+  available_single?: Maybe<_WateringTaskFilter>;
+  available_every?: Maybe<_WateringTaskFilter>;
+  changerequests_requested_by?: Maybe<_ChangeRequestFilter>;
+  changerequests_requested_by_not?: Maybe<_ChangeRequestFilter>;
+  changerequests_requested_by_in?: Maybe<Array<_ChangeRequestFilter>>;
+  changerequests_requested_by_not_in?: Maybe<Array<_ChangeRequestFilter>>;
+  changerequests_requested_by_some?: Maybe<_ChangeRequestFilter>;
+  changerequests_requested_by_none?: Maybe<_ChangeRequestFilter>;
+  changerequests_requested_by_single?: Maybe<_ChangeRequestFilter>;
+  changerequests_requested_by_every?: Maybe<_ChangeRequestFilter>;
+  changerequests_requested_to?: Maybe<_ChangeRequestFilter>;
+  changerequests_requested_to_not?: Maybe<_ChangeRequestFilter>;
+  changerequests_requested_to_in?: Maybe<Array<_ChangeRequestFilter>>;
+  changerequests_requested_to_not_in?: Maybe<Array<_ChangeRequestFilter>>;
+  changerequests_requested_to_some?: Maybe<_ChangeRequestFilter>;
+  changerequests_requested_to_none?: Maybe<_ChangeRequestFilter>;
+  changerequests_requested_to_single?: Maybe<_ChangeRequestFilter>;
+  changerequests_requested_to_every?: Maybe<_ChangeRequestFilter>;
+  logevents_triggered_by?: Maybe<_LogEventFilter>;
+  logevents_triggered_by_not?: Maybe<_LogEventFilter>;
+  logevents_triggered_by_in?: Maybe<Array<_LogEventFilter>>;
+  logevents_triggered_by_not_in?: Maybe<Array<_LogEventFilter>>;
+  logevents_triggered_by_some?: Maybe<_LogEventFilter>;
+  logevents_triggered_by_none?: Maybe<_LogEventFilter>;
+  logevents_triggered_by_single?: Maybe<_LogEventFilter>;
+  logevents_triggered_by_every?: Maybe<_LogEventFilter>;
+};
+
+export type _ChangeRequestFilter = {
+  AND?: Maybe<Array<_ChangeRequestFilter>>;
+  OR?: Maybe<Array<_ChangeRequestFilter>>;
+  label?: Maybe<Scalars['String']>;
+  label_not?: Maybe<Scalars['String']>;
+  label_in?: Maybe<Array<Scalars['String']>>;
+  label_not_in?: Maybe<Array<Scalars['String']>>;
+  label_contains?: Maybe<Scalars['String']>;
+  label_not_contains?: Maybe<Scalars['String']>;
+  label_starts_with?: Maybe<Scalars['String']>;
+  label_not_starts_with?: Maybe<Scalars['String']>;
+  label_ends_with?: Maybe<Scalars['String']>;
+  label_not_ends_with?: Maybe<Scalars['String']>;
+  neo4jImportId?: Maybe<Scalars['String']>;
+  neo4jImportId_not?: Maybe<Scalars['String']>;
+  neo4jImportId_in?: Maybe<Array<Scalars['String']>>;
+  neo4jImportId_not_in?: Maybe<Array<Scalars['String']>>;
+  neo4jImportId_contains?: Maybe<Scalars['String']>;
+  neo4jImportId_not_contains?: Maybe<Scalars['String']>;
+  neo4jImportId_starts_with?: Maybe<Scalars['String']>;
+  neo4jImportId_not_starts_with?: Maybe<Scalars['String']>;
+  neo4jImportId_ends_with?: Maybe<Scalars['String']>;
+  neo4jImportId_not_ends_with?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  type_not?: Maybe<Scalars['String']>;
+  type_in?: Maybe<Array<Scalars['String']>>;
+  type_not_in?: Maybe<Array<Scalars['String']>>;
+  type_contains?: Maybe<Scalars['String']>;
+  type_not_contains?: Maybe<Scalars['String']>;
+  type_starts_with?: Maybe<Scalars['String']>;
+  type_not_starts_with?: Maybe<Scalars['String']>;
+  type_ends_with?: Maybe<Scalars['String']>;
+  type_not_ends_with?: Maybe<Scalars['String']>;
+  requested_by?: Maybe<_UserFilter>;
+  requested_by_not?: Maybe<_UserFilter>;
+  requested_by_in?: Maybe<Array<_UserFilter>>;
+  requested_by_not_in?: Maybe<Array<_UserFilter>>;
+  requested_by_some?: Maybe<_UserFilter>;
+  requested_by_none?: Maybe<_UserFilter>;
+  requested_by_single?: Maybe<_UserFilter>;
+  requested_by_every?: Maybe<_UserFilter>;
+  requested_for?: Maybe<_WateringTaskFilter>;
+  requested_for_not?: Maybe<_WateringTaskFilter>;
+  requested_for_in?: Maybe<Array<_WateringTaskFilter>>;
+  requested_for_not_in?: Maybe<Array<_WateringTaskFilter>>;
+  requested_for_some?: Maybe<_WateringTaskFilter>;
+  requested_for_none?: Maybe<_WateringTaskFilter>;
+  requested_for_single?: Maybe<_WateringTaskFilter>;
+  requested_for_every?: Maybe<_WateringTaskFilter>;
+  requested_to?: Maybe<_UserFilter>;
+  requested_to_not?: Maybe<_UserFilter>;
+  requested_to_in?: Maybe<Array<_UserFilter>>;
+  requested_to_not_in?: Maybe<Array<_UserFilter>>;
+  requested_to_some?: Maybe<_UserFilter>;
+  requested_to_none?: Maybe<_UserFilter>;
+  requested_to_single?: Maybe<_UserFilter>;
+  requested_to_every?: Maybe<_UserFilter>;
+  requested_new_task?: Maybe<_WateringTaskFilter>;
+  requested_new_task_not?: Maybe<_WateringTaskFilter>;
+  requested_new_task_in?: Maybe<Array<_WateringTaskFilter>>;
+  requested_new_task_not_in?: Maybe<Array<_WateringTaskFilter>>;
+  requested_new_task_some?: Maybe<_WateringTaskFilter>;
+  requested_new_task_none?: Maybe<_WateringTaskFilter>;
+  requested_new_task_single?: Maybe<_WateringTaskFilter>;
+  requested_new_task_every?: Maybe<_WateringTaskFilter>;
+};
+
+export type _LogEventFilter = {
+  AND?: Maybe<Array<_LogEventFilter>>;
+  OR?: Maybe<Array<_LogEventFilter>>;
+  date?: Maybe<Scalars['String']>;
+  date_not?: Maybe<Scalars['String']>;
+  date_in?: Maybe<Array<Scalars['String']>>;
+  date_not_in?: Maybe<Array<Scalars['String']>>;
+  date_contains?: Maybe<Scalars['String']>;
+  date_not_contains?: Maybe<Scalars['String']>;
+  date_starts_with?: Maybe<Scalars['String']>;
+  date_not_starts_with?: Maybe<Scalars['String']>;
+  date_ends_with?: Maybe<Scalars['String']>;
+  date_not_ends_with?: Maybe<Scalars['String']>;
+  label?: Maybe<Scalars['String']>;
+  label_not?: Maybe<Scalars['String']>;
+  label_in?: Maybe<Array<Scalars['String']>>;
+  label_not_in?: Maybe<Array<Scalars['String']>>;
+  label_contains?: Maybe<Scalars['String']>;
+  label_not_contains?: Maybe<Scalars['String']>;
+  label_starts_with?: Maybe<Scalars['String']>;
+  label_not_starts_with?: Maybe<Scalars['String']>;
+  label_ends_with?: Maybe<Scalars['String']>;
+  label_not_ends_with?: Maybe<Scalars['String']>;
+  neo4jImportId?: Maybe<Scalars['String']>;
+  neo4jImportId_not?: Maybe<Scalars['String']>;
+  neo4jImportId_in?: Maybe<Array<Scalars['String']>>;
+  neo4jImportId_not_in?: Maybe<Array<Scalars['String']>>;
+  neo4jImportId_contains?: Maybe<Scalars['String']>;
+  neo4jImportId_not_contains?: Maybe<Scalars['String']>;
+  neo4jImportId_starts_with?: Maybe<Scalars['String']>;
+  neo4jImportId_not_starts_with?: Maybe<Scalars['String']>;
+  neo4jImportId_ends_with?: Maybe<Scalars['String']>;
+  neo4jImportId_not_ends_with?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  type_not?: Maybe<Scalars['String']>;
+  type_in?: Maybe<Array<Scalars['String']>>;
+  type_not_in?: Maybe<Array<Scalars['String']>>;
+  type_contains?: Maybe<Scalars['String']>;
+  type_not_contains?: Maybe<Scalars['String']>;
+  type_starts_with?: Maybe<Scalars['String']>;
+  type_not_starts_with?: Maybe<Scalars['String']>;
+  type_ends_with?: Maybe<Scalars['String']>;
+  type_not_ends_with?: Maybe<Scalars['String']>;
+  triggered_by?: Maybe<_UserFilter>;
+  triggered_by_not?: Maybe<_UserFilter>;
+  triggered_by_in?: Maybe<Array<_UserFilter>>;
+  triggered_by_not_in?: Maybe<Array<_UserFilter>>;
+  triggered_by_some?: Maybe<_UserFilter>;
+  triggered_by_none?: Maybe<_UserFilter>;
+  triggered_by_single?: Maybe<_UserFilter>;
+  triggered_by_every?: Maybe<_UserFilter>;
+  refers_to?: Maybe<_WateringTaskFilter>;
+  refers_to_not?: Maybe<_WateringTaskFilter>;
+  refers_to_in?: Maybe<Array<_WateringTaskFilter>>;
+  refers_to_not_in?: Maybe<Array<_WateringTaskFilter>>;
+  refers_to_some?: Maybe<_WateringTaskFilter>;
+  refers_to_none?: Maybe<_WateringTaskFilter>;
+  refers_to_single?: Maybe<_WateringTaskFilter>;
+  refers_to_every?: Maybe<_WateringTaskFilter>;
+};
+
+export type WateringTask = {
+  __typename?: 'WateringTask';
+  /** Generated field for querying the Neo4j [system id](https://neo4j.com/docs/cypher-manual/current/functions/scalar/#functions-id) of this node. */
+  _id?: Maybe<Scalars['String']>;
+  date: _Neo4jDate;
+  done?: Maybe<Scalars['Boolean']>;
+  neo4jImportId: Scalars['String'];
+  type: Scalars['String'];
+  users_assigned?: Maybe<Array<Maybe<User>>>;
+  changerequests_requested_for?: Maybe<Array<Maybe<ChangeRequest>>>;
+  changerequests_requested_new_task?: Maybe<Array<Maybe<ChangeRequest>>>;
+  logevents_refers_to?: Maybe<Array<Maybe<LogEvent>>>;
+  users_available?: Maybe<Array<Maybe<User>>>;
+};
+
+
+export type WateringTaskUsers_AssignedArgs = {
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<Maybe<_UserOrdering>>>;
+  filter?: Maybe<_UserFilter>;
+};
+
+
+export type WateringTaskChangerequests_Requested_ForArgs = {
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<Maybe<_ChangeRequestOrdering>>>;
+  filter?: Maybe<_ChangeRequestFilter>;
+};
+
+
+export type WateringTaskChangerequests_Requested_New_TaskArgs = {
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<Maybe<_ChangeRequestOrdering>>>;
+  filter?: Maybe<_ChangeRequestFilter>;
+};
+
+
+export type WateringTaskLogevents_Refers_ToArgs = {
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<Maybe<_LogEventOrdering>>>;
+  filter?: Maybe<_LogEventFilter>;
+};
+
+
+export type WateringTaskUsers_AvailableArgs = {
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<Maybe<_UserOrdering>>>;
+  filter?: Maybe<_UserFilter>;
+};
+
+export enum _UserOrdering {
+  LabelAsc = 'label_asc',
+  LabelDesc = 'label_desc',
+  Neo4jImportIdAsc = 'neo4jImportId_asc',
+  Neo4jImportIdDesc = 'neo4jImportId_desc',
+  TypeAsc = 'type_asc',
+  TypeDesc = 'type_desc',
+  IdAsc = '_id_asc',
+  IdDesc = '_id_desc'
+}
+
+export type User = {
+  __typename?: 'User';
+  /** Generated field for querying the Neo4j [system id](https://neo4j.com/docs/cypher-manual/current/functions/scalar/#functions-id) of this node. */
+  _id?: Maybe<Scalars['String']>;
+  label: Scalars['String'];
+  neo4jImportId: Scalars['String'];
+  type: Scalars['String'];
+  assigned?: Maybe<Array<Maybe<WateringTask>>>;
+  available?: Maybe<Array<Maybe<WateringTask>>>;
+  changerequests_requested_by?: Maybe<Array<Maybe<ChangeRequest>>>;
+  changerequests_requested_to?: Maybe<Array<Maybe<ChangeRequest>>>;
+  logevents_triggered_by?: Maybe<Array<Maybe<LogEvent>>>;
+};
+
+
+export type UserAssignedArgs = {
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<Maybe<_WateringTaskOrdering>>>;
+  filter?: Maybe<_WateringTaskFilter>;
+};
+
+
+export type UserAvailableArgs = {
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<Maybe<_WateringTaskOrdering>>>;
+  filter?: Maybe<_WateringTaskFilter>;
+};
+
+
+export type UserChangerequests_Requested_ByArgs = {
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<Maybe<_ChangeRequestOrdering>>>;
+  filter?: Maybe<_ChangeRequestFilter>;
+};
+
+
+export type UserChangerequests_Requested_ToArgs = {
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<Maybe<_ChangeRequestOrdering>>>;
+  filter?: Maybe<_ChangeRequestFilter>;
+};
+
+
+export type UserLogevents_Triggered_ByArgs = {
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<Maybe<_LogEventOrdering>>>;
+  filter?: Maybe<_LogEventFilter>;
+};
+
+export enum _ChangeRequestOrdering {
+  LabelAsc = 'label_asc',
+  LabelDesc = 'label_desc',
   Neo4jImportIdAsc = 'neo4jImportId_asc',
   Neo4jImportIdDesc = 'neo4jImportId_desc',
   TypeAsc = 'type_asc',
@@ -1350,6 +604,18 @@ export type ChangeRequestRequested_New_TaskArgs = {
   filter?: Maybe<_WateringTaskFilter>;
 };
 
+export enum _LogEventOrdering {
+  DateAsc = 'date_asc',
+  DateDesc = 'date_desc',
+  LabelAsc = 'label_asc',
+  LabelDesc = 'label_desc',
+  Neo4jImportIdAsc = 'neo4jImportId_asc',
+  Neo4jImportIdDesc = 'neo4jImportId_desc',
+  TypeAsc = 'type_asc',
+  TypeDesc = 'type_desc',
+  IdAsc = '_id_asc',
+  IdDesc = '_id_desc'
+}
 
 export type LogEvent = {
   __typename?: 'LogEvent';
@@ -1377,6 +643,84 @@ export type LogEventRefers_ToArgs = {
   offset?: Maybe<Scalars['Int']>;
   orderBy?: Maybe<Array<Maybe<_WateringTaskOrdering>>>;
   filter?: Maybe<_WateringTaskFilter>;
+};
+
+export enum _WateringPeriodOrdering {
+  FromAsc = 'from_asc',
+  FromDesc = 'from_desc',
+  TillAsc = 'till_asc',
+  TillDesc = 'till_desc',
+  IdAsc = '_id_asc',
+  IdDesc = '_id_desc'
+}
+
+export type _WateringPeriodFilter = {
+  AND?: Maybe<Array<_WateringPeriodFilter>>;
+  OR?: Maybe<Array<_WateringPeriodFilter>>;
+  from?: Maybe<_Neo4jDateInput>;
+  from_not?: Maybe<_Neo4jDateInput>;
+  from_in?: Maybe<Array<_Neo4jDateInput>>;
+  from_not_in?: Maybe<Array<_Neo4jDateInput>>;
+  from_lt?: Maybe<_Neo4jDateInput>;
+  from_lte?: Maybe<_Neo4jDateInput>;
+  from_gt?: Maybe<_Neo4jDateInput>;
+  from_gte?: Maybe<_Neo4jDateInput>;
+  till?: Maybe<_Neo4jDateInput>;
+  till_not?: Maybe<_Neo4jDateInput>;
+  till_in?: Maybe<Array<_Neo4jDateInput>>;
+  till_not_in?: Maybe<Array<_Neo4jDateInput>>;
+  till_lt?: Maybe<_Neo4jDateInput>;
+  till_lte?: Maybe<_Neo4jDateInput>;
+  till_gt?: Maybe<_Neo4jDateInput>;
+  till_gte?: Maybe<_Neo4jDateInput>;
+  wateringtasks?: Maybe<_WateringTaskFilter>;
+  wateringtasks_not?: Maybe<_WateringTaskFilter>;
+  wateringtasks_in?: Maybe<Array<_WateringTaskFilter>>;
+  wateringtasks_not_in?: Maybe<Array<_WateringTaskFilter>>;
+  wateringtasks_some?: Maybe<_WateringTaskFilter>;
+  wateringtasks_none?: Maybe<_WateringTaskFilter>;
+  wateringtasks_single?: Maybe<_WateringTaskFilter>;
+  wateringtasks_every?: Maybe<_WateringTaskFilter>;
+};
+
+export enum _UserSettingsOrdering {
+  UiLocaleAsc = 'ui_locale_asc',
+  UiLocaleDesc = 'ui_locale_desc',
+  LetitrainMaximumTasksAsc = 'letitrain_maximum_tasks_asc',
+  LetitrainMaximumTasksDesc = 'letitrain_maximum_tasks_desc',
+  IdAsc = '_id_asc',
+  IdDesc = '_id_desc'
+}
+
+export type _UserSettingsFilter = {
+  AND?: Maybe<Array<_UserSettingsFilter>>;
+  OR?: Maybe<Array<_UserSettingsFilter>>;
+  ui_locale?: Maybe<Scalars['String']>;
+  ui_locale_not?: Maybe<Scalars['String']>;
+  ui_locale_in?: Maybe<Array<Scalars['String']>>;
+  ui_locale_not_in?: Maybe<Array<Scalars['String']>>;
+  ui_locale_contains?: Maybe<Scalars['String']>;
+  ui_locale_not_contains?: Maybe<Scalars['String']>;
+  ui_locale_starts_with?: Maybe<Scalars['String']>;
+  ui_locale_not_starts_with?: Maybe<Scalars['String']>;
+  ui_locale_ends_with?: Maybe<Scalars['String']>;
+  ui_locale_not_ends_with?: Maybe<Scalars['String']>;
+  letitrain_maximum_tasks?: Maybe<Scalars['Int']>;
+  letitrain_maximum_tasks_not?: Maybe<Scalars['Int']>;
+  letitrain_maximum_tasks_in?: Maybe<Array<Scalars['Int']>>;
+  letitrain_maximum_tasks_not_in?: Maybe<Array<Scalars['Int']>>;
+  letitrain_maximum_tasks_lt?: Maybe<Scalars['Int']>;
+  letitrain_maximum_tasks_lte?: Maybe<Scalars['Int']>;
+  letitrain_maximum_tasks_gt?: Maybe<Scalars['Int']>;
+  letitrain_maximum_tasks_gte?: Maybe<Scalars['Int']>;
+};
+
+export type UserSettings = {
+  __typename?: 'UserSettings';
+  ui_locale?: Maybe<Scalars['String']>;
+  letitrain_maximum_tasks?: Maybe<Scalars['Int']>;
+  /** Generated field for querying the Neo4j [system id](https://neo4j.com/docs/cypher-manual/current/functions/scalar/#functions-id) of this node. */
+  _id?: Maybe<Scalars['String']>;
 };
 
 export type Mutation = {
@@ -1970,232 +1314,566 @@ export type MutationMergeUserSettingsArgs = {
   letitrain_maximum_tasks?: Maybe<Scalars['Int']>;
 };
 
-export type Query = {
-  __typename?: 'Query';
-  /** [Generated query](https://grandstack.io/docs/graphql-schema-generation-augmentation#generated-queries) for User type nodes. */
-  User?: Maybe<Array<Maybe<User>>>;
-  /** [Generated query](https://grandstack.io/docs/graphql-schema-generation-augmentation#generated-queries) for WateringTask type nodes. */
-  WateringTask?: Maybe<Array<Maybe<WateringTask>>>;
-  /** [Generated query](https://grandstack.io/docs/graphql-schema-generation-augmentation#generated-queries) for WateringPeriod type nodes. */
-  WateringPeriod?: Maybe<Array<Maybe<WateringPeriod>>>;
-  /** [Generated query](https://grandstack.io/docs/graphql-schema-generation-augmentation#generated-queries) for ChangeRequest type nodes. */
-  ChangeRequest?: Maybe<Array<Maybe<ChangeRequest>>>;
-  /** [Generated query](https://grandstack.io/docs/graphql-schema-generation-augmentation#generated-queries) for LogEvent type nodes. */
-  LogEvent?: Maybe<Array<Maybe<LogEvent>>>;
-  /** [Generated query](https://grandstack.io/docs/graphql-schema-generation-augmentation#generated-queries) for UserSettings type nodes. */
-  UserSettings?: Maybe<Array<Maybe<UserSettings>>>;
-};
-
-
-export type QueryUserArgs = {
-  label?: Maybe<Scalars['String']>;
-  neo4jImportId?: Maybe<Scalars['String']>;
-  type?: Maybe<Scalars['String']>;
-  _id?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<Maybe<_UserOrdering>>>;
-  filter?: Maybe<_UserFilter>;
-};
-
-
-export type QueryWateringTaskArgs = {
-  date?: Maybe<_Neo4jDateInput>;
-  done?: Maybe<Scalars['Boolean']>;
-  neo4jImportId?: Maybe<Scalars['String']>;
-  type?: Maybe<Scalars['String']>;
-  _id?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<Maybe<_WateringTaskOrdering>>>;
-  filter?: Maybe<_WateringTaskFilter>;
-};
-
-
-export type QueryWateringPeriodArgs = {
-  from?: Maybe<_Neo4jDateInput>;
-  till?: Maybe<_Neo4jDateInput>;
-  _id?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<Maybe<_WateringPeriodOrdering>>>;
-  filter?: Maybe<_WateringPeriodFilter>;
-};
-
-
-export type QueryChangeRequestArgs = {
-  label?: Maybe<Scalars['String']>;
-  neo4jImportId?: Maybe<Scalars['String']>;
-  type?: Maybe<Scalars['String']>;
-  _id?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<Maybe<_ChangeRequestOrdering>>>;
-  filter?: Maybe<_ChangeRequestFilter>;
-};
-
-
-export type QueryLogEventArgs = {
-  date?: Maybe<Scalars['String']>;
-  label?: Maybe<Scalars['String']>;
-  neo4jImportId?: Maybe<Scalars['String']>;
-  type?: Maybe<Scalars['String']>;
-  _id?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<Maybe<_LogEventOrdering>>>;
-  filter?: Maybe<_LogEventFilter>;
-};
-
-
-export type QueryUserSettingsArgs = {
-  ui_locale?: Maybe<Scalars['String']>;
-  letitrain_maximum_tasks?: Maybe<Scalars['Int']>;
-  _id?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<Maybe<_UserSettingsOrdering>>>;
-  filter?: Maybe<_UserSettingsFilter>;
-};
-
-export type User = {
-  __typename?: 'User';
-  /** Generated field for querying the Neo4j [system id](https://neo4j.com/docs/cypher-manual/current/functions/scalar/#functions-id) of this node. */
-  _id?: Maybe<Scalars['String']>;
-  label: Scalars['String'];
-  neo4jImportId: Scalars['String'];
-  type: Scalars['String'];
-  assigned?: Maybe<Array<Maybe<WateringTask>>>;
-  available?: Maybe<Array<Maybe<WateringTask>>>;
-  changerequests_requested_by?: Maybe<Array<Maybe<ChangeRequest>>>;
-  changerequests_requested_to?: Maybe<Array<Maybe<ChangeRequest>>>;
-  logevents_triggered_by?: Maybe<Array<Maybe<LogEvent>>>;
-};
-
-
-export type UserAssignedArgs = {
-  first?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<Maybe<_WateringTaskOrdering>>>;
-  filter?: Maybe<_WateringTaskFilter>;
-};
-
-
-export type UserAvailableArgs = {
-  first?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<Maybe<_WateringTaskOrdering>>>;
-  filter?: Maybe<_WateringTaskFilter>;
-};
-
-
-export type UserChangerequests_Requested_ByArgs = {
-  first?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<Maybe<_ChangeRequestOrdering>>>;
-  filter?: Maybe<_ChangeRequestFilter>;
-};
-
-
-export type UserChangerequests_Requested_ToArgs = {
-  first?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<Maybe<_ChangeRequestOrdering>>>;
-  filter?: Maybe<_ChangeRequestFilter>;
-};
-
-
-export type UserLogevents_Triggered_ByArgs = {
-  first?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<Maybe<_LogEventOrdering>>>;
-  filter?: Maybe<_LogEventFilter>;
-};
-
-export type UserSettings = {
-  __typename?: 'UserSettings';
-  ui_locale?: Maybe<Scalars['String']>;
-  letitrain_maximum_tasks?: Maybe<Scalars['Int']>;
-  /** Generated field for querying the Neo4j [system id](https://neo4j.com/docs/cypher-manual/current/functions/scalar/#functions-id) of this node. */
-  _id?: Maybe<Scalars['String']>;
-};
-
 export type UserSettingsInput = {
   ui_locale?: Maybe<Scalars['String']>;
   letitrain_maximum_tasks?: Maybe<Scalars['Int']>;
 };
 
-export type WateringPeriod = {
-  __typename?: 'WateringPeriod';
-  /** Generated field for querying the Neo4j [system id](https://neo4j.com/docs/cypher-manual/current/functions/scalar/#functions-id) of this node. */
-  _id?: Maybe<Scalars['String']>;
-  from: _Neo4jDate;
-  till: _Neo4jDate;
-  wateringtasks?: Maybe<Array<Maybe<WateringTask>>>;
+
+export type _UserInput = {
+  label: Scalars['String'];
 };
 
-
-export type WateringPeriodWateringtasksArgs = {
-  first?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<Maybe<_WateringTaskOrdering>>>;
-  filter?: Maybe<_WateringTaskFilter>;
-};
-
-export type WateringTask = {
-  __typename?: 'WateringTask';
-  /** Generated field for querying the Neo4j [system id](https://neo4j.com/docs/cypher-manual/current/functions/scalar/#functions-id) of this node. */
-  _id?: Maybe<Scalars['String']>;
-  date: _Neo4jDate;
-  done?: Maybe<Scalars['Boolean']>;
+export type _WateringTaskInput = {
   neo4jImportId: Scalars['String'];
-  type: Scalars['String'];
-  users_assigned?: Maybe<Array<Maybe<User>>>;
-  changerequests_requested_for?: Maybe<Array<Maybe<ChangeRequest>>>;
-  changerequests_requested_new_task?: Maybe<Array<Maybe<ChangeRequest>>>;
-  logevents_refers_to?: Maybe<Array<Maybe<LogEvent>>>;
-  users_available?: Maybe<Array<Maybe<User>>>;
 };
 
-
-export type WateringTaskUsers_AssignedArgs = {
-  first?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<Maybe<_UserOrdering>>>;
-  filter?: Maybe<_UserFilter>;
+export type _AddUserAssignedPayload = {
+  __typename?: '_AddUserAssignedPayload';
+  /** Field for the User node this assigned [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<User>;
+  /** Field for the WateringTask node this assigned [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<WateringTask>;
 };
 
-
-export type WateringTaskChangerequests_Requested_ForArgs = {
-  first?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<Maybe<_ChangeRequestOrdering>>>;
-  filter?: Maybe<_ChangeRequestFilter>;
+export type _RemoveUserAssignedPayload = {
+  __typename?: '_RemoveUserAssignedPayload';
+  /** Field for the User node this assigned [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<User>;
+  /** Field for the WateringTask node this assigned [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<WateringTask>;
 };
 
-
-export type WateringTaskChangerequests_Requested_New_TaskArgs = {
-  first?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<Maybe<_ChangeRequestOrdering>>>;
-  filter?: Maybe<_ChangeRequestFilter>;
+export type _MergeUserAssignedPayload = {
+  __typename?: '_MergeUserAssignedPayload';
+  /** Field for the User node this assigned [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<User>;
+  /** Field for the WateringTask node this assigned [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<WateringTask>;
 };
 
-
-export type WateringTaskLogevents_Refers_ToArgs = {
-  first?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<Maybe<_LogEventOrdering>>>;
-  filter?: Maybe<_LogEventFilter>;
+export type _AddUserAvailablePayload = {
+  __typename?: '_AddUserAvailablePayload';
+  /** Field for the User node this available [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<User>;
+  /** Field for the WateringTask node this available [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<WateringTask>;
 };
 
-
-export type WateringTaskUsers_AvailableArgs = {
-  first?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<Array<Maybe<_UserOrdering>>>;
-  filter?: Maybe<_UserFilter>;
+export type _RemoveUserAvailablePayload = {
+  __typename?: '_RemoveUserAvailablePayload';
+  /** Field for the User node this available [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<User>;
+  /** Field for the WateringTask node this available [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<WateringTask>;
 };
+
+export type _MergeUserAvailablePayload = {
+  __typename?: '_MergeUserAvailablePayload';
+  /** Field for the User node this available [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<User>;
+  /** Field for the WateringTask node this available [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<WateringTask>;
+};
+
+export type _ChangeRequestInput = {
+  label: Scalars['String'];
+};
+
+export type _AddUserChangerequests_Requested_ByPayload = {
+  __typename?: '_AddUserChangerequests_requested_byPayload';
+  /** Field for the ChangeRequest node this requested_by [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<ChangeRequest>;
+  /** Field for the User node this requested_by [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<User>;
+};
+
+export type _RemoveUserChangerequests_Requested_ByPayload = {
+  __typename?: '_RemoveUserChangerequests_requested_byPayload';
+  /** Field for the ChangeRequest node this requested_by [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<ChangeRequest>;
+  /** Field for the User node this requested_by [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<User>;
+};
+
+export type _MergeUserChangerequests_Requested_ByPayload = {
+  __typename?: '_MergeUserChangerequests_requested_byPayload';
+  /** Field for the ChangeRequest node this requested_by [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<ChangeRequest>;
+  /** Field for the User node this requested_by [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<User>;
+};
+
+export type _AddUserChangerequests_Requested_ToPayload = {
+  __typename?: '_AddUserChangerequests_requested_toPayload';
+  /** Field for the ChangeRequest node this requested_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<ChangeRequest>;
+  /** Field for the User node this requested_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<User>;
+};
+
+export type _RemoveUserChangerequests_Requested_ToPayload = {
+  __typename?: '_RemoveUserChangerequests_requested_toPayload';
+  /** Field for the ChangeRequest node this requested_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<ChangeRequest>;
+  /** Field for the User node this requested_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<User>;
+};
+
+export type _MergeUserChangerequests_Requested_ToPayload = {
+  __typename?: '_MergeUserChangerequests_requested_toPayload';
+  /** Field for the ChangeRequest node this requested_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<ChangeRequest>;
+  /** Field for the User node this requested_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<User>;
+};
+
+export type _LogEventInput = {
+  date: Scalars['String'];
+};
+
+export type _AddUserLogevents_Triggered_ByPayload = {
+  __typename?: '_AddUserLogevents_triggered_byPayload';
+  /** Field for the LogEvent node this triggered_by [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<LogEvent>;
+  /** Field for the User node this triggered_by [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<User>;
+};
+
+export type _RemoveUserLogevents_Triggered_ByPayload = {
+  __typename?: '_RemoveUserLogevents_triggered_byPayload';
+  /** Field for the LogEvent node this triggered_by [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<LogEvent>;
+  /** Field for the User node this triggered_by [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<User>;
+};
+
+export type _MergeUserLogevents_Triggered_ByPayload = {
+  __typename?: '_MergeUserLogevents_triggered_byPayload';
+  /** Field for the LogEvent node this triggered_by [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<LogEvent>;
+  /** Field for the User node this triggered_by [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<User>;
+};
+
+export type _AddWateringTaskUsers_AssignedPayload = {
+  __typename?: '_AddWateringTaskUsers_assignedPayload';
+  /** Field for the User node this assigned [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<User>;
+  /** Field for the WateringTask node this assigned [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<WateringTask>;
+};
+
+export type _RemoveWateringTaskUsers_AssignedPayload = {
+  __typename?: '_RemoveWateringTaskUsers_assignedPayload';
+  /** Field for the User node this assigned [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<User>;
+  /** Field for the WateringTask node this assigned [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<WateringTask>;
+};
+
+export type _MergeWateringTaskUsers_AssignedPayload = {
+  __typename?: '_MergeWateringTaskUsers_assignedPayload';
+  /** Field for the User node this assigned [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<User>;
+  /** Field for the WateringTask node this assigned [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<WateringTask>;
+};
+
+export type _AddWateringTaskChangerequests_Requested_ForPayload = {
+  __typename?: '_AddWateringTaskChangerequests_requested_forPayload';
+  /** Field for the ChangeRequest node this requested_for [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<ChangeRequest>;
+  /** Field for the WateringTask node this requested_for [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<WateringTask>;
+};
+
+export type _RemoveWateringTaskChangerequests_Requested_ForPayload = {
+  __typename?: '_RemoveWateringTaskChangerequests_requested_forPayload';
+  /** Field for the ChangeRequest node this requested_for [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<ChangeRequest>;
+  /** Field for the WateringTask node this requested_for [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<WateringTask>;
+};
+
+export type _MergeWateringTaskChangerequests_Requested_ForPayload = {
+  __typename?: '_MergeWateringTaskChangerequests_requested_forPayload';
+  /** Field for the ChangeRequest node this requested_for [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<ChangeRequest>;
+  /** Field for the WateringTask node this requested_for [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<WateringTask>;
+};
+
+export type _AddWateringTaskChangerequests_Requested_New_TaskPayload = {
+  __typename?: '_AddWateringTaskChangerequests_requested_new_taskPayload';
+  /** Field for the ChangeRequest node this requested_new_task [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<ChangeRequest>;
+  /** Field for the WateringTask node this requested_new_task [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<WateringTask>;
+};
+
+export type _RemoveWateringTaskChangerequests_Requested_New_TaskPayload = {
+  __typename?: '_RemoveWateringTaskChangerequests_requested_new_taskPayload';
+  /** Field for the ChangeRequest node this requested_new_task [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<ChangeRequest>;
+  /** Field for the WateringTask node this requested_new_task [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<WateringTask>;
+};
+
+export type _MergeWateringTaskChangerequests_Requested_New_TaskPayload = {
+  __typename?: '_MergeWateringTaskChangerequests_requested_new_taskPayload';
+  /** Field for the ChangeRequest node this requested_new_task [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<ChangeRequest>;
+  /** Field for the WateringTask node this requested_new_task [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<WateringTask>;
+};
+
+export type _AddWateringTaskLogevents_Refers_ToPayload = {
+  __typename?: '_AddWateringTaskLogevents_refers_toPayload';
+  /** Field for the LogEvent node this refers_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<LogEvent>;
+  /** Field for the WateringTask node this refers_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<WateringTask>;
+};
+
+export type _RemoveWateringTaskLogevents_Refers_ToPayload = {
+  __typename?: '_RemoveWateringTaskLogevents_refers_toPayload';
+  /** Field for the LogEvent node this refers_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<LogEvent>;
+  /** Field for the WateringTask node this refers_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<WateringTask>;
+};
+
+export type _MergeWateringTaskLogevents_Refers_ToPayload = {
+  __typename?: '_MergeWateringTaskLogevents_refers_toPayload';
+  /** Field for the LogEvent node this refers_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<LogEvent>;
+  /** Field for the WateringTask node this refers_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<WateringTask>;
+};
+
+export type _AddWateringTaskUsers_AvailablePayload = {
+  __typename?: '_AddWateringTaskUsers_availablePayload';
+  /** Field for the User node this available [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<User>;
+  /** Field for the WateringTask node this available [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<WateringTask>;
+};
+
+export type _RemoveWateringTaskUsers_AvailablePayload = {
+  __typename?: '_RemoveWateringTaskUsers_availablePayload';
+  /** Field for the User node this available [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<User>;
+  /** Field for the WateringTask node this available [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<WateringTask>;
+};
+
+export type _MergeWateringTaskUsers_AvailablePayload = {
+  __typename?: '_MergeWateringTaskUsers_availablePayload';
+  /** Field for the User node this available [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<User>;
+  /** Field for the WateringTask node this available [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<WateringTask>;
+};
+
+export type _AddChangeRequestRequested_ByPayload = {
+  __typename?: '_AddChangeRequestRequested_byPayload';
+  /** Field for the ChangeRequest node this requested_by [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<ChangeRequest>;
+  /** Field for the User node this requested_by [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<User>;
+};
+
+export type _RemoveChangeRequestRequested_ByPayload = {
+  __typename?: '_RemoveChangeRequestRequested_byPayload';
+  /** Field for the ChangeRequest node this requested_by [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<ChangeRequest>;
+  /** Field for the User node this requested_by [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<User>;
+};
+
+export type _MergeChangeRequestRequested_ByPayload = {
+  __typename?: '_MergeChangeRequestRequested_byPayload';
+  /** Field for the ChangeRequest node this requested_by [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<ChangeRequest>;
+  /** Field for the User node this requested_by [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<User>;
+};
+
+export type _AddChangeRequestRequested_ForPayload = {
+  __typename?: '_AddChangeRequestRequested_forPayload';
+  /** Field for the ChangeRequest node this requested_for [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<ChangeRequest>;
+  /** Field for the WateringTask node this requested_for [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<WateringTask>;
+};
+
+export type _RemoveChangeRequestRequested_ForPayload = {
+  __typename?: '_RemoveChangeRequestRequested_forPayload';
+  /** Field for the ChangeRequest node this requested_for [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<ChangeRequest>;
+  /** Field for the WateringTask node this requested_for [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<WateringTask>;
+};
+
+export type _MergeChangeRequestRequested_ForPayload = {
+  __typename?: '_MergeChangeRequestRequested_forPayload';
+  /** Field for the ChangeRequest node this requested_for [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<ChangeRequest>;
+  /** Field for the WateringTask node this requested_for [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<WateringTask>;
+};
+
+export type _AddChangeRequestRequested_ToPayload = {
+  __typename?: '_AddChangeRequestRequested_toPayload';
+  /** Field for the ChangeRequest node this requested_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<ChangeRequest>;
+  /** Field for the User node this requested_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<User>;
+};
+
+export type _RemoveChangeRequestRequested_ToPayload = {
+  __typename?: '_RemoveChangeRequestRequested_toPayload';
+  /** Field for the ChangeRequest node this requested_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<ChangeRequest>;
+  /** Field for the User node this requested_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<User>;
+};
+
+export type _MergeChangeRequestRequested_ToPayload = {
+  __typename?: '_MergeChangeRequestRequested_toPayload';
+  /** Field for the ChangeRequest node this requested_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<ChangeRequest>;
+  /** Field for the User node this requested_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<User>;
+};
+
+export type _AddChangeRequestRequested_New_TaskPayload = {
+  __typename?: '_AddChangeRequestRequested_new_taskPayload';
+  /** Field for the ChangeRequest node this requested_new_task [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<ChangeRequest>;
+  /** Field for the WateringTask node this requested_new_task [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<WateringTask>;
+};
+
+export type _RemoveChangeRequestRequested_New_TaskPayload = {
+  __typename?: '_RemoveChangeRequestRequested_new_taskPayload';
+  /** Field for the ChangeRequest node this requested_new_task [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<ChangeRequest>;
+  /** Field for the WateringTask node this requested_new_task [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<WateringTask>;
+};
+
+export type _MergeChangeRequestRequested_New_TaskPayload = {
+  __typename?: '_MergeChangeRequestRequested_new_taskPayload';
+  /** Field for the ChangeRequest node this requested_new_task [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<ChangeRequest>;
+  /** Field for the WateringTask node this requested_new_task [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<WateringTask>;
+};
+
+export type _AddLogEventTriggered_ByPayload = {
+  __typename?: '_AddLogEventTriggered_byPayload';
+  /** Field for the LogEvent node this triggered_by [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<LogEvent>;
+  /** Field for the User node this triggered_by [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<User>;
+};
+
+export type _RemoveLogEventTriggered_ByPayload = {
+  __typename?: '_RemoveLogEventTriggered_byPayload';
+  /** Field for the LogEvent node this triggered_by [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<LogEvent>;
+  /** Field for the User node this triggered_by [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<User>;
+};
+
+export type _MergeLogEventTriggered_ByPayload = {
+  __typename?: '_MergeLogEventTriggered_byPayload';
+  /** Field for the LogEvent node this triggered_by [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<LogEvent>;
+  /** Field for the User node this triggered_by [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<User>;
+};
+
+export type _AddLogEventRefers_ToPayload = {
+  __typename?: '_AddLogEventRefers_toPayload';
+  /** Field for the LogEvent node this refers_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<LogEvent>;
+  /** Field for the WateringTask node this refers_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<WateringTask>;
+};
+
+export type _RemoveLogEventRefers_ToPayload = {
+  __typename?: '_RemoveLogEventRefers_toPayload';
+  /** Field for the LogEvent node this refers_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<LogEvent>;
+  /** Field for the WateringTask node this refers_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<WateringTask>;
+};
+
+export type _MergeLogEventRefers_ToPayload = {
+  __typename?: '_MergeLogEventRefers_toPayload';
+  /** Field for the LogEvent node this refers_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<LogEvent>;
+  /** Field for the WateringTask node this refers_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<WateringTask>;
+};
+
+export type _UserSettingsInput = {
+  ui_locale: Scalars['String'];
+};
+
+/** Generated Time input object for Neo4j [Temporal field arguments](https://grandstack.io/docs/graphql-temporal-types-datetime/#temporal-query-arguments). */
+export type _Neo4jTimeInput = {
+  hour?: Maybe<Scalars['Int']>;
+  minute?: Maybe<Scalars['Int']>;
+  second?: Maybe<Scalars['Int']>;
+  millisecond?: Maybe<Scalars['Int']>;
+  microsecond?: Maybe<Scalars['Int']>;
+  nanosecond?: Maybe<Scalars['Int']>;
+  timezone?: Maybe<Scalars['String']>;
+  /** Creates a Neo4j [Temporal](https://grandstack.io/docs/graphql-temporal-types-datetime/#using-temporal-fields-in-mutations) Time value using a [String format](https://neo4j.com/docs/cypher-manual/current/functions/temporal/time/#functions-time-create-string). */
+  formatted?: Maybe<Scalars['String']>;
+};
+
+/** Generated Time object type for Neo4j [Temporal fields](https://grandstack.io/docs/graphql-temporal-types-datetime#using-temporal-fields-in-queries). */
+export type _Neo4jTime = {
+  __typename?: '_Neo4jTime';
+  hour?: Maybe<Scalars['Int']>;
+  minute?: Maybe<Scalars['Int']>;
+  second?: Maybe<Scalars['Int']>;
+  millisecond?: Maybe<Scalars['Int']>;
+  microsecond?: Maybe<Scalars['Int']>;
+  nanosecond?: Maybe<Scalars['Int']>;
+  timezone?: Maybe<Scalars['String']>;
+  /** Outputs a Neo4j [Temporal](https://grandstack.io/docs/graphql-temporal-types-datetime#using-temporal-fields-in-queries) Time value as a String type by using the [toString](https://neo4j.com/docs/cypher-manual/current/functions/string/#functions-tostring) Cypher function. */
+  formatted?: Maybe<Scalars['String']>;
+};
+
+/** Generated DateTime input object for Neo4j [Temporal field arguments](https://grandstack.io/docs/graphql-temporal-types-datetime/#temporal-query-arguments). */
+export type _Neo4jDateTimeInput = {
+  year?: Maybe<Scalars['Int']>;
+  month?: Maybe<Scalars['Int']>;
+  day?: Maybe<Scalars['Int']>;
+  hour?: Maybe<Scalars['Int']>;
+  minute?: Maybe<Scalars['Int']>;
+  second?: Maybe<Scalars['Int']>;
+  millisecond?: Maybe<Scalars['Int']>;
+  microsecond?: Maybe<Scalars['Int']>;
+  nanosecond?: Maybe<Scalars['Int']>;
+  timezone?: Maybe<Scalars['String']>;
+  /** Creates a Neo4j [Temporal](https://grandstack.io/docs/graphql-temporal-types-datetime/#using-temporal-fields-in-mutations) DateTime value using a [String format](https://neo4j.com/docs/cypher-manual/current/functions/temporal/datetime/#functions-datetime-create-string). */
+  formatted?: Maybe<Scalars['String']>;
+};
+
+/** Generated DateTime object type for Neo4j [Temporal fields](https://grandstack.io/docs/graphql-temporal-types-datetime#using-temporal-fields-in-queries). */
+export type _Neo4jDateTime = {
+  __typename?: '_Neo4jDateTime';
+  year?: Maybe<Scalars['Int']>;
+  month?: Maybe<Scalars['Int']>;
+  day?: Maybe<Scalars['Int']>;
+  hour?: Maybe<Scalars['Int']>;
+  minute?: Maybe<Scalars['Int']>;
+  second?: Maybe<Scalars['Int']>;
+  millisecond?: Maybe<Scalars['Int']>;
+  microsecond?: Maybe<Scalars['Int']>;
+  nanosecond?: Maybe<Scalars['Int']>;
+  timezone?: Maybe<Scalars['String']>;
+  /** Outputs a Neo4j [Temporal](https://grandstack.io/docs/graphql-temporal-types-datetime#using-temporal-fields-in-queries) DateTime value as a String type by using the [toString](https://neo4j.com/docs/cypher-manual/current/functions/string/#functions-tostring) Cypher function. */
+  formatted?: Maybe<Scalars['String']>;
+};
+
+/** Generated LocalTime input object for Neo4j [Temporal field arguments](https://grandstack.io/docs/graphql-temporal-types-datetime/#temporal-query-arguments). */
+export type _Neo4jLocalTimeInput = {
+  hour?: Maybe<Scalars['Int']>;
+  minute?: Maybe<Scalars['Int']>;
+  second?: Maybe<Scalars['Int']>;
+  millisecond?: Maybe<Scalars['Int']>;
+  microsecond?: Maybe<Scalars['Int']>;
+  nanosecond?: Maybe<Scalars['Int']>;
+  /** Creates a Neo4j [Temporal](https://grandstack.io/docs/graphql-temporal-types-datetime/#using-temporal-fields-in-mutations) LocalTime value using a [String format](https://neo4j.com/docs/cypher-manual/current/functions/temporal/localtime/#functions-localtime-create-string). */
+  formatted?: Maybe<Scalars['String']>;
+};
+
+/** Generated LocalTime object type for Neo4j [Temporal fields](https://grandstack.io/docs/graphql-temporal-types-datetime#using-temporal-fields-in-queries). */
+export type _Neo4jLocalTime = {
+  __typename?: '_Neo4jLocalTime';
+  hour?: Maybe<Scalars['Int']>;
+  minute?: Maybe<Scalars['Int']>;
+  second?: Maybe<Scalars['Int']>;
+  millisecond?: Maybe<Scalars['Int']>;
+  microsecond?: Maybe<Scalars['Int']>;
+  nanosecond?: Maybe<Scalars['Int']>;
+  /** Outputs a Neo4j [Temporal](https://grandstack.io/docs/graphql-temporal-types-datetime#using-temporal-fields-in-queries) LocalTime value as a String type by using the [toString](https://neo4j.com/docs/cypher-manual/current/functions/string/#functions-tostring) Cypher function. */
+  formatted?: Maybe<Scalars['String']>;
+};
+
+/** Generated LocalDateTime input object for Neo4j [Temporal field arguments](https://grandstack.io/docs/graphql-temporal-types-datetime/#temporal-query-arguments). */
+export type _Neo4jLocalDateTimeInput = {
+  year?: Maybe<Scalars['Int']>;
+  month?: Maybe<Scalars['Int']>;
+  day?: Maybe<Scalars['Int']>;
+  hour?: Maybe<Scalars['Int']>;
+  minute?: Maybe<Scalars['Int']>;
+  second?: Maybe<Scalars['Int']>;
+  millisecond?: Maybe<Scalars['Int']>;
+  microsecond?: Maybe<Scalars['Int']>;
+  nanosecond?: Maybe<Scalars['Int']>;
+  /** Creates a Neo4j [Temporal](https://grandstack.io/docs/graphql-temporal-types-datetime/#using-temporal-fields-in-mutations) LocalDateTime value using a [String format](https://neo4j.com/docs/cypher-manual/current/functions/temporal/localdatetime/#functions-localdatetime-create-string). */
+  formatted?: Maybe<Scalars['String']>;
+};
+
+/** Generated LocalDateTime object type for Neo4j [Temporal fields](https://grandstack.io/docs/graphql-temporal-types-datetime#using-temporal-fields-in-queries). */
+export type _Neo4jLocalDateTime = {
+  __typename?: '_Neo4jLocalDateTime';
+  year?: Maybe<Scalars['Int']>;
+  month?: Maybe<Scalars['Int']>;
+  day?: Maybe<Scalars['Int']>;
+  hour?: Maybe<Scalars['Int']>;
+  minute?: Maybe<Scalars['Int']>;
+  second?: Maybe<Scalars['Int']>;
+  millisecond?: Maybe<Scalars['Int']>;
+  microsecond?: Maybe<Scalars['Int']>;
+  nanosecond?: Maybe<Scalars['Int']>;
+  /** Outputs a Neo4j [Temporal](https://grandstack.io/docs/graphql-temporal-types-datetime#using-temporal-fields-in-queries) LocalDateTime value as a String type by using the [toString](https://neo4j.com/docs/cypher-manual/current/functions/string/#functions-tostring) Cypher function. */
+  formatted?: Maybe<Scalars['String']>;
+};
+
+export type _Neo4jPointDistanceFilter = {
+  point: _Neo4jPointInput;
+  distance: Scalars['Float'];
+};
+
+/** Generated Point input object for Neo4j [Spatial field arguments](https://grandstack.io/docs/graphql-spatial-types/#point-query-arguments). */
+export type _Neo4jPointInput = {
+  x?: Maybe<Scalars['Float']>;
+  y?: Maybe<Scalars['Float']>;
+  z?: Maybe<Scalars['Float']>;
+  longitude?: Maybe<Scalars['Float']>;
+  latitude?: Maybe<Scalars['Float']>;
+  height?: Maybe<Scalars['Float']>;
+  crs?: Maybe<Scalars['String']>;
+  srid?: Maybe<Scalars['Int']>;
+};
+
+/** Generated Point object type for Neo4j [Spatial fields](https://grandstack.io/docs/graphql-spatial-types#using-point-in-queries). */
+export type _Neo4jPoint = {
+  __typename?: '_Neo4jPoint';
+  x?: Maybe<Scalars['Float']>;
+  y?: Maybe<Scalars['Float']>;
+  z?: Maybe<Scalars['Float']>;
+  longitude?: Maybe<Scalars['Float']>;
+  latitude?: Maybe<Scalars['Float']>;
+  height?: Maybe<Scalars['Float']>;
+  crs?: Maybe<Scalars['String']>;
+  srid?: Maybe<Scalars['Int']>;
+};
+
+export enum _RelationDirections {
+  In = 'IN',
+  Out = 'OUT'
+}
 
 
 
@@ -2275,27 +1953,27 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
+  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  Query: ResolverTypeWrapper<{}>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
-  _UserOrdering: _UserOrdering;
-  _UserFilter: _UserFilter;
+  WateringPeriod: ResolverTypeWrapper<WateringPeriod>;
+  _Neo4jDate: ResolverTypeWrapper<_Neo4jDate>;
+  _WateringTaskOrdering: _WateringTaskOrdering;
   _WateringTaskFilter: _WateringTaskFilter;
   _Neo4jDateInput: _Neo4jDateInput;
-  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  _UserFilter: _UserFilter;
   _ChangeRequestFilter: _ChangeRequestFilter;
   _LogEventFilter: _LogEventFilter;
-  User: ResolverTypeWrapper<User>;
-  _WateringTaskOrdering: _WateringTaskOrdering;
   WateringTask: ResolverTypeWrapper<WateringTask>;
-  _Neo4jDate: ResolverTypeWrapper<_Neo4jDate>;
+  _UserOrdering: _UserOrdering;
+  User: ResolverTypeWrapper<User>;
   _ChangeRequestOrdering: _ChangeRequestOrdering;
   ChangeRequest: ResolverTypeWrapper<ChangeRequest>;
   _LogEventOrdering: _LogEventOrdering;
   LogEvent: ResolverTypeWrapper<LogEvent>;
   _WateringPeriodOrdering: _WateringPeriodOrdering;
   _WateringPeriodFilter: _WateringPeriodFilter;
-  WateringPeriod: ResolverTypeWrapper<WateringPeriod>;
   _UserSettingsOrdering: _UserSettingsOrdering;
   _UserSettingsFilter: _UserSettingsFilter;
   UserSettings: ResolverTypeWrapper<UserSettings>;
@@ -2364,30 +2042,30 @@ export type ResolversTypes = {
   _Neo4jLocalDateTimeInput: _Neo4jLocalDateTimeInput;
   _Neo4jLocalDateTime: ResolverTypeWrapper<_Neo4jLocalDateTime>;
   _Neo4jPointDistanceFilter: _Neo4jPointDistanceFilter;
-  _Neo4jPointInput: _Neo4jPointInput;
   Float: ResolverTypeWrapper<Scalars['Float']>;
+  _Neo4jPointInput: _Neo4jPointInput;
   _Neo4jPoint: ResolverTypeWrapper<_Neo4jPoint>;
   _RelationDirections: _RelationDirections;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  Query: {};
   String: Scalars['String'];
+  Boolean: Scalars['Boolean'];
+  Query: {};
   Int: Scalars['Int'];
-  _UserFilter: _UserFilter;
+  WateringPeriod: WateringPeriod;
+  _Neo4jDate: _Neo4jDate;
   _WateringTaskFilter: _WateringTaskFilter;
   _Neo4jDateInput: _Neo4jDateInput;
-  Boolean: Scalars['Boolean'];
+  _UserFilter: _UserFilter;
   _ChangeRequestFilter: _ChangeRequestFilter;
   _LogEventFilter: _LogEventFilter;
-  User: User;
   WateringTask: WateringTask;
-  _Neo4jDate: _Neo4jDate;
+  User: User;
   ChangeRequest: ChangeRequest;
   LogEvent: LogEvent;
   _WateringPeriodFilter: _WateringPeriodFilter;
-  WateringPeriod: WateringPeriod;
   _UserSettingsFilter: _UserSettingsFilter;
   UserSettings: UserSettings;
   Mutation: {};
@@ -2455,200 +2133,26 @@ export type ResolversParentTypes = {
   _Neo4jLocalDateTimeInput: _Neo4jLocalDateTimeInput;
   _Neo4jLocalDateTime: _Neo4jLocalDateTime;
   _Neo4jPointDistanceFilter: _Neo4jPointDistanceFilter;
-  _Neo4jPointInput: _Neo4jPointInput;
   Float: Scalars['Float'];
+  _Neo4jPointInput: _Neo4jPointInput;
   _Neo4jPoint: _Neo4jPoint;
 };
 
-export type _AddChangeRequestRequested_ByPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddChangeRequestRequested_byPayload'] = ResolversParentTypes['_AddChangeRequestRequested_byPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  assignableWateringPeriod?: Resolver<Maybe<ResolversTypes['WateringPeriod']>, ParentType, ContextType>;
+  User?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType, RequireFields<QueryUserArgs, never>>;
+  WateringTask?: Resolver<Maybe<Array<Maybe<ResolversTypes['WateringTask']>>>, ParentType, ContextType, RequireFields<QueryWateringTaskArgs, never>>;
+  WateringPeriod?: Resolver<Maybe<Array<Maybe<ResolversTypes['WateringPeriod']>>>, ParentType, ContextType, RequireFields<QueryWateringPeriodArgs, never>>;
+  ChangeRequest?: Resolver<Maybe<Array<Maybe<ResolversTypes['ChangeRequest']>>>, ParentType, ContextType, RequireFields<QueryChangeRequestArgs, never>>;
+  LogEvent?: Resolver<Maybe<Array<Maybe<ResolversTypes['LogEvent']>>>, ParentType, ContextType, RequireFields<QueryLogEventArgs, never>>;
+  UserSettings?: Resolver<Maybe<Array<Maybe<ResolversTypes['UserSettings']>>>, ParentType, ContextType, RequireFields<QueryUserSettingsArgs, never>>;
 };
 
-export type _AddChangeRequestRequested_ForPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddChangeRequestRequested_forPayload'] = ResolversParentTypes['_AddChangeRequestRequested_forPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _AddChangeRequestRequested_New_TaskPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddChangeRequestRequested_new_taskPayload'] = ResolversParentTypes['_AddChangeRequestRequested_new_taskPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _AddChangeRequestRequested_ToPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddChangeRequestRequested_toPayload'] = ResolversParentTypes['_AddChangeRequestRequested_toPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _AddLogEventRefers_ToPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddLogEventRefers_toPayload'] = ResolversParentTypes['_AddLogEventRefers_toPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['LogEvent']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _AddLogEventTriggered_ByPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddLogEventTriggered_byPayload'] = ResolversParentTypes['_AddLogEventTriggered_byPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['LogEvent']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _AddUserAssignedPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddUserAssignedPayload'] = ResolversParentTypes['_AddUserAssignedPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _AddUserAvailablePayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddUserAvailablePayload'] = ResolversParentTypes['_AddUserAvailablePayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _AddUserChangerequests_Requested_ByPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddUserChangerequests_requested_byPayload'] = ResolversParentTypes['_AddUserChangerequests_requested_byPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _AddUserChangerequests_Requested_ToPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddUserChangerequests_requested_toPayload'] = ResolversParentTypes['_AddUserChangerequests_requested_toPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _AddUserLogevents_Triggered_ByPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddUserLogevents_triggered_byPayload'] = ResolversParentTypes['_AddUserLogevents_triggered_byPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['LogEvent']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _AddWateringTaskChangerequests_Requested_ForPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddWateringTaskChangerequests_requested_forPayload'] = ResolversParentTypes['_AddWateringTaskChangerequests_requested_forPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _AddWateringTaskChangerequests_Requested_New_TaskPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddWateringTaskChangerequests_requested_new_taskPayload'] = ResolversParentTypes['_AddWateringTaskChangerequests_requested_new_taskPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _AddWateringTaskLogevents_Refers_ToPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddWateringTaskLogevents_refers_toPayload'] = ResolversParentTypes['_AddWateringTaskLogevents_refers_toPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['LogEvent']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _AddWateringTaskUsers_AssignedPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddWateringTaskUsers_assignedPayload'] = ResolversParentTypes['_AddWateringTaskUsers_assignedPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _AddWateringTaskUsers_AvailablePayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddWateringTaskUsers_availablePayload'] = ResolversParentTypes['_AddWateringTaskUsers_availablePayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _MergeChangeRequestRequested_ByPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeChangeRequestRequested_byPayload'] = ResolversParentTypes['_MergeChangeRequestRequested_byPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _MergeChangeRequestRequested_ForPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeChangeRequestRequested_forPayload'] = ResolversParentTypes['_MergeChangeRequestRequested_forPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _MergeChangeRequestRequested_New_TaskPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeChangeRequestRequested_new_taskPayload'] = ResolversParentTypes['_MergeChangeRequestRequested_new_taskPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _MergeChangeRequestRequested_ToPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeChangeRequestRequested_toPayload'] = ResolversParentTypes['_MergeChangeRequestRequested_toPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _MergeLogEventRefers_ToPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeLogEventRefers_toPayload'] = ResolversParentTypes['_MergeLogEventRefers_toPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['LogEvent']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _MergeLogEventTriggered_ByPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeLogEventTriggered_byPayload'] = ResolversParentTypes['_MergeLogEventTriggered_byPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['LogEvent']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _MergeUserAssignedPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeUserAssignedPayload'] = ResolversParentTypes['_MergeUserAssignedPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _MergeUserAvailablePayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeUserAvailablePayload'] = ResolversParentTypes['_MergeUserAvailablePayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _MergeUserChangerequests_Requested_ByPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeUserChangerequests_requested_byPayload'] = ResolversParentTypes['_MergeUserChangerequests_requested_byPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _MergeUserChangerequests_Requested_ToPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeUserChangerequests_requested_toPayload'] = ResolversParentTypes['_MergeUserChangerequests_requested_toPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _MergeUserLogevents_Triggered_ByPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeUserLogevents_triggered_byPayload'] = ResolversParentTypes['_MergeUserLogevents_triggered_byPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['LogEvent']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _MergeWateringTaskChangerequests_Requested_ForPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeWateringTaskChangerequests_requested_forPayload'] = ResolversParentTypes['_MergeWateringTaskChangerequests_requested_forPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _MergeWateringTaskChangerequests_Requested_New_TaskPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeWateringTaskChangerequests_requested_new_taskPayload'] = ResolversParentTypes['_MergeWateringTaskChangerequests_requested_new_taskPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _MergeWateringTaskLogevents_Refers_ToPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeWateringTaskLogevents_refers_toPayload'] = ResolversParentTypes['_MergeWateringTaskLogevents_refers_toPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['LogEvent']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _MergeWateringTaskUsers_AssignedPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeWateringTaskUsers_assignedPayload'] = ResolversParentTypes['_MergeWateringTaskUsers_assignedPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _MergeWateringTaskUsers_AvailablePayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeWateringTaskUsers_availablePayload'] = ResolversParentTypes['_MergeWateringTaskUsers_availablePayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
+export type WateringPeriodResolvers<ContextType = any, ParentType extends ResolversParentTypes['WateringPeriod'] = ResolversParentTypes['WateringPeriod']> = {
+  _id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  from?: Resolver<ResolversTypes['_Neo4jDate'], ParentType, ContextType>;
+  till?: Resolver<ResolversTypes['_Neo4jDate'], ParentType, ContextType>;
+  wateringtasks?: Resolver<Maybe<Array<Maybe<ResolversTypes['WateringTask']>>>, ParentType, ContextType, RequireFields<WateringPeriodWateringtasksArgs, never>>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -2660,163 +2164,30 @@ export type _Neo4jDateResolvers<ContextType = any, ParentType extends ResolversP
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type _Neo4jDateTimeResolvers<ContextType = any, ParentType extends ResolversParentTypes['_Neo4jDateTime'] = ResolversParentTypes['_Neo4jDateTime']> = {
-  year?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  month?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  day?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  hour?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  minute?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  second?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  millisecond?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  microsecond?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  nanosecond?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  timezone?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  formatted?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+export type WateringTaskResolvers<ContextType = any, ParentType extends ResolversParentTypes['WateringTask'] = ResolversParentTypes['WateringTask']> = {
+  _id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  date?: Resolver<ResolversTypes['_Neo4jDate'], ParentType, ContextType>;
+  done?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  neo4jImportId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  users_assigned?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType, RequireFields<WateringTaskUsers_AssignedArgs, never>>;
+  changerequests_requested_for?: Resolver<Maybe<Array<Maybe<ResolversTypes['ChangeRequest']>>>, ParentType, ContextType, RequireFields<WateringTaskChangerequests_Requested_ForArgs, never>>;
+  changerequests_requested_new_task?: Resolver<Maybe<Array<Maybe<ResolversTypes['ChangeRequest']>>>, ParentType, ContextType, RequireFields<WateringTaskChangerequests_Requested_New_TaskArgs, never>>;
+  logevents_refers_to?: Resolver<Maybe<Array<Maybe<ResolversTypes['LogEvent']>>>, ParentType, ContextType, RequireFields<WateringTaskLogevents_Refers_ToArgs, never>>;
+  users_available?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType, RequireFields<WateringTaskUsers_AvailableArgs, never>>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type _Neo4jLocalDateTimeResolvers<ContextType = any, ParentType extends ResolversParentTypes['_Neo4jLocalDateTime'] = ResolversParentTypes['_Neo4jLocalDateTime']> = {
-  year?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  month?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  day?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  hour?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  minute?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  second?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  millisecond?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  microsecond?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  nanosecond?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  formatted?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _Neo4jLocalTimeResolvers<ContextType = any, ParentType extends ResolversParentTypes['_Neo4jLocalTime'] = ResolversParentTypes['_Neo4jLocalTime']> = {
-  hour?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  minute?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  second?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  millisecond?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  microsecond?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  nanosecond?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  formatted?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _Neo4jPointResolvers<ContextType = any, ParentType extends ResolversParentTypes['_Neo4jPoint'] = ResolversParentTypes['_Neo4jPoint']> = {
-  x?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  y?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  z?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  longitude?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  latitude?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  height?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  crs?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  srid?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _Neo4jTimeResolvers<ContextType = any, ParentType extends ResolversParentTypes['_Neo4jTime'] = ResolversParentTypes['_Neo4jTime']> = {
-  hour?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  minute?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  second?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  millisecond?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  microsecond?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  nanosecond?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  timezone?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  formatted?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _RemoveChangeRequestRequested_ByPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveChangeRequestRequested_byPayload'] = ResolversParentTypes['_RemoveChangeRequestRequested_byPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _RemoveChangeRequestRequested_ForPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveChangeRequestRequested_forPayload'] = ResolversParentTypes['_RemoveChangeRequestRequested_forPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _RemoveChangeRequestRequested_New_TaskPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveChangeRequestRequested_new_taskPayload'] = ResolversParentTypes['_RemoveChangeRequestRequested_new_taskPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _RemoveChangeRequestRequested_ToPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveChangeRequestRequested_toPayload'] = ResolversParentTypes['_RemoveChangeRequestRequested_toPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _RemoveLogEventRefers_ToPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveLogEventRefers_toPayload'] = ResolversParentTypes['_RemoveLogEventRefers_toPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['LogEvent']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _RemoveLogEventTriggered_ByPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveLogEventTriggered_byPayload'] = ResolversParentTypes['_RemoveLogEventTriggered_byPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['LogEvent']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _RemoveUserAssignedPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveUserAssignedPayload'] = ResolversParentTypes['_RemoveUserAssignedPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _RemoveUserAvailablePayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveUserAvailablePayload'] = ResolversParentTypes['_RemoveUserAvailablePayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _RemoveUserChangerequests_Requested_ByPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveUserChangerequests_requested_byPayload'] = ResolversParentTypes['_RemoveUserChangerequests_requested_byPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _RemoveUserChangerequests_Requested_ToPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveUserChangerequests_requested_toPayload'] = ResolversParentTypes['_RemoveUserChangerequests_requested_toPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _RemoveUserLogevents_Triggered_ByPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveUserLogevents_triggered_byPayload'] = ResolversParentTypes['_RemoveUserLogevents_triggered_byPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['LogEvent']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _RemoveWateringTaskChangerequests_Requested_ForPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveWateringTaskChangerequests_requested_forPayload'] = ResolversParentTypes['_RemoveWateringTaskChangerequests_requested_forPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _RemoveWateringTaskChangerequests_Requested_New_TaskPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveWateringTaskChangerequests_requested_new_taskPayload'] = ResolversParentTypes['_RemoveWateringTaskChangerequests_requested_new_taskPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _RemoveWateringTaskLogevents_Refers_ToPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveWateringTaskLogevents_refers_toPayload'] = ResolversParentTypes['_RemoveWateringTaskLogevents_refers_toPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['LogEvent']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _RemoveWateringTaskUsers_AssignedPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveWateringTaskUsers_assignedPayload'] = ResolversParentTypes['_RemoveWateringTaskUsers_assignedPayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type _RemoveWateringTaskUsers_AvailablePayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveWateringTaskUsers_availablePayload'] = ResolversParentTypes['_RemoveWateringTaskUsers_availablePayload']> = {
-  from?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
+export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
+  _id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  label?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  neo4jImportId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  assigned?: Resolver<Maybe<Array<Maybe<ResolversTypes['WateringTask']>>>, ParentType, ContextType, RequireFields<UserAssignedArgs, never>>;
+  available?: Resolver<Maybe<Array<Maybe<ResolversTypes['WateringTask']>>>, ParentType, ContextType, RequireFields<UserAvailableArgs, never>>;
+  changerequests_requested_by?: Resolver<Maybe<Array<Maybe<ResolversTypes['ChangeRequest']>>>, ParentType, ContextType, RequireFields<UserChangerequests_Requested_ByArgs, never>>;
+  changerequests_requested_to?: Resolver<Maybe<Array<Maybe<ResolversTypes['ChangeRequest']>>>, ParentType, ContextType, RequireFields<UserChangerequests_Requested_ToArgs, never>>;
+  logevents_triggered_by?: Resolver<Maybe<Array<Maybe<ResolversTypes['LogEvent']>>>, ParentType, ContextType, RequireFields<UserLogevents_Triggered_ByArgs, never>>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -2832,10 +2203,6 @@ export type ChangeRequestResolvers<ContextType = any, ParentType extends Resolve
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export interface JsonScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['JSON'], any> {
-  name: 'JSON';
-}
-
 export type LogEventResolvers<ContextType = any, ParentType extends ResolversParentTypes['LogEvent'] = ResolversParentTypes['LogEvent']> = {
   _id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   date?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2844,6 +2211,13 @@ export type LogEventResolvers<ContextType = any, ParentType extends ResolversPar
   type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   triggered_by?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType, RequireFields<LogEventTriggered_ByArgs, never>>;
   refers_to?: Resolver<Maybe<Array<Maybe<ResolversTypes['WateringTask']>>>, ParentType, ContextType, RequireFields<LogEventRefers_ToArgs, never>>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type UserSettingsResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserSettings'] = ResolversParentTypes['UserSettings']> = {
+  ui_locale?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  letitrain_maximum_tasks?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  _id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -2924,121 +2298,426 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   MergeUserSettings?: Resolver<Maybe<ResolversTypes['UserSettings']>, ParentType, ContextType, RequireFields<MutationMergeUserSettingsArgs, 'ui_locale'>>;
 };
 
-export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  User?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType, RequireFields<QueryUserArgs, never>>;
-  WateringTask?: Resolver<Maybe<Array<Maybe<ResolversTypes['WateringTask']>>>, ParentType, ContextType, RequireFields<QueryWateringTaskArgs, never>>;
-  WateringPeriod?: Resolver<Maybe<Array<Maybe<ResolversTypes['WateringPeriod']>>>, ParentType, ContextType, RequireFields<QueryWateringPeriodArgs, never>>;
-  ChangeRequest?: Resolver<Maybe<Array<Maybe<ResolversTypes['ChangeRequest']>>>, ParentType, ContextType, RequireFields<QueryChangeRequestArgs, never>>;
-  LogEvent?: Resolver<Maybe<Array<Maybe<ResolversTypes['LogEvent']>>>, ParentType, ContextType, RequireFields<QueryLogEventArgs, never>>;
-  UserSettings?: Resolver<Maybe<Array<Maybe<ResolversTypes['UserSettings']>>>, ParentType, ContextType, RequireFields<QueryUserSettingsArgs, never>>;
-};
+export interface JsonScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['JSON'], any> {
+  name: 'JSON';
+}
 
-export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
-  _id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  label?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  neo4jImportId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  assigned?: Resolver<Maybe<Array<Maybe<ResolversTypes['WateringTask']>>>, ParentType, ContextType, RequireFields<UserAssignedArgs, never>>;
-  available?: Resolver<Maybe<Array<Maybe<ResolversTypes['WateringTask']>>>, ParentType, ContextType, RequireFields<UserAvailableArgs, never>>;
-  changerequests_requested_by?: Resolver<Maybe<Array<Maybe<ResolversTypes['ChangeRequest']>>>, ParentType, ContextType, RequireFields<UserChangerequests_Requested_ByArgs, never>>;
-  changerequests_requested_to?: Resolver<Maybe<Array<Maybe<ResolversTypes['ChangeRequest']>>>, ParentType, ContextType, RequireFields<UserChangerequests_Requested_ToArgs, never>>;
-  logevents_triggered_by?: Resolver<Maybe<Array<Maybe<ResolversTypes['LogEvent']>>>, ParentType, ContextType, RequireFields<UserLogevents_Triggered_ByArgs, never>>;
+export type _AddUserAssignedPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddUserAssignedPayload'] = ResolversParentTypes['_AddUserAssignedPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type UserSettingsResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserSettings'] = ResolversParentTypes['UserSettings']> = {
-  ui_locale?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  letitrain_maximum_tasks?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  _id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+export type _RemoveUserAssignedPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveUserAssignedPayload'] = ResolversParentTypes['_RemoveUserAssignedPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type WateringPeriodResolvers<ContextType = any, ParentType extends ResolversParentTypes['WateringPeriod'] = ResolversParentTypes['WateringPeriod']> = {
-  _id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  from?: Resolver<ResolversTypes['_Neo4jDate'], ParentType, ContextType>;
-  till?: Resolver<ResolversTypes['_Neo4jDate'], ParentType, ContextType>;
-  wateringtasks?: Resolver<Maybe<Array<Maybe<ResolversTypes['WateringTask']>>>, ParentType, ContextType, RequireFields<WateringPeriodWateringtasksArgs, never>>;
+export type _MergeUserAssignedPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeUserAssignedPayload'] = ResolversParentTypes['_MergeUserAssignedPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type WateringTaskResolvers<ContextType = any, ParentType extends ResolversParentTypes['WateringTask'] = ResolversParentTypes['WateringTask']> = {
-  _id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  date?: Resolver<ResolversTypes['_Neo4jDate'], ParentType, ContextType>;
-  done?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  neo4jImportId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  users_assigned?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType, RequireFields<WateringTaskUsers_AssignedArgs, never>>;
-  changerequests_requested_for?: Resolver<Maybe<Array<Maybe<ResolversTypes['ChangeRequest']>>>, ParentType, ContextType, RequireFields<WateringTaskChangerequests_Requested_ForArgs, never>>;
-  changerequests_requested_new_task?: Resolver<Maybe<Array<Maybe<ResolversTypes['ChangeRequest']>>>, ParentType, ContextType, RequireFields<WateringTaskChangerequests_Requested_New_TaskArgs, never>>;
-  logevents_refers_to?: Resolver<Maybe<Array<Maybe<ResolversTypes['LogEvent']>>>, ParentType, ContextType, RequireFields<WateringTaskLogevents_Refers_ToArgs, never>>;
-  users_available?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType, RequireFields<WateringTaskUsers_AvailableArgs, never>>;
+export type _AddUserAvailablePayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddUserAvailablePayload'] = ResolversParentTypes['_AddUserAvailablePayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _RemoveUserAvailablePayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveUserAvailablePayload'] = ResolversParentTypes['_RemoveUserAvailablePayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _MergeUserAvailablePayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeUserAvailablePayload'] = ResolversParentTypes['_MergeUserAvailablePayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _AddUserChangerequests_Requested_ByPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddUserChangerequests_requested_byPayload'] = ResolversParentTypes['_AddUserChangerequests_requested_byPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _RemoveUserChangerequests_Requested_ByPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveUserChangerequests_requested_byPayload'] = ResolversParentTypes['_RemoveUserChangerequests_requested_byPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _MergeUserChangerequests_Requested_ByPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeUserChangerequests_requested_byPayload'] = ResolversParentTypes['_MergeUserChangerequests_requested_byPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _AddUserChangerequests_Requested_ToPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddUserChangerequests_requested_toPayload'] = ResolversParentTypes['_AddUserChangerequests_requested_toPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _RemoveUserChangerequests_Requested_ToPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveUserChangerequests_requested_toPayload'] = ResolversParentTypes['_RemoveUserChangerequests_requested_toPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _MergeUserChangerequests_Requested_ToPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeUserChangerequests_requested_toPayload'] = ResolversParentTypes['_MergeUserChangerequests_requested_toPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _AddUserLogevents_Triggered_ByPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddUserLogevents_triggered_byPayload'] = ResolversParentTypes['_AddUserLogevents_triggered_byPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['LogEvent']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _RemoveUserLogevents_Triggered_ByPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveUserLogevents_triggered_byPayload'] = ResolversParentTypes['_RemoveUserLogevents_triggered_byPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['LogEvent']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _MergeUserLogevents_Triggered_ByPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeUserLogevents_triggered_byPayload'] = ResolversParentTypes['_MergeUserLogevents_triggered_byPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['LogEvent']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _AddWateringTaskUsers_AssignedPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddWateringTaskUsers_assignedPayload'] = ResolversParentTypes['_AddWateringTaskUsers_assignedPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _RemoveWateringTaskUsers_AssignedPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveWateringTaskUsers_assignedPayload'] = ResolversParentTypes['_RemoveWateringTaskUsers_assignedPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _MergeWateringTaskUsers_AssignedPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeWateringTaskUsers_assignedPayload'] = ResolversParentTypes['_MergeWateringTaskUsers_assignedPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _AddWateringTaskChangerequests_Requested_ForPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddWateringTaskChangerequests_requested_forPayload'] = ResolversParentTypes['_AddWateringTaskChangerequests_requested_forPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _RemoveWateringTaskChangerequests_Requested_ForPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveWateringTaskChangerequests_requested_forPayload'] = ResolversParentTypes['_RemoveWateringTaskChangerequests_requested_forPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _MergeWateringTaskChangerequests_Requested_ForPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeWateringTaskChangerequests_requested_forPayload'] = ResolversParentTypes['_MergeWateringTaskChangerequests_requested_forPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _AddWateringTaskChangerequests_Requested_New_TaskPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddWateringTaskChangerequests_requested_new_taskPayload'] = ResolversParentTypes['_AddWateringTaskChangerequests_requested_new_taskPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _RemoveWateringTaskChangerequests_Requested_New_TaskPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveWateringTaskChangerequests_requested_new_taskPayload'] = ResolversParentTypes['_RemoveWateringTaskChangerequests_requested_new_taskPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _MergeWateringTaskChangerequests_Requested_New_TaskPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeWateringTaskChangerequests_requested_new_taskPayload'] = ResolversParentTypes['_MergeWateringTaskChangerequests_requested_new_taskPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _AddWateringTaskLogevents_Refers_ToPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddWateringTaskLogevents_refers_toPayload'] = ResolversParentTypes['_AddWateringTaskLogevents_refers_toPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['LogEvent']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _RemoveWateringTaskLogevents_Refers_ToPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveWateringTaskLogevents_refers_toPayload'] = ResolversParentTypes['_RemoveWateringTaskLogevents_refers_toPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['LogEvent']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _MergeWateringTaskLogevents_Refers_ToPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeWateringTaskLogevents_refers_toPayload'] = ResolversParentTypes['_MergeWateringTaskLogevents_refers_toPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['LogEvent']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _AddWateringTaskUsers_AvailablePayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddWateringTaskUsers_availablePayload'] = ResolversParentTypes['_AddWateringTaskUsers_availablePayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _RemoveWateringTaskUsers_AvailablePayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveWateringTaskUsers_availablePayload'] = ResolversParentTypes['_RemoveWateringTaskUsers_availablePayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _MergeWateringTaskUsers_AvailablePayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeWateringTaskUsers_availablePayload'] = ResolversParentTypes['_MergeWateringTaskUsers_availablePayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _AddChangeRequestRequested_ByPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddChangeRequestRequested_byPayload'] = ResolversParentTypes['_AddChangeRequestRequested_byPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _RemoveChangeRequestRequested_ByPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveChangeRequestRequested_byPayload'] = ResolversParentTypes['_RemoveChangeRequestRequested_byPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _MergeChangeRequestRequested_ByPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeChangeRequestRequested_byPayload'] = ResolversParentTypes['_MergeChangeRequestRequested_byPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _AddChangeRequestRequested_ForPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddChangeRequestRequested_forPayload'] = ResolversParentTypes['_AddChangeRequestRequested_forPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _RemoveChangeRequestRequested_ForPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveChangeRequestRequested_forPayload'] = ResolversParentTypes['_RemoveChangeRequestRequested_forPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _MergeChangeRequestRequested_ForPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeChangeRequestRequested_forPayload'] = ResolversParentTypes['_MergeChangeRequestRequested_forPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _AddChangeRequestRequested_ToPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddChangeRequestRequested_toPayload'] = ResolversParentTypes['_AddChangeRequestRequested_toPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _RemoveChangeRequestRequested_ToPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveChangeRequestRequested_toPayload'] = ResolversParentTypes['_RemoveChangeRequestRequested_toPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _MergeChangeRequestRequested_ToPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeChangeRequestRequested_toPayload'] = ResolversParentTypes['_MergeChangeRequestRequested_toPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _AddChangeRequestRequested_New_TaskPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddChangeRequestRequested_new_taskPayload'] = ResolversParentTypes['_AddChangeRequestRequested_new_taskPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _RemoveChangeRequestRequested_New_TaskPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveChangeRequestRequested_new_taskPayload'] = ResolversParentTypes['_RemoveChangeRequestRequested_new_taskPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _MergeChangeRequestRequested_New_TaskPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeChangeRequestRequested_new_taskPayload'] = ResolversParentTypes['_MergeChangeRequestRequested_new_taskPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['ChangeRequest']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _AddLogEventTriggered_ByPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddLogEventTriggered_byPayload'] = ResolversParentTypes['_AddLogEventTriggered_byPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['LogEvent']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _RemoveLogEventTriggered_ByPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveLogEventTriggered_byPayload'] = ResolversParentTypes['_RemoveLogEventTriggered_byPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['LogEvent']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _MergeLogEventTriggered_ByPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeLogEventTriggered_byPayload'] = ResolversParentTypes['_MergeLogEventTriggered_byPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['LogEvent']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _AddLogEventRefers_ToPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddLogEventRefers_toPayload'] = ResolversParentTypes['_AddLogEventRefers_toPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['LogEvent']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _RemoveLogEventRefers_ToPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveLogEventRefers_toPayload'] = ResolversParentTypes['_RemoveLogEventRefers_toPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['LogEvent']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _MergeLogEventRefers_ToPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeLogEventRefers_toPayload'] = ResolversParentTypes['_MergeLogEventRefers_toPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['LogEvent']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['WateringTask']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _Neo4jTimeResolvers<ContextType = any, ParentType extends ResolversParentTypes['_Neo4jTime'] = ResolversParentTypes['_Neo4jTime']> = {
+  hour?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  minute?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  second?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  millisecond?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  microsecond?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  nanosecond?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  timezone?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  formatted?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _Neo4jDateTimeResolvers<ContextType = any, ParentType extends ResolversParentTypes['_Neo4jDateTime'] = ResolversParentTypes['_Neo4jDateTime']> = {
+  year?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  month?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  day?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  hour?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  minute?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  second?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  millisecond?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  microsecond?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  nanosecond?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  timezone?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  formatted?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _Neo4jLocalTimeResolvers<ContextType = any, ParentType extends ResolversParentTypes['_Neo4jLocalTime'] = ResolversParentTypes['_Neo4jLocalTime']> = {
+  hour?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  minute?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  second?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  millisecond?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  microsecond?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  nanosecond?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  formatted?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _Neo4jLocalDateTimeResolvers<ContextType = any, ParentType extends ResolversParentTypes['_Neo4jLocalDateTime'] = ResolversParentTypes['_Neo4jLocalDateTime']> = {
+  year?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  month?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  day?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  hour?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  minute?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  second?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  millisecond?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  microsecond?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  nanosecond?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  formatted?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _Neo4jPointResolvers<ContextType = any, ParentType extends ResolversParentTypes['_Neo4jPoint'] = ResolversParentTypes['_Neo4jPoint']> = {
+  x?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  y?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  z?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  longitude?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  latitude?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  height?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  crs?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  srid?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = any> = {
-  _AddChangeRequestRequested_byPayload?: _AddChangeRequestRequested_ByPayloadResolvers<ContextType>;
-  _AddChangeRequestRequested_forPayload?: _AddChangeRequestRequested_ForPayloadResolvers<ContextType>;
-  _AddChangeRequestRequested_new_taskPayload?: _AddChangeRequestRequested_New_TaskPayloadResolvers<ContextType>;
-  _AddChangeRequestRequested_toPayload?: _AddChangeRequestRequested_ToPayloadResolvers<ContextType>;
-  _AddLogEventRefers_toPayload?: _AddLogEventRefers_ToPayloadResolvers<ContextType>;
-  _AddLogEventTriggered_byPayload?: _AddLogEventTriggered_ByPayloadResolvers<ContextType>;
-  _AddUserAssignedPayload?: _AddUserAssignedPayloadResolvers<ContextType>;
-  _AddUserAvailablePayload?: _AddUserAvailablePayloadResolvers<ContextType>;
-  _AddUserChangerequests_requested_byPayload?: _AddUserChangerequests_Requested_ByPayloadResolvers<ContextType>;
-  _AddUserChangerequests_requested_toPayload?: _AddUserChangerequests_Requested_ToPayloadResolvers<ContextType>;
-  _AddUserLogevents_triggered_byPayload?: _AddUserLogevents_Triggered_ByPayloadResolvers<ContextType>;
-  _AddWateringTaskChangerequests_requested_forPayload?: _AddWateringTaskChangerequests_Requested_ForPayloadResolvers<ContextType>;
-  _AddWateringTaskChangerequests_requested_new_taskPayload?: _AddWateringTaskChangerequests_Requested_New_TaskPayloadResolvers<ContextType>;
-  _AddWateringTaskLogevents_refers_toPayload?: _AddWateringTaskLogevents_Refers_ToPayloadResolvers<ContextType>;
-  _AddWateringTaskUsers_assignedPayload?: _AddWateringTaskUsers_AssignedPayloadResolvers<ContextType>;
-  _AddWateringTaskUsers_availablePayload?: _AddWateringTaskUsers_AvailablePayloadResolvers<ContextType>;
-  _MergeChangeRequestRequested_byPayload?: _MergeChangeRequestRequested_ByPayloadResolvers<ContextType>;
-  _MergeChangeRequestRequested_forPayload?: _MergeChangeRequestRequested_ForPayloadResolvers<ContextType>;
-  _MergeChangeRequestRequested_new_taskPayload?: _MergeChangeRequestRequested_New_TaskPayloadResolvers<ContextType>;
-  _MergeChangeRequestRequested_toPayload?: _MergeChangeRequestRequested_ToPayloadResolvers<ContextType>;
-  _MergeLogEventRefers_toPayload?: _MergeLogEventRefers_ToPayloadResolvers<ContextType>;
-  _MergeLogEventTriggered_byPayload?: _MergeLogEventTriggered_ByPayloadResolvers<ContextType>;
-  _MergeUserAssignedPayload?: _MergeUserAssignedPayloadResolvers<ContextType>;
-  _MergeUserAvailablePayload?: _MergeUserAvailablePayloadResolvers<ContextType>;
-  _MergeUserChangerequests_requested_byPayload?: _MergeUserChangerequests_Requested_ByPayloadResolvers<ContextType>;
-  _MergeUserChangerequests_requested_toPayload?: _MergeUserChangerequests_Requested_ToPayloadResolvers<ContextType>;
-  _MergeUserLogevents_triggered_byPayload?: _MergeUserLogevents_Triggered_ByPayloadResolvers<ContextType>;
-  _MergeWateringTaskChangerequests_requested_forPayload?: _MergeWateringTaskChangerequests_Requested_ForPayloadResolvers<ContextType>;
-  _MergeWateringTaskChangerequests_requested_new_taskPayload?: _MergeWateringTaskChangerequests_Requested_New_TaskPayloadResolvers<ContextType>;
-  _MergeWateringTaskLogevents_refers_toPayload?: _MergeWateringTaskLogevents_Refers_ToPayloadResolvers<ContextType>;
-  _MergeWateringTaskUsers_assignedPayload?: _MergeWateringTaskUsers_AssignedPayloadResolvers<ContextType>;
-  _MergeWateringTaskUsers_availablePayload?: _MergeWateringTaskUsers_AvailablePayloadResolvers<ContextType>;
-  _Neo4jDate?: _Neo4jDateResolvers<ContextType>;
-  _Neo4jDateTime?: _Neo4jDateTimeResolvers<ContextType>;
-  _Neo4jLocalDateTime?: _Neo4jLocalDateTimeResolvers<ContextType>;
-  _Neo4jLocalTime?: _Neo4jLocalTimeResolvers<ContextType>;
-  _Neo4jPoint?: _Neo4jPointResolvers<ContextType>;
-  _Neo4jTime?: _Neo4jTimeResolvers<ContextType>;
-  _RemoveChangeRequestRequested_byPayload?: _RemoveChangeRequestRequested_ByPayloadResolvers<ContextType>;
-  _RemoveChangeRequestRequested_forPayload?: _RemoveChangeRequestRequested_ForPayloadResolvers<ContextType>;
-  _RemoveChangeRequestRequested_new_taskPayload?: _RemoveChangeRequestRequested_New_TaskPayloadResolvers<ContextType>;
-  _RemoveChangeRequestRequested_toPayload?: _RemoveChangeRequestRequested_ToPayloadResolvers<ContextType>;
-  _RemoveLogEventRefers_toPayload?: _RemoveLogEventRefers_ToPayloadResolvers<ContextType>;
-  _RemoveLogEventTriggered_byPayload?: _RemoveLogEventTriggered_ByPayloadResolvers<ContextType>;
-  _RemoveUserAssignedPayload?: _RemoveUserAssignedPayloadResolvers<ContextType>;
-  _RemoveUserAvailablePayload?: _RemoveUserAvailablePayloadResolvers<ContextType>;
-  _RemoveUserChangerequests_requested_byPayload?: _RemoveUserChangerequests_Requested_ByPayloadResolvers<ContextType>;
-  _RemoveUserChangerequests_requested_toPayload?: _RemoveUserChangerequests_Requested_ToPayloadResolvers<ContextType>;
-  _RemoveUserLogevents_triggered_byPayload?: _RemoveUserLogevents_Triggered_ByPayloadResolvers<ContextType>;
-  _RemoveWateringTaskChangerequests_requested_forPayload?: _RemoveWateringTaskChangerequests_Requested_ForPayloadResolvers<ContextType>;
-  _RemoveWateringTaskChangerequests_requested_new_taskPayload?: _RemoveWateringTaskChangerequests_Requested_New_TaskPayloadResolvers<ContextType>;
-  _RemoveWateringTaskLogevents_refers_toPayload?: _RemoveWateringTaskLogevents_Refers_ToPayloadResolvers<ContextType>;
-  _RemoveWateringTaskUsers_assignedPayload?: _RemoveWateringTaskUsers_AssignedPayloadResolvers<ContextType>;
-  _RemoveWateringTaskUsers_availablePayload?: _RemoveWateringTaskUsers_AvailablePayloadResolvers<ContextType>;
-  ChangeRequest?: ChangeRequestResolvers<ContextType>;
-  JSON?: GraphQLScalarType;
-  LogEvent?: LogEventResolvers<ContextType>;
-  Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
-  User?: UserResolvers<ContextType>;
-  UserSettings?: UserSettingsResolvers<ContextType>;
   WateringPeriod?: WateringPeriodResolvers<ContextType>;
+  _Neo4jDate?: _Neo4jDateResolvers<ContextType>;
   WateringTask?: WateringTaskResolvers<ContextType>;
+  User?: UserResolvers<ContextType>;
+  ChangeRequest?: ChangeRequestResolvers<ContextType>;
+  LogEvent?: LogEventResolvers<ContextType>;
+  UserSettings?: UserSettingsResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
+  JSON?: GraphQLScalarType;
+  _AddUserAssignedPayload?: _AddUserAssignedPayloadResolvers<ContextType>;
+  _RemoveUserAssignedPayload?: _RemoveUserAssignedPayloadResolvers<ContextType>;
+  _MergeUserAssignedPayload?: _MergeUserAssignedPayloadResolvers<ContextType>;
+  _AddUserAvailablePayload?: _AddUserAvailablePayloadResolvers<ContextType>;
+  _RemoveUserAvailablePayload?: _RemoveUserAvailablePayloadResolvers<ContextType>;
+  _MergeUserAvailablePayload?: _MergeUserAvailablePayloadResolvers<ContextType>;
+  _AddUserChangerequests_requested_byPayload?: _AddUserChangerequests_Requested_ByPayloadResolvers<ContextType>;
+  _RemoveUserChangerequests_requested_byPayload?: _RemoveUserChangerequests_Requested_ByPayloadResolvers<ContextType>;
+  _MergeUserChangerequests_requested_byPayload?: _MergeUserChangerequests_Requested_ByPayloadResolvers<ContextType>;
+  _AddUserChangerequests_requested_toPayload?: _AddUserChangerequests_Requested_ToPayloadResolvers<ContextType>;
+  _RemoveUserChangerequests_requested_toPayload?: _RemoveUserChangerequests_Requested_ToPayloadResolvers<ContextType>;
+  _MergeUserChangerequests_requested_toPayload?: _MergeUserChangerequests_Requested_ToPayloadResolvers<ContextType>;
+  _AddUserLogevents_triggered_byPayload?: _AddUserLogevents_Triggered_ByPayloadResolvers<ContextType>;
+  _RemoveUserLogevents_triggered_byPayload?: _RemoveUserLogevents_Triggered_ByPayloadResolvers<ContextType>;
+  _MergeUserLogevents_triggered_byPayload?: _MergeUserLogevents_Triggered_ByPayloadResolvers<ContextType>;
+  _AddWateringTaskUsers_assignedPayload?: _AddWateringTaskUsers_AssignedPayloadResolvers<ContextType>;
+  _RemoveWateringTaskUsers_assignedPayload?: _RemoveWateringTaskUsers_AssignedPayloadResolvers<ContextType>;
+  _MergeWateringTaskUsers_assignedPayload?: _MergeWateringTaskUsers_AssignedPayloadResolvers<ContextType>;
+  _AddWateringTaskChangerequests_requested_forPayload?: _AddWateringTaskChangerequests_Requested_ForPayloadResolvers<ContextType>;
+  _RemoveWateringTaskChangerequests_requested_forPayload?: _RemoveWateringTaskChangerequests_Requested_ForPayloadResolvers<ContextType>;
+  _MergeWateringTaskChangerequests_requested_forPayload?: _MergeWateringTaskChangerequests_Requested_ForPayloadResolvers<ContextType>;
+  _AddWateringTaskChangerequests_requested_new_taskPayload?: _AddWateringTaskChangerequests_Requested_New_TaskPayloadResolvers<ContextType>;
+  _RemoveWateringTaskChangerequests_requested_new_taskPayload?: _RemoveWateringTaskChangerequests_Requested_New_TaskPayloadResolvers<ContextType>;
+  _MergeWateringTaskChangerequests_requested_new_taskPayload?: _MergeWateringTaskChangerequests_Requested_New_TaskPayloadResolvers<ContextType>;
+  _AddWateringTaskLogevents_refers_toPayload?: _AddWateringTaskLogevents_Refers_ToPayloadResolvers<ContextType>;
+  _RemoveWateringTaskLogevents_refers_toPayload?: _RemoveWateringTaskLogevents_Refers_ToPayloadResolvers<ContextType>;
+  _MergeWateringTaskLogevents_refers_toPayload?: _MergeWateringTaskLogevents_Refers_ToPayloadResolvers<ContextType>;
+  _AddWateringTaskUsers_availablePayload?: _AddWateringTaskUsers_AvailablePayloadResolvers<ContextType>;
+  _RemoveWateringTaskUsers_availablePayload?: _RemoveWateringTaskUsers_AvailablePayloadResolvers<ContextType>;
+  _MergeWateringTaskUsers_availablePayload?: _MergeWateringTaskUsers_AvailablePayloadResolvers<ContextType>;
+  _AddChangeRequestRequested_byPayload?: _AddChangeRequestRequested_ByPayloadResolvers<ContextType>;
+  _RemoveChangeRequestRequested_byPayload?: _RemoveChangeRequestRequested_ByPayloadResolvers<ContextType>;
+  _MergeChangeRequestRequested_byPayload?: _MergeChangeRequestRequested_ByPayloadResolvers<ContextType>;
+  _AddChangeRequestRequested_forPayload?: _AddChangeRequestRequested_ForPayloadResolvers<ContextType>;
+  _RemoveChangeRequestRequested_forPayload?: _RemoveChangeRequestRequested_ForPayloadResolvers<ContextType>;
+  _MergeChangeRequestRequested_forPayload?: _MergeChangeRequestRequested_ForPayloadResolvers<ContextType>;
+  _AddChangeRequestRequested_toPayload?: _AddChangeRequestRequested_ToPayloadResolvers<ContextType>;
+  _RemoveChangeRequestRequested_toPayload?: _RemoveChangeRequestRequested_ToPayloadResolvers<ContextType>;
+  _MergeChangeRequestRequested_toPayload?: _MergeChangeRequestRequested_ToPayloadResolvers<ContextType>;
+  _AddChangeRequestRequested_new_taskPayload?: _AddChangeRequestRequested_New_TaskPayloadResolvers<ContextType>;
+  _RemoveChangeRequestRequested_new_taskPayload?: _RemoveChangeRequestRequested_New_TaskPayloadResolvers<ContextType>;
+  _MergeChangeRequestRequested_new_taskPayload?: _MergeChangeRequestRequested_New_TaskPayloadResolvers<ContextType>;
+  _AddLogEventTriggered_byPayload?: _AddLogEventTriggered_ByPayloadResolvers<ContextType>;
+  _RemoveLogEventTriggered_byPayload?: _RemoveLogEventTriggered_ByPayloadResolvers<ContextType>;
+  _MergeLogEventTriggered_byPayload?: _MergeLogEventTriggered_ByPayloadResolvers<ContextType>;
+  _AddLogEventRefers_toPayload?: _AddLogEventRefers_ToPayloadResolvers<ContextType>;
+  _RemoveLogEventRefers_toPayload?: _RemoveLogEventRefers_ToPayloadResolvers<ContextType>;
+  _MergeLogEventRefers_toPayload?: _MergeLogEventRefers_ToPayloadResolvers<ContextType>;
+  _Neo4jTime?: _Neo4jTimeResolvers<ContextType>;
+  _Neo4jDateTime?: _Neo4jDateTimeResolvers<ContextType>;
+  _Neo4jLocalTime?: _Neo4jLocalTimeResolvers<ContextType>;
+  _Neo4jLocalDateTime?: _Neo4jLocalDateTimeResolvers<ContextType>;
+  _Neo4jPoint?: _Neo4jPointResolvers<ContextType>;
 };
 
 
