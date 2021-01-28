@@ -36,10 +36,8 @@ export function WateringDetailDrawer( {date, onDrawerClose}: Props ) {
   } )
   const userProfile = useSelector<RootState, KeycloakProfile | null>(( {userProfile} ) => userProfile )
 
-  const wateringTask = WateringTaskData && WateringTaskData.WateringTask && WateringTaskData.WateringTask.length > 0 && WateringTaskData.WateringTask[0]
-  const itsMyTurn = wateringTask
-      && wateringTask.users_assigned
-      && wateringTask.users_assigned.findIndex(( user ) => userProfile && user && userProfile.username === user.label ) >= 0
+  const { users_assigned = [] } = WateringTaskData?.WateringTask?.[0] || {}
+  const itsMyTurn = ( users_assigned || [] ).findIndex(( user ) => user && userProfile?.username === user?.label ) >= 0
 
 
   const handleAssign = () => {
@@ -50,7 +48,7 @@ export function WateringDetailDrawer( {date, onDrawerClose}: Props ) {
     <div style={{backgroundColor: 'white'}}>
       <Container>
         <Box display='flex' flexDirection='row' justifyContent='center' minHeight='130px'>
-          {wateringTask && wateringTask.users_assigned && wateringTask.users_assigned
+          { ( users_assigned || [] )
             .map( user => user && (
               <Box display='flex' flexDirection='column' alignItems='center' justifyContent='center'>
                 <AvatarComponent

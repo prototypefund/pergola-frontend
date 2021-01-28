@@ -35,7 +35,7 @@ export function WeekSelector( {date, children}: Props ) {
   const getDateRangeString: ( dateRange: DateRangeStruct ) => string = ( {
     startDate,
     endDate
-  } ) => `${startDate.format( 'DD.MMM.' )}. - ${endDate.format( 'DD.MMM.' )} ${endDate.format( 'YYYY' )}`
+  } ) => `${startDate.format( 'DD.MMM.' )} - ${endDate.format( 'DD.MMM.' )} ${endDate.format( 'YYYY' )}`
 
   const nextPage = ()  => handleJumpWeek( 1 )
   const prevPage = ()  => handleJumpWeek( -1 )

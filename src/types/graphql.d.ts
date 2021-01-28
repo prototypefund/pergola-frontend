@@ -214,6 +214,14 @@ export type _WateringTaskFilter = {
   users_available_none?: Maybe<_UserFilter>;
   users_available_single?: Maybe<_UserFilter>;
   users_available_every?: Maybe<_UserFilter>;
+  wateringperiod?: Maybe<_WateringPeriodFilter>;
+  wateringperiod_not?: Maybe<_WateringPeriodFilter>;
+  wateringperiod_in?: Maybe<Array<_WateringPeriodFilter>>;
+  wateringperiod_not_in?: Maybe<Array<_WateringPeriodFilter>>;
+  wateringperiod_some?: Maybe<_WateringPeriodFilter>;
+  wateringperiod_none?: Maybe<_WateringPeriodFilter>;
+  wateringperiod_single?: Maybe<_WateringPeriodFilter>;
+  wateringperiod_every?: Maybe<_WateringPeriodFilter>;
 };
 
 /** Generated Date input object for Neo4j [Temporal field arguments](https://grandstack.io/docs/graphql-temporal-types-datetime/#temporal-query-arguments). */
@@ -428,6 +436,35 @@ export type _LogEventFilter = {
   refers_to_every?: Maybe<_WateringTaskFilter>;
 };
 
+export type _WateringPeriodFilter = {
+  AND?: Maybe<Array<_WateringPeriodFilter>>;
+  OR?: Maybe<Array<_WateringPeriodFilter>>;
+  from?: Maybe<_Neo4jDateInput>;
+  from_not?: Maybe<_Neo4jDateInput>;
+  from_in?: Maybe<Array<_Neo4jDateInput>>;
+  from_not_in?: Maybe<Array<_Neo4jDateInput>>;
+  from_lt?: Maybe<_Neo4jDateInput>;
+  from_lte?: Maybe<_Neo4jDateInput>;
+  from_gt?: Maybe<_Neo4jDateInput>;
+  from_gte?: Maybe<_Neo4jDateInput>;
+  till?: Maybe<_Neo4jDateInput>;
+  till_not?: Maybe<_Neo4jDateInput>;
+  till_in?: Maybe<Array<_Neo4jDateInput>>;
+  till_not_in?: Maybe<Array<_Neo4jDateInput>>;
+  till_lt?: Maybe<_Neo4jDateInput>;
+  till_lte?: Maybe<_Neo4jDateInput>;
+  till_gt?: Maybe<_Neo4jDateInput>;
+  till_gte?: Maybe<_Neo4jDateInput>;
+  wateringtasks?: Maybe<_WateringTaskFilter>;
+  wateringtasks_not?: Maybe<_WateringTaskFilter>;
+  wateringtasks_in?: Maybe<Array<_WateringTaskFilter>>;
+  wateringtasks_not_in?: Maybe<Array<_WateringTaskFilter>>;
+  wateringtasks_some?: Maybe<_WateringTaskFilter>;
+  wateringtasks_none?: Maybe<_WateringTaskFilter>;
+  wateringtasks_single?: Maybe<_WateringTaskFilter>;
+  wateringtasks_every?: Maybe<_WateringTaskFilter>;
+};
+
 export type WateringTask = {
   __typename?: 'WateringTask';
   /** Generated field for querying the Neo4j [system id](https://neo4j.com/docs/cypher-manual/current/functions/scalar/#functions-id) of this node. */
@@ -441,6 +478,7 @@ export type WateringTask = {
   changerequests_requested_new_task?: Maybe<Array<Maybe<ChangeRequest>>>;
   logevents_refers_to?: Maybe<Array<Maybe<LogEvent>>>;
   users_available?: Maybe<Array<Maybe<User>>>;
+  wateringperiod?: Maybe<Array<Maybe<WateringPeriod>>>;
 };
 
 
@@ -481,6 +519,14 @@ export type WateringTaskUsers_AvailableArgs = {
   offset?: Maybe<Scalars['Int']>;
   orderBy?: Maybe<Array<Maybe<_UserOrdering>>>;
   filter?: Maybe<_UserFilter>;
+};
+
+
+export type WateringTaskWateringperiodArgs = {
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<Maybe<_WateringPeriodOrdering>>>;
+  filter?: Maybe<_WateringPeriodFilter>;
 };
 
 export enum _UserOrdering {
@@ -653,35 +699,6 @@ export enum _WateringPeriodOrdering {
   IdAsc = '_id_asc',
   IdDesc = '_id_desc'
 }
-
-export type _WateringPeriodFilter = {
-  AND?: Maybe<Array<_WateringPeriodFilter>>;
-  OR?: Maybe<Array<_WateringPeriodFilter>>;
-  from?: Maybe<_Neo4jDateInput>;
-  from_not?: Maybe<_Neo4jDateInput>;
-  from_in?: Maybe<Array<_Neo4jDateInput>>;
-  from_not_in?: Maybe<Array<_Neo4jDateInput>>;
-  from_lt?: Maybe<_Neo4jDateInput>;
-  from_lte?: Maybe<_Neo4jDateInput>;
-  from_gt?: Maybe<_Neo4jDateInput>;
-  from_gte?: Maybe<_Neo4jDateInput>;
-  till?: Maybe<_Neo4jDateInput>;
-  till_not?: Maybe<_Neo4jDateInput>;
-  till_in?: Maybe<Array<_Neo4jDateInput>>;
-  till_not_in?: Maybe<Array<_Neo4jDateInput>>;
-  till_lt?: Maybe<_Neo4jDateInput>;
-  till_lte?: Maybe<_Neo4jDateInput>;
-  till_gt?: Maybe<_Neo4jDateInput>;
-  till_gte?: Maybe<_Neo4jDateInput>;
-  wateringtasks?: Maybe<_WateringTaskFilter>;
-  wateringtasks_not?: Maybe<_WateringTaskFilter>;
-  wateringtasks_in?: Maybe<Array<_WateringTaskFilter>>;
-  wateringtasks_not_in?: Maybe<Array<_WateringTaskFilter>>;
-  wateringtasks_some?: Maybe<_WateringTaskFilter>;
-  wateringtasks_none?: Maybe<_WateringTaskFilter>;
-  wateringtasks_single?: Maybe<_WateringTaskFilter>;
-  wateringtasks_every?: Maybe<_WateringTaskFilter>;
-};
 
 export enum _UserSettingsOrdering {
   UiLocaleAsc = 'ui_locale_asc',
@@ -1965,6 +1982,7 @@ export type ResolversTypes = {
   _UserFilter: _UserFilter;
   _ChangeRequestFilter: _ChangeRequestFilter;
   _LogEventFilter: _LogEventFilter;
+  _WateringPeriodFilter: _WateringPeriodFilter;
   WateringTask: ResolverTypeWrapper<WateringTask>;
   _UserOrdering: _UserOrdering;
   User: ResolverTypeWrapper<User>;
@@ -1973,7 +1991,6 @@ export type ResolversTypes = {
   _LogEventOrdering: _LogEventOrdering;
   LogEvent: ResolverTypeWrapper<LogEvent>;
   _WateringPeriodOrdering: _WateringPeriodOrdering;
-  _WateringPeriodFilter: _WateringPeriodFilter;
   _UserSettingsOrdering: _UserSettingsOrdering;
   _UserSettingsFilter: _UserSettingsFilter;
   UserSettings: ResolverTypeWrapper<UserSettings>;
@@ -2061,11 +2078,11 @@ export type ResolversParentTypes = {
   _UserFilter: _UserFilter;
   _ChangeRequestFilter: _ChangeRequestFilter;
   _LogEventFilter: _LogEventFilter;
+  _WateringPeriodFilter: _WateringPeriodFilter;
   WateringTask: WateringTask;
   User: User;
   ChangeRequest: ChangeRequest;
   LogEvent: LogEvent;
-  _WateringPeriodFilter: _WateringPeriodFilter;
   _UserSettingsFilter: _UserSettingsFilter;
   UserSettings: UserSettings;
   Mutation: {};
@@ -2175,6 +2192,7 @@ export type WateringTaskResolvers<ContextType = any, ParentType extends Resolver
   changerequests_requested_new_task?: Resolver<Maybe<Array<Maybe<ResolversTypes['ChangeRequest']>>>, ParentType, ContextType, RequireFields<WateringTaskChangerequests_Requested_New_TaskArgs, never>>;
   logevents_refers_to?: Resolver<Maybe<Array<Maybe<ResolversTypes['LogEvent']>>>, ParentType, ContextType, RequireFields<WateringTaskLogevents_Refers_ToArgs, never>>;
   users_available?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType, RequireFields<WateringTaskUsers_AvailableArgs, never>>;
+  wateringperiod?: Resolver<Maybe<Array<Maybe<ResolversTypes['WateringPeriod']>>>, ParentType, ContextType, RequireFields<WateringTaskWateringperiodArgs, never>>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

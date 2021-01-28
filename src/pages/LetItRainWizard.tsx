@@ -1,5 +1,5 @@
 import {gql, useMutation, useQuery} from '@apollo/client'
-import {Box, Button, Container, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, makeStyles, Toolbar, Typography, useMediaQuery, useTheme} from '@material-ui/core'
+import {Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, makeStyles, useMediaQuery, useTheme} from '@material-ui/core'
 import {ArrowBack as ArrowBackIcon} from '@material-ui/icons'
 import dayjs from 'dayjs'
 import * as React from 'react'
@@ -7,7 +7,7 @@ import {useState} from 'react'
 import {Link, useHistory, useParams} from 'react-router-dom'
 
 import {Calendar, HorizontalStepper, LetItRainFrequency, NotificationSettings} from '../components'
-import {fromNeo4JDate} from '../helper'
+import {fromNeo4JDate, toNeo4JDate} from '../helper'
 import {_Neo4jDateInput, UserSettings, UserSettingsInput, WateringPeriod} from '../types/graphql'
 
 export interface LetItRainWizardRouterProps {
@@ -60,45 +60,38 @@ export function LetItRainWizard() {
 
   const [setUserAvailabilityMutation] =
       useMutation<Boolean, { dates: Array<_Neo4jDateInput> }>( SET_USER_AVAILABLITY_FOR_WATERING_PERIOD,
-        {variables: {dates: availableDates.map( d => {
-          return {
-            year: d.getFullYear(),
-            month: d.getMonth()+1,
-            day: d.getDate()
-          }} )}} )
+        {variables: {dates: availableDates.map( toNeo4JDate )}} )
 
   const [ mergeUserSettings ] =
       useMutation<UserSettings, {settings: UserSettingsInput}>( MERGE_USER_SETTINGS,
         {variables: { settings: { letitrain_maximum_tasks: userWantsMaximumTasks }} } )
 
   const lastMondayDate = dayjs().weekday( -7 )
-
-  //const {  } = assignableWateringPeriodData
   const tasks =  assignableWateringPeriodData?.assignableWateringPeriod?.wateringtasks || []
   const calendarDates = tasks.length === 0
     ? [...Array( DAYS_COUNT )]
       .map(( _, i ) => lastMondayDate.add( i, 'day' ).toDate())
     :  tasks.map( t => t ? fromNeo4JDate( t.date ) : new Date())
 
-
-
   const steps: StepDesc[] = [
     {
       title: 'Häufigkeit',
       headline: 'Häufigkeit angeben',
-      StepComponent: <LetItRainFrequency onChange={ frequency => setUserWantsMaximumTasks( frequency )} />,
+      StepComponent:
+        <LetItRainFrequency
+          frequency={userWantsMaximumTasks}
+          onChange={ frequency => setUserWantsMaximumTasks( frequency )} />
     },
     {
       title: 'Verfügbarkeit',
       headline: 'Verfügbarkeit angeben',
-      StepComponent: (
+      StepComponent:
         <Calendar
           dates={calendarDates}
+          selectedDates={availableDates}
           onChange={( dates ) => {
             setAvailableDates( dates )
-          }}
-        />
-      ),
+          }}/>
     },
     {
       title: 'Erinnerung',
@@ -106,13 +99,6 @@ export function LetItRainWizard() {
       StepComponent: <NotificationSettings />,
     },
   ]
-
-  const finishWizard = async () => {
-    await setUserAvailabilityMutation()
-    await mergeUserSettings()
-    history.push( '/watering/thanks' )
-  }
-
   const getCurrentStepIndex = ( numStr: string ) => {
     let currentStepNum = parseInt( numStr ) || 0
     if ( currentStepNum >= steps.length ) currentStepNum = steps.length - 1
@@ -120,6 +106,14 @@ export function LetItRainWizard() {
   }
   const currentStepIndex = getCurrentStepIndex( stepNumber )
   const currentStep = steps[currentStepIndex]
+
+  const finishWizard = async () => {
+    console.log( availableDates )
+    await setUserAvailabilityMutation()
+    await mergeUserSettings()
+    history.push( '/watering/thanks' )
+  }
+
 
   return (
     <Dialog

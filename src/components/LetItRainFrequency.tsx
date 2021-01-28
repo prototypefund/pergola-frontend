@@ -4,11 +4,13 @@ import { useState } from 'react'
 
 interface Props {
   onChange?: ( frequency: number ) => void;
+  frequency?: number
 }
 
-export function LetItRainFrequency( { onChange }: Props ) {
+export function LetItRainFrequency( { onChange, frequency: _frequency }: Props ) {
   const classes = useStyles()
-  const [daysPerWeek, setDaysPerWeek] = useState( 2 )
+  const [frequency, setFrequency] = useState( 2 )
+  const daysPerWeek = _frequency || frequency
 
   return (
     <>
@@ -22,7 +24,7 @@ export function LetItRainFrequency( { onChange }: Props ) {
         value={daysPerWeek}
         onChange={( _, value ) => {
           const v = typeof value === 'number' ? value : 1
-          setDaysPerWeek( v )
+          setFrequency( v )
           onChange?.( v )
         }
         }

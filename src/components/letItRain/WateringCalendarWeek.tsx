@@ -3,7 +3,6 @@ import {Box, Container, IconButton, Link, makeStyles, Theme, Typography} from '@
 import {
   ChevronLeft as ArrowBackIcon, ChevronRight as ArrowForwardIcon
 } from '@material-ui/icons'
-import {DefaultTheme} from '@material-ui/styles'
 import dayjs from 'dayjs'
 import {KeycloakProfile} from 'keycloak-js'
 import React, {useEffect, useState} from 'react'
@@ -13,7 +12,6 @@ import {equalsNeo4jDate, fromNeo4JDate, toNeo4JDate} from '../../helper'
 import {RootState} from '../../reducers'
 import {_Neo4jDate, WateringPeriod, WateringTask} from '../../types/graphql'
 import {BottomDrawer, CornerBadge} from '../basic'
-import { ItsMyTurnIcon,IWillHelpIcon} from './icons'
 import {WateringDetailDrawer} from './WateringDetailDrawer'
 
 interface WateringDayProps {
@@ -21,8 +19,8 @@ interface WateringDayProps {
   recruiterCount: number;
   onSelect?: Function;
   active?: boolean;
-  notInPeriod?: boolean;
-  itsMyTurn?: boolean;
+  inPeriod?: boolean;
+  cornerActive?: boolean;
   optimalRecruiterCount?: number;
   size?: number;
 }
@@ -30,19 +28,20 @@ interface WateringDayProps {
 interface WateringDayStylesProps {
   recruiterMissingCount: number;
   active?: boolean;
+  inPeriod?: boolean;
   size: number;
 }
 
-const WateringDay = ( {date, recruiterCount, optimalRecruiterCount = 3, size = 60, onSelect, active, notInPeriod, itsMyTurn}: WateringDayProps ) => {
+const WateringDay = ( {date, recruiterCount, optimalRecruiterCount = 3, size = 60, onSelect, active, inPeriod, cornerActive}: WateringDayProps ) => {
   const d = dayjs( date )
   const classes = useWateringDayStyles( {
     recruiterMissingCount: optimalRecruiterCount - recruiterCount,
-    active, size} )
+    active, size, inPeriod} )
 
   return (
     <Link underline='none' onClick={() => onSelect && onSelect()} component="button">
-      <div className={`${classes.dayContainer} ${active && 'active'} ${notInPeriod && 'notInPeriod'}`}>
-        <CornerBadge className={classes.badge} cornerActive={itsMyTurn}>
+      <div className={classes.dayContainer}>
+        <CornerBadge className={classes.badge} cornerActive={cornerActive}>
           <div className='badgeContent'>
             <Typography variant="h6">{d.format( 'dd' )}</Typography>
             <Typography variant="body1">{d.format( 'DD.M.' )}</Typography>
@@ -55,15 +54,17 @@ const WateringDay = ( {date, recruiterCount, optimalRecruiterCount = 3, size = 6
 
 const useWateringDayStyles = makeStyles<Theme, WateringDayStylesProps>(( theme ) => ( {
   badge: {
-    backgroundColor: ( {recruiterMissingCount} ) => (
-      recruiterMissingCount >= 2
-        ? '#FFBD4A'
-        : ( recruiterMissingCount === 2
-          ? '#F6E6A2'
-          : '#BDE3DC' )
+    backgroundColor: ( {recruiterMissingCount, inPeriod} ) => (
+      !inPeriod
+        ? theme.palette.grey['400']
+        : ( recruiterMissingCount >= 2
+          ? '#FFBD4A'
+          : ( recruiterMissingCount === 2
+            ? '#F6E6A2'
+            : '#BDE3DC' ))
     )},
   dayContainer:  {
-    padding: '8px',
+    padding: '2px',
     height: ( {size} ) => `${size +  20}px`,
     '& .badgeContent': {
       transition: 'width 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, height 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
@@ -94,6 +95,10 @@ query WateringTask($dateFrom: _Neo4jDateInput, $dateTo: _Neo4jDateInput) {
         date { day month year}
         users_assigned { label }
         users_available { label }
+        wateringperiod {
+            from { day month year }
+            till { day month year }
+        }
     }
 }
 `
@@ -133,52 +138,44 @@ const WateringCalendarWeek = ( {startDate, dayCount, onNextPageRequested, onPrev
     .map(( _, i ) => dayjs( d ).add( i, 'day' ))
     .map(( date ) => ( {
       date,
+      iAmAvailable: false,
       itsMyTurn: false,
       recruiterCount: 0,
-      notInPeriod: true
+      inPeriod: false
     } ))
   const [calendarDates, setCalendarDates] = useState( defaultCalendarDates( dayCount, startDate ))
   const userProfile = useSelector<RootState, KeycloakProfile | null>(( {userProfile} ) => userProfile )
 
   useEffect(() => {
-    const getPeriod = () => {
-
-      if( !wateringPeriodData
-          || !Array.isArray( wateringPeriodData.WateringPeriod )
-          || wateringPeriodData.WateringPeriod.length === 0 ) return null
-      const { WateringPeriod: [ {from , till} ] } = wateringPeriodData
-      return {
-        from,
-        till
-      }
-    }
-    const period = getPeriod()
     if( !wateringTasksData ) {
       setCalendarDates( defaultCalendarDates( dayCount, startDate ))
     } else {
-      const withinPeriod = ( date: dayjs.Dayjs ) => {
-        if( !period ) return false
-        const {from, till} = period
+      const withinPeriod = ( date: dayjs.Dayjs, period?: WateringPeriod ) => {
+        const { from, till } = period || {}
+        if( !from || !till ) return false
         const _from = dayjs( fromNeo4JDate( from ))
         const _till = dayjs( fromNeo4JDate( till ))
         return  date.isSame( _from ) || date.isSame( _till ) || ( date.isBefore( _till ) && date.isAfter( _from ))
       }
-      const wateringtasks = wateringTasksData && wateringTasksData.WateringTask
+      const withinPeriods = ( date: dayjs.Dayjs, periods: ( WateringPeriod | null | undefined )[] ) => periods.findIndex( p => p && withinPeriod( date, p )) >= 0
+      const wateringtasks = wateringTasksData?.WateringTask
+
       setCalendarDates(
         [...Array( dayCount )]
           .map(( _, i ) => dayjs( startDate ).add( i, 'day' ))
           .map( date => {
-            const task = Array.isArray( wateringtasks ) && wateringtasks.find( t => t && equalsNeo4jDate( t.date, date.toDate()))
+            const task = ( wateringtasks || [] ).find( t => t && equalsNeo4jDate( t.date, date.toDate()))
             return {
               date,
-              itsMyTurn: !!( task && task.users_assigned && task.users_assigned.findIndex(( user ) => userProfile && user && userProfile.username === user.label ) >= 0 ),
-              recruiterCount: task && task.users_assigned && task.users_assigned.length || 0,
-              notInPeriod: !task && !withinPeriod( date ) //TODO: we need another way to reliably detect periods
+              itsMyTurn: ( task?.users_assigned || [] ).findIndex(( user ) => user && userProfile?.username === user.label ) >= 0 ,
+              iAmAvailable: ( task?.users_available || [] ).findIndex(( user ) => user && userProfile?.username === user.label ) >= 0 ,
+              recruiterCount: task?.users_assigned?.length || 0,
+              inPeriod: !!( task && withinPeriods( date, ( wateringtasks || [] ).map(( task ) => task.wateringperiod?.[0] )))  //TODO: we need another way to reliably detect periods
             }
           } ))
 
     }
-  }, [startDate, wateringPeriodData, wateringTasksData] )
+  }, [startDate, wateringTasksData] )
 
 
 
@@ -214,14 +211,15 @@ const WateringCalendarWeek = ( {startDate, dayCount, onNextPageRequested, onPrev
   return (
     <>
       <Box display="flex" flexDirection="row" margin='16px'>
-        {calendarDates.map(( { date, recruiterCount, notInPeriod }, i ) => (
+        {calendarDates.map(( { date, recruiterCount, inPeriod, itsMyTurn, iAmAvailable }, i ) => (
           <WateringDay
             onSelect={() => select( i, date.toDate())}
             active={selectedDay.index === i}
             key={date.toISOString()}
             date={date.toDate()}
             recruiterCount={recruiterCount}
-            notInPeriod={notInPeriod}
+            inPeriod={inPeriod}
+            cornerActive={iAmAvailable || itsMyTurn}
           />
         ))}
       </Box>
