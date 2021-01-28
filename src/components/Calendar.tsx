@@ -15,23 +15,26 @@ dayjs.extend( weekOfYear )
 interface Props {
   dates: Date[];
   onChange?: ( dates: Date[] ) => void;
+  selectedDates?: Date[]
 }
 
-export function Calendar( { dates = [], onChange }: Props ) {
+export function Calendar( { dates = [], onChange, selectedDates: _selectedDates }: Props ) {
   const classes = useStyles()
 
-  const [selectedDates, setSelectedDates] = React.useState<Date[]>( [] )
+  const [selectedDatesIntern, setSelectedDates] = React.useState<Date[]>( [] )
+  const selectedDates = _selectedDates || selectedDatesIntern
+
 
   const toggleDates = ( dates: Date[], selected: Boolean ) => {
     // remove or add given dates from selected dates
-    const _selectedDates = selected
+    const __selectedDates = selected
       ? [
         ...selectedDates,
         ...dates.filter(( date ) => !dateIncluded( selectedDates, date )),
       ]
       : selectedDates.filter(( date ) => !dateIncluded( dates, date ))
-    setSelectedDates( _selectedDates )
-    onChange?.( selectedDates )
+    !_selectedDates && setSelectedDates( __selectedDates )
+    onChange?.( __selectedDates )
   }
 
   const dateIncluded: ( dates: Date[], date: Date ) => boolean = (
