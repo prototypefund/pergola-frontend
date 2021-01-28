@@ -38,6 +38,18 @@ jobs:
           name: stub  ## TODO
           command: echo 'hallo welt' > ./index.html
       - run: nix shell .#deploy --command deploy ./index.html index.html
+      - add_ssh_keys
+      - run:
+          name: CD
+          command: |
+            cat .circleci/known_hosts >> ~/.ssh/known_hosts
+            git config --global user.email "build@circleci.com"
+            git config --global user.name "CI/CD"
+            git switch -c live
+            git add index.html
+            git commit -m build
+            git remote add deployment deploy-pergola@live.pergola.gra.one:~/live/frontend
+            git push --force deployment
 workflows:
   version: 2
   build+test+deploy:

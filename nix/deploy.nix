@@ -8,11 +8,11 @@
   export GITHUB_USER="$CIRCLE_PROJECT_USERNAME"
   export GITHUB_REPO="$CIRCLE_PROJECT_REPONAME"
   export TAG="''${CIRCLE_TAG:-$CIRCLE_BRANCH}"
-  export RELEASE_NAME="''${CIRCLE_TAG:-$CIRCLE_SHA1}"
 
   export FILE="$1"
   export NAME="$2"
 
-  github-release release -t $TAG -n $RELEASE_NAME
+  github-release delete -t $TAG || true
+  github-release release -t $TAG
   github-release upload -t $TAG -f "$FILE" -n "$NAME"
 '')
