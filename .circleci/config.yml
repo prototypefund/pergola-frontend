@@ -1,0 +1,55 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: johannesloetzsch/nix-flake:latest
+    steps:
+      - run:
+          name: Disable Sandbox
+          command: mkdir -p ~/.config/nix/; echo 'sandbox = false' >> ~/.config/nix/nix.conf;
+      - run:
+          name: Allow qemu to be used in dockerTools.buildImage.runAsRoot
+          command: mkdir -p ~/.config/nix/; echo 'system-features = kvm' >> ~/.config/nix/nix.conf;
+      - checkout
+      - restore_cache:
+          keys:
+            - nix-{{ checksum "flake.lock" }}-{{ checksum "flake.nix" }}
+            - nix
+      - run:
+          name: Build
+          command: echo TODO
+      - save_cache:
+          key: nix-{{ checksum "flake.lock" }}-{{ checksum "flake.nix" }}
+          paths:
+            - /nix/
+  deploy:
+    docker:
+      - image: johannesloetzsch/nix-flake:latest
+    steps:
+      - run:
+          name: Disable Sandbox
+          command: mkdir -p ~/.config/nix/; echo 'sandbox = false' >> ~/.config/nix/nix.conf;
+      - checkout
+      - restore_cache:
+          keys:
+            - nix-{{ checksum "flake.lock" }}-{{ checksum "flake.nix" }}
+            - nix
+      - run:
+          name: stub  ## TODO
+          command: echo 'hallo welt' > ./index.html
+      - run: nix shell .#deploy --command deploy ./index.html index.html
+workflows:
+  version: 2
+  build+test+deploy:
+    jobs:
+      - build:
+          filters:  ## tags+branches
+            tags:
+              only: /.*/
+      - deploy:
+          context: deployment  ## provide $GITHUB_TOKEN
+          requires:
+            - build  ## TODO implement tests and run them as requirement
+          filters:  ## tags+branches
+            tags:
+              only: /.*/

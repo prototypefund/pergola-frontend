@@ -14,6 +14,7 @@
     legacyPackages.x86_64-linux = {
       jq = pkgs.jq;
       node2nix = pkgs.nodePackages.node2nix;
+      deploy = import ./nix/deploy.nix { inherit pkgs; };
 
       pergola-frontend-deps = import ./nix/override.nix { inherit pkgs; };
       pergola-frontend = import ./nix/default.nix { inherit pkgs; };
