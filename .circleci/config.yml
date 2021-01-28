@@ -37,7 +37,7 @@ jobs:
       - run:
           name: stub  ## TODO
           command: echo 'hallo welt' > ./index.html
-      - run: nix shell .#deploy --command deploy ./index.html index.html
+#     - run: nix shell .#deploy --command deploy ./index.html index.html  ## create a $GITHUB_TOKEN for the project first
       - add_ssh_keys
       - run:
           name: CD
@@ -62,6 +62,9 @@ workflows:
           context: deployment  ## provide $GITHUB_TOKEN
           requires:
             - build  ## TODO implement tests and run them as requirement
-          filters:  ## tags+branches
+          filters:  ## tags+master
             tags:
               only: /.*/
+            branches:
+              only:
+                - master
