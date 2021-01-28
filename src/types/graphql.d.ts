@@ -108,6 +108,7 @@ export type WateringPeriod = {
   from: _Neo4jDate;
   till: _Neo4jDate;
   wateringtasks?: Maybe<Array<Maybe<WateringTask>>>;
+  hasUsersAssigned?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -696,6 +697,8 @@ export enum _WateringPeriodOrdering {
   FromDesc = 'from_desc',
   TillAsc = 'till_asc',
   TillDesc = 'till_desc',
+  HasUsersAssignedAsc = 'hasUsersAssigned_asc',
+  HasUsersAssignedDesc = 'hasUsersAssigned_desc',
   IdAsc = '_id_asc',
   IdDesc = '_id_desc'
 }
@@ -2170,6 +2173,7 @@ export type WateringPeriodResolvers<ContextType = any, ParentType extends Resolv
   from?: Resolver<ResolversTypes['_Neo4jDate'], ParentType, ContextType>;
   till?: Resolver<ResolversTypes['_Neo4jDate'], ParentType, ContextType>;
   wateringtasks?: Resolver<Maybe<Array<Maybe<ResolversTypes['WateringTask']>>>, ParentType, ContextType, RequireFields<WateringPeriodWateringtasksArgs, never>>;
+  hasUsersAssigned?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

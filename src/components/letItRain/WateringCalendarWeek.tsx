@@ -96,6 +96,7 @@ query WateringTask($dateFrom: _Neo4jDateInput, $dateTo: _Neo4jDateInput) {
         users_assigned { label }
         users_available { label }
         wateringperiod {
+            hasUsersAssigned
             from { day month year }
             till { day month year }
         }
@@ -170,7 +171,7 @@ const WateringCalendarWeek = ( {startDate, dayCount, onNextPageRequested, onPrev
               itsMyTurn: ( task?.users_assigned || [] ).findIndex(( user ) => user && userProfile?.username === user.label ) >= 0 ,
               iAmAvailable: ( task?.users_available || [] ).findIndex(( user ) => user && userProfile?.username === user.label ) >= 0 ,
               recruiterCount: task?.users_assigned?.length || 0,
-              inPeriod: !!( task && withinPeriods( date, ( wateringtasks || [] ).map(( task ) => task.wateringperiod?.[0] )))  //TODO: we need another way to reliably detect periods
+              inPeriod: !!( task?.wateringperiod?.[0]?.hasUsersAssigned )
             }
           } ))
 
