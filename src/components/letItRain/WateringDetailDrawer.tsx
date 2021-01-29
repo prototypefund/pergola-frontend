@@ -12,7 +12,6 @@ import {RootState} from '../../reducers'
 import {WateringTask} from '../../types/graphql'
 
 type Props = {
-  date: Date,
   onDrawerClose?: () => any
 };
 
@@ -28,7 +27,8 @@ const GET_WATERING_TASK = gql`
     }
 `
 
-export function WateringDetailDrawer( {date, onDrawerClose}: Props ) {
+export function WateringDetailDrawer( { onDrawerClose}: Props ) {
+  const date = useSelector<RootState, Date>(( {letItRain: { selectedDate = new Date() }} ) => selectedDate )
   const {data: WateringTaskData} = useQuery<{ WateringTask: WateringTask[] }>( GET_WATERING_TASK, {
     variables: {
       date: toNeo4JDate( date )

@@ -1,6 +1,6 @@
 import {KeycloakProfile} from 'keycloak-js'
 
-import {UserProfileAction,UserProfileActions} from '../actions/userProfile'
+import {UserProfileAction,UserProfileActions} from '../actions'
 import createReducer from './createReducer'
 
 export const userProfile = createReducer<null|KeycloakProfile>( null, {

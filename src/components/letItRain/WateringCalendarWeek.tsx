@@ -1,5 +1,5 @@
 import {gql, useQuery} from '@apollo/client'
-import {Box, Drawer, IconButton, Paper, Popover, Typography} from '@material-ui/core'
+import {Box, IconButton, Paper, Typography} from '@material-ui/core'
 import {
   ChevronLeft as ArrowBackIcon, ChevronRight as ArrowForwardIcon
 } from '@material-ui/icons'
@@ -8,9 +8,10 @@ import {KeycloakProfile} from 'keycloak-js'
 import React, {useEffect, useRef, useState} from 'react'
 import {useHotkeys} from 'react-hotkeys-hook'
 import ScrollContainer from 'react-indiana-drag-scroll'
-import {useSelector} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {useResizeObserver} from 'react-resize-observer-hook'
 
+import {nextDay, previousDay, selectDay} from '../../actions'
 import {equalsNeo4jDate, toNeo4JDate} from '../../helper'
 import {RootState} from '../../reducers'
 import {_Neo4jDate, WateringTask} from '../../types/graphql'
@@ -43,7 +44,8 @@ query WateringTask($dateFrom: _Neo4jDateInput, $dateTo: _Neo4jDateInput) {
 `
 const WateringCalendarWeek = ( {preselectedDate, defaultDayCount = 7 }: WateringCalendarWeekProps ) => {
 
-  const [selectedDay, selectDay] = useState<{date?: Date}>( { date: preselectedDate } )
+  const dispatch = useDispatch()
+  const selectedDay = useSelector<RootState, Date | undefined>(( {letItRain: { selectedDate= preselectedDate }} ) => selectedDate )
   const [dayCount, setDayCount] = useState( 7 )
   const [{ startDate, endDate}, setTimeWindow] = useState( {
     startDate:  dayjs( preselectedDate ).subtract( dayCount, 'day' ).toDate(), endDate: dayjs( preselectedDate ).add( dayCount, 'day' ).toDate() } )
@@ -70,8 +72,8 @@ const WateringCalendarWeek = ( {preselectedDate, defaultDayCount = 7 }: Watering
 
   useEffect(() => {
     setTimeWindow( prev => {
-      const start = dayjs( selectedDay?.date ).subtract( dayCount, 'day' )
-      const end = dayjs( selectedDay?.date ).add( dayCount, 'day' )
+      const start = dayjs( selectedDay ).subtract( dayCount, 'day' )
+      const end = dayjs( selectedDay ).add( dayCount, 'day' )
       const tw = {
         startDate: ( start.isBefore( prev.startDate ) && start.diff( prev.startDate, 'day' ) < -4 )? start.toDate() : prev.startDate,
         endDate: ( end.isAfter( prev.endDate )  && end.diff( prev.endDate, 'day' ) > 4  ) ? end.toDate() : prev.endDate
@@ -115,16 +117,16 @@ const WateringCalendarWeek = ( {preselectedDate, defaultDayCount = 7 }: Watering
   }, [startDate, endDate, wateringTasksData] )
 
   const select = ( i, date ) => {
-    selectDay( { date } )
+    dispatch( selectDay( date ))
     setDrawerWateringDay( true )
   }
 
   const selectPreviousDay = () => {
-    selectDay( prev => ( { date: dayjs( prev.date ).subtract( 1, 'day' ).toDate()} ))
+    dispatch( previousDay())
   }
 
   const selectNextDay = () => {
-    selectDay(  prev => ( { date: dayjs( prev.date ).add( 1, 'day' ).toDate()} ))
+    dispatch( nextDay())
   }
 
   useHotkeys( 'left', () => selectPreviousDay())
@@ -143,13 +145,13 @@ const WateringCalendarWeek = ( {preselectedDate, defaultDayCount = 7 }: Watering
 
   return (
     <div ref={outerDiv}>
-      <Typography variant='h4' style={{width: '100%', textAlign: 'center'}}>{selectedDay?.date && dayjs( selectedDay.date ).format( 'DD. MMMM YYYY' )}</Typography>
+      <Typography variant='h4' style={{width: '100%', textAlign: 'center'}}>{selectedDay && dayjs( selectedDay ).format( 'DD. MMMM YYYY' )}</Typography>
       <ScrollContainer className={'container'} horizontal style={{height: '100px', width: '100%', whiteSpace: 'nowrap'}}>
         <Box display='flex' flexDirection='row' alignItems='baseline' minHeight={'80px'}>
           {calendarDates.map(( { date, recruiterCount, inPeriod, itsMyTurn, iAmAvailable }, i ) => (
             <WateringCalendarTaskItem
               onSelect={() => select( i, date.toDate())}
-              active={selectedDay?.date && date.isSame( selectedDay.date, 'day' )}
+              active={selectedDay && date.isSame( selectedDay, 'day' )}
               onActivate={handleTaskSelected}
               key={date.toISOString()}
               date={date.toDate()}
@@ -166,10 +168,10 @@ const WateringCalendarWeek = ( {preselectedDate, defaultDayCount = 7 }: Watering
           <>
             <Box display='flex' flexDirection='row' justifyContent='space-between'>
               <IconButton onClick={selectPreviousDay}><ArrowBackIcon/></IconButton>
-              <Typography variant="h4">{selectedDay && selectedDay.date?.toLocaleDateString()}</Typography>
+              <Typography variant="h4">{selectedDay && selectedDay?.toLocaleDateString()}</Typography>
               <IconButton onClick={selectNextDay}><ArrowForwardIcon/></IconButton>
             </Box>
-            { selectedDay.date && <WateringDetailDrawer date={selectedDay.date} onDrawerClose={() => setDrawerWateringDay( false )}/> }
+            { selectedDay && <WateringDetailDrawer onDrawerClose={() => setDrawerWateringDay( false )}/> }
           </>
         </Paper></Box>}
     </div>
