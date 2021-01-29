@@ -8,7 +8,7 @@ import { RootState } from '../reducers'
 
 export function Login() {
   const { keycloak } = useKeycloak()
-  const userProfile = useSelector<RootState>(( {userProfile} ) => userProfile )
+  const userProfile = useSelector<RootState, KeycloakProfile | null>(( {userProfile} ) => userProfile )
   const dispatch = useDispatch()
 
   return keycloak.authenticated ?
@@ -17,7 +17,7 @@ export function Login() {
 	                dispatch( setUserProfile( null ))
       }}>
         <div>
-          {userProfile && ( userProfile as KeycloakProfile ).username}
+          {userProfile?.username}
 	&nbsp;
         Logout
         </div>

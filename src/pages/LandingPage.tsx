@@ -15,6 +15,7 @@ import {
   Typography,
 } from '@material-ui/core'
 import { FilterVintage } from '@material-ui/icons'
+import {useKeycloak} from '@react-keycloak/web'
 import React, { useState } from 'react'
 
 import BackgroundImage from '../static/background_full_grey_01.jpg'
@@ -30,6 +31,7 @@ export interface LandingPage_Info {
 }
 
 export function LandingPage() {
+  const { keycloak } = useKeycloak()
   const classes = useStyles()
   const [selectedGarden, setSelectedGarden] = useState( '' )
 
@@ -83,9 +85,9 @@ export function LandingPage() {
           </List>
           <Container>
             <Button variant="contained">mehr erfahren</Button>
-            <Button variant="contained" color="primary">
+            {!keycloak.authenticated && <Button onClick={() => keycloak.login()} variant="contained" color="primary">
               anmelden
-            </Button>
+            </Button>}
           </Container>
           <Typography>Neuen Gemeinschaftsgarten registrieren?</Typography>
         </Paper>
