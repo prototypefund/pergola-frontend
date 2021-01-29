@@ -15,6 +15,7 @@ import {nextDay, previousDay, selectDay} from '../../actions'
 import {equalsNeo4jDate, toNeo4JDate} from '../../helper'
 import {RootState} from '../../reducers'
 import {_Neo4jDate, WateringTask} from '../../types/graphql'
+import {toWateringTaskInfo} from './helper'
 import {WateringCalendarTaskItem} from './WateringCalendarTaskItem'
 import {WateringDetailDrawer} from './WateringDetailDrawer'
 
@@ -104,11 +105,8 @@ const WateringCalendarWeek = ( {preselectedDate, defaultDayCount = 7 }: Watering
           .map( date => {
             const task = ( wateringtasks || [] ).find( t => t && equalsNeo4jDate( t.date, date.toDate()))
             return {
-              date,
-              itsMyTurn: ( task?.users_assigned || [] ).findIndex(( user ) => user && userProfile?.username === user.label ) >= 0 ,
-              iAmAvailable: ( task?.users_available || [] ).findIndex(( user ) => user && userProfile?.username === user.label ) >= 0 ,
-              recruiterCount: task?.users_assigned?.length || 0,
-              inPeriod: !!( task?.wateringperiod?.[0]?.hasUsersAssigned )
+              ...toWateringTaskInfo( task, userProfile || undefined ),
+              date
             }
           } ))
 

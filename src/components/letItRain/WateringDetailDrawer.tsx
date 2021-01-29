@@ -1,6 +1,6 @@
 // @flow
 import {gql, useQuery} from '@apollo/client'
-import {Box, Button, Container, Typography} from '@material-ui/core'
+import {Box, Button, Container, makeStyles, Paper, Typography} from '@material-ui/core'
 import {AddCircle} from '@material-ui/icons'
 import AvatarComponent from 'avataaars'
 import {KeycloakProfile} from 'keycloak-js'
@@ -10,6 +10,8 @@ import {useSelector} from 'react-redux'
 import {toNeo4JDate} from '../../helper'
 import {RootState} from '../../reducers'
 import {WateringTask} from '../../types/graphql'
+import {CornerBadge} from '../basic'
+import {toWateringTaskInfo} from './helper'
 
 type Props = {
   onDrawerClose?: () => any
@@ -23,11 +25,15 @@ const GET_WATERING_TASK = gql`
             date { day month year}
             users_assigned { label }
             users_available { label }
+            wateringperiod {
+                hasUsersAssigned
+            }
         }
     }
 `
 
 export function WateringDetailDrawer( { onDrawerClose}: Props ) {
+  const classes = useStyles()
   const date = useSelector<RootState, Date>(( {letItRain: { selectedDate = new Date() }} ) => selectedDate )
   const {data: WateringTaskData} = useQuery<{ WateringTask: WateringTask[] }>( GET_WATERING_TASK, {
     variables: {
@@ -36,19 +42,25 @@ export function WateringDetailDrawer( { onDrawerClose}: Props ) {
   } )
   const userProfile = useSelector<RootState, KeycloakProfile | null>(( {userProfile} ) => userProfile )
 
-  const { users_assigned = [] } = WateringTaskData?.WateringTask?.[0] || {}
-  const itsMyTurn = ( users_assigned || [] ).findIndex(( user ) => user && userProfile?.username === user?.label ) >= 0
-
+  const task = WateringTaskData?.WateringTask?.[0]
+  const {
+    itsMyTurn,
+    inPeriod,
+    iAmAvailable
+  } = toWateringTaskInfo( task, userProfile || undefined )
 
   const handleAssign = () => {
     console.log( 'assign' )
   }
 
-  return (
-    <div style={{backgroundColor: 'white'}}>
-      <Container>
+  if( inPeriod ) {
+    return (
+      <Paper className={classes.paper}>
+        <Typography variant='h6'>{
+          inPeriod ? '' : 'Leider noch planlos'
+        }</Typography>
         <Box display='flex' flexDirection='row' justifyContent='center' minHeight='130px'>
-          { ( users_assigned || [] )
+          { ( task?.users_assigned || [] )
             .map( user => user && (
               <Box key={user._id} display='flex' flexDirection='column' alignItems='center' justifyContent='center' margin='8px'>
                 <AvatarComponent
@@ -60,21 +72,46 @@ export function WateringDetailDrawer( { onDrawerClose}: Props ) {
             )
             )
           }
-          {!itsMyTurn &&
-            <Button
-              startIcon={<AddCircle />}
-              onClick={handleAssign}>
+          {!itsMyTurn && inPeriod &&
+          <Button
+            startIcon={<AddCircle />}
+            onClick={handleAssign}>
             Helfen!
-            </Button>}
+          </Button>}
         </Box>
-        <Box display='flex' flexDirection='row' justifyContent='space-between'>
-          <Button style={{color: 'red'}} > absagen</Button>
-          <Button onClick={onDrawerClose}>zurück</Button>
-        </Box>
-      </Container>
-    </div>
-  )
+      </Paper>
+
+    )
+  } else {
+    return (
+      <Paper className={classes.paper}>
+        <Typography variant='h6'>Leider noch planlos</Typography>
+        <Button variant='outlined'>
+          <CornerBadge cornerActive={iAmAvailable} className={classes.cornerButton}>
+            <div>
+              <Typography>Du bist {!iAmAvailable && 'nicht'} verfügbar</Typography>
+              <Typography style={{fontWeight: 'bold', textTransform: 'capitalize'}}>ändern</Typography>
+            </div>
+          </CornerBadge>
+        </Button>
+      </Paper>
+    )
+  }
 };
+
+const useStyles = makeStyles(() => ( {
+  paper: {
+    padding: '16px',
+    minWidth: '400px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  cornerButton: {
+    width: '100px',
+    height: '100px'
+  }
+} ))
 
 const randomAvatarProps = () =>
   avatars[ Math.floor( Math.random()*avatars.length ) ]
