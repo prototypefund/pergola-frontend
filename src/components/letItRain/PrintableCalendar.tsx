@@ -38,7 +38,7 @@ export function PrintableCalendar( { childRef } : Props ) {
     const task = WateringTasksData?.WateringTask?.find(( {date} ) => dayjs( cellDate ).isSame( fromNeo4JDate( date ), 'day' ))
     const users =  task?.users_assigned || []
     return users.map( user => user && (
-      <div key={cellDate.toISOString() + user._id} style={{color: stringToHSL( user.label )}}>{user.label}</div>
+      <div key={cellDate.toISOString() + user.label} style={{color: stringToHSL( user.label )}}>{user.label}</div>
     ))
 
   }
