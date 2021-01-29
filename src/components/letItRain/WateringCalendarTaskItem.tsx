@@ -1,6 +1,6 @@
 import {Link, makeStyles, Theme, Typography} from '@material-ui/core'
 import dayjs from 'dayjs'
-import React from 'react'
+import React, {useEffect, useRef} from 'react'
 
 import {CornerBadge} from '../basic'
 
@@ -13,6 +13,7 @@ interface WateringCalendarTaskItemProps {
   cornerActive?: boolean;
   optimalRecruiterCount?: number;
   size?: number;
+  onActivate?: (  active: boolean,  ref: HTMLElement | null ) => void;
 }
 
 interface WateringCalendarTaskItemStylesProps {
@@ -22,14 +23,33 @@ interface WateringCalendarTaskItemStylesProps {
   size: number;
 }
 
-export const WateringCalendarTaskItem = ( {date, recruiterCount, optimalRecruiterCount = 3, size = 60, onSelect, active, inPeriod, cornerActive}: WateringCalendarTaskItemProps ) => {
+export const WateringCalendarTaskItem = (
+  {
+    date,
+    recruiterCount,
+    optimalRecruiterCount = 3,
+    size = 60,
+    onSelect,
+    onActivate,
+    active = false,
+    inPeriod,
+    cornerActive
+  }: WateringCalendarTaskItemProps ) => {
   const d = dayjs( date )
   const classes = useStyles( {
     recruiterMissingCount: optimalRecruiterCount - recruiterCount,
     active, size, inPeriod} )
 
+  const ref = useRef<HTMLSpanElement | null>( null )
+
+  useEffect(() => {
+    onActivate && active && onActivate( active, ref?.current )
+  }, [active] )
+
+
+
   return (
-    <Link underline='none' onClick={() => onSelect && onSelect()} component="button">
+    <Link ref={ref as any} underline='none' onClick={() => onSelect && onSelect()} component="button">
       <div className={classes.dayContainer}>
         <CornerBadge className={classes.badge} cornerActive={cornerActive}>
           <div className='badgeContent'>

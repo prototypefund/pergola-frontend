@@ -1,12 +1,14 @@
 import {gql, useQuery} from '@apollo/client'
-import {Box, IconButton, Typography} from '@material-ui/core'
+import {IconButton, Typography} from '@material-ui/core'
 import {
   ChevronLeft as ArrowBackIcon, ChevronRight as ArrowForwardIcon
 } from '@material-ui/icons'
 import dayjs from 'dayjs'
 import {KeycloakProfile} from 'keycloak-js'
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
+import ScrollContainer from 'react-indiana-drag-scroll'
 import {useSelector} from 'react-redux'
+import {useResizeObserver} from 'react-resize-observer-hook'
 
 import {equalsNeo4jDate, toNeo4JDate} from '../../helper'
 import {RootState} from '../../reducers'
@@ -17,7 +19,7 @@ import {WateringDetailDrawer} from './WateringDetailDrawer'
 
 interface WateringCalendarWeekProps {
   startDate: Date;
-  dayCount: number;
+  defaultDayCount?: number;
   onNextPageRequested?: () => any;
   onPrevPageRequested?: () => any;
 }
@@ -39,8 +41,9 @@ query WateringTask($dateFrom: _Neo4jDateInput, $dateTo: _Neo4jDateInput) {
     }
 }
 `
-const WateringCalendarWeek = ( {startDate, dayCount, onNextPageRequested, onPrevPageRequested}: WateringCalendarWeekProps ) => {
+const WateringCalendarWeek = ( {startDate, defaultDayCount = 7 }: WateringCalendarWeekProps ) => {
   const [selectedDay, selectDay] = useState<{index: number,date?: Date}>( { index: -1 } )
+  const [dayCount, setDayCount] = useState( 7 )
   const [drawerWateringDay, setDrawerWateringDay] = useState<boolean>( false )
   const {data: wateringTasksData} = useQuery<{WateringTask: WateringTask[]}, { dateFrom: _Neo4jDate, dateTo: _Neo4jDate}>( GET_WATERING_TASKS, {
     variables: {
@@ -59,6 +62,19 @@ const WateringCalendarWeek = ( {startDate, dayCount, onNextPageRequested, onPrev
     } ))
   const [calendarDates, setCalendarDates] = useState( defaultCalendarDates( dayCount, startDate ))
   const userProfile = useSelector<RootState, KeycloakProfile | null>(( {userProfile} ) => userProfile )
+
+  const outerDiv = useRef( null )
+  useResizeObserver( outerDiv,
+    ( {width} ) => {
+      try {
+        setDayCount( prev => {
+          const v = Math.floor( width / 60 ) + defaultDayCount
+          return v > prev ? v : prev
+        } )
+      } catch ( e ){
+        console.log( e )}
+    } )
+
 
   useEffect(() => {
     if( !wateringTasksData ) {
@@ -83,8 +99,6 @@ const WateringCalendarWeek = ( {startDate, dayCount, onNextPageRequested, onPrev
     }
   }, [startDate, wateringTasksData] )
 
-
-
   const select = ( i, date ) => {
     selectDay( { index: i, date } )
     if ( i >= 0 ) {
@@ -96,31 +110,30 @@ const WateringCalendarWeek = ( {startDate, dayCount, onNextPageRequested, onPrev
 
   const selectPreviousDay = () => {
     const i = selectedDay.index - 1
-    if( i >= 0 )
-      selectDay( {index: i, date: dayjs( selectedDay.date ).subtract( 1, 'day' ).toDate()} )
-    else if( onPrevPageRequested ) {
-      onPrevPageRequested()
-      selectDay( {index: dayCount - 1, date: dayjs( selectedDay.date ).subtract( 1, 'day' ).toDate()} )
-    }
+    i >= 0 && selectDay( prev => ( {index: i, date: dayjs( prev.date ).subtract( 1, 'day' ).toDate()} ))
   }
 
   const selectNextDay = () => {
     const i = selectedDay.index + 1
-    if( i < dayCount )
-      selectDay( {index: i, date: dayjs( selectedDay.date ).add( 1, 'day' ).toDate()} )
-    else if( onNextPageRequested ) {
-      onNextPageRequested()
-      selectDay( {index: 0, date: dayjs( selectedDay.date ).add( 1, 'day' ).toDate()} )
-    }
+    i < dayCount && selectDay(  prev => ( {index: i, date: dayjs( prev?.date ).add( 1, 'day' ).toDate()} ))
+  }
+
+  const handleTaskSelected = ( active: boolean ,ref: HTMLElement | null ) => {
+    active && ref?.scrollIntoView( {
+      behavior: 'smooth',
+      block: 'center',
+      inline: 'center'
+    } )
   }
 
   return (
-    <>
-      <Box display="flex" flexDirection="row" margin='16px'>
+    <div ref={outerDiv}>
+      <ScrollContainer className={'container'} horizontal style={{height: '100px', width: '100%', whiteSpace: 'nowrap'}}>
         {calendarDates.map(( { date, recruiterCount, inPeriod, itsMyTurn, iAmAvailable }, i ) => (
           <WateringCalendarTaskItem
             onSelect={() => select( i, date.toDate())}
             active={selectedDay.index === i}
+            onActivate={handleTaskSelected}
             key={date.toISOString()}
             date={date.toDate()}
             recruiterCount={recruiterCount}
@@ -128,7 +141,7 @@ const WateringCalendarWeek = ( {startDate, dayCount, onNextPageRequested, onPrev
             cornerActive={iAmAvailable || itsMyTurn}
           />
         ))}
-      </Box>
+      </ScrollContainer>
       <BottomDrawer
         open={drawerWateringDay}
         onClose={() => setDrawerWateringDay( false )}
@@ -140,7 +153,7 @@ const WateringCalendarWeek = ( {startDate, dayCount, onNextPageRequested, onPrev
           </> )}>
         { selectedDay.date && <WateringDetailDrawer date={selectedDay.date} onDrawerClose={() => setDrawerWateringDay( false )}/> }
       </BottomDrawer>
-    </>
+    </div>
   )
 }
 

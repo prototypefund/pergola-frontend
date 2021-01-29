@@ -1,5 +1,5 @@
 import {Box, Button, Container, makeStyles} from '@material-ui/core'
-import {Add, PlusOne} from '@material-ui/icons'
+import {Add} from '@material-ui/icons'
 import dayjs from 'dayjs'
 import * as React from 'react'
 import {Link, Route, Switch} from 'react-router-dom'
@@ -30,10 +30,8 @@ export function LetItRainEntry() {
               </Box>
             }
             <WeekSelector date={today.toDate()}>
-              {( {startDate, dayCount, nextPage, prevPage} ) => (
-                <Box display='flex' alignItems='center' flexDirection='column' overflow='hidden'>
-                  <WateringCalendarWeek startDate={startDate} dayCount={dayCount} onNextPageRequested={nextPage} onPrevPageRequested={prevPage} />
-                </Box>
+              {( {startDate, nextPage, prevPage} ) => (
+                <WateringCalendarWeek startDate={startDate}  onNextPageRequested={nextPage} onPrevPageRequested={prevPage} />
               )}
             </WeekSelector>
           </PaperDrop>
