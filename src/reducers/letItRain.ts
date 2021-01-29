@@ -3,8 +3,6 @@ import dayjs from 'dayjs'
 import {
   LetItRainActions,
   LetItRainDaySelectAction,
-  LetItRainNextDayAction,
-  LetItRainPreviousDayAction
 } from '../actions'
 import createReducer from './createReducer'
 
@@ -21,13 +19,13 @@ export const letItRain = createReducer( {
       selectedDate: action.payload
     }
   },
-  [LetItRainActions.NEXT_DAY]( state: LetItRainStateType, action: LetItRainNextDayAction ) {
+  [LetItRainActions.NEXT_DAY]( state: LetItRainStateType ) {
     return {
       ...state,
       selectedDate: dayjs( state.selectedDate ).add( 1, 'day' ).toDate()
     }
   },
-  [LetItRainActions.PREVIOUS_DAY]( state: LetItRainStateType, action: LetItRainPreviousDayAction ) {
+  [LetItRainActions.PREVIOUS_DAY]( state: LetItRainStateType ) {
     return {
       ...state,
       selectedDate: dayjs( state.selectedDate ).subtract( 1, 'day' ).toDate()

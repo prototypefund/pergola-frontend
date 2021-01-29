@@ -50,7 +50,7 @@ export function WateringDetailDrawer( { onDrawerClose}: Props ) {
         <Box display='flex' flexDirection='row' justifyContent='center' minHeight='130px'>
           { ( users_assigned || [] )
             .map( user => user && (
-              <Box display='flex' flexDirection='column' alignItems='center' justifyContent='center'>
+              <Box key={user._id} display='flex' flexDirection='column' alignItems='center' justifyContent='center' margin='8px'>
                 <AvatarComponent
                   style={{width: '100px', height: '100px'}}
                   {...randomAvatarProps()}

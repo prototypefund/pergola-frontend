@@ -1,20 +1,33 @@
-import {Box, Button, Container, makeStyles} from '@material-ui/core'
-import {Add} from '@material-ui/icons'
+import {Box, Button, Container, IconButton, makeStyles, Paper, Typography} from '@material-ui/core'
+import {Add, ChevronLeft as ArrowBackIcon, ChevronRight as ArrowForwardIcon} from '@material-ui/icons'
 import dayjs from 'dayjs'
 import * as React from 'react'
+import {useDispatch, useSelector} from 'react-redux'
 import {Link, Route, Switch} from 'react-router-dom'
 
-import {PaperDrop, WateringHelpDrawerButton, WeekSelector} from '../components'
+import {nextDay, previousDay} from '../actions'
+import {PaperDrop, WateringHelpDrawerButton} from '../components'
 import {PageTitle} from '../components/basic'
 import WateringCalendarWeek from '../components/letItRain/WateringCalendarWeek'
+import {WateringDetailDrawer} from '../components/letItRain/WateringDetailDrawer'
+import {RootState} from '../reducers'
 import BackgroundImage from '../static/background_full_grey_01.jpg'
 import {LetItRainWizard} from './LetItRainWizard'
 
 
 export function LetItRainEntry() {
+  const dispatch = useDispatch()
+  const selectedDay = useSelector<RootState, Date | undefined>(( {letItRain: { selectedDate }} ) => selectedDate )
   const classes = useStyles()
   dayjs.locale( 'de' )
-  const today = dayjs()
+
+  const selectPreviousDay = () => {
+    dispatch( previousDay())
+  }
+
+  const selectNextDay = () => {
+    dispatch( nextDay())
+  }
 
   return (
     <>
@@ -29,16 +42,24 @@ export function LetItRainEntry() {
                 </Link>
               </Box>
             }
-            <WeekSelector date={today.toDate()}>
-              {( {startDate, nextPage, prevPage} ) => (
-                <WateringCalendarWeek preselectedDate={startDate}  onNextPageRequested={nextPage} onPrevPageRequested={prevPage} />
-              )}
-            </WeekSelector>
+            <WateringCalendarWeek preselectedDate={new Date()}/>
           </PaperDrop>
           <Box display='flex' flexDirection='row' justifyContent='space-between' flexGrow={1} alignItems='center'>
             <WateringHelpDrawerButton/>
             <Button>Kalender abbonieren</Button>
           </Box>
+          {selectedDay && <Box  position='absolute' left={0} width='100%' display='flex' justifyContent='center' marginTop='40px'>
+            <Paper>
+              <>
+                <Box display='flex' flexDirection='row' justifyContent='space-between'>
+                  <IconButton onClick={selectPreviousDay}><ArrowBackIcon/></IconButton>
+                  <Typography variant="h4">{selectedDay.toLocaleDateString()}</Typography>
+                  <IconButton onClick={selectNextDay}><ArrowForwardIcon/></IconButton>
+                </Box>
+                { selectedDay && <WateringDetailDrawer/> }
+              </>
+            </Paper></Box>}
+
         </Container>
       </Box>
       <Switch>

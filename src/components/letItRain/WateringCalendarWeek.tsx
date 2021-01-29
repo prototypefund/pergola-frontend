@@ -49,7 +49,6 @@ const WateringCalendarWeek = ( {preselectedDate, defaultDayCount = 7 }: Watering
   const [dayCount, setDayCount] = useState( 7 )
   const [{ startDate, endDate}, setTimeWindow] = useState( {
     startDate:  dayjs( preselectedDate ).subtract( dayCount, 'day' ).toDate(), endDate: dayjs( preselectedDate ).add( dayCount, 'day' ).toDate() } )
-  const [drawerWateringDay, setDrawerWateringDay] = useState<boolean>( false )
   const {data: wateringTasksData} = useQuery<{WateringTask: WateringTask[]}, { dateFrom: _Neo4jDate, dateTo: _Neo4jDate}>( GET_WATERING_TASKS, {
     variables: {
       dateFrom: toNeo4JDate( startDate ),
@@ -116,9 +115,8 @@ const WateringCalendarWeek = ( {preselectedDate, defaultDayCount = 7 }: Watering
     }
   }, [startDate, endDate, wateringTasksData] )
 
-  const select = ( i, date ) => {
+  const select = ( date: Date ) => {
     dispatch( selectDay( date ))
-    setDrawerWateringDay( true )
   }
 
   const selectPreviousDay = () => {
@@ -150,7 +148,7 @@ const WateringCalendarWeek = ( {preselectedDate, defaultDayCount = 7 }: Watering
         <Box display='flex' flexDirection='row' alignItems='baseline' minHeight={'80px'}>
           {calendarDates.map(( { date, recruiterCount, inPeriod, itsMyTurn, iAmAvailable }, i ) => (
             <WateringCalendarTaskItem
-              onSelect={() => select( i, date.toDate())}
+              onSelect={() => select( date.toDate())}
               active={selectedDay && date.isSame( selectedDay, 'day' )}
               onActivate={handleTaskSelected}
               key={date.toISOString()}
@@ -163,17 +161,6 @@ const WateringCalendarWeek = ( {preselectedDate, defaultDayCount = 7 }: Watering
 
         </Box>
       </ScrollContainer>
-      {drawerWateringDay && <Box  position='absolute' left={0} width='100%' display='flex' justifyContent='center' marginTop='40px'>
-        <Paper>
-          <>
-            <Box display='flex' flexDirection='row' justifyContent='space-between'>
-              <IconButton onClick={selectPreviousDay}><ArrowBackIcon/></IconButton>
-              <Typography variant="h4">{selectedDay && selectedDay?.toLocaleDateString()}</Typography>
-              <IconButton onClick={selectNextDay}><ArrowForwardIcon/></IconButton>
-            </Box>
-            { selectedDay && <WateringDetailDrawer onDrawerClose={() => setDrawerWateringDay( false )}/> }
-          </>
-        </Paper></Box>}
     </div>
   )
 }
