@@ -143,10 +143,16 @@ const WateringCalendarWeek = ( {preselectedDate, defaultDayCount = 7 }: Watering
 
   return (
     <div ref={outerDiv}>
-      <Typography variant='h4' style={{width: '100%', textAlign: 'center'}}>{selectedDay && dayjs( selectedDay ).format( 'DD. MMMM YYYY' )}</Typography>
+      <Box display='flex' flexDirection='row' justifyContent='space-between'>
+        <IconButton onClick={selectPreviousDay}><ArrowBackIcon/></IconButton>
+        <Typography variant='h4' style={{width: '100%', textAlign: 'center'}}>
+          {selectedDay && dayjs( selectedDay ).format( 'dd, DD. MMMM YYYY' ) + ( dayjs( selectedDay ).isSame( new Date(), 'day' ) ? ' (heute)' : '' )}
+        </Typography>
+        <IconButton onClick={selectNextDay}><ArrowForwardIcon/></IconButton>
+      </Box>
       <ScrollContainer className={'container'} horizontal style={{height: '100px', width: '100%', whiteSpace: 'nowrap'}}>
         <Box display='flex' flexDirection='row' alignItems='baseline' minHeight={'80px'}>
-          {calendarDates.map(( { date, recruiterCount, inPeriod, itsMyTurn, iAmAvailable }, i ) => (
+          {calendarDates.map(( { date, recruiterCount, inPeriod, itsMyTurn, iAmAvailable } ) => (
             <WateringCalendarTaskItem
               onSelect={() => select( date.toDate())}
               active={selectedDay && date.isSame( selectedDay, 'day' )}

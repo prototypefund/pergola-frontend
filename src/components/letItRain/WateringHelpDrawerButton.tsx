@@ -1,42 +1,41 @@
 import {Button, Container, Typography} from '@material-ui/core'
-import { Help as HelpIcon} from '@material-ui/icons'
 import * as React from 'react'
-import {useState} from 'react'
 
 import {BottomDrawer} from '../basic'
 import {AvailableIcon, ItsMyTurnIcon, IWillHelpIcon} from './icons'
 
-export function WateringHelpDrawerButton() {
-  const [drawerOpen, setDrawerOpen] = useState( false )
+interface Props {
+  drawerOpen: boolean;
+  onClose?: () => void;
+}
+
+export function WateringHelpDrawer( {drawerOpen, onClose } : Props ) {
 
   return (
-    <>
-      <Button onClick={() => setDrawerOpen( true )}>Hilfe <HelpIcon/></Button>
-      <BottomDrawer
-        open={drawerOpen}
-        toolbar={<Typography variant='h5'>Hilfe zum Gießplan</Typography>}
-        onClose={() => setDrawerOpen( false )}>
-        <Container style={{minHeight: '300px', backgroundColor: 'white'}}>
-          <Typography>
+    <BottomDrawer
+      open={drawerOpen}
+      toolbar={<Typography variant='h5'>Hilfe zum Gießplan</Typography>}
+      onClose={onClose}>
+      <Container style={{minHeight: '300px', backgroundColor: 'white'}}>
+        <Typography>
              Die Tropfen zeigen dir deine Gießzeiten.
-          </Typography>
-          <Typography>
-            <ItsMyTurnIcon /> Du bist fest zum Gießen eingeplant.
-          </Typography>
-          <Typography>
-            <AvailableIcon/>Du hast dich verfügbar gemeldet, aber der Gießplan ist noch nicht erstellt.
-          </Typography>
-          <Typography>
-            <IWillHelpIcon/> Du kannst einen spontanen Einsatz anmelden.
-          </Typography>
-          <Typography>
+        </Typography>
+        <Typography>
+          <ItsMyTurnIcon /> Du bist fest zum Gießen eingeplant.
+        </Typography>
+        <Typography>
+          <AvailableIcon/>Du hast dich verfügbar gemeldet, aber der Gießplan ist noch nicht erstellt.
+        </Typography>
+        <Typography>
+          <IWillHelpIcon/> Du kannst einen spontanen Einsatz anmelden.
+        </Typography>
+        <Typography>
             Die Farben zeigen dir, wie viele Menschen sich zum Gießen gemeldet haben.
-          </Typography>
+        </Typography>
 
-          <Button onClick={() => setDrawerOpen( false )}>Okay, verstanden!</Button>
-        </Container>
-      </BottomDrawer>
-    </>
+        <Button onClick={() => onClose && onClose()}>Okay, verstanden!</Button>
+      </Container>
+    </BottomDrawer>
   )
 }
 
