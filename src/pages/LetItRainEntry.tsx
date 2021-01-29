@@ -31,7 +31,7 @@ export function LetItRainEntry() {
             }
             <WeekSelector date={today.toDate()}>
               {( {startDate, nextPage, prevPage} ) => (
-                <WateringCalendarWeek startDate={startDate}  onNextPageRequested={nextPage} onPrevPageRequested={prevPage} />
+                <WateringCalendarWeek preselectedDate={startDate}  onNextPageRequested={nextPage} onPrevPageRequested={prevPage} />
               )}
             </WeekSelector>
           </PaperDrop>
