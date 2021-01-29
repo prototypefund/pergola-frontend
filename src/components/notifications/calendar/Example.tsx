@@ -23,11 +23,16 @@ function renderCell( date: Date, jcalData = undefined ) {
 
 export function ExampleCalendar() {
   return (
-    <CalDav
-      root={process.env.WEBDAV_URL || 'http://localhost:4001/calendar'}
-      path={'/public/wateringTasks.ics'}
-    >
-      <Calendar bordered renderCell={renderCell} isoWeek={true} />
-    </CalDav>
+    <>
+      <style>
+        { '@media print { .rs-calendar-panel .rs-calendar-table-cell-selected .rs-calendar-table-cell-content {border: none;}.rs-calendar-panel .rs-calendar-table-cell-is-today .rs-calendar-table-cell-day{color: inherit}}' }
+      </style>
+      <CalDav
+        root={process.env.WEBDAV_URL || 'http://localhost:4001/calendar'}
+        path={'/public/wateringTasks.ics'}
+      >
+        <Calendar bordered renderCell={renderCell} isoWeek={true} />
+      </CalDav>
+    </>
   )
 }
