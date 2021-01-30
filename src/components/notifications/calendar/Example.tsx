@@ -25,7 +25,7 @@ export function ExampleCalendar() {
   return (
     <>
       <style>
-        { '@media print { .rs-calendar-panel .rs-calendar-table-cell-selected .rs-calendar-table-cell-content {border: none;}.rs-calendar-panel .rs-calendar-table-cell-is-today .rs-calendar-table-cell-day{color: inherit}}' }
+        {'@media print {.rs-calendar-header-forward, .rs-calendar-header-backward, .rs-calendar-btn-today {display: none} .rs-calendar-panel .rs-calendar-table-cell-selected .rs-calendar-table-cell-content {border: none;}.rs-calendar-panel .rs-calendar-table-cell-is-today .rs-calendar-table-cell-day{color: inherit; background: none;}}' }
       </style>
       <CalDav
         root={process.env.WEBDAV_URL || 'http://localhost:4001/calendar'}
