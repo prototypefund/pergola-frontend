@@ -168,7 +168,7 @@ export function Calendar( { dates = [], onChange, selectedDates: _selectedDates 
     )
   }
 
-  function DateCheckBox( { date } ): React.ReactElement<{ date: Date }> {
+  function DateCheckBox( { date, disabled } ): React.ReactElement<{ date: Date }> {
     return (
       <div>
         <Checkbox
@@ -180,7 +180,8 @@ export function Calendar( { dates = [], onChange, selectedDates: _selectedDates 
           icon={<CheckBoxIcon />}
           color="primary"
           onChange={( e ) => handleDateChange( e, date )}
-          checked={dateIncluded( selectedDates, date )}
+          checked={dateIncluded( selectedDates, date ) && !disabled}
+          disabled={disabled}
         />
       </div>
     )
@@ -241,17 +242,25 @@ export function Calendar( { dates = [], onChange, selectedDates: _selectedDates 
               control={<CwCheckBox cw={cw} />}
               label={`CW ${cw}`}
             />
-            {datesByWeeks.get( cw ).map(( date: Date, dateIndex: number ) => (
-              <FormControlLabel
-                key={dateIndex}
-                classes={{
-                  root: classes.checkBoxLabel,
-                  label: classes.checkBoxLabelText,
-                }}
-                control={<DateCheckBox date={date} />}
-                label={date.getDate()}
-              />
-            ))}
+            {[...new Array( 7 )].map(( e, dayOfWeek ) => {
+              { // Make sure each day has a date.
+                let date = datesByWeeks.get( cw ).find( date => dayjs( date ).weekday() === dayOfWeek )
+                const dateAvailable = ( !! date )
+                if ( ! dateAvailable ) {
+                  // Provide missing date by week and day number.
+                  date = dayjs().week( cw ).weekday( dayOfWeek ).toDate()
+                }
+                return <FormControlLabel
+                  key={dayjs( date ).format( 'DD-MM-YYYY' )}
+                  classes={{
+                    root: classes.checkBoxLabel,
+                    label: classes.checkBoxLabelText,
+                  }}
+                  control={<DateCheckBox date={date} disabled={! dateAvailable} />}
+                  label={date.getDate()}
+                />
+              }
+            } )}
           </FormGroup>
         ))}
       </div>
