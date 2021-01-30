@@ -45,10 +45,6 @@ jobs:
           command: |
             groupadd --system nobody && useradd --system -g nobody nobody
             mkdir -p /usr/bin && nix shell nixpkgs#which --command bash -c 'ln -s $(which env) /usr/bin/'
-            export GRAPHQL_SERVER_URL=https://api.pergola.gra.one/graphql
-            export PERGOLA_API_HOST=api.pergola.gra.one
-            export PERGOLA_APP_HOST=live.pergola.gra.one
-            export KEYCLOAK_HOST=keycloak.pergola.gra.one
             nix develop .#trivial --command npx yarn run build-prod
 #     - run: nix shell .#deploy --command deploy ./index.html index.html  ## create a $GITHUB_TOKEN for the project first
       - add_ssh_keys
@@ -63,6 +59,16 @@ jobs:
             git commit -m build
             git remote add deployment deploy-pergola@live.pergola.gra.one:~/live/frontend
             git push --force deployment
+      - run:
+          name: Check Availability
+          command: |
+            URL="https://live2.pergola.gra.one/"
+            TIMEOUT=60
+            (for i in $(seq $TIMEOUT); do
+              [ $(nix shell nixpkgs#curl --command curl -s -o /dev/null -w "%{http_code}" $URL) = "200" ] && echo online && exit 0
+              echo -n .; sleep 1
+             done && echo offline && false
+            )
 workflows:
   version: 2
   build+test+deploy:
