@@ -1,0 +1,12 @@
+#!/usr/bin/env -S bash -e
+
+## in non-bare-repos we start in ./.git/ while in bare-repos we are already toplevel
+. git-sh-setup && cd_to_toplevel && [ $(is_bare_repository) = "false" ] && cd ..
+
+(date; echo
+ git checkout -f live; echo
+ git log -n2; echo
+
+ cd ..
+ set -o allexport && source live.env && docker-compose up --build -d
+) 2>&1 >../frontend-deploy.log

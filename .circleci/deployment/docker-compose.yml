@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  pergola-live-frontend:
+    restart: unless-stopped
+    build: 
+      context: ./frontend
+      dockerfile: .circleci/deployment/Dockerfile
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik"
+      - "traefik.http.services.pergola-live-frontend.loadbalancer.server.port=80"
+      - "traefik.http.routers.pergola-live-frontend.service=pergola-live-frontend"
+      - "traefik.http.routers.pergola-live-frontend.rule=Host(`${PERGOLA_APP_HOST}`)"
+      - "traefik.http.routers.pergola-live-frontend.entrypoints=websecure"
+      - "traefik.http.routers.pergola-live-frontend.tls.certresolver=myresolver"
+networks:
+  traefik:
+    external: true

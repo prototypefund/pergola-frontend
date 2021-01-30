@@ -10,7 +10,7 @@ pkgs.mkShell {
     echo -e '\nFor a production build run:'
     echo '> npx yarn run build-prod'
 
-    ## TODO load env-file depending on $ENV
-    source .circleci/live.env
+    ENV=''${ENV:-live}
+    set -o allexport && source .circleci/$ENV.env
   '';
 }
