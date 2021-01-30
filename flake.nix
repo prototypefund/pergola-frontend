@@ -12,6 +12,8 @@
   in
   rec {
     legacyPackages.x86_64-linux = {
+      trivial = import ./nix/trivial/shell.nix { inherit pkgs; };
+
       jq = pkgs.jq;
       node2nix = pkgs.nodePackages.node2nix;
       deploy = import ./nix/deploy.nix { inherit pkgs; };
@@ -20,6 +22,7 @@
       pergola-frontend = import ./nix/default.nix { inherit pkgs; };
     };
 
-    defaultPackage.x86_64-linux = legacyPackages.x86_64-linux.pergola-frontend;
+    #defaultPackage.x86_64-linux = legacyPackages.x86_64-linux.pergola-frontend;
+    defaultPackage.x86_64-linux = legacyPackages.x86_64-linux.trivial;
   };
 }

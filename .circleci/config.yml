@@ -16,7 +16,13 @@ jobs:
             - nix-{{ checksum "flake.lock" }}-{{ checksum "flake.nix" }}
             - nix
       - run:
-          name: Build
+          name: Trivial build
+          command: |
+            groupadd --system nobody && useradd --system -g nobody nobody
+            mkdir -p /usr/bin && nix shell nixpkgs#which --command bash -c 'ln -s $(which env) /usr/bin/'
+            nix develop .#trivial --command npx yarn run build-prod
+      - run:
+          name: Pure build
           command: echo TODO
       - save_cache:
           key: nix-{{ checksum "flake.lock" }}-{{ checksum "flake.nix" }}
@@ -35,8 +41,11 @@ jobs:
             - nix-{{ checksum "flake.lock" }}-{{ checksum "flake.nix" }}
             - nix
       - run:
-          name: stub  ## TODO
-          command: echo 'hallo welt' > ./index.html
+          name: Trivial build  ## TODO use the result from the previous build
+          command: |
+            groupadd --system nobody && useradd --system -g nobody nobody
+            mkdir -p /usr/bin && nix shell nixpkgs#which --command bash -c 'ln -s $(which env) /usr/bin/'
+            nix develop .#trivial --command npx yarn run build-prod
 #     - run: nix shell .#deploy --command deploy ./index.html index.html  ## create a $GITHUB_TOKEN for the project first
       - add_ssh_keys
       - run:
@@ -46,7 +55,7 @@ jobs:
             git config --global user.email "build@circleci.com"
             git config --global user.name "CI/CD"
             git switch -c live
-            git add index.html
+            git add -f www
             git commit -m build
             git remote add deployment deploy-pergola@live.pergola.gra.one:~/live/frontend
             git push --force deployment
