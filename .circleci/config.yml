@@ -45,6 +45,10 @@ jobs:
           command: |
             groupadd --system nobody && useradd --system -g nobody nobody
             mkdir -p /usr/bin && nix shell nixpkgs#which --command bash -c 'ln -s $(which env) /usr/bin/'
+            export GRAPHQL_SERVER_URL=https://api.pergola.gra.one/graphql
+            export PERGOLA_API_HOST=api.pergola.gra.one
+            export PERGOLA_APP_HOST=live.pergola.gra.one
+            export KEYCLOAK_HOST=keycloak.pergola.gra.one
             nix develop .#trivial --command npx yarn run build-prod
 #     - run: nix shell .#deploy --command deploy ./index.html index.html  ## create a $GITHUB_TOKEN for the project first
       - add_ssh_keys
