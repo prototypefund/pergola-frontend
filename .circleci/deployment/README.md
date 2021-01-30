@@ -6,22 +6,10 @@ To setup a git-server you can follow [this instructions](https://git-scm.com/boo
 
 The ci expects the live-system to be at `deploy-pergola@live.pergola.gra.one:~/live/$REPO`
 
-### Docker-compose
-
-For security-reasons we don't allow git-users to alter the docker-compose.yml and the environment-variables. Instead copy the files in the directory above the repositories:
+To be able to deploy, the user needs be added to group `docker`:
 
 ```
-cd ~/live
-cp frontend/.circleci/deployment/docker-compose.yml .
-cp frontend/.circleci/live.env .
-```
-
-### Git-Hooks
-
-The same for the hooks:
-
-```
-cp frontend/.circleci/deployment/hooks/post-receive frontend/.git/hooks/
+adduser deploy-pergola docker
 ```
 
 ### Repositories
@@ -34,4 +22,22 @@ cd ~/live
 git init frontend
 cd frontend
 git config receive.denyCurrentBranch ignore
+```
+
+### Git-Hooks
+
+Copy, don't link!
+
+```
+cp frontend/.circleci/deployment/hooks/post-receive frontend/.git/hooks/
+```
+
+### Docker-compose
+
+For security-reasons we don't allow git-users to alter the docker-compose.yml and the environment-variables. Instead copy the files in the directory above the repositories:
+
+```
+cd ~/live
+cp frontend/.circleci/deployment/docker-compose.yml .
+cp frontend/.circleci/live.env .
 ```

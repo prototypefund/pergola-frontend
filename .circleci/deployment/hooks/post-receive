@@ -3,7 +3,7 @@
 ## in non-bare-repos we start in ./.git/ while in bare-repos we are already toplevel
 . git-sh-setup && cd_to_toplevel && [ $(is_bare_repository) = "false" ] && cd ..
 
-(date; echo
+(date
  git checkout -f live; echo
  git log -n2; echo
 
