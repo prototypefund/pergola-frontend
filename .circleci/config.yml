@@ -18,14 +18,15 @@ jobs:
       - run:
           name: Trivial build
           command: |
-            groupadd --system nobody && useradd --system -g nobody nobody
-            mkdir -p /usr/bin && nix shell nixpkgs#which --command bash -c 'ln -s $(which env) /usr/bin/'
             nix develop .#trivial --command npx yarn run build-prod
+            nix-store --delete /nix/store/*-www || true
+            nix-store --add www
       - run:
           name: Pure build
           command: echo TODO
       - save_cache:
-          key: nix-{{ checksum "flake.lock" }}-{{ checksum "flake.nix" }}
+          ## As long as we want reuse nonpure builds, we always save
+          key: nix-{{ checksum "flake.lock" }}-{{ checksum "flake.nix" }}-{{ .BuildNum }}
           paths:
             - /nix/
   deploy:
@@ -40,12 +41,6 @@ jobs:
           keys:
             - nix-{{ checksum "flake.lock" }}-{{ checksum "flake.nix" }}
             - nix
-      - run:
-          name: Trivial build  ## TODO use the result from the previous build
-          command: |
-            groupadd --system nobody && useradd --system -g nobody nobody
-            mkdir -p /usr/bin && nix shell nixpkgs#which --command bash -c 'ln -s $(which env) /usr/bin/'
-            nix develop .#trivial --command npx yarn run build-prod
 #     - run: nix shell .#deploy --command deploy ./index.html index.html  ## create a $GITHUB_TOKEN for the project first
       - add_ssh_keys
       - run:
@@ -55,6 +50,7 @@ jobs:
             git config --global user.email "build@circleci.com"
             git config --global user.name "CI/CD"
             git switch -c live
+            cp -r /nix/store/*-www www
             git add -f www
             git commit -m build
             git remote add deployment deploy-pergola@live.pergola.gra.one:~/live/frontend
