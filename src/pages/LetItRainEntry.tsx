@@ -13,6 +13,7 @@ import {WateringDetailDrawer} from '../components/letItRain/WateringDetailDrawer
 import {webdavUrl} from '../config/calendat'
 import {RootState} from '../reducers'
 import BackgroundImage from '../static/background_full_grey_01.jpg'
+import {LetItRainAvailabilityDialog} from './LetItRainAvailabilityDialog'
 import {LetItRainWizard} from './LetItRainWizard'
 
 
@@ -58,6 +59,10 @@ export function LetItRainEntry() {
       </Box>
       <Switch>
         <Route path='/watering/wizard/:stepNumber' component={LetItRainWizard} />
+        <Route path="/watering/availability/:startDate" render={ ( { match } ) => {
+          const { startDate = new Date()} = match.params
+          return ( <LetItRainAvailabilityDialog startDate={dayjs( startDate, 'YYYY-MM-DD' ).toDate()} /> )
+        }} />
       </Switch>
     </>
   )
