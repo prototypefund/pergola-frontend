@@ -3,6 +3,8 @@
   #!${pkgs.runtimeShell} -xe
   export PATH="${pkgs.stdenv.lib.makeBinPath (with pkgs; [github-release])}"
 
+  ## $GITHUB_TOKEN must be a `personal access token` with scope `public_repo`.
+  ## The owner of the token must be projekt owner of the repo.
   [ -n "$GITHUB_TOKEN" ]
 
   export GITHUB_USER="$CIRCLE_PROJECT_USERNAME"
@@ -12,7 +14,8 @@
   export FILE="$1"
   export NAME="$2"
 
-  github-release delete -t $TAG || true
-  github-release release -t $TAG
-  github-release upload -t $TAG -f "$FILE" -n "$NAME"
+  (github-release delete -t $TAG || true
+   github-release release -t $TAG
+   github-release upload -t $TAG -f "$FILE" -n "$NAME"
+  ) 2>/dev/null  ## prevent leakage of $GITHUB_TOKEN
 '')
