@@ -26,9 +26,8 @@ import { Link, Route, Router } from 'react-router-dom'
 
 import { Login } from './components'
 import { history } from './configureStore'
-import {GardenOverviewPage, LandingPage} from './pages'
+import {GardenOverviewPage, LandingPage,LetItRainEntry} from './pages'
 import { CalendarAndNotifications } from './pages/CalendarAndNotifications'
-import {LetItRainEntry} from './pages/LetItRainEntry'
 import { withRoot } from './withRoot'
 
 function Routes() {
@@ -48,7 +47,6 @@ function Routes() {
 
 function a11yTabProps( index, route ) {
   return {
-    showLabel: false,
     component: Link,
     to: `/${route}`,
     id: `scrollable-prevent-tab-${index}`,

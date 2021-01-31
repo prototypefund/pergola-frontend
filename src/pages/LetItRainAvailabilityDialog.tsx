@@ -79,6 +79,7 @@ export function LetItRainAvailabilityDialog( {startDate } : Props ) {
       }} )
 
   useEffect(() => {
+    if( !tasks || tasks.length <= 0 ) return
     const _availableDates = tasks.map( t => t ? fromNeo4jDate( t.date ) : new Date())
     setAvailableDates( _availableDates )
   }, [tasks] )

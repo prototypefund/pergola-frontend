@@ -83,7 +83,7 @@ const WateringCalendarWeek = ( {preselectedDate, defaultDayCount = 7 }: Watering
 
 
   const outerDiv = useRef( null )
-  useResizeObserver( outerDiv,
+  outerDiv && useResizeObserver( outerDiv,
     ( {width} ) => {
       setDayCount( prev => {
         const v = Math.floor( width / 60 ) + defaultDayCount
