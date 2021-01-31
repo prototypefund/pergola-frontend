@@ -6,8 +6,13 @@ let
 in
 pkgs.mkShell {
   buildInputs = with pkgs; [
-    apktool gradle
+    ## for android
+    openjdk8 gradle
+    apktool
     androidSdk glibc
+
+    ## for cordova
+    nodejs-14_x
   ];
 
   ANDROID_SDK_ROOT_RO = "${androidSdk}/libexec/android-sdk";
@@ -16,12 +21,25 @@ pkgs.mkShell {
   GRADLE_OPTS = "-Dorg.gradle.project.android.aapt2FromMavenOverride=${ANDROID_SDK_ROOT}/build-tools/30.0.3/aapt2";
 
   shellHook = ''
+    [ "$CIRCLECI" = "true" ] && set -euxo pipefail
+
     export ANDROID_SDK_ROOT="${ANDROID_SDK_ROOT}"
     [ -d $ANDROID_SDK_ROOT ] && rm -r $ANDROID_SDK_ROOT
     cp -rL $ANDROID_SDK_ROOT_RO $ANDROID_SDK_ROOT
     chmod -R a+w $ANDROID_SDK_ROOT
 
+    npx yarn
+    (cd cordova && npm i)
+    [ -d cordova/www ] || mkdir cordova/www
+    [ -d cordova/platforms ] && echo 'You might want delete ./cordova/platforms'
+    [ -d cordova/platforms/android ] || (cd cordova && npx cordova platform add android)
+
     echo 'You should be able to build the apk:'
     echo '> (cd cordova && npx cordova build android)'
+    echo 'The full build is started by:'
+    echo '> npx yarn run build-prod-cordova-android'
+
+    ENV=''${ENV:-live}
+    set -o allexport && source .circleci/$ENV.env
   '';
 }
