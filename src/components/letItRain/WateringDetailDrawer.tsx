@@ -3,11 +3,13 @@ import {gql, useQuery} from '@apollo/client'
 import {Box, Button, Container, makeStyles, Paper, Typography} from '@material-ui/core'
 import {AddCircle} from '@material-ui/icons'
 import AvatarComponent from 'avataaars'
+import dayjs from 'dayjs'
 import {KeycloakProfile} from 'keycloak-js'
 import * as React from 'react'
 import {useSelector} from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
-import {toNeo4JDate} from '../../helper'
+import {toNeo4jDateInput} from '../../helper'
 import {RootState} from '../../reducers'
 import {WateringTask} from '../../types/graphql'
 import {CornerBadge} from '../basic'
@@ -34,10 +36,11 @@ const GET_WATERING_TASK = gql`
 
 export function WateringDetailDrawer( { onDrawerClose}: Props ) {
   const classes = useStyles()
+  const history = useHistory()
   const date = useSelector<RootState, Date>(( {letItRain: { selectedDate = new Date() }} ) => selectedDate )
   const {data: WateringTaskData} = useQuery<{ WateringTask: WateringTask[] }>( GET_WATERING_TASK, {
     variables: {
-      date: toNeo4JDate( date )
+      date: toNeo4jDateInput( date )
     }
   } )
   const userProfile = useSelector<RootState, KeycloakProfile | null>(( {userProfile} ) => userProfile )
@@ -86,7 +89,9 @@ export function WateringDetailDrawer( { onDrawerClose}: Props ) {
     return (
       <Paper className={classes.paper}>
         <Typography variant='h6'>Leider noch planlos</Typography>
-        <Button variant='outlined'>
+        <Button
+          variant='outlined'
+          onClick={() => history.push( `/watering/availability/${dayjs( date ).format( 'YYYY-MM-DD' )}` ) }>
           <CornerBadge cornerActive={iAmAvailable} className={classes.cornerButton}>
             <div>
               <Typography>Du bist {!iAmAvailable && 'nicht'} verfügbar</Typography>

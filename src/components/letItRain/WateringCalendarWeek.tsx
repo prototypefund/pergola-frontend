@@ -1,5 +1,5 @@
 import {gql, useQuery} from '@apollo/client'
-import {Box, IconButton, Paper, Typography} from '@material-ui/core'
+import {Box, IconButton, Typography} from '@material-ui/core'
 import {
   ChevronLeft as ArrowBackIcon, ChevronRight as ArrowForwardIcon
 } from '@material-ui/icons'
@@ -12,12 +12,11 @@ import {useDispatch, useSelector} from 'react-redux'
 import {useResizeObserver} from 'react-resize-observer-hook'
 
 import {nextDay, previousDay, selectDay} from '../../actions'
-import {equalsNeo4jDate, toNeo4JDate} from '../../helper'
+import {equalsNeo4jDate, toNeo4jDateInput} from '../../helper'
 import {RootState} from '../../reducers'
-import {_Neo4jDate, WateringTask} from '../../types/graphql'
+import {_Neo4jDateInput, WateringTask} from '../../types/graphql'
 import {toWateringTaskInfo} from './helper'
 import {WateringCalendarTaskItem} from './WateringCalendarTaskItem'
-import {WateringDetailDrawer} from './WateringDetailDrawer'
 
 interface WateringCalendarWeekProps {
   preselectedDate: Date;
@@ -50,10 +49,10 @@ const WateringCalendarWeek = ( {preselectedDate, defaultDayCount = 7 }: Watering
   const [dayCount, setDayCount] = useState( 7 )
   const [{ startDate, endDate}, setTimeWindow] = useState( {
     startDate:  dayjs( preselectedDate ).subtract( dayCount, 'day' ).toDate(), endDate: dayjs( preselectedDate ).add( dayCount, 'day' ).toDate() } )
-  const {data: wateringTasksData} = useQuery<{WateringTask: WateringTask[]}, { dateFrom: _Neo4jDate, dateTo: _Neo4jDate}>( GET_WATERING_TASKS, {
+  const {data: wateringTasksData} = useQuery<{WateringTask: WateringTask[]}, { dateFrom: _Neo4jDateInput, dateTo: _Neo4jDateInput}>( GET_WATERING_TASKS, {
     variables: {
-      dateFrom: toNeo4JDate( startDate ),
-      dateTo: toNeo4JDate( endDate  )
+      dateFrom: toNeo4jDateInput( startDate ),
+      dateTo: toNeo4jDateInput( endDate  )
     }
   } )
 

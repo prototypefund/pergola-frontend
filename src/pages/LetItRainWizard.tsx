@@ -7,7 +7,7 @@ import {useState} from 'react'
 import {Link, useHistory, useParams} from 'react-router-dom'
 
 import {Calendar, HorizontalStepper, LetItRainFrequency, NotificationSettings} from '../components'
-import {fromNeo4JDate, toNeo4JDate} from '../helper'
+import {fromNeo4jDate, toNeo4jDateInput} from '../helper'
 import {_Neo4jDateInput, UserSettings, UserSettingsInput, WateringPeriod} from '../types/graphql'
 
 export interface LetItRainWizardRouterProps {
@@ -60,7 +60,7 @@ export function LetItRainWizard() {
 
   const [setUserAvailabilityMutation] =
       useMutation<Boolean, { dates: Array<_Neo4jDateInput> }>( SET_USER_AVAILABLITY_FOR_WATERING_PERIOD,
-        {variables: {dates: availableDates.map( toNeo4JDate )}} )
+        {variables: {dates: availableDates.map( toNeo4jDateInput )}} )
 
   const [ mergeUserSettings ] =
       useMutation<UserSettings, {settings: UserSettingsInput}>( MERGE_USER_SETTINGS,
@@ -71,7 +71,7 @@ export function LetItRainWizard() {
   const calendarDates = tasks.length === 0
     ? [...Array( DAYS_COUNT )]
       .map(( _, i ) => lastMondayDate.add( i, 'day' ).toDate())
-    :  tasks.map( t => t ? fromNeo4JDate( t.date ) : new Date())
+    :  tasks.map( t => t ? fromNeo4jDate( t.date ) : new Date())
 
   const steps: StepDesc[] = [
     {
