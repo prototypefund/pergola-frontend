@@ -44,7 +44,7 @@ export const WateringCalendarTaskItem = (
 
   useEffect(() => {
     onActivate && active && onActivate( active, ref?.current )
-  }, [active] )
+  }, [active, ref] )
 
 
 
