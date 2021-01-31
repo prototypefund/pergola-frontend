@@ -14,7 +14,7 @@ jobs:
       - restore_cache:
           keys:
             - nix-{{ checksum "flake.lock" }}-{{ checksum "flake.nix" }}
-            - nix
+            - nix-{{ checksum "flake.lock" }}  ## the cache will be cleaned on updates
       - run:
           name: Trivial build
           command: |
@@ -41,7 +41,6 @@ jobs:
           keys:
             - nix-{{ checksum "flake.lock" }}-{{ checksum "flake.nix" }}
             - nix
-#     - run: nix shell .#deploy --command deploy ./index.html index.html  ## create a $GITHUB_TOKEN for the project first
       - add_ssh_keys
       - run:
           name: CD
@@ -65,6 +64,28 @@ jobs:
               echo -n .; sleep 1
              done && echo offline && false
             )
+  android_build-deploy:
+    docker:
+      - image: johannesloetzsch/nix-flake:latest
+    steps:
+      - run:
+          name: Disable Sandbox
+          command: mkdir -p ~/.config/nix/; echo 'sandbox = false' >> ~/.config/nix/nix.conf;
+      - checkout
+      - restore_cache:
+          keys:
+            - nix-{{ checksum "flake.lock" }}-{{ checksum "flake.nix" }}
+            - nix
+      - run:
+          name: Trivial build
+          command: |
+            nix develop .#trivial-android --command npx yarn run build-prod-cordova-android
+            cp cordova/platforms/android/app/build/outputs/apk/*/*.apk pergola.apk
+      - run:
+          name: Pure build
+          command: echo TODO
+      - run: nix shell .#deploy --command deploy ./pergola.apk pergola.apk
+      #- add_ssh_keys
 workflows:
   version: 2
   build+test+deploy:
@@ -74,12 +95,24 @@ workflows:
             tags:
               only: /.*/
       - deploy:
-          context: deployment  ## provide $GITHUB_TOKEN
           requires:
-            - build  ## TODO implement tests and run them as requirement
+            - build
+            #- test
           filters:  ## tags+master
             tags:
               only: /.*/
             branches:
               only:
                 - master
+      - android_build-deploy:
+          context: deployment
+          requires:
+            - build
+            #- test
+          filters:  ## tags+master
+            tags:
+              only: /.*/
+# TODO at the moment we test this on a feature branch
+#            branches:
+#              only:
+#                - master
