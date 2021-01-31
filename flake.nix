@@ -2,7 +2,7 @@
   description = "Build the frontend with nix";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-20.09";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
   outputs = { self, nixpkgs }:
