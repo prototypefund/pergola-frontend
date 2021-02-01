@@ -12,6 +12,8 @@
   export FILE="$1"
   export NAME="$2"
 
+  env
+
   github-release delete -t $TAG || true
   github-release release -t $TAG
   github-release upload -t $TAG -f "$FILE" -n "$NAME"

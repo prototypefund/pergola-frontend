@@ -84,8 +84,10 @@ jobs:
       - run:
           name: Pure build
           command: echo TODO
+      ## TODO debug credentials
       - add_ssh_keys
-      - run: nix shell .#deploy --command deploy ./pergola.apk pergola.apk || true  ## TODO debug credentials
+      - run: ls -l ./pergola.apk
+      - run: nix shell .#deploy --command deploy ./pergola.apk pergola.apk || true
 workflows:
   version: 2
   build+test+deploy:
