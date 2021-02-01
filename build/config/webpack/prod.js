@@ -21,7 +21,7 @@ module.exports = merge( commonConfig, {
   },
   devtool: 'source-map',
   plugins:
-    isCordova ? [
+    !isCordova ? [
       new WorkboxPlugin.InjectManifest( {
         swSrc: resolvePath( 'src/service-worker.js' ),
       } )

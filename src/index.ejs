@@ -29,9 +29,17 @@
       name="apple-mobile-web-app-status-bar-style"
       content="black-translucent"
     />
-    <link rel="icon" type="image/png" sizes="196x196" href="static/icons/favicon-196.png">
-    <link rel="apple-touch-icon" href="static/icons/apple-icon-180.png">
+    <link rel="icon" type="image/png" sizes="196x196" href="/static/icons/favicon-196.png">
+    <link rel="apple-touch-icon" href="/static/icons/apple-icon-180.png">
     <link rel="manifest" href="/manifest.json" />
+    <script>
+    // Check that service workers are supported
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js');
+      });
+    }
+    </script>
     <% } %>
     <!-- built styles file will be auto injected -->
   </head>
