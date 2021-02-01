@@ -64,7 +64,8 @@ module.exports = {
       'REACT_APP_KEYCLOAK_CLIENT_ID',
       'PERGOLA_API_URL',
       'NODE_ENV',
-      'WEBDAV_URL'
+      'WEBDAV_URL',
+      'TARGET',
     ] ),
     new CheckerPlugin(),
     new HtmlWebpackPlugin( {
