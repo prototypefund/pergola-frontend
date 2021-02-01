@@ -85,7 +85,18 @@ jobs:
           name: Pure build
           command: echo TODO
       - run: nix shell .#deploy --command deploy ./pergola.apk pergola.apk || true  ## TODO debug credentials
-      #- add_ssh_keys
+      - add_ssh_keys
+      - run:
+          name: CD
+          command: |
+            cat .circleci/known_hosts >> ~/.ssh/known_hosts
+            git config --global user.email "build@circleci.com"
+            git config --global user.name "CI/CD"
+            git switch -c fdroid
+            git add -f *.apk
+            git commit -m 'apk build'
+            git remote add deployment deploy-pergola@live.pergola.gra.one:~/live/fdroid
+            git push --force deployment
 workflows:
   version: 2
   build+test+deploy:
@@ -97,7 +108,6 @@ workflows:
       - deploy:
           requires:
             - build
-            #- test
           filters:  ## tags+master
             tags:
               only: /.*/
@@ -108,10 +118,8 @@ workflows:
           context: deployment
           requires:
             - build
-            #- test
-          filters:  ## tags+master
+          filters:  ## tags
             tags:
               only: /.*/
             branches:
-              only:
-                - master
+              ignore: /.*/
