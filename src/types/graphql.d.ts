@@ -745,7 +745,7 @@ export type UserSettings = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  mergeUserSettings?: Maybe<UserSettings>;
+  ownMergeUserSettings?: Maybe<UserSettings>;
   seedNeo4jFromJSON?: Maybe<Scalars['Boolean']>;
   setUserAvailability?: Maybe<Scalars['Boolean']>;
   seedAvailabilitiesFromTests?: Maybe<Scalars['Boolean']>;
@@ -891,13 +891,15 @@ export type Mutation = {
 };
 
 
-export type MutationMergeUserSettingsArgs = {
+export type MutationOwnMergeUserSettingsArgs = {
   settings?: Maybe<UserSettingsInput>;
 };
 
 
 export type MutationSetUserAvailabilityArgs = {
   dates: Array<Maybe<_Neo4jDateInput>>;
+  from?: Maybe<_Neo4jDateInput>;
+  till?: Maybe<_Neo4jDateInput>;
 };
 
 
@@ -2244,7 +2246,7 @@ export type UserSettingsResolvers<ContextType = any, ParentType extends Resolver
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  mergeUserSettings?: Resolver<Maybe<ResolversTypes['UserSettings']>, ParentType, ContextType, RequireFields<MutationMergeUserSettingsArgs, never>>;
+  ownMergeUserSettings?: Resolver<Maybe<ResolversTypes['UserSettings']>, ParentType, ContextType, RequireFields<MutationOwnMergeUserSettingsArgs, never>>;
   seedNeo4jFromJSON?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   setUserAvailability?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationSetUserAvailabilityArgs, 'dates'>>;
   seedAvailabilitiesFromTests?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;

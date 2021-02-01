@@ -85,7 +85,7 @@ export function LetItRainAvailabilityDialog( {startDate } : Props ) {
   }, [tasks] )
 
 
-
+  console.log( 'render' )
 
   const handleCancel = () => history.goBack()
   const handleOkay = async () => {

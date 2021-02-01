@@ -32,7 +32,7 @@ mutation  setUserAvailability($dates: [_Neo4jDateInput]!) {
 
 const MERGE_USER_SETTINGS = gql`
 mutation mergeUserSettings($settings: UserSettingsInput!) {
-    mergeUserSettings (
+    ownMergeUserSettings (
         settings: $settings
     ) { letitrain_maximum_tasks }
 }
