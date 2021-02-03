@@ -1,0 +1,20 @@
+#!/usr/bin/env -S bash -e
+
+## in non-bare-repos we start in ./.git/
+cd ..
+
+BRANCH=fdroid
+SERVICE=fdroid
+ENV=live
+
+pwd
+( date
+ git log -n2; echo
+
+ [ -d fdroid-repo ] || git clone https://github.com/community-garden/fdroid-repo.git
+ [ -d fdroid-repo/fdroid/repo ] || mkdir -p fdroid-repo/fdroid/repo
+
+ cp *.apk fdroid-repo/fdroid/repo
+
+ docker-compose -f ~/${ENV}/${SERVICE}.docker-compose.yml --project-directory fdroid-repo up --build -d
+) 2>&1 >../${SERVICE}.deploy.log

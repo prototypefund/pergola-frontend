@@ -20,8 +20,9 @@ Pushing into the repo requires the following setting:
 ```
 cd ~/live
 git init frontend
-cd frontend
-git config receive.denyCurrentBranch ignore
+(cd frontend && git config receive.denyCurrentBranch ignore)
+git init fdroid
+(cd fdroid && git config receive.denyCurrentBranch ignore)
 ```
 
 ### Git-Hooks
@@ -30,6 +31,7 @@ Copy, don't link!
 
 ```
 cp frontend/.circleci/deployment/hooks/post-receive frontend/.git/hooks/
+cp frontend/.circleci/deployment/hooks/fdroid/post-receive fdroid/.git/hooks/
 ```
 
 ### Docker-compose
@@ -38,6 +40,7 @@ For security-reasons we don't allow git-users to alter the docker-compose.yml an
 
 ```
 cd ~/live
-cp frontend/.circleci/deployment/docker-compose.yml .
 cp frontend/.circleci/live.env .
+cp frontend/.circleci/deployment/docker-compose.yml frontend.docker-compose.yml
+cp fdroid/docker-compose.yml fdroid.docker-compose.yml
 ```
