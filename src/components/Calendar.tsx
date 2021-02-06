@@ -197,7 +197,7 @@ export function Calendar( { dates = [], onChange, selectedDates: _selectedDates 
 
   return (
     <>
-      <Typography variant="h2">Wann hast du Zeit?</Typography>
+      <Typography variant="h2" className={classes.question}>Wann hast du Zeit?</Typography>
       <div className={String( classes.wrapper )}>
         <Typography variant="body2" align="center" gutterBottom={true}>
           Zeitraum:&nbsp;
@@ -273,6 +273,14 @@ const useStyles = makeStyles(( theme: Theme ) => ( {
     [theme.breakpoints.up( 'sm' )]: {
       padding: '10px',
     }
+  },
+  question: {
+    textAlign: 'center',
+    width: '70%',
+    marginBottom: '2rem',
+    '@media (max-width:320px)': {
+      marginBottom: '1rem',
+    },
   },
   legend: {
     // todo: get rid of fixed dimensions
