@@ -125,7 +125,7 @@ export function LetItRainWizard() {
         <IconButton onClick={() => history.goBack()}>
           <ArrowBackIcon />
         </IconButton>
-        <span>{currentStep.headline}</span>
+        <span className={classes.dialogTitleText}>{currentStep.headline}</span>
       </DialogTitle>
       <DialogContent className={classes.dialogContent}>
         <Box display="flex" flexDirection="column" flexWrap="nowrap" alignItems="center" justifyContent="space-between" className={classes.box}>
@@ -179,11 +179,11 @@ const useStyles = makeStyles(() => ( {
       display: 'flex',
       alignItems: 'center',
     },
-    '& span': {
-      position: 'relative',
-      margin: '0 auto',
-      left: '-20px',
-    },
+  },
+  dialogTitleText: {
+    position: 'relative',
+    left: '-20px',
+    margin: '0 auto',
   },
   dialogContent: {
     position: 'relative'
