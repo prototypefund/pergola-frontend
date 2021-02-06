@@ -15,8 +15,8 @@ export interface LetItRainWizardRouterProps {
 }
 
 interface StepDesc {
-  title: String;
-  headline: String;
+  title: string;
+  headline: string;
   StepComponent: JSX.Element;
 }
 
@@ -129,10 +129,7 @@ export function LetItRainWizard() {
       </DialogTitle>
       <DialogContent className={classes.dialogContent}>
         <Box display="flex" flexDirection="column" flexWrap="nowrap" alignItems="center" justifyContent="space-between" className={classes.box}>
-          <HorizontalStepper
-            steps={steps.map(( { title } ) => title )}
-            activeStep={currentStepIndex}
-          />
+          <HorizontalStepper steps={steps.map(( { title } ) => title )} activeStep={currentStepIndex}  />
           {currentStep.StepComponent}
         </Box>
       </DialogContent>
