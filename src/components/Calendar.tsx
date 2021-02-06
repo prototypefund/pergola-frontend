@@ -202,13 +202,11 @@ export function Calendar( { dates = [], onChange, selectedDates: _selectedDates 
         <Typography variant="body1" align="center" gutterBottom={true}>
           Zeitraum:&nbsp;
           {dayjs( firstDate ).format(
-            firstDate.getMonth() === lastDate.getMonth()
+            ( firstDate.getMonth() === lastDate.getMonth())
               ? 'D.'
-              : 'D. MMMM' +
-                  ( firstDate.getFullYear() !== lastDate.getFullYear()) ??
-                  ' YYYY'
+              : 'D. MMMM'
           )}
-          &nbsp;-&nbsp;
+          &nbsp;–&nbsp;
           {dayjs( lastDate ).format( 'D. MMMM YYYY' )}
         </Typography>
         <FormGroup row>
