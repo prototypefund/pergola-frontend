@@ -83,6 +83,7 @@ const useStyles = makeStyles(() => ( {
     justifyContent: 'space-around',
     alignItems: 'center',
     padding: '0 10%',
+    overflow: 'hidden',
     '&:after': {
       content: '""',
       position: 'absolute',
@@ -92,20 +93,20 @@ const useStyles = makeStyles(() => ( {
       bottom: 0,
       display: 'block',
       background: '#8b4513',
-      height: '60px',
+      height: '30px',
     }
   },
   carrot: {
     position: 'relative',
     width: '50px',
     transition: 'all .5s ease',
-    top: 0,
+    top: '28px',
     '&:nth-child(1)': {
       order: 4,
       transform: 'scaleX(-1) rotate(-7deg) scale(0.8)',
       '&.active': {
         transform: 'scaleX(-1) rotate(7deg) scale(1.1)',
-        top: '-18px',
+        top: '14px',
       },
     },
     '&:nth-child(2)': {
@@ -113,7 +114,7 @@ const useStyles = makeStyles(() => ( {
       transform: 'rotate(6deg) scale(0.8)',
       '&.active': {
         transform: 'rotate(-6deg) scale(1.1)',
-        top: '-13px',
+        top: '15px',
       },
     },
     '&:nth-child(3)': {
@@ -121,7 +122,7 @@ const useStyles = makeStyles(() => ( {
       transform: 'rotate(-8deg) scale(0.8)',
       '&.active': {
         transform: 'rotate(3deg) scale(1.1)',
-        top: '-16px',
+        top: '12px',
       },
     },
     '&:nth-child(4)': {
@@ -129,7 +130,7 @@ const useStyles = makeStyles(() => ( {
       transform: 'rotate(-7deg) scale(0.8)',
       '&.active': {
         transform: 'rotate(7deg) scale(1.1)',
-        top: '-15px',
+        top: '17px',
       },
     },
     '&:nth-child(5)': {
@@ -137,7 +138,7 @@ const useStyles = makeStyles(() => ( {
       transform: 'rotate(7deg) scale(0.8)',
       '&.active': {
         transform: 'rotate(-9deg) scale(1.1)',
-        top: '-18px',
+        top: '16px',
       },
     },
     '&:nth-child(6)': {
@@ -145,7 +146,7 @@ const useStyles = makeStyles(() => ( {
       transform: 'scale(0.8)',
       '&.active': {
         transform: 'scale(1.1)',
-        top: '-17px',
+        top: '14px',
       },
     },
     '&:nth-child(7)': {
@@ -153,7 +154,7 @@ const useStyles = makeStyles(() => ( {
       transform: 'rotate(-7deg) scale(0.8)',
       '&.active': {
         transform: 'rotate(7deg) scale(1.1)',
-        top: '-13px',
+        top: '13px',
       },
     },
   },

@@ -128,7 +128,7 @@ export function LetItRainWizard() {
         <span>{currentStep.headline}</span>
       </DialogTitle>
       <DialogContent className={classes.dialogContent}>
-        <Box display="flex" flexDirection="column" flexWrap="wrap" alignItems="center" justifyContent="space-between" className={classes.box}>
+        <Box display="flex" flexDirection="column" flexWrap="nowrap" alignItems="center" justifyContent="space-between" className={classes.box}>
           <HorizontalStepper
             steps={steps.map(( { title } ) => title )}
             activeStep={currentStepIndex}
