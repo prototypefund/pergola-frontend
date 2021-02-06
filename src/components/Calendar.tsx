@@ -199,7 +199,7 @@ export function Calendar( { dates = [], onChange, selectedDates: _selectedDates 
     <>
       <Typography variant="h2">Wann hast du Zeit?</Typography>
       <div className={String( classes.wrapper )}>
-        <Typography variant="body1" align="center" gutterBottom={true}>
+        <Typography variant="body2" align="center" gutterBottom={true}>
           Zeitraum:&nbsp;
           {dayjs( firstDate ).format(
             ( firstDate.getMonth() === lastDate.getMonth())
@@ -207,7 +207,7 @@ export function Calendar( { dates = [], onChange, selectedDates: _selectedDates 
               : 'D. MMMM'
           )}
           &nbsp;–&nbsp;
-          {dayjs( lastDate ).format( 'D. MMMM YYYY' )}
+          {dayjs( lastDate ).format( 'D. MMMM' )}
         </Typography>
         <FormGroup row>
           <FormControlLabel
@@ -270,9 +270,6 @@ const useStyles = makeStyles(( theme: Theme ) => ( {
   wrapper: {
     padding: '6px 2px 2px',
     background: '#f7f7f7',
-    '@media (max-width:320px)': {
-      padding: '6px 1px 1px',
-    },
     [theme.breakpoints.up( 'sm' )]: {
       padding: '10px',
     }
@@ -286,7 +283,7 @@ const useStyles = makeStyles(( theme: Theme ) => ( {
   headCheckBox: {},
   checkBox: {
     padding: '2px',
-    '@media (max-width:320px)': {
+    '@media (max-width:360px)': {
       padding: '1px',
     },
   },
@@ -302,7 +299,7 @@ const useStyles = makeStyles(( theme: Theme ) => ( {
     '$headCheckBox &': {
       border: '1px solid ' + theme.palette.primary.main,
     },
-    '@media (max-width:320px)': {
+    '@media (max-width:360px)': {
       width: '32px',
       height: '32px',
     },
