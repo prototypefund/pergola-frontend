@@ -5,7 +5,6 @@ import {
   InMemoryCache,
 } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
-import {CircularProgress, makeStyles} from '@material-ui/core'
 import { ReactKeycloakProvider, useKeycloak } from '@react-keycloak/web'
 import dayjs from 'dayjs'
 import de from 'dayjs/locale/de'
@@ -19,6 +18,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { setUserProfile } from './actions'
 import App from './App'
 import configureStore from './configureStore'
+import logo from './static/logo-pergola-green.svg'
 
 dayjs.extend( localizedFormat )
 dayjs.extend( weekday )
@@ -39,7 +39,6 @@ const uri = process.env.PERGOLA_API_URL || 'http://localhost:4001/graphql'
 const cache = new InMemoryCache()
 
 function ApolloRoot( { persistor } ) {
-  const classes = useStyles()
   const { keycloak } = useKeycloak()
   const authLink = setContext(( _, { headers } ) => {
     return {
@@ -57,7 +56,12 @@ function ApolloRoot( { persistor } ) {
   return (
     <ApolloProvider client={client}>
       <PersistGate
-        loading={<CircularProgress classes={{ root: classes.centered, circle: classes.circle }} />}
+        loading={<img src={logo} alt="Loading..." style={{
+          position: 'fixed',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)'
+        }} />}
         persistor={persistor}
       >
         <App />
@@ -94,15 +98,3 @@ export function ReduxRoot() {
     </Provider>
   )
 }
-
-const useStyles = makeStyles( theme => ( {
-  centered: {
-    position: 'fixed',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)'
-  },
-  circle: {
-    color: '#006f52'
-  }
-} ))
