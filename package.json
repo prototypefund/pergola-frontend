@@ -24,7 +24,7 @@
     "cordova-electron": "cross-env TARGET=cordova cross-env NODE_ENV=development node ./build/build.js && concurrently --kill-others \"cross-env TARGET=cordova cross-env ELECTRON_WATCH=true cross-env NODE_ENV=development cross-env webpack --progress --config ./build/webpack.config.js --watch\" \"cd cordova && cordova run electron --nobuild\"",
     "postinstall": "cpy ./node_modules/framework7-icons/fonts/*.* ./src/fonts/",
     "storybook": "start-storybook -p 6006",
-    "build-assets": "pwa-asset-generator ./public/Pergola.svg ./src/static/icons --path-override /static/icons  --icon-only --favicon -m ./public/manifest.json -i ./public/index.html",
+    "build-assets": "pwa-asset-generator ./public/Pergola.svg ./src/static/favicon --path-override /static/favicon  --icon-only --favicon -m ./public/site.webmanifest -i ./public/index.html",
     "build-storybook": "build-storybook",
     "lint:eslint": "tsc --noEmit && eslint \"src/**/*.{js,ts,jsx,tsx}\" --fix",
     "lint:putout": "putout --fix src"
