@@ -14,6 +14,7 @@ import {webdavUrl} from '../config/calendat'
 import {RootState} from '../reducers'
 import BackgroundImage from '../static/background_full_grey_01.jpg'
 import {LetItRainAvailabilityDialog} from './LetItRainAvailabilityDialog'
+import {LetItRainThanksDialog} from './LetItRainThanksDialog'
 import {LetItRainWizard} from './LetItRainWizard'
 
 
@@ -63,6 +64,7 @@ export function LetItRainEntry() {
           const { startDate = new Date()} = match.params
           return ( <LetItRainAvailabilityDialog startDate={dayjs( startDate, 'YYYY-MM-DD' ).toDate()} /> )
         }} />
+        <Route path='/watering/thanks' component={LetItRainThanksDialog}/>
       </Switch>
     </>
   )
