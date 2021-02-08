@@ -90,8 +90,8 @@ module.exports = {
         },
         {
           noErrorOnMissing: false,
-          from: resolvePath( 'public/manifest.json' ),
-          to: resolvePath( 'www/manifest.json' ),
+          from: resolvePath( 'public/site.webmanifest' ),
+          to: resolvePath( 'www/site.webmanifest' ),
         },
       ],
     } ),

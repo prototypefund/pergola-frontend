@@ -205,8 +205,8 @@ module.exports = {
         },
         {
           noErrorOnMissing: true,
-          from: resolvePath('src/manifest.json'),
-          to: resolvePath('www/manifest.json'),
+          from: resolvePath('src/site.webmanifest'),
+          to: resolvePath('www/site.webmanifest'),
         },
       ],
     }),
