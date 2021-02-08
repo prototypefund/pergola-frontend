@@ -3,8 +3,8 @@ import {Box, IconButton, Typography} from '@material-ui/core'
 import {
   ChevronLeft as ArrowBackIcon, ChevronRight as ArrowForwardIcon
 } from '@material-ui/icons'
+import {useKeycloak} from '@react-keycloak/web'
 import dayjs from 'dayjs'
-import {KeycloakProfile} from 'keycloak-js'
 import React, {useEffect, useRef, useState} from 'react'
 import {useHotkeys} from 'react-hotkeys-hook'
 import ScrollContainer from 'react-indiana-drag-scroll'
@@ -31,10 +31,12 @@ query WateringTask($dateFrom: _Neo4jDateInput, $dateTo: _Neo4jDateInput) {
         { date_gte: $dateFrom },
         { date_lte: $dateTo } ]
     }) {
+        _id
         date { day month year}
-        users_assigned { label }
-        users_available { label }
+        users_assigned { _id id label }
+        users_available { _id id label }
         wateringperiod {
+            _id
             hasUsersAssigned
             from { day month year }
             till { day month year }
@@ -45,6 +47,7 @@ query WateringTask($dateFrom: _Neo4jDateInput, $dateTo: _Neo4jDateInput) {
 const WateringCalendarWeek = ( {preselectedDate, defaultDayCount = 7 }: WateringCalendarWeekProps ) => {
 
   const dispatch = useDispatch()
+  const { keycloak: { subject: userId } } = useKeycloak()
   const selectedDay = useSelector<RootState, Date | undefined>(( {letItRain: { selectedDate= preselectedDate }} ) => selectedDate )
   const [dayCount, setDayCount] = useState( 7 )
   const [{ startDate, endDate}, setTimeWindow] = useState( {
@@ -56,7 +59,6 @@ const WateringCalendarWeek = ( {preselectedDate, defaultDayCount = 7 }: Watering
     }
   } )
 
-
   const defaultCalendarDates = ( _startDate: Date, _endDate: Date ) => [...Array( Math.abs( dayjs( _startDate ).diff( _endDate, 'day' )))]
     .map(( _, i ) => dayjs( startDate ).add( i, 'day' ))
     .map(( date ) => ( {
@@ -67,7 +69,6 @@ const WateringCalendarWeek = ( {preselectedDate, defaultDayCount = 7 }: Watering
       inPeriod: false
     } ))
   const [calendarDates, setCalendarDates] = useState( defaultCalendarDates( startDate, endDate ))
-  const userProfile = useSelector<RootState, KeycloakProfile | null>(( {userProfile} ) => userProfile )
 
   useEffect(() => {
     setTimeWindow( prev => {
@@ -104,7 +105,7 @@ const WateringCalendarWeek = ( {preselectedDate, defaultDayCount = 7 }: Watering
           .map( date => {
             const task = ( wateringtasks || [] ).find( t => t && equalsNeo4jDate( t.date, date.toDate()))
             return {
-              ...toWateringTaskInfo( task, userProfile || undefined ),
+              ...toWateringTaskInfo( task,  userId ),
               date
             }
           } ))

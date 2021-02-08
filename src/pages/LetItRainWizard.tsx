@@ -41,7 +41,8 @@ mutation mergeUserSettings($settings: UserSettingsInput!) {
 const ASSIGNABLE_WATERING_PERIOD = gql`
   query assignableWateringPeriod {
       assignableWateringPeriod {
-          wateringtasks { date { day year month } } 
+          _id
+          wateringtasks { _id date { day year month } } 
           from { year, month, day }
           till { year, month, day }
       }

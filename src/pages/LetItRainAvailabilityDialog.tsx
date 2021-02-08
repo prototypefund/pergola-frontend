@@ -8,32 +8,32 @@ import {
   Theme,
   useMediaQuery, useTheme
 } from '@material-ui/core'
+import {useKeycloak} from '@react-keycloak/web'
 import dayjs from 'dayjs'
-import {KeycloakProfile} from 'keycloak-js'
 import * as React from 'react'
 import {useEffect, useState} from 'react'
-import {useSelector} from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
 import {Calendar} from '../components'
 import {fromNeo4jDate, neo4jDateToInput,toNeo4jDateInput} from '../helper'
-import {RootState} from '../reducers'
 import {_Neo4jDateInput, WateringPeriod} from '../types/graphql'
 
 const GET_WATERING_PERIOD = gql`
-    query WateringPeriod($date: _Neo4jDateInput, $label: String) {
+    query WateringPeriod($date: _Neo4jDateInput, $userId: String) {
         WateringPeriod( filter:
         { AND: [
             { from_lte: $date },
             { till_gte: $date } ]
         }) {
+            _id
             from { day month year }
             till { day month year }
             wateringtasks( filter: {
-                users_available_some: { label: $label }
+                users_available_some: { id: $userId }
             }) {
+                _id
                 date { day month year }
-                users_available { label }
+                users_available { _id id label }
             }
         }
     }
@@ -54,17 +54,17 @@ interface Props {
 
 export function LetItRainAvailabilityDialog( {startDate } : Props ) {
   const classes = useStyles()
+  const { keycloak: { subject: userId } } = useKeycloak()
   const theme = useTheme()
   const history = useHistory()
   const fullscreenDialog = useMediaQuery( theme.breakpoints.down( 'md' ))
-  const userProfile = useSelector<RootState, KeycloakProfile | null>(( {userProfile} ) => userProfile )
   const [availableDates, setAvailableDates] = useState<Array<Date>>( [] )
-  const {data: wateringPeriodData} = useQuery<{WateringPeriod: WateringPeriod[]}, { date: _Neo4jDateInput, label: string}>( GET_WATERING_PERIOD, {
+  const {data: wateringPeriodData} = userId && useQuery<{WateringPeriod: WateringPeriod[]}, { date: _Neo4jDateInput, userId: string}>( GET_WATERING_PERIOD, {
     variables: {
       date: toNeo4jDateInput( startDate ),
-      label: userProfile?.username || ''
+      userId
     }
-  } )
+  } ) || {}
   const tasks =  wateringPeriodData?.WateringPeriod?.[0]?.wateringtasks || []
   const { from, till } = wateringPeriodData?.WateringPeriod?.[0] || {}
   const calendarDates =  ( from && till && [...Array( Math.abs( dayjs( fromNeo4jDate( till )).diff( fromNeo4jDate( from ), 'day' )))]

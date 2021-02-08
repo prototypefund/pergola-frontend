@@ -2,9 +2,9 @@
 import {gql, useQuery} from '@apollo/client'
 import {Box, Button, Container, makeStyles, Paper, Typography} from '@material-ui/core'
 import {AddCircle} from '@material-ui/icons'
+import {useKeycloak} from '@react-keycloak/web'
 import AvatarComponent from 'avataaars'
 import dayjs from 'dayjs'
-import {KeycloakProfile} from 'keycloak-js'
 import * as React from 'react'
 import {useSelector} from 'react-redux'
 import { useHistory } from 'react-router-dom'
@@ -24,10 +24,12 @@ const GET_WATERING_TASK = gql`
         WateringTask(filter:
         { date: $date }
         ) {
+            _id
             date { day month year}
-            users_assigned { label }
-            users_available { label }
+            users_assigned { _id id label }
+            users_available { _id id label }
             wateringperiod {
+                _id
                 hasUsersAssigned
             }
         }
@@ -36,6 +38,7 @@ const GET_WATERING_TASK = gql`
 
 export function WateringDetailDrawer( { onDrawerClose}: Props ) {
   const classes = useStyles()
+  const { keycloak: { subject: userId } } = useKeycloak()
   const history = useHistory()
   const date = useSelector<RootState, Date>(( {letItRain: { selectedDate = new Date() }} ) => selectedDate )
   const {data: WateringTaskData} = useQuery<{ WateringTask: WateringTask[] }>( GET_WATERING_TASK, {
@@ -43,14 +46,13 @@ export function WateringDetailDrawer( { onDrawerClose}: Props ) {
       date: toNeo4jDateInput( date )
     }
   } )
-  const userProfile = useSelector<RootState, KeycloakProfile | null>(( {userProfile} ) => userProfile )
 
   const task = WateringTaskData?.WateringTask?.[0]
   const {
     itsMyTurn,
     inPeriod,
     iAmAvailable
-  } = toWateringTaskInfo( task, userProfile || undefined )
+  } = toWateringTaskInfo( task,  userId )
 
   const handleAssign = () => {
     console.log( 'assign' )
