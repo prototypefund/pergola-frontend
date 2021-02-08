@@ -28,6 +28,8 @@ import { Login } from './components'
 import { history } from './configureStore'
 import {GardenOverviewPage, LandingPage,LetItRainEntry} from './pages'
 import { CalendarAndNotifications } from './pages/CalendarAndNotifications'
+import backgroundImage from './static/background_full_grey_01.jpg'
+import title from './static/logo-pergola-title.svg'
 import { withRoot } from './withRoot'
 
 function Routes() {
@@ -66,10 +68,11 @@ function App() {
       <div className={classes.root}>
         <AppBar className={classes.appBar} position="sticky">
           <Toolbar className={classes.appBarLeft}>
-            <Typography className={classes.title} variant="h3" noWrap>
-              Pergola
-            </Typography>
-            <Typography variant="h6" color="inherit" noWrap={isMobile}>
+            <svg className={classes.title} role="img">
+              <title>Pergola</title>
+              <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref={title + '#logo'} />
+            </svg>
+            <Typography variant="subtitle2" color="inherit" noWrap={isMobile}>
               Wurzelwerk
             </Typography>
           </Toolbar>
@@ -131,7 +134,9 @@ const useStyles = makeStyles(( theme: Theme ) => ( {
   },
   content: {
     flex: '1 0 auto',
-    backgroundColor: theme.palette.background.default,
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'fixed',
   },
   bottomBar: {
     flexShrink: 0,
@@ -142,7 +147,12 @@ const useStyles = makeStyles(( theme: Theme ) => ( {
     flexDirection: 'column',
     alignItems: 'start',
   },
-  title: {},
+  title: {
+    marginTop: '5px',
+    width: '135px',
+    height: '59px',
+    fill: theme.palette.primary.contrastText
+  },
   navIconHide: {
     [theme.breakpoints.up( 'md' )]: {
       display: 'none',

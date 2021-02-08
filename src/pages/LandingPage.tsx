@@ -18,8 +18,6 @@ import { FilterVintage } from '@material-ui/icons'
 import {useKeycloak} from '@react-keycloak/web'
 import React, { useState } from 'react'
 
-import BackgroundImage from '../static/background_full_grey_01.jpg'
-
 export interface LandingPage_Garden {
   id: string;
   name: string;
@@ -50,11 +48,7 @@ export function LandingPage() {
   ]
 
   return (
-    <div className={classes.page}>
-      <Container className={classes.titleAndChooser}>
-        <Typography variant="h2">Pergola</Typography>
-        <Typography variant="h5">Gemeinsam Gärtnern</Typography>
-      </Container>
+    <div>
       <Container className={classes.gardenSelectContainer}>
         <FormControl variant="filled" className={classes.gardenSelectControl}>
           <InputLabel>Wähle einen Garten</InputLabel>
@@ -97,12 +91,6 @@ export function LandingPage() {
 }
 
 const useStyles = makeStyles(( theme: Theme ) => ( {
-  page: {
-    backgroundImage: `url(${BackgroundImage})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'fixed',
-    height: '100%'
-  },
   gardenSelectContainer: {
     marginTop: '23px',
     marginBottom: '28px',
