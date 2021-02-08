@@ -31,6 +31,7 @@ export type Query = {
 
 
 export type QueryUserArgs = {
+  id?: Maybe<Scalars['String']>;
   label?: Maybe<Scalars['String']>;
   neo4jImportId?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
@@ -237,6 +238,16 @@ export type _Neo4jDateInput = {
 export type _UserFilter = {
   AND?: Maybe<Array<_UserFilter>>;
   OR?: Maybe<Array<_UserFilter>>;
+  id?: Maybe<Scalars['String']>;
+  id_not?: Maybe<Scalars['String']>;
+  id_in?: Maybe<Array<Scalars['String']>>;
+  id_not_in?: Maybe<Array<Scalars['String']>>;
+  id_contains?: Maybe<Scalars['String']>;
+  id_not_contains?: Maybe<Scalars['String']>;
+  id_starts_with?: Maybe<Scalars['String']>;
+  id_not_starts_with?: Maybe<Scalars['String']>;
+  id_ends_with?: Maybe<Scalars['String']>;
+  id_not_ends_with?: Maybe<Scalars['String']>;
   label?: Maybe<Scalars['String']>;
   label_not?: Maybe<Scalars['String']>;
   label_in?: Maybe<Array<Scalars['String']>>;
@@ -531,6 +542,8 @@ export type WateringTaskWateringperiodArgs = {
 };
 
 export enum _UserOrdering {
+  IdAsc = 'id_asc',
+  IdDesc = 'id_desc',
   LabelAsc = 'label_asc',
   LabelDesc = 'label_desc',
   Neo4jImportIdAsc = 'neo4jImportId_asc',
@@ -545,6 +558,7 @@ export type User = {
   __typename?: 'User';
   /** Generated field for querying the Neo4j [system id](https://neo4j.com/docs/cypher-manual/current/functions/scalar/#functions-id) of this node. */
   _id?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
   label: Scalars['String'];
   neo4jImportId: Scalars['String'];
   type: Scalars['String'];
@@ -1001,6 +1015,7 @@ export type MutationMergeUserLogevents_Triggered_ByArgs = {
 
 
 export type MutationCreateUserArgs = {
+  id: Scalars['String'];
   label: Scalars['String'];
   neo4jImportId: Scalars['String'];
   type: Scalars['String'];
@@ -1008,19 +1023,21 @@ export type MutationCreateUserArgs = {
 
 
 export type MutationUpdateUserArgs = {
-  label: Scalars['String'];
+  id: Scalars['String'];
+  label?: Maybe<Scalars['String']>;
   neo4jImportId?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
 };
 
 
 export type MutationDeleteUserArgs = {
-  label: Scalars['String'];
+  id: Scalars['String'];
 };
 
 
 export type MutationMergeUserArgs = {
-  label: Scalars['String'];
+  id: Scalars['String'];
+  label?: Maybe<Scalars['String']>;
   neo4jImportId?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
 };
@@ -1343,7 +1360,7 @@ export type UserSettingsInput = {
 
 
 export type _UserInput = {
-  label: Scalars['String'];
+  id: Scalars['String'];
 };
 
 export type _WateringTaskInput = {
@@ -1742,6 +1759,11 @@ export type _MergeLogEventRefers_ToPayload = {
   to?: Maybe<WateringTask>;
 };
 
+export type Subscription = {
+  __typename?: 'Subscription';
+  WateringTaskChange?: Maybe<Scalars['Boolean']>;
+};
+
 export type _UserSettingsInput = {
   ui_locale: Scalars['String'];
 };
@@ -2054,6 +2076,7 @@ export type ResolversTypes = {
   _AddLogEventRefers_toPayload: ResolverTypeWrapper<_AddLogEventRefers_ToPayload>;
   _RemoveLogEventRefers_toPayload: ResolverTypeWrapper<_RemoveLogEventRefers_ToPayload>;
   _MergeLogEventRefers_toPayload: ResolverTypeWrapper<_MergeLogEventRefers_ToPayload>;
+  Subscription: ResolverTypeWrapper<{}>;
   _UserSettingsInput: _UserSettingsInput;
   _Neo4jTimeInput: _Neo4jTimeInput;
   _Neo4jTime: ResolverTypeWrapper<_Neo4jTime>;
@@ -2145,6 +2168,7 @@ export type ResolversParentTypes = {
   _AddLogEventRefers_toPayload: _AddLogEventRefers_ToPayload;
   _RemoveLogEventRefers_toPayload: _RemoveLogEventRefers_ToPayload;
   _MergeLogEventRefers_toPayload: _MergeLogEventRefers_ToPayload;
+  Subscription: {};
   _UserSettingsInput: _UserSettingsInput;
   _Neo4jTimeInput: _Neo4jTimeInput;
   _Neo4jTime: _Neo4jTime;
@@ -2204,6 +2228,7 @@ export type WateringTaskResolvers<ContextType = any, ParentType extends Resolver
 
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
   _id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   label?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   neo4jImportId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2266,10 +2291,10 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   AddUserLogevents_triggered_by?: Resolver<Maybe<ResolversTypes['_AddUserLogevents_triggered_byPayload']>, ParentType, ContextType, RequireFields<MutationAddUserLogevents_Triggered_ByArgs, 'from' | 'to'>>;
   RemoveUserLogevents_triggered_by?: Resolver<Maybe<ResolversTypes['_RemoveUserLogevents_triggered_byPayload']>, ParentType, ContextType, RequireFields<MutationRemoveUserLogevents_Triggered_ByArgs, 'from' | 'to'>>;
   MergeUserLogevents_triggered_by?: Resolver<Maybe<ResolversTypes['_MergeUserLogevents_triggered_byPayload']>, ParentType, ContextType, RequireFields<MutationMergeUserLogevents_Triggered_ByArgs, 'from' | 'to'>>;
-  CreateUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'label' | 'neo4jImportId' | 'type'>>;
-  UpdateUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'label'>>;
-  DeleteUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationDeleteUserArgs, 'label'>>;
-  MergeUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationMergeUserArgs, 'label'>>;
+  CreateUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'id' | 'label' | 'neo4jImportId' | 'type'>>;
+  UpdateUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'id'>>;
+  DeleteUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationDeleteUserArgs, 'id'>>;
+  MergeUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationMergeUserArgs, 'id'>>;
   AddWateringTaskUsers_assigned?: Resolver<Maybe<ResolversTypes['_AddWateringTaskUsers_assignedPayload']>, ParentType, ContextType, RequireFields<MutationAddWateringTaskUsers_AssignedArgs, 'from' | 'to'>>;
   RemoveWateringTaskUsers_assigned?: Resolver<Maybe<ResolversTypes['_RemoveWateringTaskUsers_assignedPayload']>, ParentType, ContextType, RequireFields<MutationRemoveWateringTaskUsers_AssignedArgs, 'from' | 'to'>>;
   MergeWateringTaskUsers_assigned?: Resolver<Maybe<ResolversTypes['_MergeWateringTaskUsers_assignedPayload']>, ParentType, ContextType, RequireFields<MutationMergeWateringTaskUsers_AssignedArgs, 'from' | 'to'>>;
@@ -2614,6 +2639,10 @@ export type _MergeLogEventRefers_ToPayloadResolvers<ContextType = any, ParentTyp
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type SubscriptionResolvers<ContextType = any, ParentType extends ResolversParentTypes['Subscription'] = ResolversParentTypes['Subscription']> = {
+  WateringTaskChange?: SubscriptionResolver<Maybe<ResolversTypes['Boolean']>, "WateringTaskChange", ParentType, ContextType>;
+};
+
 export type _Neo4jTimeResolvers<ContextType = any, ParentType extends ResolversParentTypes['_Neo4jTime'] = ResolversParentTypes['_Neo4jTime']> = {
   hour?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   minute?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
@@ -2737,6 +2766,7 @@ export type Resolvers<ContextType = any> = {
   _AddLogEventRefers_toPayload?: _AddLogEventRefers_ToPayloadResolvers<ContextType>;
   _RemoveLogEventRefers_toPayload?: _RemoveLogEventRefers_ToPayloadResolvers<ContextType>;
   _MergeLogEventRefers_toPayload?: _MergeLogEventRefers_ToPayloadResolvers<ContextType>;
+  Subscription?: SubscriptionResolvers<ContextType>;
   _Neo4jTime?: _Neo4jTimeResolvers<ContextType>;
   _Neo4jDateTime?: _Neo4jDateTimeResolvers<ContextType>;
   _Neo4jLocalTime?: _Neo4jLocalTimeResolvers<ContextType>;
