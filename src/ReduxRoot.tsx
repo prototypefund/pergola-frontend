@@ -51,6 +51,11 @@ function ApolloRoot( { persistor } ) {
   const client = new ApolloClient( {
     link: authLink.concat( createHttpLink( { uri } )),
     cache,
+    defaultOptions: {
+      watchQuery: {
+        fetchPolicy: 'cache-and-network'
+      }
+    }
   } )
 
   return (
