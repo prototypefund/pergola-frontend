@@ -1,11 +1,15 @@
 import {
   ApolloClient,
+  ApolloLink,
   ApolloProvider,
   createHttpLink,
-  InMemoryCache,
+  from,   InMemoryCache,
+  split
 } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
+import { getMainDefinition } from '@apollo/client/utilities'
 import { ReactKeycloakProvider, useKeycloak } from '@react-keycloak/web'
+import { WebSocketLink } from 'apollo-link-ws'
 import dayjs from 'dayjs'
 import de from 'dayjs/locale/de'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
@@ -36,20 +40,52 @@ const keycloak = Keycloak( {
 } )
 
 const uri = process.env.PERGOLA_API_URL || 'http://localhost:4001/graphql'
+const wsUri = uri.replace( /^http(s?)/, 'ws$1' )
 const cache = new InMemoryCache()
+
+
+function getHeaders( keycloak: Keycloak.KeycloakInstance ) {
+  return {
+    authorization: keycloak.token ? `Bearer ${keycloak.token}` : '',
+  }
+}
 
 function ApolloRoot( { persistor } ) {
   const { keycloak } = useKeycloak()
+
+  const wsLink = new WebSocketLink( {
+    uri: wsUri,
+    options: {
+      reconnect: true,
+      lazy: true,
+      connectionParams: () => ( {
+        headers: getHeaders( keycloak ),
+      } ),
+    },
+  } ) as unknown as ApolloLink
+
   const authLink = setContext(( _, { headers } ) => {
     return {
       headers: {
         ...headers,
-        authorization: keycloak.token ? `Bearer ${keycloak.token}` : '',
+        ...getHeaders( keycloak )
       },
     }
   } )
+
+  const httpLink = createHttpLink( {uri} )
+
   const client = new ApolloClient( {
-    link: authLink.concat( createHttpLink( { uri } )),
+    link: from( [
+      split(
+        ( { query } ) => {
+          const def = getMainDefinition( query )
+          return def.kind === 'OperationDefinition' && def.operation === 'subscription'
+        },
+        wsLink,
+        authLink.concat( httpLink )
+      )
+    ] ),
     cache,
     defaultOptions: {
       watchQuery: {
