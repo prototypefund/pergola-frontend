@@ -1,4 +1,4 @@
-import {Box, Button, Container, IconButton, makeStyles, Menu, MenuItem, Paper, Typography} from '@material-ui/core'
+import {Box, IconButton, makeStyles, Menu, MenuItem, Paper, Typography} from '@material-ui/core'
 import {Add, MoreVert, Today} from '@material-ui/icons'
 import dayjs from 'dayjs'
 import * as React from 'react'
@@ -8,7 +8,7 @@ import {Link, Route, Switch} from 'react-router-dom'
 import {useReactToPrint} from 'react-to-print'
 
 import {selectDay} from '../actions'
-import {PrintableCalendar, WateringHelpDrawer} from '../components'
+import {LetItRainSurveyFab, PrintableCalendar, WateringHelpDrawer} from '../components'
 import WateringCalendarWeek from '../components/letItRain/WateringCalendarWeek'
 import {WateringDetailDrawer} from '../components/letItRain/WateringDetailDrawer'
 import {webdavUrl} from '../config/calendat'
@@ -63,6 +63,7 @@ export function LetItRainEntry() {
       <Box display='none'>
         <PrintableCalendar childRef={calendarRef} />
       </Box>
+      <LetItRainSurveyFab/>
       <Switch>
         <Route path='/watering/wizard/:stepNumber' component={LetItRainWizard} />
         <Route path="/watering/availability/:startDate" render={ ( { match } ) => {
