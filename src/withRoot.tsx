@@ -5,6 +5,7 @@ import * as React from 'react'
 import { Router } from 'react-router-dom'
 
 import {history} from './configureStore'
+import ServiceWorkerUpdateManager from './ServiceWorkerUpdateManager'
 
 const headingsFontFamily = [
   'oswald',
@@ -144,6 +145,7 @@ export function withRoot( Component: any ) {
       <ThemeProvider theme={theme}>
         {/* Reboot kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
+        <ServiceWorkerUpdateManager/>
         <Router history={history}>
           <Component {...props} />
         </Router>
