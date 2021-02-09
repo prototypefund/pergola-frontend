@@ -107,6 +107,15 @@ body {
   height: 100%;
 }
 
+
+a:hover,
+a:focus {
+  color: hsl(163, 50%, 80%);
+}
+a:active {
+  color: hsl(163, 50%, 60%);
+}
+
 #app {
   height: 100%;
 }
