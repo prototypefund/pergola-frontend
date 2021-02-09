@@ -2,6 +2,9 @@ import { CssBaseline } from '@material-ui/core'
 import { createMuiTheme, responsiveFontSizes  } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/styles'
 import * as React from 'react'
+import { Router } from 'react-router-dom'
+
+import {history} from './configureStore'
 
 const headingsFontFamily = [
   'oswald',
@@ -141,7 +144,9 @@ export function withRoot( Component: any ) {
       <ThemeProvider theme={theme}>
         {/* Reboot kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-        <Component {...props} />
+        <Router history={history}>
+          <Component {...props} />
+        </Router>
       </ThemeProvider>
     )
   }

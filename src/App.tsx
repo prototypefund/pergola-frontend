@@ -4,7 +4,6 @@ import './css/app.scss'
 import {
   AppBar,
   BottomNavigation,
-  CssBaseline,
   Tab,
   Tabs,
   Toolbar,
@@ -22,10 +21,9 @@ import {
 import { makeStyles } from '@material-ui/styles'
 import * as React from 'react'
 import {withLocalize} from 'react-localize-redux'
-import { Link, Route, Router } from 'react-router-dom'
+import { Link, Route, useLocation } from 'react-router-dom'
 
 import { Login } from './components'
-import { history } from './configureStore'
 import {GardenOverviewPage, LandingPage,LetItRainEntry} from './pages'
 import { CalendarAndNotifications } from './pages/CalendarAndNotifications'
 import backgroundImage from './static/background_full_grey_01.jpg'
@@ -51,6 +49,7 @@ function a11yTabProps( index, route ) {
   return {
     component: Link,
     to: `/${route}`,
+    value: `/${route}`,
     id: `scrollable-prevent-tab-${index}`,
     'aria-controls': `scrollable-prevent-tabpanel-${index}`,
   }
@@ -61,59 +60,57 @@ function App() {
   const isMobile = useMediaQuery(( theme: Theme ) =>
     theme.breakpoints.down( 'sm' )
   )
+  const { pathname } = useLocation()
 
   return (
-    <Router history={history}>
-      <CssBaseline />
-      <div className={classes.root}>
-        <AppBar className={classes.appBar} position="sticky">
-          <Toolbar className={classes.appBarLeft}>
-            <svg className={classes.title} role="img">
-              <title>Pergola</title>
-              <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref={title + '#logo'} />
-            </svg>
-            <Typography variant="subtitle2" color="inherit" noWrap={isMobile}>
+    <div className={classes.root}>
+      <AppBar className={classes.appBar} position="sticky">
+        <Toolbar className={classes.appBarLeft}>
+          <svg className={classes.title} role="img">
+            <title>Pergola</title>
+            <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref={title + '#logo'} />
+          </svg>
+          <Typography variant="subtitle2" color="inherit" noWrap={isMobile}>
               Wurzelwerk
-            </Typography>
-          </Toolbar>
-          <Toolbar><Login /></Toolbar>
-        </AppBar>
-        <Routes />
-        <BottomNavigation
-          className={classes.bottomBar}
-          component="footer"
-          color="primary"
-        >
-          <Tabs centered>
-            <Tab
-              icon={<MapIcon />}
-              aria-label="garden map"
-              {...a11yTabProps( 0, 'map' )}
-            />
-            <Tab
-              icon={<WaterdropIcon />}
-              aria-label="watering"
-              {...a11yTabProps( 1, 'watering' )}
-            />
-            <Tab
-              icon={<CalendarIcon />}
-              aria-label="calendar"
-              {...a11yTabProps( 2, 'home' )}
-            />
-            <Tab
-              icon={<NotificationIcon />}
-              aria-label="mentioned"
-              {...a11yTabProps( 3, 'notifications' )}
-            />
-            <Tab
-              icon={<SettingsIcon />}
-              aria-label="settings"
-              {...a11yTabProps( 4, 'settings' )}
-            />
-          </Tabs>
-        </BottomNavigation>
-      </div>
-    </Router>
+          </Typography>
+        </Toolbar>
+        <Toolbar><Login /></Toolbar>
+      </AppBar>
+      <Routes />
+      <BottomNavigation
+        className={classes.bottomBar}
+        component="footer"
+        color="primary"
+      >
+        <Tabs centered value={pathname}>
+          <Tab
+            icon={<MapIcon />}
+            aria-label="garden map"
+            {...a11yTabProps( 0, 'map' )}
+          />
+          <Tab
+            icon={<WaterdropIcon />}
+            aria-label="watering"
+            {...a11yTabProps( 1, 'watering' )}
+          />
+          <Tab
+            icon={<CalendarIcon />}
+            aria-label="calendar"
+            {...a11yTabProps( 2, 'home' )}
+          />
+          <Tab
+            icon={<NotificationIcon />}
+            aria-label="mentioned"
+            {...a11yTabProps( 3, 'notifications' )}
+          />
+          <Tab
+            icon={<SettingsIcon />}
+            aria-label="settings"
+            {...a11yTabProps( 4, 'settings' )}
+          />
+        </Tabs>
+      </BottomNavigation>
+    </div>
   )
 }
 
