@@ -1,3 +1,5 @@
+import '../../css/rsuite.scss'
+
 import {gql, useQuery} from '@apollo/client'
 import dayjs from 'dayjs'
 import * as React from 'react'
@@ -44,7 +46,7 @@ export function PrintableCalendar( { childRef } : Props ) {
   }
 
   return (
-    <div ref={childRef}>
+    <div ref={childRef} className='rsuite'>
       <style>
         {'@media print {.rs-calendar-header-forward, .rs-calendar-header-backward, .rs-calendar-btn-today {display: none} .rs-calendar-panel .rs-calendar-table-cell-selected .rs-calendar-table-cell-content {border: none;}.rs-calendar-panel .rs-calendar-table-cell-is-today .rs-calendar-table-cell-day{color: inherit; background: none;}}' }
       </style>

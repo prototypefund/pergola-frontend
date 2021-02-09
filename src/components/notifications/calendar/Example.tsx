@@ -1,4 +1,4 @@
-import 'rsuite/dist/styles/rsuite-default.css'
+import '../../../css/rsuite.scss'
 
 import * as React from 'react'
 import { Calendar } from 'rsuite'
@@ -23,7 +23,7 @@ function renderCell( date: Date, jcalData = undefined ) {
 
 export function ExampleCalendar() {
   return (
-    <>
+    <div className='rsuite'>
       <style>
         {'@media print {.rs-calendar-header-forward, .rs-calendar-header-backward, .rs-calendar-btn-today {display: none} .rs-calendar-panel .rs-calendar-table-cell-selected .rs-calendar-table-cell-content {border: none;}.rs-calendar-panel .rs-calendar-table-cell-is-today .rs-calendar-table-cell-day{color: inherit; background: none;}}' }
       </style>
@@ -33,6 +33,6 @@ export function ExampleCalendar() {
       >
         <Calendar bordered renderCell={renderCell} isoWeek={true} />
       </CalDav>
-    </>
+    </div>
   )
 }
