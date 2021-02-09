@@ -11,7 +11,7 @@ export interface LetItRainStateType {
 }
 
 export const letItRain = createReducer( {
-  selectedDate: null
+  selectedDate: new Date()
 }, {
   [LetItRainActions.SELECT_DAY]( state: LetItRainStateType, action: LetItRainDaySelectAction ) {
     return {

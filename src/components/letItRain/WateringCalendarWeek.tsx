@@ -56,7 +56,7 @@ const WateringCalendarWeek = ( {preselectedDate, defaultDayCount = 7 }: Watering
 
   const dispatch = useDispatch()
   const { keycloak: { subject: userId } } = useKeycloak()
-  const selectedDay = useSelector<RootState, Date | undefined>(( {letItRain: { selectedDate= preselectedDate }} ) => selectedDate )
+  const selectedDay = useSelector<RootState, Date | undefined | null>(( {letItRain: { selectedDate}} ) => selectedDate ) || preselectedDate
   const [dayCount, setDayCount] = useState( 7 )
   const [{ startDate, endDate}, setTimeWindow] = useState( {
     startDate:  dayjs( preselectedDate ).subtract( dayCount, 'day' ).toDate(), endDate: dayjs( preselectedDate ).add( dayCount, 'day' ).toDate() } )
