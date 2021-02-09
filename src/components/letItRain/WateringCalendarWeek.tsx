@@ -60,7 +60,7 @@ const WateringCalendarWeek = ( {preselectedDate, defaultDayCount = 7 }: Watering
   const [dayCount, setDayCount] = useState( 7 )
   const [{ startDate, endDate}, setTimeWindow] = useState( {
     startDate:  dayjs( preselectedDate ).subtract( dayCount, 'day' ).toDate(), endDate: dayjs( preselectedDate ).add( dayCount, 'day' ).toDate() } )
-  const {data: wateringTasksData, refetch} = useQuery<{WateringTask: WateringTask[]}, { dateFrom: _Neo4jDateInput, dateTo: _Neo4jDateInput}>( GET_WATERING_TASKS, {
+  const {data: wateringTasksData, refetch, loading } = useQuery<{WateringTask: WateringTask[]}, { dateFrom: _Neo4jDateInput, dateTo: _Neo4jDateInput}>( GET_WATERING_TASKS, {
     variables: {
       dateFrom: toNeo4jDateInput( startDate ),
       dateTo: toNeo4jDateInput( endDate  )
@@ -68,7 +68,7 @@ const WateringCalendarWeek = ( {preselectedDate, defaultDayCount = 7 }: Watering
   } )
 
   const { data: WateringTaskChangeData } = useSubscription<{WateringtaskChange: Boolean}>( WATERING_TASK_CHANGE )
-  useEffect(() => { refetch() }, [WateringTaskChangeData] )
+  useEffect(() => { wateringTasksData && !loading && refetch() }, [WateringTaskChangeData] )
 
 
   const defaultCalendarDates = ( _startDate: Date, _endDate: Date ) => [...Array( Math.abs( dayjs( _startDate ).diff( _endDate, 'day' )))]
