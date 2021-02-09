@@ -42,10 +42,12 @@ export function CalDav( props:CalDavProps ) {
   return (
     <>
       {loading && props.loader}
-      { {...props.children,
-        props: {...props.children.props,
-	         /** We pass through the jcalData for usage with arbitrary children.
-		  *  For trivial usage of rsuite.Calendar as child, renderCell is wrapped. **/ 
+      {{...props.children,
+        props: {
+	  ...props.children.props,
+	  /** We pass through the jcalData for usage with arbitrary children.
+           *  For trivial usage of rsuite.Calendar as child, renderCell is wrapped. **/
+          jcalData,
           renderCell: ( date:Date ) => props.children.props.renderCell( date, jcalData ) }}}
     </>
   )
