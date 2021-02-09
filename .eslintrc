@@ -31,7 +31,7 @@
       "exports": "only-multiline",
       "functions": "never"
     }],
-    "space-in-parens":  [ "error", "always", { "exceptions": [ "()", "empty" ] } ],
+    "space-in-parens":  [ "warn", "always", { "exceptions": [ "()", "empty" ] } ],
     "sort-imports": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-inferrable-types": [
