@@ -14,7 +14,7 @@ import {
   Theme,
   Typography,
 } from '@material-ui/core'
-import { FilterVintage } from '@material-ui/icons'
+import { Eco } from '@material-ui/icons'
 import {useKeycloak} from '@react-keycloak/web'
 import React, { useState } from 'react'
 
@@ -42,15 +42,15 @@ export function LandingPage() {
     { id: 'johannstadt', name: 'Internationaler Garten Johannstadt' },
   ]
   const landingInfos: LandingPage_Info[] = [
-    { id: '0', headline: 'Gießpläne können erstellt werden' },
-    { id: '1', headline: 'COVID-19 Restriktionen' },
-    { id: '2', headline: 'weitere Gartenmitgleider hinzugekommen' },
+    { id: '0', headline: 'Erstelle einen Gießplan für euren Garten' },
+    { id: '1', headline: 'Verschaffe dir einen Überblick über anstehende Termine' },
+    { id: '2', headline: 'Lerne mit der interaktiven Karte deinen Garten kennen' },
   ]
 
   return (
     <div>
       <Container className={classes.gardenSelectContainer}>
-        <FormControl variant="filled" className={classes.gardenSelectControl}>
+        <FormControl variant="filled" fullWidth={true}>
           <InputLabel>Wähle einen Garten</InputLabel>
           <Select value={selectedGarden} onChange={handleSelectGarden}>
             <MenuItem key="none" value="">
@@ -66,24 +66,20 @@ export function LandingPage() {
       </Container>
       <Container>
         <Paper elevation={0} className={classes.paperContainer}>
-          <Typography>Gemeinsam gärtnern mit Pergola</Typography>
+          <Typography variant="h4">Gemeinsam gärtnern mit Pergola</Typography>
           <List>
             {landingInfos.map(( { id, headline } ) => (
-              <ListItem key={id}>
-                <ListItemIcon>
-                  <FilterVintage />
+              <ListItem className={classes.listItem} key={id}>
+                <ListItemIcon className={classes.listItemIcon}>
+                  <Eco color="primary" />
                 </ListItemIcon>
                 <ListItemText primary={headline} />
               </ListItem>
             ))}
           </List>
-          <Container>
-            <Button variant="contained">mehr erfahren</Button>
-            {!keycloak.authenticated && <Button onClick={() => keycloak.login()} variant="contained" color="primary">
-              anmelden
-            </Button>}
-          </Container>
-          <Typography>Neuen Gemeinschaftsgarten registrieren?</Typography>
+          <Button variant="contained" className={classes.button} href="https://community-garden.github.io/" target="_blank">Mehr Infos</Button>
+          {!keycloak.authenticated && <Button onClick={() => keycloak.login()} variant="contained" color="primary" className={classes.button}>
+            anmelden</Button>}
         </Paper>
       </Container>
     </div>
@@ -96,12 +92,22 @@ const useStyles = makeStyles(( theme: Theme ) => ( {
     marginBottom: '28px',
   },
   paperContainer: {
-    padding: '25px 27px 10px 27px',
-  },
-  gardenSelectControl: {
-    width: '100%',
+    margin: '1rem 0',
+    padding: '1rem',
   },
   titleAndChooser: {
     color: theme.palette.primary.contrastText,
   },
+  listItem: {
+    padding: '.5rem 0'
+  },
+  listItemIcon: {
+    minWidth: '2.5rem',
+  },
+  button: {
+    margin: '.5rem 0',
+    '& + &': {
+      marginLeft: '.5rem'
+    }
+  }
 } ))
