@@ -1,0 +1,40 @@
+.dayOverview {
+  background-color: white;
+  margin: 15px;
+  padding: 10px;
+}
+.dayOverview h3 {
+  text-align: center;
+}
+.dayOverview table {
+  display: inline-table;
+}
+.dayOverview td {
+  padding-left: 10px;
+}
+
+/** Defaults for colorbars, overwritten on big screen **/
+.colorCodedCalendarEntry {
+  display: inline-block;
+  min-height: 50%;
+}
+.colorCodedCalendarEntry p {
+  display: none;
+}
+
+@media only screen and (min-width: 1024px) {
+  /** Display the Events instead of just colorbars **/
+  .colorCodedCalendarEntry {
+    display: inherit;
+    min-height: inherit;
+    width: 100% !important;
+  }
+  .colorCodedCalendarEntry p {
+    display: inherit;
+  }
+
+  /** Allow the height of the selected cell to be flexible, so the border fits the content **/
+  .rs-calendar-table-cell-selected .rs-calendar-table-cell-content {
+    height: unset !important;
+  }
+}
