@@ -153,10 +153,10 @@ const WateringCalendarWeek = ( {preselectedDate, defaultDayCount = 7 }: Watering
 
   return (
     <div ref={outerDiv}>
-      <Box display='flex' flexDirection='row' justifyContent='space-between'>
+      <Box display='flex' flexDirection='row' justifyContent='space-between' alignItems='center' mb={1}>
         <IconButton onClick={selectPreviousDay}><ArrowBackIcon/></IconButton>
-        <Typography variant='h4' style={{width: '100%', textAlign: 'center'}}>
-          {selectedDay && dayjs( selectedDay ).format( 'dd, DD. MMMM YYYY' ) + ( dayjs( selectedDay ).isSame( new Date(), 'day' ) ? ' (heute)' : '' )}
+        <Typography variant='body1' style={{width: '100%', textAlign: 'center'}}>
+          {selectedDay && dayjs( selectedDay ).format( 'dddd, DD. MMMM' ) + ( dayjs( selectedDay ).isSame( new Date(), 'day' ) ? ' (heute)' : '' )}
         </Typography>
         <IconButton onClick={selectNextDay}><ArrowForwardIcon/></IconButton>
       </Box>

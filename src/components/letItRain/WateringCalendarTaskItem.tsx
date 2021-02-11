@@ -1,4 +1,4 @@
-import {Link, makeStyles, Theme, Typography} from '@material-ui/core'
+import {Box, Link, makeStyles, Theme, Typography} from '@material-ui/core'
 import dayjs from 'dayjs'
 import React, {useEffect, useRef} from 'react'
 
@@ -47,15 +47,14 @@ export const WateringCalendarTaskItem = (
   }, [active, ref] )
 
 
-
   return (
     <Link ref={ref as any} underline='none' onClick={() => onSelect && onSelect()} component="button">
       <div className={classes.dayContainer}>
         <CornerBadge className={classes.badge} cornerActive={cornerActive}>
-          <div className='badgeContent'>
-            <Typography variant="h6">{d.format( 'dd' )}</Typography>
-            <Typography variant="body1">{d.format( 'DD.M.' )}</Typography>
-          </div>
+          <Box display="flex" flexDirection="column" justifyContent="center" className='badgeContent'>
+            <Typography className={classes.dayTitle}>{d.format('dd')}</Typography>
+            <Typography className={classes.daySubTitle}>{d.format('DD.M.')}</Typography>
+          </Box>
         </CornerBadge>
       </div>
     </Link>
@@ -86,5 +85,14 @@ const useStyles = makeStyles<Theme, WateringCalendarTaskItemStylesProps>(( theme
     '& h6': {
       fontWeight: ( {active} ) => active ? 'bold' : 'normal',
     }
+  },
+  dayTitle: {
+    fontSize: ( {active} ) => active ?  '1.5rem' : '1rem',
+    fontWeight: ( {active} ) => active ? 'bold' : 'normal',
+    textTransform: 'uppercase'
+  },
+  daySubTitle: {
+    fontSize: ( {active} ) => active ?  '1.2rem' : '.9rem',
+    fontWeight: ( {active} ) => active ? 'bold' : 'normal',
   }
 } ))

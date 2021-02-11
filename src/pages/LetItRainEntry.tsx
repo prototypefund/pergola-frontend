@@ -1,4 +1,4 @@
-import {Box, IconButton, makeStyles, Menu, MenuItem, Paper, Typography} from '@material-ui/core'
+import {Box, IconButton, makeStyles, Menu, MenuItem, Paper, Toolbar, Typography} from '@material-ui/core'
 import {Add, MoreVert, Today} from '@material-ui/icons'
 import dayjs from 'dayjs'
 import * as React from 'react'
@@ -32,8 +32,8 @@ export function LetItRainEntry() {
     <>
       <Box className={`${classes.main} page`} component="main"  display='flex' flexDirection='column'>
         <Paper>
-          <Box display='flex' justifyContent='space-between' padding='8px'>
-            <Typography variant='h2'>Unser Gießplan</Typography>
+          <Toolbar className={classes.toolbar}>
+            <Typography variant='h4'>Unser Gießplan</Typography>
             <div>
               <IconButton onClick={() => dispatch( selectDay( new Date())) }>
                 <Today/>
@@ -41,7 +41,7 @@ export function LetItRainEntry() {
               <IconButton component={Link} to='/watering/wizard/0' >
                 <Add/>
               </IconButton>
-              <IconButton onClick={( {currentTarget} ) => setMenuAnchor( currentTarget )}>
+              <IconButton edge="end" onClick={( {currentTarget} ) => setMenuAnchor( currentTarget )}>
                 <MoreVert/>
               </IconButton>
               <Menu keepMounted open={Boolean( menuAnchor )} anchorEl={menuAnchor} onClose={()  => setMenuAnchor( null )}>
@@ -50,7 +50,7 @@ export function LetItRainEntry() {
                 <MenuItem onClick={() => setDrawerOpen( true )}>Hilfe</MenuItem>
               </Menu>
             </div>
-          </Box>
+          </Toolbar>
           <WateringCalendarWeek preselectedDate={new Date()}/>
         </Paper>
         <WateringHelpDrawer drawerOpen={drawerOpen} onClose={() => setDrawerOpen( false )}/>
@@ -83,8 +83,10 @@ const useStyles = makeStyles(() => ( {
     backgroundSize: 'cover',
     backgroundAttachment: 'fixed',
     height: '100%'
-
   },
+  toolbar: {
+    justifyContent: 'space-between'
+  }
 } ))
 
 

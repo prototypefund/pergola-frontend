@@ -61,7 +61,7 @@ export function WateringDetailDrawer( { onDrawerClose}: Props ) {
   if( inPeriod ) {
     return (
       <Paper className={classes.paper}>
-        <Typography variant='h6'>{
+        <Typography variant='h5' className={classes.detailTitle}>{
           inPeriod ? '' : 'Leider noch planlos'
         }</Typography>
         <Box display='flex' flexDirection='row' justifyContent='center' minHeight='130px'>
@@ -72,7 +72,7 @@ export function WateringDetailDrawer( { onDrawerClose}: Props ) {
                   style={{width: '100px', height: '100px'}}
                   {...randomAvatarProps()}
                 />
-                <Typography  variant='h5'>{user.label}</Typography>
+                <Typography variant='h5'>{user.label}</Typography>
               </Box>
             )
             )
@@ -90,13 +90,13 @@ export function WateringDetailDrawer( { onDrawerClose}: Props ) {
   } else {
     return (
       <Paper className={classes.paper}>
-        <Typography variant='h6'>Leider noch planlos</Typography>
+        <Typography variant='h5' className={classes.detailTitle}>Leider noch planlos</Typography>
         <Button
           variant='outlined'
           onClick={() => history.push( `/watering/availability/${dayjs( date ).format( 'YYYY-MM-DD' )}` ) }>
           <CornerBadge cornerActive={iAmAvailable} className={classes.cornerButton}>
             <div>
-              <Typography>Du bist {!iAmAvailable && 'nicht'} verfügbar</Typography>
+              <Typography variant='body2'>Du bist {!iAmAvailable && 'nicht'} verfügbar</Typography>
               <Typography style={{fontWeight: 'bold', textTransform: 'capitalize'}}>ändern</Typography>
             </div>
           </CornerBadge>
@@ -117,6 +117,9 @@ const useStyles = makeStyles(() => ( {
   cornerButton: {
     width: '100px',
     height: '100px'
+  },
+  detailTitle: {
+    marginBottom: '.5rem'
   }
 } ))
 

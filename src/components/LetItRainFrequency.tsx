@@ -14,7 +14,7 @@ export function LetItRainFrequency( { onChange, frequency: _frequency }: Props )
 
   return (
     <>
-      <Typography variant="h2" className={classes.question}>
+      <Typography variant="h3" className={classes.question}>
         Wie oft möchtest du maximal gießen?
       </Typography>
       <Typography variant="body1">Wir planen dich ein für höchstens &hellip;</Typography>
@@ -65,11 +65,11 @@ export function LetItRainFrequency( { onChange, frequency: _frequency }: Props )
   )
 }
 
-const useStyles = makeStyles(() => ( {
+const useStyles = makeStyles((theme) => ( {
   question: {
     textAlign: 'center',
-    width: '70%',
     marginBottom: '2rem',
+    width: '80%',
     '@media (max-width:320px)': {
       marginBottom: '1rem',
     },

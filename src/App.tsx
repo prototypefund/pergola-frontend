@@ -70,7 +70,7 @@ function App() {
             <title>Pergola</title>
             <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref={title + '#logo'} />
           </svg>
-          <Typography variant="subtitle2" color="inherit" noWrap={isMobile}>
+          <Typography variant="subtitle1" color="inherit" noWrap={isMobile}>
               Wurzelwerk
           </Typography>
         </Toolbar>

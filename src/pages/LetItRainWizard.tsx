@@ -173,6 +173,7 @@ const useStyles = makeStyles(() => ( {
     },
   },
   dialogTitle: {
+    paddingBottom: 0,
     '& h2': {
       display: 'flex',
       alignItems: 'center',

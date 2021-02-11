@@ -48,24 +48,56 @@ let theme = createMuiTheme( {
       '"Segoe UI Emoji"',
       '"Segoe UI Symbol"',
     ].join( ',' ),
+    body1: {
+      fontSize: '1rem',
+    },
+    body2: {
+      // Body tag font size!
+      fontSize: '.875rem',
+    },
+    h1: {
+      fontSize: '5.5625rem',
+      fontFamily: headingsFontFamily,
+    },
     h2: {
-      fontSize: '2.25rem',
+      fontSize: '3.4375rem',
+      fontFamily: headingsFontFamily,
+    },
+    h3: {
+      fontSize: '2.75rem',
+      fontFamily: headingsFontFamily,
+    },
+    h4: {
+      fontSize: '1.9375rem',
+      fontFamily: headingsFontFamily,
+    },
+    h5: {
+      textTransform: 'uppercase',
+      fontSize: '1.375rem',
       fontFamily: headingsFontFamily,
     },
     h6: {
       textTransform: 'uppercase',
       fontSize: '1.125rem',
-      fontWeight: 600,
-      color: '#006f52', // TODO: use previous defined palette color
+      fontFamily: headingsFontFamily,
     },
+    button: {
+      textTransform: 'uppercase',
+      fontWeight: 700
+    },
+    caption: {
+      fontSize: '.625rem',
+    },
+    subtitle1: {
+      fontSize: '.9375rem',
+      fontFamily: headingsFontFamily,
+    },
+    subtitle2: {
+      fontSize: '.8125rem',
+      fontFamily: headingsFontFamily,
+    }
   },
   overrides: {
-    MuiButton: {
-      label: {
-        textTransform: 'uppercase',
-        fontWeight: 'bold',
-      }
-    },
     MuiDialogContent: {
       root: {
         '@media (max-width:320px)': {
@@ -78,11 +110,16 @@ let theme = createMuiTheme( {
         padding: 0
       }
     },
+    MuiFilledInput: {
+      root: {
+        backgroundColor: 'white!important',
+      },
+    },
     MuiSlider: {
       root: {
         width: '75%',
         height: '10px',
-        margin: '3rem 0 1rem',
+        margin: '2rem 0 0',
       },
       rail: {
         height: '10px',
