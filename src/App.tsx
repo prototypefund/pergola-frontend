@@ -136,7 +136,7 @@ const useStyles = makeStyles(( theme: Theme ) => ( {
     backgroundPosition: 'fixed',
   },
   bottomBar: {
-    flexShrink: 0,
+    zIndex: theme.zIndex.appBar,
     color: theme.palette.primary.contrastText,
     background: theme.palette.primary.main,
   },
