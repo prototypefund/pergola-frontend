@@ -1,4 +1,12 @@
 {
   "wateringPlan": "Gießplan",
-  "ourWateringPlan": "Unser Gießplan"
+  "ourWateringPlan": "Unser Gießplan",
+  "watering": {
+    "planless": "leider noch planlos",
+    "change": "ändern",
+    "help": "helfen",
+    "uRAvailable": "Du bist verfügbar",
+    "uRNotAvailable": "Du bist nicht verfügbar",
+    "itsMyTurn": "Ich bin dran"
+  }
 }
