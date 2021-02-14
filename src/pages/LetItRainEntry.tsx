@@ -3,6 +3,7 @@ import {Add, MoreVert, Today} from '@material-ui/icons'
 import dayjs from 'dayjs'
 import * as React from 'react'
 import {useRef, useState} from 'react'
+import { useTranslation } from 'react-i18next'
 import {useDispatch, useSelector} from 'react-redux'
 import {Link, Route, Switch} from 'react-router-dom'
 import {useReactToPrint} from 'react-to-print'
@@ -20,6 +21,7 @@ import {LetItRainWizard} from './LetItRainWizard'
 
 
 export function LetItRainEntry() {
+  const { t } = useTranslation( 'letItRain' )
   const dispatch = useDispatch()
   const selectedDay = useSelector<RootState, Date | undefined>(( {letItRain: { selectedDate }} ) => selectedDate )
   const classes = useStyles()
@@ -33,7 +35,7 @@ export function LetItRainEntry() {
       <Box className={`${classes.main} page`} component="main"  display='flex' flexDirection='column'>
         <Paper>
           <Toolbar className={classes.toolbar}>
-            <Typography variant='h4'>Unser Gießplan</Typography>
+            <Typography variant='h4'>{t( 'ourWateringPlan' )}</Typography>
             <div>
               <IconButton onClick={() => dispatch( selectDay( new Date())) }>
                 <Today/>

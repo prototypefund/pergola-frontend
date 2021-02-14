@@ -17,6 +17,8 @@ import {
 import { Eco } from '@material-ui/icons'
 import {useKeycloak} from '@react-keycloak/web'
 import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
+
 
 export interface LandingPage_Garden {
   id: string;
@@ -29,6 +31,7 @@ export interface LandingPage_Info {
 }
 
 export function LandingPage() {
+  const { t } = useTranslation()
   const { keycloak } = useKeycloak()
   const classes = useStyles()
   const [selectedGarden, setSelectedGarden] = useState( '' )
@@ -66,7 +69,7 @@ export function LandingPage() {
       </Container>
       <Container>
         <Paper elevation={0} className={classes.paperContainer}>
-          <Typography variant="h4">Gemeinsam gärtnern mit Pergola</Typography>
+          <Typography variant="h4">{t( 'gardeningTogether' )}</Typography>
           <List>
             {landingInfos.map(( { id, headline } ) => (
               <ListItem className={classes.listItem} key={id}>

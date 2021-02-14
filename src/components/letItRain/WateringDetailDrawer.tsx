@@ -38,8 +38,7 @@ const GET_WATERING_TASK = gql`
 `
 
 export function WateringDetailDrawer( { onDrawerClose}: Props ) {
-  const { t: _t } = useTranslation( 'letItRain' )
-  const t = _t( 'watering' )
+  const { t } = useTranslation( 'letItRain' )
   const classes = useStyles()
   const { keycloak: { subject: userId } } = useKeycloak()
   const history = useHistory()
@@ -65,7 +64,7 @@ export function WateringDetailDrawer( { onDrawerClose}: Props ) {
     return (
       <Paper className={classes.paper}>
         <Typography variant='h5' className={classes.detailTitle}>{
-          inPeriod ? '' : t.planless
+          inPeriod ? '' : t( 'watering.planless' )
         }</Typography>
         <Box display='flex' flexDirection='row' justifyContent='center' minHeight='130px'>
           { ( task?.users_assigned || [] )
@@ -84,7 +83,7 @@ export function WateringDetailDrawer( { onDrawerClose}: Props ) {
           <Button
             startIcon={<AddCircle />}
             onClick={handleAssign}>
-            {t.help}
+            {t( 'watering.help' )}
           </Button>}
         </Box>
       </Paper>
@@ -93,14 +92,14 @@ export function WateringDetailDrawer( { onDrawerClose}: Props ) {
   } else {
     return (
       <Paper className={classes.paper}>
-        <Typography variant='h5' className={classes.detailTitle}>{t.planless}</Typography>
+        <Typography variant='h5' className={classes.detailTitle}>{t( 'watering.planless' )}</Typography>
         <Button
           variant='outlined'
           onClick={() => history.push( `/watering/availability/${dayjs( date ).format( 'YYYY-MM-DD' )}` ) }>
           <CornerBadge cornerActive={iAmAvailable} className={classes.cornerButton}>
             <div>
-              <Typography variant='body2'>{iAmAvailable ? t.uRAvailable :  t.uRNotAvailable } </Typography>
-              <Typography style={{fontWeight: 'bold', textTransform: 'capitalize'}}>{t.change}</Typography>
+              <Typography variant='body2'>{iAmAvailable ? t( 'watering.uRAvailable' ) :  t( 'watering.uRNotAvailable' ) } </Typography>
+              <Typography style={{fontWeight: 'bold', textTransform: 'capitalize'}}>{t( 'watering.change' )}</Typography>
             </div>
           </CornerBadge>
         </Button>

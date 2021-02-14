@@ -1,33 +1,35 @@
+import { Button, Typography } from '@material-ui/core'
 import { useKeycloak } from '@react-keycloak/web'
 import {KeycloakProfile} from 'keycloak-js'
 import * as React from 'react'
+import { useTranslation } from 'react-i18next'
 import { useDispatch,useSelector  } from 'react-redux'
 
 import {setUserProfile} from '../actions'
 import { RootState } from '../reducers'
 
 export function Login() {
+  const { t } = useTranslation()
   const { keycloak } = useKeycloak()
   const userProfile = useSelector<RootState, KeycloakProfile | null>(( {userProfile} ) => userProfile )
   const dispatch = useDispatch()
 
   return keycloak.authenticated ?
-    (
-      <a onClick={() => { keycloak.logout()
+    ( <>
+      <Button onClick={() => { keycloak.logout()
 	                dispatch( setUserProfile( null ))
       }}>
-        <div>
-          {userProfile?.username}
-	&nbsp;
-        Logout
-        </div>
-      </a>
+        {t( 'user.logout' )}
+      </Button>
+      <Typography>
+          &nbsp;
+        {userProfile?.username}
+      </Typography>
+    </>
     ) :
     (
-      <a onClick={() => keycloak.login()}>
-        <div>
-        Login
-        </div>
-      </a>
+      <Button onClick={() => keycloak.login()}>
+        {t( 'user.login' )}
+      </Button>
     )
 }

@@ -1,4 +1,8 @@
 {
   "welcome": "Willkommen",
-  "gardeningTogether": "Gemeinsam gärtnern mit Pergola"
+  "gardeningTogether": "Gemeinsam gärtnern mit Pergola",
+  "user": {
+    "login": "einloggen",
+    "logout": "ausloggen"
+  }
 }
