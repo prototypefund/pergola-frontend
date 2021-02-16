@@ -1,5 +1,4 @@
-import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql'
-
+import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
@@ -765,6 +764,8 @@ export type Mutation = {
   setUserAvailability?: Maybe<Scalars['Boolean']>;
   seedAvailabilitiesFromTests?: Maybe<Scalars['Boolean']>;
   planWateringPeriods?: Maybe<Scalars['JSON']>;
+  pushSubscribe?: Maybe<Scalars['Boolean']>;
+  publishToAll?: Maybe<Scalars['Boolean']>;
   /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##add--remove-relationship) for [creating](https://neo4j.com/docs/cypher-manual/4.1/clauses/create/#create-relationships) the assigned relationship. */
   AddUserAssigned?: Maybe<_AddUserAssignedPayload>;
   /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##add--remove-relationship) for [deleting](https://neo4j.com/docs/cypher-manual/4.1/clauses/delete/#delete-delete-relationships-only) the assigned relationship. */
@@ -922,6 +923,16 @@ export type MutationPlanWateringPeriodsArgs = {
   period_length?: Maybe<Scalars['Int']>;
   planing_ahead?: Maybe<Scalars['Int']>;
   periods_predefined?: Maybe<Scalars['Int']>;
+};
+
+
+export type MutationPushSubscribeArgs = {
+  subscription?: Maybe<PushSubscriptionInput>;
+};
+
+
+export type MutationPublishToAllArgs = {
+  message?: Maybe<PushMessageInput>;
 };
 
 
@@ -1359,6 +1370,22 @@ export type UserSettingsInput = {
   letitrain_maximum_tasks?: Maybe<Scalars['Int']>;
 };
 
+
+export type PushSubscriptionInput = {
+  endpoint: Scalars['String'];
+  expirationTime?: Maybe<Scalars['Int']>;
+  keys: PushKeyInput;
+};
+
+export type PushKeyInput = {
+  auth: Scalars['String'];
+  p256dh: Scalars['String'];
+};
+
+export type PushMessageInput = {
+  title: Scalars['String'];
+  message?: Maybe<Scalars['String']>;
+};
 
 export type _UserInput = {
   id: Scalars['String'];
@@ -1975,7 +2002,7 @@ export type SubscriptionObject<TResult, TKey extends string, TParent, TContext, 
   | SubscriptionResolverObject<TResult, TParent, TContext, TArgs>;
 
 export type SubscriptionResolver<TResult, TKey extends string, TParent = {}, TContext = {}, TArgs = {}> =
-  | (( ...args: any[] ) => SubscriptionObject<TResult, TKey, TParent, TContext, TArgs> )
+  | ((...args: any[]) => SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>)
   | SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>;
 
 export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
@@ -1984,7 +2011,7 @@ export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
   info: GraphQLResolveInfo
 ) => Maybe<TTypes> | Promise<Maybe<TTypes>>;
 
-export type IsTypeOfResolverFn<T = {}, TContext = {}> = ( obj: T, context: TContext, info: GraphQLResolveInfo ) => boolean | Promise<boolean>;
+export type IsTypeOfResolverFn<T = {}, TContext = {}> = (obj: T, context: TContext, info: GraphQLResolveInfo) => boolean | Promise<boolean>;
 
 export type NextResolverFn<T> = () => Promise<T>;
 
@@ -2025,6 +2052,9 @@ export type ResolversTypes = {
   Mutation: ResolverTypeWrapper<{}>;
   UserSettingsInput: UserSettingsInput;
   JSON: ResolverTypeWrapper<Scalars['JSON']>;
+  PushSubscriptionInput: PushSubscriptionInput;
+  PushKeyInput: PushKeyInput;
+  PushMessageInput: PushMessageInput;
   _UserInput: _UserInput;
   _WateringTaskInput: _WateringTaskInput;
   _AddUserAssignedPayload: ResolverTypeWrapper<_AddUserAssignedPayload>;
@@ -2117,6 +2147,9 @@ export type ResolversParentTypes = {
   Mutation: {};
   UserSettingsInput: UserSettingsInput;
   JSON: Scalars['JSON'];
+  PushSubscriptionInput: PushSubscriptionInput;
+  PushKeyInput: PushKeyInput;
+  PushMessageInput: PushMessageInput;
   _UserInput: _UserInput;
   _WateringTaskInput: _WateringTaskInput;
   _AddUserAssignedPayload: _AddUserAssignedPayload;
@@ -2277,6 +2310,8 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   setUserAvailability?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationSetUserAvailabilityArgs, 'dates'>>;
   seedAvailabilitiesFromTests?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   planWateringPeriods?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType, RequireFields<MutationPlanWateringPeriodsArgs, never>>;
+  pushSubscribe?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationPushSubscribeArgs, never>>;
+  publishToAll?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationPublishToAllArgs, never>>;
   AddUserAssigned?: Resolver<Maybe<ResolversTypes['_AddUserAssignedPayload']>, ParentType, ContextType, RequireFields<MutationAddUserAssignedArgs, 'from' | 'to'>>;
   RemoveUserAssigned?: Resolver<Maybe<ResolversTypes['_RemoveUserAssignedPayload']>, ParentType, ContextType, RequireFields<MutationRemoveUserAssignedArgs, 'from' | 'to'>>;
   MergeUserAssigned?: Resolver<Maybe<ResolversTypes['_MergeUserAssignedPayload']>, ParentType, ContextType, RequireFields<MutationMergeUserAssignedArgs, 'from' | 'to'>>;
@@ -2641,7 +2676,7 @@ export type _MergeLogEventRefers_ToPayloadResolvers<ContextType = any, ParentTyp
 };
 
 export type SubscriptionResolvers<ContextType = any, ParentType extends ResolversParentTypes['Subscription'] = ResolversParentTypes['Subscription']> = {
-  WateringTaskChange?: SubscriptionResolver<Maybe<ResolversTypes['Boolean']>, 'WateringTaskChange', ParentType, ContextType>;
+  WateringTaskChange?: SubscriptionResolver<Maybe<ResolversTypes['Boolean']>, "WateringTaskChange", ParentType, ContextType>;
 };
 
 export type _Neo4jTimeResolvers<ContextType = any, ParentType extends ResolversParentTypes['_Neo4jTime'] = ResolversParentTypes['_Neo4jTime']> = {

@@ -10,6 +10,7 @@
     "dev": "cross-env PORT=8081 cross-env NODE_ENV=development react-scripts start",
     "codegen": "gql-gen",
     "build-dev": "cross-env TARGET=web cross-env NODE_ENV=development node ./build/build.js",
+    "build-serve-dev": "cross-env TARGET=web cross-env NODE_ENV=development node ./build/build.js && serve -s www",
     "build-prod": "cross-env TARGET=web cross-env NODE_ENV=production node ./build/build.js",
     "build-dev-cordova": "cross-env TARGET=cordova cross-env NODE_ENV=development node ./build/build.js && cd cordova && cordova build",
     "build-prod-cordova": "cross-env TARGET=cordova cross-env NODE_ENV=production node ./build/build.js && cd cordova && cordova build",
@@ -47,6 +48,7 @@
     "apollo-link-ws": "^1.0.20",
     "avataaars": "^1.2.1",
     "dayjs": "^1.9.7",
+    "dotenv": "^8.2.0",
     "graphql": "15.0.0",
     "i18next": "^19.8.7",
     "i18next-browser-languagedetector": "^6.0.1",
@@ -58,6 +60,7 @@
     "localforage": "1.9.0",
     "pixi.js": "^5.3.3",
     "prop-types": "^15.7.2",
+    "pushkit": "^3.2.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-hotkeys-hook": "^3.0.3",
@@ -78,6 +81,7 @@
     "webdav": "^3.6.2"
   },
   "devDependencies": {
+    "serve": "^11.3.2",
     "@babel/core": "^7.11.6",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/plugin-transform-runtime": "^7.11.5",

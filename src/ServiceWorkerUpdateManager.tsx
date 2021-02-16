@@ -1,7 +1,23 @@
+import { gql, useMutation } from '@apollo/client'
 import {Box, Button, LinearProgress, Snackbar, Typography } from '@material-ui/core'
+import { useKeycloak } from '@react-keycloak/web'
+import {PushKit} from 'pushkit/client/dist/index'
 import React, {MouseEventHandler,useCallback, useEffect, useRef, useState  } from 'react'
 import { register } from 'register-service-worker'
+import {PushSubscriptionInput} from 'types/graphql'
 
+import {getDefaultOptions} from './helper'
+
+interface PushKitClientInstance {
+  supported: boolean;
+  subscribed: boolean;
+  key: string;
+  reg?: ServiceWorkerRegistration;
+  sub?: PushSubscription;
+  handleRegistration(
+    reg: ServiceWorkerRegistration
+  ): Promise<PushSubscription | null>;
+}
 
 const useAlive = () => {
   const isAliveRef = useRef( true )
@@ -13,19 +29,38 @@ const useAlive = () => {
   )
   return useCallback(() => isAliveRef.current, [] )
 }
+console.log( process.env.REACT_APP_PUBLIC_VAPID_KEY )
+const pkInstance = (() => { try { return new PushKit( process.env.REACT_APP_PUBLIC_VAPID_KEY || 'BIwTug5gws8tUV9ojDJoeMOMugRoWBDLRo6f8SbO94nSJ6bblCnMAlEq08XMRWhAUUpDI9W6BmLnY7kEtbD20Rc', true ) as PushKitClientInstance } catch ( e ) { return } } )()
+const pushApiUrl = process.env.PERGOLA_PUSH_API_URL || 'http://localhost:4001/reg'
+
+const PUSH_SUBSCRIBE_MUTATION = gql`
+mutation  pushSubscribe($subscription: PushSubscriptionInput) {
+    pushSubscribe(subscription: $subscription)
+}
+`
 
 function ServiceWorkerUpdateManager() {
-  if( process.env.TARGET !== 'web' ) return null
+  //if( process.env.TARGET !== 'web' ) return null
+  const { keycloak } = useKeycloak()
   const checkAlive = useAlive()
   const [dismissed, setDismissed] = useState( false )
 
   const [update, setUpdate] = useState<MouseEventHandler<HTMLElement> | undefined>()
   const [refreshing, setRefreshing] = useState( false )
+  const [pushSubscribe] = useMutation<Boolean, {subscription: PushSubscriptionInput}>( PUSH_SUBSCRIBE_MUTATION )
+
   useEffect(() => {
     register( '/service-worker.js', {
       registrationOptions: { scope: './' },
+      registered: async ( registration ) => {
+        const pushRegistration = await  pkInstance?.handleRegistration( registration )
+        if( pushRegistration ) {
+          const subscription = pushRegistration.toJSON() as unknown as PushSubscriptionInput
+          await pushSubscribe( {variables: { subscription }} )
+        }
+      },
       updated( registration ) {
-        setUpdate(() => ( _ ) => {
+        setUpdate(() => () => {
           if ( !checkAlive()) return
           setRefreshing( true )
           registration.waiting?.postMessage( { type: 'SKIP_WAITING' } )
