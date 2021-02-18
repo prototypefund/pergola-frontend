@@ -63,6 +63,7 @@ module.exports = {
       'REACT_APP_KEYCLOAK_URL',
       'REACT_APP_KEYCLOAK_CLIENT_ID',
       'PERGOLA_API_URL',
+      'PERGOLA_APP_URL',
       'NODE_ENV',
       'WEBDAV_URL',
       'TARGET',
