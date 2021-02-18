@@ -6,8 +6,6 @@ import React, {MouseEventHandler,useCallback, useEffect, useRef, useState  } fro
 import { register } from 'register-service-worker'
 import {PushSubscriptionInput} from 'types/graphql'
 
-import {getDefaultOptions} from './helper'
-
 interface PushKitClientInstance {
   supported: boolean;
   subscribed: boolean;

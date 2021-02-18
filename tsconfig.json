@@ -22,7 +22,8 @@
     "noImplicitAny": false,
     "noImplicitThis": true,
     "strictNullChecks": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": "./src"
   },
   "include": [
     "src",
