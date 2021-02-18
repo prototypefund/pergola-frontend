@@ -62,6 +62,7 @@ module.exports = {
       'REACT_APP_KEYCLOAK_REALM',
       'REACT_APP_KEYCLOAK_URL',
       'REACT_APP_KEYCLOAK_CLIENT_ID',
+      'REACT_APP_PUBLIC_VAPID_KEY',
       'PERGOLA_API_URL',
       'PERGOLA_APP_URL',
       'NODE_ENV',
