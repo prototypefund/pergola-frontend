@@ -12,11 +12,11 @@ import {
 } from '@material-ui/core'
 import { Theme } from '@material-ui/core/styles'
 import {
-  CalendarViewDay as CalendarIcon,
-  Explore as MapIcon,
-  Notifications as NotificationIcon,
+  EventNote as EventNoteIcon,
+  Home as HomeIcon,
+  Map as MapIcon,
   Opacity as WaterdropIcon,
-  Settings as SettingsIcon,
+  Person as PersonIcon
 } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/styles'
 import * as React from 'react'
@@ -38,7 +38,6 @@ function Routes() {
     <div className={classes.content}>
       <Route exact={true} path="/" component={LandingPage} />
       <Route exact={true} path="/map" component={GardenOverviewPage} />
-      <Route exact={true} path="/home" component={LandingPage} />
       <Route path="/watering" component={LetItRainEntry} />
       <Route path="/notifications" component={CalendarAndNotifications} />
     </div>
@@ -84,28 +83,28 @@ function App() {
       >
         <Tabs centered value={pathname}>
           <Tab
+            icon={<HomeIcon/>}
+            aria-label="home"
+            {...a11yTabProps( 0, '' )}
+          />
+          <Tab
             icon={<MapIcon />}
             aria-label="garden map"
-            {...a11yTabProps( 0, 'map' )}
+            {...a11yTabProps( 1, 'map' )}
           />
           <Tab
             icon={<WaterdropIcon />}
             aria-label="watering"
-            {...a11yTabProps( 1, 'watering' )}
+            {...a11yTabProps( 2, 'watering' )}
           />
           <Tab
-            icon={<CalendarIcon />}
-            aria-label="calendar"
-            {...a11yTabProps( 2, 'home' )}
-          />
-          <Tab
-            icon={<NotificationIcon />}
+            icon={<EventNoteIcon />}
             aria-label="mentioned"
             {...a11yTabProps( 3, 'notifications' )}
           />
           <Tab
-            icon={<SettingsIcon />}
-            aria-label="settings"
+            icon={<PersonIcon />}
+            aria-label="profile settings"
             {...a11yTabProps( 4, 'settings' )}
           />
         </Tabs>
