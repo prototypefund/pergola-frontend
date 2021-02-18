@@ -1,4 +1,3 @@
-import 'rsuite/dist/styles/rsuite-default.css'  // TODO remove this, but keep the default background color and other relevant styles
 import '../../../css/rsuite.scss'
 import './colorCodedCalendar.scss'
 
@@ -8,11 +7,11 @@ import { Calendar } from 'rsuite'
 
 import { CalDav, getEventsOfDay } from './CalDav'
 
-function formatTimePeriod(event) {
+function formatTimePeriod( event ) {
   const from = event.startDate.toJSDate()
   const till = event.endDate?.toJSDate()
   return dayjs( from ).format( 'HH:mm' )
-         + (till && dayjs(till).isAfter(dayjs(from)) ? dayjs( till ).format( ' - HH:mm' ) : '')
+         + ( till && dayjs( till ).isAfter( dayjs( from )) ? dayjs( till ).format( ' - HH:mm' ) : '' )
 	 + ' Uhr'
 }
 
@@ -23,7 +22,7 @@ function renderCell( date: Date, jcalData = undefined ) {
     const color = event.component.getFirstPropertyValue( 'x-pergola-color' ) || 'grey'
     return (
       <div className='colorCodedCalendarEntry' key={event.uid}
-        style={{ background: color, width: (Math.floor(100/events.length)).toString()+'%' }}>
+        style={{ background: color, width: ( Math.floor( 100/events.length )).toString()+'%' }}>
         <p> {event.summary} </p>
       </div>
     )
@@ -42,7 +41,7 @@ export function DayOverview( {date, events} ) {
             return (
               <tr key={event.uid}>
                 <td style={{background: color}}> &nbsp; </td>
-                <td> {formatTimePeriod(event)} </td>
+                <td> {formatTimePeriod( event )} </td>
                 <td> {event.summary} </td>
               </tr>
             )} )}
@@ -57,13 +56,13 @@ export function ColorCodedCalendar( {jcalData}:any ) {
   const [date, setDate] = useState( new Date())
 
   return (
-    <>
-      <Calendar className='rsuite'
+    <div className='rsuite'>
+      <Calendar
         bordered compact isoWeek={true}
         renderCell={ ( date:Date ) => renderCell( date, jcalData ) }
         onChange={setDate}  />
       <DayOverview date={date} events={getEventsOfDay( date, jcalData )} />
-    </>
+    </div>
   )
 }
 
