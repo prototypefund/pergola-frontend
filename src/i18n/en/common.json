@@ -1,8 +1,15 @@
 {
   "welcome": "Welcome",
   "gardeningTogether": "community gardening with Pergola",
+  "updateAvailable": "",
   "user": {
     "login": "log in",
     "logout": "log out"
-  }
+  },
+  "update": {
+    "newUpdateAvailable": "New version is available - please refresh.",
+    "refresh": "refresh",
+    "later": "later"
+  },
+  "cancel": "cancel"
 }

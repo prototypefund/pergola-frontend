@@ -4,9 +4,9 @@
   "watering": {
     "planless": "leider noch planlos",
     "change": "ändern",
-    "help": "helfen",
+    "help": "hilf aus",
     "uRAvailable": "Du bist verfügbar",
     "uRNotAvailable": "Du bist nicht verfügbar",
-    "itsMyTurn": "Ich bin dran"
+    "itsMyTurn": "Du bist dran"
   }
 }

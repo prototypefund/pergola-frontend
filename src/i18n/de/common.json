@@ -4,5 +4,11 @@
   "user": {
     "login": "einloggen",
     "logout": "ausloggen"
-  }
+  },
+  "update": {
+    "newUpdateAvailable": "Neue Version verfügbar - bitte neu laden!",
+    "refresh": "neu laden",
+    "later": "später"
+  },
+  "cancel": "abbrechen"
 }
