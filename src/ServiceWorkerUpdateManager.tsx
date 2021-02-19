@@ -1,9 +1,10 @@
-import { gql, useMutation } from '@apollo/client'
-import {Box, Button, LinearProgress, Snackbar, Typography } from '@material-ui/core'
-import { useKeycloak } from '@react-keycloak/web'
+import {gql, useMutation} from '@apollo/client'
+import {Box, Button, LinearProgress, Snackbar, Typography} from '@material-ui/core'
+import {useKeycloak} from '@react-keycloak/web'
 import {PushKit} from 'pushkit/client/dist/index'
-import React, {MouseEventHandler,useCallback, useEffect, useRef, useState  } from 'react'
-import { register } from 'register-service-worker'
+import React, {MouseEventHandler, useCallback, useEffect, useRef, useState} from 'react'
+import {useTranslation} from 'react-i18next'
+import {register} from 'register-service-worker'
 import {PushSubscriptionInput} from 'types/graphql'
 
 interface PushKitClientInstance {
@@ -12,6 +13,7 @@ interface PushKitClientInstance {
   key: string;
   reg?: ServiceWorkerRegistration;
   sub?: PushSubscription;
+
   handleRegistration(
     reg: ServiceWorkerRegistration
   ): Promise<PushSubscription | null>;
@@ -27,44 +29,81 @@ const useAlive = () => {
   )
   return useCallback(() => isAliveRef.current, [] )
 }
-console.log( process.env.REACT_APP_PUBLIC_VAPID_KEY )
-const pkInstance = (() => { try { return new PushKit( process.env.REACT_APP_PUBLIC_VAPID_KEY || 'BIwTug5gws8tUV9ojDJoeMOMugRoWBDLRo6f8SbO94nSJ6bblCnMAlEq08XMRWhAUUpDI9W6BmLnY7kEtbD20Rc', true ) as PushKitClientInstance } catch ( e ) { return } } )()
-const pushApiUrl = process.env.PERGOLA_PUSH_API_URL || 'http://localhost:4001/reg'
+const pkInstance = (() => {
+  try {
+    return new PushKit( process.env.REACT_APP_PUBLIC_VAPID_KEY || 'BIwTug5gws8tUV9ojDJoeMOMugRoWBDLRo6f8SbO94nSJ6bblCnMAlEq08XMRWhAUUpDI9W6BmLnY7kEtbD20Rc', true ) as PushKitClientInstance
+  } catch ( e ) {
+    return
+  }
+} )()
 
 const PUSH_SUBSCRIBE_MUTATION = gql`
-mutation  pushSubscribe($subscription: PushSubscriptionInput) {
-    pushSubscribe(subscription: $subscription)
-}
+    mutation  pushSubscribe($subscription: PushSubscriptionInput) {
+        pushSubscribe(subscription: $subscription)
+    }
 `
 
 function ServiceWorkerUpdateManager() {
-  //if( process.env.TARGET !== 'web' ) return null
-  const { keycloak } = useKeycloak()
+  if( process.env.TARGET !== 'web' ) return null
+  const {keycloak: { authenticated = false }} = useKeycloak()
   const checkAlive = useAlive()
+  const {t} = useTranslation()
   const [dismissed, setDismissed] = useState( false )
+  const [swRegistration, setSwRegistration] = useState<ServiceWorkerRegistration | null >( null )
+
 
   const [update, setUpdate] = useState<MouseEventHandler<HTMLElement> | undefined>()
   const [refreshing, setRefreshing] = useState( false )
-  const [pushSubscribe] = useMutation<Boolean, {subscription: PushSubscriptionInput}>( PUSH_SUBSCRIBE_MUTATION )
+  const [pushSubscribe] = useMutation<Boolean, { subscription: PushSubscriptionInput }>( PUSH_SUBSCRIBE_MUTATION )
+
+  const registerOrUpdateSubscription = async ( registration: ServiceWorkerRegistration ) => {
+    const pushRegistration = await pkInstance?.handleRegistration( registration )
+    if ( pushRegistration ) {
+      const subscription = pushRegistration.toJSON() as unknown as PushSubscriptionInput
+      await pushSubscribe( {variables: {subscription}} )
+    }
+  }
+
+  useEffect(() => {
+    if( !authenticated || !swRegistration ) return
+    registerOrUpdateSubscription( swRegistration )
+  }, [swRegistration, authenticated] )
 
   useEffect(() => {
     register( '/service-worker.js', {
-      registrationOptions: { scope: './' },
-      registered: async ( registration ) => {
-        const pushRegistration = await  pkInstance?.handleRegistration( registration )
-        if( pushRegistration ) {
-          const subscription = pushRegistration.toJSON() as unknown as PushSubscriptionInput
-          await pushSubscribe( {variables: { subscription }} )
-        }
+      registrationOptions: {scope: './'},
+      registered( registration ) {
+        console.log( 'Service worker has been registered.' )
+        setSwRegistration( registration )
       },
       updated( registration ) {
+        console.log( 'New content is available; please refresh.' )
+        setSwRegistration( registration )
         setUpdate(() => () => {
           if ( !checkAlive()) return
           setRefreshing( true )
-          registration.waiting?.postMessage( { type: 'SKIP_WAITING' } )
+          registration.waiting?.postMessage( {type: 'SKIP_WAITING'} )
           registration.update().then(() => window.location.reload())
         } )
       },
+      ready( registration ) {
+        console.log( 'Service worker is active.' )
+        setSwRegistration( registration )
+      },
+      cached( registration ) {
+        console.log( 'Content has been cached for offline use.' )
+        setSwRegistration( registration )
+      },
+      updatefound( registration ) {
+        console.log( 'New content is downloading.' )
+        setSwRegistration( registration )
+      },
+      offline() {
+        console.log( 'No internet connection found. App is running in offline mode.' )
+      },
+      error( error ) {
+        console.error( 'Error during service worker registration:', error )
+      }
     } )
   }, [] )
 
@@ -72,12 +111,13 @@ function ServiceWorkerUpdateManager() {
   useEffect(() => {
     const timer = setInterval(() => {
       setProgress(( prevProgress ) => {
-        if( prevProgress < 0 ) {
+        if ( prevProgress < 0 ) {
           setDismissed( true )
           clearInterval( timer )
           return 100
         }
-        return prevProgress - 10 } )
+        return prevProgress - 10
+      } )
     }, 500 )
     return () => {
       clearInterval( timer )
@@ -90,8 +130,8 @@ function ServiceWorkerUpdateManager() {
       message={
         <Box display="flex" alignItems="center">
           <Box width="100%" mr={1}>
-            <LinearProgress variant="determinate" value={progress} />
-            <Typography>New version is available - please refresh.</Typography>
+            <LinearProgress variant="determinate" value={progress}/>
+            <Typography>{t( 'update' ).newUpdateAvailable}</Typography>
           </Box>
         </Box>
       }
@@ -102,7 +142,7 @@ function ServiceWorkerUpdateManager() {
             component='button'
             onClick={() => setDismissed( true )}
           >
-              later
+            {t( 'update' ).later}
           </Button>
           <Button
             variant='outlined'
@@ -110,7 +150,7 @@ function ServiceWorkerUpdateManager() {
             onClick={update}
             disabled={refreshing}
           >
-              refresh
+            {t( 'update' ).refresh}
           </Button>
         </>
       }
