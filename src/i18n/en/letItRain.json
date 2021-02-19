@@ -1,6 +1,12 @@
 {
   "wateringPlan": "watering plan",
   "ourWateringPlan": "our watering plan",
+  "menu": {
+    "manage": "manage periods",
+    "help": "help",
+    "subscribeCalendar": "subscribe to calendar",
+    "exportPrint": "export/print"
+  },
   "watering": {
     "planless": "not yet planned",
     "change": "change",
@@ -8,5 +14,10 @@
     "uRAvailable": "you are available",
     "uRNotAvailable": "you are not available",
     "itsMyTurn": "it's your turn"
+  },
+  "assignment": {
+    "confirmRemoveContent": "if you cancel your assignment, other gardeners will get a request for substitution",
+    "confirmRemoveTitle": "Realy cancel your assignement?",
+    "callOff": "call off"
   }
 }

@@ -1,5 +1,6 @@
-import {Box, IconButton, makeStyles, Menu, MenuItem, Paper, Toolbar, Typography} from '@material-ui/core'
+import {Box, Button, IconButton, makeStyles, Menu, MenuItem, Paper, Toolbar, Typography} from '@material-ui/core'
 import {Add, MoreVert, Today} from '@material-ui/icons'
+import { useKeycloak } from '@react-keycloak/web'
 import dayjs from 'dayjs'
 import * as React from 'react'
 import {useRef, useState} from 'react'
@@ -16,12 +17,14 @@ import {webdavUrl} from '../config/calendat'
 import {RootState} from '../reducers'
 import BackgroundImage from '../static/background_full_grey_01.jpg'
 import {LetItRainAvailabilityDialog} from './LetItRainAvailabilityDialog'
+import {LetItRainManageDialog} from './LetItRainManageDialog'
 import {LetItRainThanksDialog} from './LetItRainThanksDialog'
 import {LetItRainWizard} from './LetItRainWizard'
 
 
 export function LetItRainEntry() {
   const { t } = useTranslation( 'letItRain' )
+  const { keycloak } = useKeycloak()
   const dispatch = useDispatch()
   const selectedDay = useSelector<RootState, Date | undefined>(( {letItRain: { selectedDate }} ) => selectedDate )
   const classes = useStyles()
@@ -47,9 +50,12 @@ export function LetItRainEntry() {
                 <MoreVert/>
               </IconButton>
               <Menu keepMounted open={Boolean( menuAnchor )} anchorEl={menuAnchor} onClose={()  => setMenuAnchor( null )}>
-                <MenuItem component={Link} to={webdavUrl + '/public/wateringTasks.ics'} target='_blank'>Kalender abonieren</MenuItem>
-                <MenuItem onClick={handlePrint}>Exportieren/Drucken</MenuItem>
-                <MenuItem onClick={() => setDrawerOpen( true )}>Hilfe</MenuItem>
+                <MenuItem>
+                  <a href={webdavUrl + '/public/wateringTasks.ics'} target='_blank' rel="noreferrer">{t( 'menu' ).subscribeCalendar}</a>
+                </MenuItem>
+                <MenuItem onClick={handlePrint}>{t( 'menu' ).exportPrint}</MenuItem>
+                {keycloak.hasRealmRole( 'garden_manager' ) && <MenuItem component={Link} to='/watering/manage'>{t( 'menu' ).manage}</MenuItem>}
+                <MenuItem onClick={() => setDrawerOpen( true )}>{t( 'menu' ).help}</MenuItem>
               </Menu>
             </div>
           </Toolbar>
@@ -73,6 +79,7 @@ export function LetItRainEntry() {
           return ( <LetItRainAvailabilityDialog startDate={dayjs( startDate, 'YYYY-MM-DD' ).toDate()} /> )
         }} />
         <Route path='/watering/thanks' component={LetItRainThanksDialog}/>
+        <Route path='/watering/manage' component={LetItRainManageDialog}/>
       </Switch>
     </>
   )

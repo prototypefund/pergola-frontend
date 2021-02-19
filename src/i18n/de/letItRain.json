@@ -1,6 +1,12 @@
 {
   "wateringPlan": "Gießplan",
   "ourWateringPlan": "Unser Gießplan",
+  "menu": {
+    "manage": "Bewässerungsperioden...",
+    "help": "Hilfe",
+    "subscribeCalendar": "Kalender abonnieren",
+    "exportPrint": "Exportieren/Drucken"
+  },
   "watering": {
     "planless": "leider noch planlos",
     "change": "ändern",
@@ -8,5 +14,10 @@
     "uRAvailable": "Du bist verfügbar",
     "uRNotAvailable": "Du bist nicht verfügbar",
     "itsMyTurn": "Du bist dran"
+  },
+  "assignment": {
+    "confirmRemoveContent": "Wenn du deiene Einsatz absagst, erhalten andere Gärtner*innen bei Bedarf eine Vertretungsanfrage.",
+    "confirmRemoveTitle": "Gießeinsatz wirklich absagen?",
+    "callOff": "absagen"
   }
 }

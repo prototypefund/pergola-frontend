@@ -60,7 +60,7 @@ export function LetItRainWizard() {
   const {data: assignableWateringPeriodData } = useQuery<{assignableWateringPeriod: WateringPeriod}>( ASSIGNABLE_WATERING_PERIOD )
 
   const [setUserAvailabilityMutation] =
-      useMutation<Boolean, { dates: Array<_Neo4jDateInput> }>( SET_USER_AVAILABLITY_FOR_WATERING_PERIOD,
+      useMutation<boolean, { dates: Array<_Neo4jDateInput> }>( SET_USER_AVAILABLITY_FOR_WATERING_PERIOD,
         {variables: {dates: availableDates.map( toNeo4jDateInput )}} )
 
   const [ mergeUserSettings ] =

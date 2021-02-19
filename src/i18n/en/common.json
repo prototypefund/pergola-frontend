@@ -11,5 +11,6 @@
     "refresh": "refresh",
     "later": "later"
   },
-  "cancel": "cancel"
+  "cancel": "cancel",
+  "okay": "okay"
 }
