@@ -24,7 +24,7 @@ import {withLocalize} from 'react-localize-redux'
 import { Link, Route, useLocation } from 'react-router-dom'
 
 import { Login } from './components'
-import {GardenOverviewPage, LandingPage,LetItRainEntry} from './pages'
+import {GardenOverviewPage, LandingPage, LetItRainEntry, Settings} from './pages'
 import { CalendarAndNotifications } from './pages/CalendarAndNotifications'
 import backgroundImage from './static/background_full_grey_01.jpg'
 import title from './static/logo-pergola-title.svg'
@@ -40,6 +40,7 @@ function Routes() {
       <Route exact={true} path="/map" component={GardenOverviewPage} />
       <Route path="/watering" component={LetItRainEntry} />
       <Route path="/notifications" component={CalendarAndNotifications} />
+      <Route path="/settings" component={Settings} />
     </div>
   )
 }
