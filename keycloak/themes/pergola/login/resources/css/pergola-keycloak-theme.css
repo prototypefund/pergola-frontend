@@ -3,9 +3,26 @@
   --mdc-theme-secondary: #eb8d17;
 }
 
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+}
+
 body {
   background: url('../img/background_full_grey_01.jpg') no-repeat;
   background-size: cover;
+}
+
+#kc-container-wrapper {
+  padding-top: 7vh;
+}
+
+#kc-header {
+  margin-top: 0;
 }
 
 #kc-header-wrapper {
