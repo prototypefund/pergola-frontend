@@ -16,7 +16,7 @@ export function LoginPrompt() {
   return (
     <Dialog aria-labelledby="simple-dialog-title" open={true}>
       <DialogTitle disableTypography={true}>
-        <Typography variant="h4" align="center">Mooooment...</Typography>
+        <Typography variant="h4" align="center">{t( 'user.loginPrompt' )}</Typography>
         <IconButton className={classes.closeIconButton} onClick={history.goBack}>
           <CloseIcon fontSize="small" />
         </IconButton>
@@ -25,15 +25,15 @@ export function LoginPrompt() {
         <Box textAlign="center" my={2}>
           <LockIcon fontSize="large" color="primary"  />
         </Box>
-        <Box textAlign="center" my={2}>
+        <Box textAlign="center" my={2} mx="auto" maxWidth="175px">
           <Typography>
-            Bitte melde dich an,<br />um weiterzumachen.
+            {t( 'user.loginPlease' )}
           </Typography>
         </Box>
       </DialogContent>
       <DialogActions className={classes.dialogActions}>
         <Button autoFocus onClick={history.goBack} variant="contained">
-          Zurück
+          {t( 'back' )}
         </Button>
         <Button onClick={() => keycloak.login()} variant="contained" color="primary" endIcon={<LockOpenRounded />}>
           {t( 'user.login' )}

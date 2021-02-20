@@ -3,6 +3,8 @@
   "gardeningTogether": "Gemeinsam gärtnern mit Pergola",
   "user": {
     "login": "einloggen",
+    "loginPrompt": "Mooooment...",
+    "loginPlease": "Bitte melde dich an, um weiterzumachen.",
     "logout": "ausloggen"
   },
   "update": {
@@ -11,5 +13,6 @@
     "later": "später"
   },
   "cancel": "abbrechen",
-  "okay": "OK"
+  "okay": "OK",
+  "back": "Zurück"
 }
