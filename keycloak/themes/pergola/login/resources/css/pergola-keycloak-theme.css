@@ -1,3 +1,36 @@
+:root {
+  --mdc-theme-primary: #009e7e;
+  --mdc-theme-secondary: #eb8d17;
+}
+
 body {
-  color: #009e7e;
+  background: url('../img/background_full_grey_01.jpg') no-repeat;
+  background-size: cover;
+}
+
+#kc-header-wrapper {
+  background: url('../img/logo-pergola-title.svg') no-repeat center center;
+  height: 100px;
+}
+
+#kc-header-wrapper .title {
+  /* only for screen readers */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  -webkit-clip-path: inset(50%);
+  clip-path: inset(50%);
+  border: 0;
+}
+
+#kc-content {
+  box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+}
+
+.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
+  color: rgba(0, 158, 126, .87)
 }
