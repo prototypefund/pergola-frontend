@@ -4,6 +4,8 @@
   "updateAvailable": "",
   "user": {
     "login": "log in",
+    "loginPrompt": "Holy pergoly!",
+    "loginPlease": "Please login to continue.",
     "logout": "log out"
   },
   "update": {
@@ -12,5 +14,6 @@
     "later": "later"
   },
   "cancel": "cancel",
-  "okay": "okay"
+  "okay": "okay",
+  "back": "Back"
 }
