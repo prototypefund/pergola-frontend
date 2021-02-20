@@ -1,55 +1,46 @@
 // @ts-nocheck
-import './leaflet/preleaflet'
+import './preleaflet'
 import 'leaflet-extra-markers/dist/css/leaflet.extra-markers.min.css'
 import 'leaflet-pixi-overlay/L.PixiOverlay'
 import 'leaflet-draw/dist/leaflet.draw-src.css'
 import 'leaflet-draw/dist/leaflet.draw-src'
-import './leaflet/leaflet.extra-markers'
+import './leaflet.extra-markers'
 import '@icon/icofont/icofont.css'
 
 import { Layer } from 'leaflet'
 import * as L from 'leaflet'
-import * as PIXI from 'pixi.js'
 import React from 'react'
 import { MapLayer, MapLayerProps } from 'react-leaflet'
 
-import {ShapeCreator} from './leaflet/ShapeCreator'
-
-interface ReactLeaflet_PixiOverlayProps extends MapLayerProps {
-  data: object;
-  drawCallback: ( utils: object, data: object ) => any;
-}
+import {ShapeCreator} from './ShapeCreator'
 
 
 
-
-export default class ReactLeaflet_PixiOverlay
+export default class LeafletEditableOverlay
   extends MapLayer
   implements JSX.Element {
 
   constructor( props ) {
     super( props )
-    this.setState( {initialized: false} )
+    this.state = {
+      leafletElement: null
+    }
   }
 
 
-  createLeafletElement( props: ReactLeaflet_PixiOverlayProps ) {
-    const { data, drawCallback } = props
-    // @ts-ignore
-    return L.pixiOverlay( function ( utils ) {
-      drawCallback( utils, data )
-    }, new PIXI.Container()) as Layer
+  createLeafletElement( props: MapLayerProps ) {
+    return this.initDrawControl()
 
   }
 
   initDrawControl() {
     // @ts-ignore
-    if( !this.leafletElement || this?.state?.initialized )  return
+    //if( !this.leafletElement || this?.state?.initialized )  return
     // @ts-ignore
-    this.setState( { 'initialized': true } )
+    // this.setState( { 'initialized': true } )
     const { layerContainer, map } = this.props.leaflet || this.context
-    this.leafletElement.addTo( layerContainer )
-    this.leafletElement.addTo( map )
+    //this.leafletElement.addTo( layerContainer )
+    //this.leafletElement.addTo( map )
 
     const newVegiMarker = () => L.icon.glyph( {
       prefix: 'icofont',
@@ -78,10 +69,9 @@ export default class ReactLeaflet_PixiOverlay
 
     // @ts-ignore
     const editableLayer = new L.FeatureGroup()
-    this.setState( {editableLayer: editableLayer} )
     map.addLayer( editableLayer )
     // @ts-ignore
-    const drawControl = new L.Control.Draw( {
+    this.drawControl = new L.Control.Draw( {
       position: 'topright',
       draw: {
         polyline: {
@@ -115,29 +105,31 @@ export default class ReactLeaflet_PixiOverlay
         remove: false,
       },
     } )
-    map.addControl( drawControl )
+    map.addControl( this.drawControl )
+    return editableLayer
   }
 
   componentWillUnmount() {
     const { layerContainer, map } = this.props.leaflet || this.context
     map.removeLayer( this.leafletElement )
+    map.removeControl( this.drawControl )
     layerContainer.removeLayer( this.leafletElement )
   }
 
-  componentDidUpdate() {
-    this.leafletElement = this.createLeafletElement( this.props )
-    this.initDrawControl()
+  componentDidMount() {
+    //this.leafletElement && this.componentWillUnmount()
+    if( !this.leafletElement ) this.leafletElement = this.createLeafletElement( this.props )
+    //this.setState( {leafletElement: this.leafletElement} )
   }
 
   render() {
     const { map } = this.props.leaflet || this.context
-    const { editableLayer } = this.state || {}
     return (
-      <ShapeCreator map={map} editableLayer={editableLayer} />
+      <ShapeCreator map={map} editableLayer={this.leafletElement} />
     )
   }
 
   key: React.Key | null = null;
-  props: any;
+  props: MapLayerProps;
   type: any;
 }

@@ -32,3 +32,5 @@ export function previousDay() : LetItRainPreviousDayAction {
   return { type: LetItRainActions.PREVIOUS_DAY, payload: undefined}
 }
 
+export type LetItRainAction = LetItRainDaySelectAction | LetItRainNextDayAction | LetItRainPreviousDayAction
+
