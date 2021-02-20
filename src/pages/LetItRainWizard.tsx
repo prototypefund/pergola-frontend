@@ -1,12 +1,14 @@
 import {gql, useMutation, useQuery} from '@apollo/client'
 import {Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, makeStyles, useMediaQuery, useTheme} from '@material-ui/core'
 import {ArrowBack as ArrowBackIcon} from '@material-ui/icons'
+import { useKeycloak } from '@react-keycloak/web'
 import dayjs from 'dayjs'
 import * as React from 'react'
 import {useState} from 'react'
 import {Link, useHistory, useParams} from 'react-router-dom'
 
 import {Calendar, HorizontalStepper, LetItRainFrequency, NotificationSettings} from '../components'
+import {LoginPrompt} from '../components/LoginPrompt'
 import {fromNeo4jDate, toNeo4jDateInput} from '../helper'
 import {_Neo4jDateInput, UserSettings, UserSettingsInput, WateringPeriod} from '../types/graphql'
 
@@ -50,6 +52,7 @@ const ASSIGNABLE_WATERING_PERIOD = gql`
 `
 
 export function LetItRainWizard() {
+  const { keycloak } = useKeycloak()
   const theme = useTheme()
   const classes = useStyles()
   const history = useHistory()
@@ -116,8 +119,8 @@ export function LetItRainWizard() {
   }
 
 
-  return (
-    <Dialog
+  return keycloak.authenticated ?
+    ( <Dialog
       fullScreen={fullscreenDialog}
       className={classes.dialog + ( fullscreenDialog ? '' : ' noFullscreen' )}
       open={true}
@@ -162,7 +165,10 @@ export function LetItRainWizard() {
         )}
       </DialogActions>
     </Dialog>
-  )
+    ) :
+    (
+      <LoginPrompt />
+    )
 }
 
 const useStyles = makeStyles(() => ( {
