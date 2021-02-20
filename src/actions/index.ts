@@ -3,12 +3,14 @@ import { useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import { GardenSelectAction } from './garden-select'
-import { LetItRainDaySelectAction} from './letItRain'
+import { GardenMapAction } from './gardenMap'
+import { LetItRainAction} from './letItRain'
 import { UserProfileAction } from './userProfile'
 
 export * from './userProfile'
 export * from './garden-select'
 export * from './letItRain'
+export * from './gardenMap'
 
 export function useActions( actions: any, deps?: any ): any {
   const dispatch = useDispatch()
@@ -23,4 +25,4 @@ export function useActions( actions: any, deps?: any ): any {
   )
 }
 
-export type Action = GardenSelectAction | UserProfileAction | LetItRainDaySelectAction
+export type Action = GardenSelectAction | UserProfileAction | LetItRainAction | GardenMapAction

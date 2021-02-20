@@ -2583,6 +2583,11 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
+"@icon/icofont@^1.0.1-alpha.1":
+  version "1.0.1-alpha.1"
+  resolved "https://registry.yarnpkg.com/@icon/icofont/-/icofont-1.0.1-alpha.1.tgz#8bcf5bb2a414aabca4ba24a7cc2215a7568afb6e"
+  integrity sha512-LF4Fm1Wn+LeKZ5HB+MQAX+DKkdW4Qkf0oIrXD9HgBSuggFTSkwZo+dq8Y+K8pe5WjgWXbalHZegkYRn2ATVlzg==
+
 "@icons/material@^0.2.4":
   version "0.2.4"
   resolved "https://registry.yarnpkg.com/@icons/material/-/material-0.2.4.tgz#e90c9f71768b3736e76d7dd6783fc6c2afa88bc8"
@@ -5118,10 +5123,10 @@
     "@types/leaflet" "*"
     "@types/react" "*"
 
-"@types/react-redux@7.1.7":
-  version "7.1.7"
-  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-7.1.7.tgz#12a0c529aba660696947384a059c5c6e08185c7a"
-  integrity sha512-U+WrzeFfI83+evZE2dkZ/oF/1vjIYgqrb5dGgedkqVV8HEfDFujNgWCwHL89TDuWKb47U0nTBT6PLGq4IIogWg==
+"@types/react-redux@^7.1.16":
+  version "7.1.16"
+  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-7.1.16.tgz#0fbd04c2500c12105494c83d4a3e45c084e3cb21"
+  integrity sha512-f/FKzIrZwZk7YEO9E1yoxIuDNRiDducxkFlkw/GNMGEnK9n4K8wJzlJBghpSuOVDgEUHoDkDF7Gi9lHNQR4siw==
   dependencies:
     "@types/hoist-non-react-statics" "^3.3.0"
     "@types/react" "*"
@@ -14129,10 +14134,20 @@ leaflet-draw@^1.0.4:
   resolved "https://registry.yarnpkg.com/leaflet-draw/-/leaflet-draw-1.0.4.tgz#45be92f378ed253e7202fdeda1fcc71885198d46"
   integrity sha512-rsQ6saQO5ST5Aj6XRFylr5zvarWgzWnrg46zQ1MEOEIHsppdC/8hnN8qMoFvACsPvTioAuysya/TVtog15tyAQ==
 
+leaflet-extra-markers@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/leaflet-extra-markers/-/leaflet-extra-markers-1.2.1.tgz#dcea9e0ab3850c4724afa6eda8dda8fa743739fa"
+  integrity sha512-k3mGGBJg5wr4LY89MyLHcWCol3yNC9qcK1+5os+HjBk09RlxmqsywNSBwmpP1WKnkKCIgofnOFOhdM5GeK0kHQ==
+
 leaflet-pixi-overlay@^1.8.1:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/leaflet-pixi-overlay/-/leaflet-pixi-overlay-1.8.1.tgz#540645b1136512f7e63fd1f781bbffb2f5bf0df9"
   integrity sha512-YEAvD5vGuhCvVnlcgMxQyh5wIKDtfRoDXUp/iLd3HNY+mOLhVKMqogQXmyBbzjn4eYkzAOVRF1DBPJaCjYrb8w==
+
+leaflet.icon.glyph@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/leaflet.icon.glyph/-/leaflet.icon.glyph-0.3.0.tgz#9151a2c1be87aedc3984bc273c39e47e45220929"
+  integrity sha512-kCZGgyAd0pY0EgM70XE7sNTBqXVr2mgcfbCtxq/5uWP7Hk2QTJ8DYcUHvHMqcooZqp1QjUua/uagutopKEcGMg==
 
 leaflet@^1.7.1:
   version "1.7.1"
