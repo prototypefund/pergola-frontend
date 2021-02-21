@@ -3,22 +3,15 @@
   --mdc-theme-secondary: #eb8d17;
 }
 
-html {
-  height: 100%;
-}
-
 body {
   min-height: 100vh;
   margin: 0;
-}
-
-body {
   background: url('../img/background_full_grey_01.jpg') no-repeat;
   background-size: cover;
 }
 
 #kc-container-wrapper {
-  padding-top: 7vh;
+  padding-top: 7vh 0 1rem 0;
 }
 
 #kc-header {
@@ -50,4 +43,11 @@ body {
 
 .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
   color: rgba(0, 158, 126, .87)
+}
+
+.template .language-picker:after {
+  /* clearfix */
+  content: "";
+  display: table;
+  clear: both;
 }
