@@ -42,14 +42,14 @@ const GET_WATERING_TASK = gql`
 `
 
 const REMOVE_ASSIGNMENT_MUTATION = gql`
-    mutation removeAssignment($date: _Neo4jDateInput!) {
-        removeAssignment(date: $date)
+    mutation removeAssignment($date: _Neo4jDateInput!, $gardenId: ID!) {
+        removeAssignment(date: $date, gardenId: $gardenId)
     }
 `
 
 const ADD_ASSIGNMENT_MUTATION = gql`
-    mutation addAssignment($date: _Neo4jDateInput!) {
-        addAssignment(date: $date)
+    mutation addAssignment($date: _Neo4jDateInput!, $gardenId: ID!) {
+        addAssignment(date: $date, gardenId: $gardenId)
     }
 `
 const WATERING_TASK_CHANGE = gql`
@@ -74,13 +74,15 @@ export function WateringDetailDrawer( {onDrawerClose}: Props ) {
   const { data: WateringTaskChangeData } = useSubscription<{WateringtaskChange: Boolean}>( WATERING_TASK_CHANGE )
   useEffect(() => { WateringTaskData && !loading && refetch() }, [WateringTaskChangeData] )
 
-  const [removeAssignment] = useMutation<boolean, { date: _Neo4jDateInput }>( REMOVE_ASSIGNMENT_MUTATION, {
+  const [removeAssignment] = useMutation<boolean, { date: _Neo4jDateInput, gardenId: string }>( REMOVE_ASSIGNMENT_MUTATION, {
     variables: {
+      gardenId,
       date: toNeo4jDateInput( date )
     }
   } )
-  const [addAssignment] = useMutation<boolean, { date: _Neo4jDateInput }>( ADD_ASSIGNMENT_MUTATION, {
+  const [addAssignment] = useMutation<boolean, { date: _Neo4jDateInput, gardenId: string }>( ADD_ASSIGNMENT_MUTATION, {
     variables: {
+      gardenId,
       date: toNeo4jDateInput( date )
     }
   } )

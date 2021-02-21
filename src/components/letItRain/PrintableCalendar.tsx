@@ -29,7 +29,7 @@ interface Props {
 
 export function PrintableCalendar( { childRef } : Props ) {
   const startDate = dayjs().startOf( 'month' ).toDate()
-  const endDate = dayjs().endOf( 'month' ).toDate()
+  const endDate = dayjs( startDate ).endOf( 'month' ).toDate()
   const { gardenId } = useParams<{gardenId: string}>()
 
   const {data: WateringTasksData} = useQuery<{WateringTask: WateringTask[]}, {gardenId: string, dateFrom: _Neo4jDateInput, dateTo: _Neo4jDateInput}>( GET_WATERING_TASKS, {
@@ -54,7 +54,7 @@ export function PrintableCalendar( { childRef } : Props ) {
       <style>
         {'@media print {.rs-calendar-header-forward, .rs-calendar-header-backward, .rs-calendar-btn-today {display: none} .rs-calendar-panel .rs-calendar-table-cell-selected .rs-calendar-table-cell-content {border: none;}.rs-calendar-panel .rs-calendar-table-cell-is-today .rs-calendar-table-cell-day{color: inherit; background: none;}}' }
       </style>
-      <Calendar bordered renderCell={renderCell} />
+      <Calendar value={startDate} bordered renderCell={renderCell} />
     </div>
   )
 }

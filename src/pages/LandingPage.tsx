@@ -63,7 +63,7 @@ export function LandingPage() {
               <em>keiner</em>
             </MenuItem>
             {gardens.map(( { id, name } ) => (
-              <MenuItem key={id} component={Link}  to={`${url}${id}`} >
+              <MenuItem key={id} component={Link}  to={`${url}${id}/home`} >
                 {name}
               </MenuItem>
             ))}

@@ -37,8 +37,8 @@ const WATERING_PERIODS_QUERY = gql`
 `
 
 const PLAN_WATERING_PERIOD_MUTATION = gql`
-    mutation planWateringPeriod($gardenId: ID!, $planing_ahead: Int, $periods_predefined: Int!) {
-        planWateringPeriods(gardenId: $gardenId, planing_ahead: $planing_ahead, periods_predefined: $periods_predefined)
+    mutation planWateringPeriod($gardenId: ID!, $planning_ahead: Int, $periods_predefined: Int!) {
+        planWateringPeriods(gardenId: $gardenId, planning_ahead: $planning_ahead, periods_predefined: $periods_predefined)
     }
 `
 
@@ -67,7 +67,7 @@ export function WateringPeriodManager() {
           <Button onClick={() => planWateringPeriods( {
             variables: {
               gardenId,
-              planing_ahead: 7,
+              planning_ahead: 7,
               periods_predefined: periodsPredefined
             }} )}>
             start planning
@@ -78,14 +78,15 @@ export function WateringPeriodManager() {
             {wateringPeriodsData?.WateringPeriod.map( waterinPeriod => {
               const from = dayjs( fromNeo4jDate( waterinPeriod.from ))
               const till = dayjs( fromNeo4jDate( waterinPeriod.till ))
+              const planning_ahead =  till.diff( dayjs(), 'day' )
               return ( <ListItem key={waterinPeriod._id}>
                 <ListItemText>{from.format( 'LL' )} - {till.format( 'LL' )}</ListItemText>
                 <ListItemSecondaryAction>
                   <IconButton disabled={!!waterinPeriod.hasUsersAssigned}
-                    onClick={() => waterinPeriod._id && planWateringPeriods( {
+                    onClick={() =>  planWateringPeriods( {
                       variables: {
                         gardenId,
-                        planing_ahead: Math.ceil( from.diff( dayjs(), 'day' )),
+                        planning_ahead,
                         periods_predefined: periodsPredefined
                       }
                     } )}>
