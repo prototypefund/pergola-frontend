@@ -48,14 +48,16 @@ export function Calendar( { dates = [], onChange, selectedDates: _selectedDates 
   const [firstDate] = dates
   const lastDate = dates[dates.length - 1]
 
-  // TODO: Currently each calendar week needs 7 dates, otherwise we get wrong/missing checkboxes. How to fix this?
-  const datesByWeeks = dates.reduce(( map, date ) => {
+  const datesByWeeks: Map<number, Array<Date>> = dates.reduce((map, date ) => {
     const cw = dayjs( date ).week()
     map.has( cw ) || map.set( cw, [] )
     map.get( cw ).push( date )
 
     return map
   }, new Map())
+
+  // Make sure calendar weeks are in asc order
+  // datesByWeeks = new Map(Array.from(datesByWeeks).sort((a, b) => a[0] - b[0] ) )
 
   const handleAllChange = ( event ) => {
     // (un)check all dates
@@ -242,21 +244,24 @@ export function Calendar( { dates = [], onChange, selectedDates: _selectedDates 
             />
             {[...new Array( 7 )].map(( e, dayOfWeek ) => {
               { // Make sure each day has a date.
-                let date = datesByWeeks.get( cw ).find( date => dayjs( date ).weekday() === dayOfWeek )
-                const dateAvailable = ( !! date )
-                if ( ! dateAvailable ) {
-                  // Provide missing date by week and day number.
-                  date = dayjs().week( cw ).weekday( dayOfWeek ).toDate()
+                const datesOfWeek = datesByWeeks.get(cw)
+                if (datesOfWeek) {
+                  let date = datesOfWeek.find(date => dayjs(date).weekday() === dayOfWeek)
+                  const dateAvailable = !!date
+                  if (!date) {
+                    // Provide missing date by week and day number.
+                    date = dayjs().week(cw).weekday(dayOfWeek).toDate()
+                  }
+                  return <FormControlLabel
+                    key={dayjs(date).format('DD-MM-YYYY')}
+                    classes={{
+                      root: classes.checkBoxLabel,
+                      label: classes.checkBoxLabelText,
+                    }}
+                    control={<DateCheckBox date={date} disabled={!dateAvailable}/>}
+                    label={date.getDate()}
+                  />
                 }
-                return <FormControlLabel
-                  key={dayjs( date ).format( 'DD-MM-YYYY' )}
-                  classes={{
-                    root: classes.checkBoxLabel,
-                    label: classes.checkBoxLabelText,
-                  }}
-                  control={<DateCheckBox date={date} disabled={! dateAvailable} />}
-                  label={date.getDate()}
-                />
               }
             } )}
           </FormGroup>
