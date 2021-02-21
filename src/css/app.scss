@@ -102,24 +102,12 @@
 //
 //
 
-body {
-  min-height: 100vh;
-}
-
-
 a:hover,
 a:focus {
   color: hsl(163, 50%, 80%);
 }
 a:active {
   color: hsl(163, 50%, 60%);
-}
-
-#app {
-  height: 100%;
-}
-
-.page {
 }
 
 footer {
