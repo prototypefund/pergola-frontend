@@ -54,11 +54,6 @@ export function LandingPage() {
     { id: 'wurzelwerk', name: 'Wurzelwerk' },
     { id: 'pippilotta', name: 'Garten Pippilotta' },
   ]
-  const landingInfos: LandingPage_Info[] = [
-    { id: '0', headline: 'Erstelle einen Gießplan für euren Garten' },
-    { id: '1', headline: 'Verschaffe dir einen Überblick über anstehende Termine' },
-    { id: '2', headline: 'Lerne mit der interaktiven Karte deinen Garten kennen' },
-  ]
 
   return (
     <div>

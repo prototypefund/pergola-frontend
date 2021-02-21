@@ -1,4 +1,5 @@
 export * from './LandingPage'
+export * from './Home'
 export * from './GardenOverviewPage'
 export * from './LetItRainEntry'
 export * from './LetItRainWizard'
