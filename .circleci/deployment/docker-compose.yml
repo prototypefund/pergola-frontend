@@ -13,9 +13,13 @@ services:
       - "traefik.docker.network=traefik"
       - "traefik.http.services.pergola-live-frontend.loadbalancer.server.port=80"
       - "traefik.http.routers.pergola-live-frontend.service=pergola-live-frontend"
-      - "traefik.http.routers.pergola-live-frontend.rule=Host(`${PERGOLA_APP_HOST}`)"
+      - "traefik.http.routers.pergola-live-frontend.rule=Host(`${PERGOLA_APP_HOST}`, `live2.pergola.gra.one`)"
       - "traefik.http.routers.pergola-live-frontend.entrypoints=websecure"
       - "traefik.http.routers.pergola-live-frontend.tls.certresolver=myresolver"
+      - "traefik.http.routers.pergola-live-frontend.middlewares=live2"
+      - "traefik.http.middlewares.live2.redirectregex.regex=^https:\/\/live2.pergola.gra.one(.*)"
+      - "traefik.http.middlewares.live2.redirectregex.replacement=https://${PERGOLA_APP_HOST}$${1}"
+
 networks:
   traefik:
     external: true
