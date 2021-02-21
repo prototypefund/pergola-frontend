@@ -9,11 +9,13 @@ import {
   useTheme
 } from '@material-ui/core'
 import * as React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory, useRouteMatch } from 'react-router-dom'
 
 import {WateringPeriodManager} from '../components/letItRain'
 
 export function LetItRainManageDialog() {
+  const { url } = useRouteMatch()
+  const history = useHistory()
   const classes = useStyles()
   const theme = useTheme()
   const fullScreen = useMediaQuery( theme.breakpoints.down( 'sm' ))
@@ -23,9 +25,7 @@ export function LetItRainManageDialog() {
       <DialogTitle disableTypography={true}><Typography variant="h4" align="center">Manage Watering Periods</Typography></DialogTitle>
       <DialogContent><WateringPeriodManager /></DialogContent>
       <DialogActions className={classes.dialogActions}>
-        <Link to='/watering'>
-          <Button autoFocus color="primary" variant="outlined">Zum Gießkalender</Button>
-        </Link>
+        <Button autoFocus color="primary" variant="outlined" onClick={() => history.goBack() }>Zum Gießkalender</Button>
       </DialogActions>
     </Dialog>
   )

@@ -5,7 +5,7 @@ import { useKeycloak } from '@react-keycloak/web'
 import dayjs from 'dayjs'
 import * as React from 'react'
 import {useState} from 'react'
-import {Link, useHistory, useParams} from 'react-router-dom'
+import {Link, useHistory, useParams, useRouteMatch} from 'react-router-dom'
 
 import {Calendar, HorizontalStepper, LetItRainFrequency, NotificationSettings} from '../components'
 import {LoginPrompt} from '../components/LoginPrompt'
@@ -56,6 +56,7 @@ export function LetItRainWizard() {
   const theme = useTheme()
   const classes = useStyles()
   const history = useHistory()
+  const { url } = useRouteMatch()
   const { stepNumber } = useParams<LetItRainWizardRouterProps>()
   const fullscreenDialog = useMediaQuery( theme.breakpoints.down( 'md' ))
   const [availableDates, setAvailableDates] = useState<Array<Date>>( [] )
@@ -150,7 +151,7 @@ export function LetItRainWizard() {
           </Button>
         ) : (
           <Link
-            to={`/watering/wizard/${currentStepIndex + 1}`}
+            to={`${url}/watering/wizard/${currentStepIndex + 1}`}
             style={{ width: '100%' }}
           >
             <Button

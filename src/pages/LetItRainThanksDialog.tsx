@@ -15,12 +15,13 @@ import {
 } from '@material-ui/core'
 import {AvTimerRounded, NotificationsActiveRounded, SettingsRounded} from '@material-ui/icons'
 import * as React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useRouteMatch } from 'react-router-dom'
 
 import Sunflower from '../static/sunflower.svg'
 
 export function LetItRainThanksDialog() {
   const classes = useStyles()
+  const { url } = useRouteMatch()
   const theme = useTheme()
   const fullScreen = useMediaQuery( theme.breakpoints.down( 'sm' ))
 
@@ -54,7 +55,7 @@ export function LetItRainThanksDialog() {
         </List>
       </DialogContent>
       <DialogActions className={classes.dialogActions}>
-        <Link to='/watering'>
+        <Link to={`${url}/watering`}>
           <Button autoFocus color="primary" variant="outlined">Zum Gießkalender</Button>
         </Link>
       </DialogActions>
