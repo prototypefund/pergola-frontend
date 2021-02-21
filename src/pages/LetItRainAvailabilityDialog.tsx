@@ -1,27 +1,29 @@
 import {gql, useMutation, useQuery} from '@apollo/client'
-import {
-  Box, Button,
+import {   Box, Button,
   Dialog, DialogActions,
   DialogContent,
   DialogTitle,
   makeStyles,
   Theme,
+  Typography ,
   useMediaQuery, useTheme
 } from '@material-ui/core'
 import {useKeycloak} from '@react-keycloak/web'
 import dayjs from 'dayjs'
 import * as React from 'react'
 import {useEffect, useState} from 'react'
-import { useHistory } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import { useHistory, useParams } from 'react-router-dom'
 
 import {Calendar} from '../components'
 import {fromNeo4jDate, neo4jDateToInput,toNeo4jDateInput} from '../helper'
 import {_Neo4jDateInput, WateringPeriod} from '../types/graphql'
 
 const GET_WATERING_PERIOD = gql`
-    query WateringPeriod($date: _Neo4jDateInput, $userId: String) {
+    query WateringPeriod($gardenId: ID!, $date: _Neo4jDateInput, $userId: String) {
         WateringPeriod( filter:
         { AND: [
+            { at: { gardenId:  $gardenId } },
             { from_lte: $date },
             { till_gte: $date } ]
         }) {
@@ -40,8 +42,9 @@ const GET_WATERING_PERIOD = gql`
 `
 
 const SET_USER_AVAILABLITY_FOR_WATERING_PERIOD = gql`
-    mutation  setUserAvailability($dates: [_Neo4jDateInput]!, $from: _Neo4jDateInput, $till: _Neo4jDateInput) {
+    mutation  setUserAvailability($gardenId: ID!, $dates: [_Neo4jDateInput]!, $from: _Neo4jDateInput, $till: _Neo4jDateInput) {
         setUserAvailability(
+            gardenId: $gardenId
             dates: $dates
             from: $from
             till: $till
@@ -55,12 +58,15 @@ interface Props {
 export function LetItRainAvailabilityDialog( {startDate } : Props ) {
   const classes = useStyles()
   const { keycloak: { subject: userId } } = useKeycloak()
+  const { t } = useTranslation( 'letItRain' )
+  const { gardenId } = useParams<{gardenId: string}>()
   const theme = useTheme()
   const history = useHistory()
   const fullscreenDialog = useMediaQuery( theme.breakpoints.down( 'md' ))
   const [availableDates, setAvailableDates] = useState<Array<Date>>( [] )
-  const {data: wateringPeriodData} = userId && useQuery<{WateringPeriod: WateringPeriod[]}, { date: _Neo4jDateInput, userId: string}>( GET_WATERING_PERIOD, {
+  const {data: wateringPeriodData} = userId && useQuery<{ WateringPeriod: WateringPeriod[]}, {gardenId: string, date: _Neo4jDateInput, userId: string}>( GET_WATERING_PERIOD, {
     variables: {
+      gardenId,
       date: toNeo4jDateInput( startDate ),
       userId
     }
@@ -70,9 +76,10 @@ export function LetItRainAvailabilityDialog( {startDate } : Props ) {
   const calendarDates =  ( from && till && [...Array( Math.abs( dayjs( fromNeo4jDate( till )).diff( fromNeo4jDate( from ), 'day' )))]
     .map(( _, i ) =>  dayjs( fromNeo4jDate( from )) .add( i, 'day' ).toDate())) || []
   const [setUserAvailabilityMutation] =
-    useMutation< Boolean, { dates: Array<_Neo4jDateInput>, from: _Neo4jDateInput | undefined, till: _Neo4jDateInput | undefined }>(
+    useMutation< Boolean, {gardenId: string, dates: Array<_Neo4jDateInput>, from: _Neo4jDateInput | undefined, till: _Neo4jDateInput | undefined }>(
       SET_USER_AVAILABLITY_FOR_WATERING_PERIOD,
       {variables: {
+        gardenId,
         dates: availableDates.map( toNeo4jDateInput ),
         from: from && neo4jDateToInput( from ),
         till: till && neo4jDateToInput( till )
@@ -84,8 +91,6 @@ export function LetItRainAvailabilityDialog( {startDate } : Props ) {
     setAvailableDates( _availableDates )
   }, [tasks] )
 
-
-  console.log( 'render' )
 
   const handleCancel = () => history.goBack()
   const handleOkay = async () => {
@@ -103,12 +108,12 @@ export function LetItRainAvailabilityDialog( {startDate } : Props ) {
       <DialogTitle className={classes.dialogTitle} />
       <DialogContent className={classes.dialogContent}>
         <Box display="flex" flexDirection="column" flexWrap="wrap" alignItems="center" justifyContent="space-between" className={classes.box} >
-          {calendarDates.length > 0 && <Calendar
+          {calendarDates.length > 0 ? <Calendar
             dates={calendarDates}
             selectedDates={availableDates}
             onChange={( dates ) => {
               setAvailableDates( dates )
-            }}/>}
+            }}/> : <Typography variant='body1' >{t( 'wizard' ).sorryNotYetPlanned}</Typography>}
         </Box>
       </DialogContent>
       <DialogActions>

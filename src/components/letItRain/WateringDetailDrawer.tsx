@@ -9,7 +9,7 @@ import * as React from 'react'
 import {useEffect, useState} from 'react'
 import {useTranslation} from 'react-i18next'
 import {useSelector} from 'react-redux'
-import {useHistory} from 'react-router-dom'
+import {Link, useHistory, useParams, useRouteMatch} from 'react-router-dom'
 
 import {toNeo4jDateInput} from '../../helper'
 import {RootState} from '../../reducers'
@@ -22,9 +22,12 @@ type Props = {
 };
 
 const GET_WATERING_TASK = gql`
-    query WateringTask($date: _Neo4jDateInput) {
+    query WateringTask($gardenId: ID!, $date: _Neo4jDateInput) {
         WateringTask(filter:
-        { date: $date }
+        {AND: [
+            { wateringperiod: { at: {gardenId: $gardenId } } }
+            { date: $date }
+        ]}
         ) {
             _id
             date { day month year}
@@ -59,10 +62,12 @@ export function WateringDetailDrawer( {onDrawerClose}: Props ) {
   const {t} = useTranslation( 'letItRain' )
   const classes = useStyles()
   const {keycloak: {subject: userId}} = useKeycloak()
-  const history = useHistory()
+  const { gardenId } = useParams<{gardenId: string}>()
+  const { url } = useRouteMatch()
   const date = useSelector<RootState, Date>(( {letItRain: {selectedDate = new Date()}} ) => selectedDate )
-  const {data: WateringTaskData, loading, refetch} = useQuery<{ WateringTask: WateringTask[] }>( GET_WATERING_TASK, {
+  const {data: WateringTaskData, loading, refetch} = useQuery<{gardenId: string, WateringTask: WateringTask[] }>( GET_WATERING_TASK, {
     variables: {
+      gardenId,
       date: toNeo4jDateInput( date )
     }
   } )
@@ -147,7 +152,8 @@ export function WateringDetailDrawer( {onDrawerClose}: Props ) {
         <Typography variant='h5' className={classes.detailTitle}>{t( 'watering.planless' )}</Typography>
         <Button
           variant='outlined'
-          onClick={() => history.push( `/watering/availability/${dayjs( date ).format( 'YYYY-MM-DD' )}` )}>
+          component={Link}
+          to={`${url}/availability/${dayjs( date ).format( 'YYYY-MM-DD' )}`} >
           <CornerBadge cornerActive={iAmAvailable} className={classes.cornerButton}>
             <div>
               <Typography

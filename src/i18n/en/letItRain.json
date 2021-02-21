@@ -19,5 +19,8 @@
     "confirmRemoveContent": "if you cancel your assignment, other gardeners will get a request for substitution",
     "confirmRemoveTitle": "Realy cancel your assignement?",
     "callOff": "call off"
+  },
+  "wizard": {
+    "sorryNotYetPlanned": "Sorry, currently not in a planning phase, please come again later"
   }
 }

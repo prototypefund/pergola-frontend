@@ -3,15 +3,17 @@ import '../../css/rsuite.scss'
 import {gql, useQuery} from '@apollo/client'
 import dayjs from 'dayjs'
 import * as React from 'react'
+import { useParams } from 'react-router-dom'
 import {Calendar} from 'rsuite'
 
 import {fromNeo4jDate, stringToHSL, toNeo4jDateInput} from '../../helper'
 import {_Neo4jDateInput, WateringTask} from '../../types/graphql'
 
 const GET_WATERING_TASKS = gql`
-    query WateringTask($dateFrom: _Neo4jDateInput, $dateTo: _Neo4jDateInput) {
+    query WateringTask($gardenId: ID!, $dateFrom: _Neo4jDateInput, $dateTo: _Neo4jDateInput) {
         WateringTask(filter:
         { AND: [
+            { wateringperiod: { at: {gardenId: $gardenId } } }
             { date_gte: $dateFrom },
             { date_lte: $dateTo } ]
         }) {
@@ -28,9 +30,11 @@ interface Props {
 export function PrintableCalendar( { childRef } : Props ) {
   const startDate = dayjs().startOf( 'month' ).toDate()
   const endDate = dayjs().endOf( 'month' ).toDate()
+  const { gardenId } = useParams<{gardenId: string}>()
 
-  const {data: WateringTasksData} = useQuery<{WateringTask: WateringTask[]}, { dateFrom: _Neo4jDateInput, dateTo: _Neo4jDateInput}>( GET_WATERING_TASKS, {
+  const {data: WateringTasksData} = useQuery<{WateringTask: WateringTask[]}, {gardenId: string, dateFrom: _Neo4jDateInput, dateTo: _Neo4jDateInput}>( GET_WATERING_TASKS, {
     variables: {
+      gardenId,
       dateFrom: toNeo4jDateInput( startDate ),
       dateTo: toNeo4jDateInput( endDate  )
     }

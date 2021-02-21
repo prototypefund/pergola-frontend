@@ -18,7 +18,7 @@ import { Eco } from '@material-ui/icons'
 import {useKeycloak} from '@react-keycloak/web'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Link,useRouteMatch } from 'react-router-dom'
+import { Link, useRouteMatch } from 'react-router-dom'
 
 
 export interface LandingPage_Garden {
@@ -63,10 +63,8 @@ export function LandingPage() {
               <em>keiner</em>
             </MenuItem>
             {gardens.map(( { id, name } ) => (
-              <MenuItem key={id} value={id}>
-                <Link to={`${url}${id}`} >
-                  {name}
-                </Link>
+              <MenuItem key={id} component={Link}  to={`${url}${id}`} >
+                {name}
               </MenuItem>
             ))}
           </Select>

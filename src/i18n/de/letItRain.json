@@ -19,5 +19,8 @@
     "confirmRemoveContent": "Wenn du deiene Einsatz absagst, erhalten andere Gärtner*innen bei Bedarf eine Vertretungsanfrage.",
     "confirmRemoveTitle": "Gießeinsatz wirklich absagen?",
     "callOff": "absagen"
+  },
+  "wizard": {
+    "sorryNotYetPlanned": "Entschuldige, dieser Zeitraum befindet sich noch nicht in der Vorplanung. Bitte, komme später wieder."
   }
 }

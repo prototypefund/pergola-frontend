@@ -1,5 +1,6 @@
 import {gql, useMutation, useQuery} from '@apollo/client'
 import {
+  Button,
   Container,
   FormControl,
   FormControlLabel,
@@ -19,13 +20,14 @@ import {PlayForWork} from '@material-ui/icons'
 import dayjs from 'dayjs'
 import * as React from 'react'
 import {useState} from 'react'
+import {useParams} from 'react-router-dom'
 
 import {fromNeo4jDate, toNeo4jDateInput} from '../../helper'
 import {_Neo4jDateInput, MutationPlanWateringPeriodsArgs, WateringPeriod} from '../../types/graphql'
 
 const WATERING_PERIODS_QUERY = gql`
-    query WateringPeriod($date: _Neo4jDateInput) {
-        WateringPeriod(filter: {till_gte: $date}) {
+    query WateringPeriod($gardenId: ID!, $date: _Neo4jDateInput) {
+        WateringPeriod(filter: { AND: [ {at: {gardenId: $gardenId } } , {till_gte: $date} ] } ) {
             _id
             hasUsersAssigned
             from { year month day}
@@ -35,16 +37,18 @@ const WATERING_PERIODS_QUERY = gql`
 `
 
 const PLAN_WATERING_PERIOD_MUTATION = gql`
-    mutation planWateringPeriod($planing_ahead: Int!, $periods_predefined: Int!) {
-        planWateringPeriods(planing_ahead: $planing_ahead, periods_predefined: $periods_predefined)
+    mutation planWateringPeriod($gardenId: ID!, $planing_ahead: Int, $periods_predefined: Int!) {
+        planWateringPeriods(gardenId: $gardenId, planing_ahead: $planing_ahead, periods_predefined: $periods_predefined)
     }
 `
 
 export function WateringPeriodManager() {
-  const {data: wateringPeriodsData} = useQuery<{ WateringPeriod: WateringPeriod[] }, { date: _Neo4jDateInput }>( WATERING_PERIODS_QUERY, {
-    variables: {date: toNeo4jDateInput( new Date())}
+  const {gardenId} = useParams<{ gardenId: string }>()
+
+  const {data: wateringPeriodsData} = useQuery<{ WateringPeriod: WateringPeriod[] }, { date: _Neo4jDateInput, gardenId: string }>( WATERING_PERIODS_QUERY, {
+    variables: {gardenId, date: toNeo4jDateInput( new Date())}
   } )
-  const [planWateringPeriods] = useMutation<any, MutationPlanWateringPeriodsArgs>( PLAN_WATERING_PERIOD_MUTATION )
+  const [planWateringPeriods] = useMutation<any, MutationPlanWateringPeriodsArgs>( PLAN_WATERING_PERIOD_MUTATION  )
   const [periodsPredefined, setPeriodsPredefined] = useState( 0 )
 
   return (
@@ -60,6 +64,14 @@ export function WateringPeriodManager() {
                 onChange={e => setPeriodsPredefined( parseInt( e.target.value ) || periodsPredefined )}
               />}/>
           </FormGroup>
+          <Button onClick={() => planWateringPeriods( {
+            variables: {
+              gardenId,
+              planing_ahead: 7,
+              periods_predefined: periodsPredefined
+            }} )}>
+            start planning
+          </Button>
         </Container>
         <Container>
           <List>
@@ -72,6 +84,7 @@ export function WateringPeriodManager() {
                   <IconButton disabled={!!waterinPeriod.hasUsersAssigned}
                     onClick={() => waterinPeriod._id && planWateringPeriods( {
                       variables: {
+                        gardenId,
                         planing_ahead: Math.ceil( from.diff( dayjs(), 'day' )),
                         periods_predefined: periodsPredefined
                       }
