@@ -10,6 +10,10 @@ body {
   background-size: cover;
 }
 
+a {
+  color: var(--mdc-theme-primary);
+}
+
 #kc-container-wrapper {
   padding-top: 7vh 0 1rem 0;
 }
@@ -55,6 +59,10 @@ body {
 .register input[required] + div label:after {
   content: "*";
   margin-left: 2px;
+}
+
+#kc-social-providers {
+  margin-top: 1rem;
 }
 
 .template .language-picker:after {
