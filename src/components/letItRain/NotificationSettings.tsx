@@ -100,7 +100,7 @@ const useStyles = makeStyles(( theme: Theme ) => ( {
     alignItems: 'center',
   },
   numberInput: {
-    width: '2ch',
+    width: '40px',
     textAlign: 'center',
   }
 } ))
