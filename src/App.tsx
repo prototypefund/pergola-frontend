@@ -69,7 +69,7 @@ function App() {
     }
   }
   return (
-    <div className={classes.root}>
+    <>
       <AppBar className={classes.appBar} position="sticky">
         <Toolbar className={classes.appBarLeft}>
           <svg className={classes.title} role="img">
@@ -114,7 +114,7 @@ function App() {
           />
         </Tabs>
       </BottomNavigation>
-    </div>
+    </>
   )
 }
 
@@ -124,6 +124,9 @@ const useStyles = makeStyles(( theme: Theme ) => ( {
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'fixed',
   },
   appBar: {
     flexDirection: 'row',
@@ -135,9 +138,6 @@ const useStyles = makeStyles(( theme: Theme ) => ( {
   },
   content: {
     flex: '1 0 auto',
-    backgroundImage: `url(${backgroundImage})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'fixed',
   },
   bottomBar: {
     zIndex: theme.zIndex.appBar,
@@ -172,10 +172,11 @@ const useStyles = makeStyles(( theme: Theme ) => ( {
 } ))
 
 function RootApp() {
-  return <>
-    <Route exact={true} path="/"  component={LandingPage}/>
+  const classes = useStyles()
+  return <div className={classes.root}>
+    <Route exact={true} path="/" component={LandingPage}/>
     <Route path="/:gardenId" component={App} />
-  </>
+  </div>
 }
 
 export default withLocalize( withRoot( RootApp  ))

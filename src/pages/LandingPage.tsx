@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Container,
   FormControl,
@@ -14,11 +15,17 @@ import {
   Theme,
   Typography,
 } from '@material-ui/core'
-import { Eco } from '@material-ui/icons'
+import {
+  EventNote as EventNoteIcon,
+  Map as MapIcon,
+  Opacity as WaterdropIcon,
+} from '@material-ui/icons'
 import {useKeycloak} from '@react-keycloak/web'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, useRouteMatch } from 'react-router-dom'
+
+import title from '../static/logo-pergola-title.svg'
 
 
 export interface LandingPage_Garden {
@@ -55,7 +62,13 @@ export function LandingPage() {
 
   return (
     <div>
-      <Container className={classes.gardenSelectContainer}>
+      <Container>
+        <Box textAlign="center">
+          <svg className={classes.title} role="img">
+            <title>Pergola</title>
+            <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref={title + '#logo'} />
+          </svg>
+        </Box>
         <FormControl variant="filled" fullWidth={true}>
           <InputLabel>Wähle einen Garten</InputLabel>
           <Select value={selectedGarden} onChange={handleSelectGarden}>
@@ -74,14 +87,24 @@ export function LandingPage() {
         <Paper elevation={0} className={classes.paperContainer}>
           <Typography variant="h4">{t( 'gardeningTogether' )}</Typography>
           <List>
-            {landingInfos.map(( { id, headline } ) => (
-              <ListItem className={classes.listItem} key={id}>
-                <ListItemIcon className={classes.listItemIcon}>
-                  <Eco color="primary" />
-                </ListItemIcon>
-                <ListItemText primary={headline} />
-              </ListItem>
-            ))}
+            <ListItem className={classes.listItem}>
+              <ListItemIcon className={classes.listItemIcon}>
+                <WaterdropIcon color="primary" />
+              </ListItemIcon>
+              <ListItemText primary="Erstelle einen Gießplan für euren Garten" />
+            </ListItem>
+            <ListItem className={classes.listItem}>
+              <ListItemIcon className={classes.listItemIcon}>
+                <EventNoteIcon color="primary" />
+              </ListItemIcon>
+              <ListItemText primary="Verschaffe dir einen Überblick über anstehende Termine" />
+            </ListItem>
+            <ListItem className={classes.listItem}>
+              <ListItemIcon className={classes.listItemIcon}>
+                <MapIcon color="primary" />
+              </ListItemIcon>
+              <ListItemText primary="Lerne mit der interaktiven Karte deinen Garten kennen" />
+            </ListItem>
           </List>
           <Button variant="contained" className={classes.button} href="https://community-garden.github.io/" target="_blank">Mehr Infos</Button>
           {!keycloak.authenticated && <Button onClick={() => keycloak.login()} variant="contained" color="primary" className={classes.button}>
@@ -93,6 +116,12 @@ export function LandingPage() {
 }
 
 const useStyles = makeStyles(( theme: Theme ) => ( {
+  title: {
+    width: '200px',
+    maxWidth: '50vw',
+    height: 'auto',
+    fill: theme.palette.primary.contrastText
+  },
   gardenSelectContainer: {
     marginTop: '23px',
     marginBottom: '28px',
