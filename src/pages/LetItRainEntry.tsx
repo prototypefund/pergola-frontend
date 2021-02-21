@@ -6,7 +6,7 @@ import * as React from 'react'
 import {useRef, useState} from 'react'
 import { useTranslation } from 'react-i18next'
 import {useDispatch, useSelector} from 'react-redux'
-import {Link, Route, Switch} from 'react-router-dom'
+import {Link, Route, Switch, useRouteMatch} from 'react-router-dom'
 import {useReactToPrint} from 'react-to-print'
 
 import {selectDay} from '../actions'
@@ -24,6 +24,7 @@ import {LetItRainWizard} from './LetItRainWizard'
 
 export function LetItRainEntry() {
   const { t } = useTranslation( 'letItRain' )
+  const { url, path } = useRouteMatch()
   const { keycloak } = useKeycloak()
   const dispatch = useDispatch()
   const selectedDay = useSelector<RootState, Date | undefined>(( {letItRain: { selectedDate }} ) => selectedDate )
@@ -43,7 +44,7 @@ export function LetItRainEntry() {
               <IconButton onClick={() => dispatch( selectDay( new Date())) }>
                 <Today/>
               </IconButton>
-              <IconButton component={Link} to='/watering/wizard/0' >
+              <IconButton component={Link} to={`${url}/wizard/0`} >
                 <Add/>
               </IconButton>
               <IconButton edge="end" onClick={( {currentTarget} ) => setMenuAnchor( currentTarget )}>
@@ -54,7 +55,7 @@ export function LetItRainEntry() {
                   <a href={webdavUrl + '/public/wateringTasks.ics'} target='_blank' rel="noreferrer">{t( 'menu' ).subscribeCalendar}</a>
                 </MenuItem>
                 <MenuItem onClick={handlePrint}>{t( 'menu' ).exportPrint}</MenuItem>
-                {keycloak.hasRealmRole( 'garden_manager' ) && <MenuItem component={Link} to='/watering/manage'>{t( 'menu' ).manage}</MenuItem>}
+                {keycloak.hasRealmRole( 'garden_manager' ) && <MenuItem component={Link} to={`${url}/manage`}>{t( 'menu' ).manage}</MenuItem>}
                 <MenuItem onClick={() => setDrawerOpen( true )}>{t( 'menu' ).help}</MenuItem>
               </Menu>
             </div>
@@ -73,13 +74,13 @@ export function LetItRainEntry() {
       </Box>
       <LetItRainSurveyFab/>
       <Switch>
-        <Route path='/watering/wizard/:stepNumber' component={LetItRainWizard} />
-        <Route path="/watering/availability/:startDate" render={ ( { match } ) => {
+        <Route path={`${path}/wizard/:stepNumber`} component={LetItRainWizard} />
+        <Route path={`${path}/availability/:startDate`} render={ ( { match } ) => {
           const { startDate = new Date()} = match.params
           return ( <LetItRainAvailabilityDialog startDate={dayjs( startDate, 'YYYY-MM-DD' ).toDate()} /> )
         }} />
-        <Route path='/watering/thanks' component={LetItRainThanksDialog}/>
-        <Route path='/watering/manage' component={LetItRainManageDialog}/>
+        <Route path={`${path}/thanks`} component={LetItRainThanksDialog}/>
+        <Route path={`${path}/manage`} component={LetItRainManageDialog}/>
       </Switch>
     </>
   )

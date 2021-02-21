@@ -18,6 +18,7 @@ import { Eco } from '@material-ui/icons'
 import {useKeycloak} from '@react-keycloak/web'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Link,useRouteMatch } from 'react-router-dom'
 
 
 export interface LandingPage_Garden {
@@ -32,6 +33,8 @@ export interface LandingPage_Info {
 
 export function LandingPage() {
   const { t } = useTranslation()
+  const { url } = useRouteMatch()
+  console.log( {url} )
   const { keycloak } = useKeycloak()
   const classes = useStyles()
   const [selectedGarden, setSelectedGarden] = useState( '' )
@@ -42,7 +45,7 @@ export function LandingPage() {
 
   const gardens: LandingPage_Garden[] = [
     { id: 'wurzelwerk', name: 'Wurzelwerk' },
-    { id: 'johannstadt', name: 'Internationaler Garten Johannstadt' },
+    { id: 'pippilotta', name: 'Garten Pippilotta' },
   ]
   const landingInfos: LandingPage_Info[] = [
     { id: '0', headline: 'Erstelle einen Gießplan für euren Garten' },
@@ -61,7 +64,9 @@ export function LandingPage() {
             </MenuItem>
             {gardens.map(( { id, name } ) => (
               <MenuItem key={id} value={id}>
-                {name}
+                <Link to={`${url}${id}`} >
+                  {name}
+                </Link>
               </MenuItem>
             ))}
           </Select>

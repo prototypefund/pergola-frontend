@@ -21,7 +21,7 @@ import {
 import { makeStyles } from '@material-ui/styles'
 import * as React from 'react'
 import {withLocalize} from 'react-localize-redux'
-import { Link, Route, useLocation } from 'react-router-dom'
+import { Link, Route, useLocation, useParams, useRouteMatch } from 'react-router-dom'
 
 import { Login } from './components'
 import {GardenOverviewPage, LandingPage, LetItRainEntry, Settings} from './pages'
@@ -31,37 +31,41 @@ import title from './static/logo-pergola-title.svg'
 import { withRoot } from './withRoot'
 
 function Routes() {
+  const { path } = useRouteMatch()
+  console.log( {path} )
   const classes = useStyles()
 
   // @ts-ignore
   return (
     <div className={classes.content}>
-      <Route exact={true} path="/" component={LandingPage} />
-      <Route exact={true} path="/map" component={GardenOverviewPage} />
-      <Route path="/watering" component={LetItRainEntry} />
-      <Route path="/notifications" component={CalendarAndNotifications} />
-      <Route path="/settings" component={Settings} />
+      <Route exact={true} path={`${path}/`} component={CalendarAndNotifications} />
+      <Route path={`${path}/map`} component={GardenOverviewPage} />
+      <Route path={`${path}/watering`} component={LetItRainEntry} />
+      <Route path={`${path}/notifications`} component={CalendarAndNotifications} />
+      <Route path={`${path}/settings`} component={Settings} />
     </div>
   )
 }
 
-function a11yTabProps( index, route ) {
-  return {
-    component: Link,
-    to: `/${route}`,
-    value: `/${route}`,
-    id: `scrollable-prevent-tab-${index}`,
-    'aria-controls': `scrollable-prevent-tabpanel-${index}`,
-  }
-}
 
 function App() {
   const classes = useStyles()
+  const { url } = useRouteMatch()
+  const { gardenId } = useParams<{gardenId: string}>()
   const isMobile = useMediaQuery(( theme: Theme ) =>
     theme.breakpoints.down( 'sm' )
   )
   const { pathname } = useLocation()
 
+  function a11yTabProps( index, route ) {
+    return {
+      component: Link,
+      to: `${url}/${route}`,
+      value: `${url}/${route}`,
+      id: `scrollable-prevent-tab-${index}`,
+      'aria-controls': `scrollable-prevent-tabpanel-${index}`,
+    }
+  }
   return (
     <div className={classes.root}>
       <AppBar className={classes.appBar} position="sticky">
@@ -70,9 +74,7 @@ function App() {
             <title>Pergola</title>
             <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref={title + '#logo'} />
           </svg>
-          <Typography variant="subtitle1" color="inherit" noWrap={isMobile}>
-              Wurzelwerk
-          </Typography>
+          <Typography variant="subtitle1" color="inherit" noWrap={isMobile} >{gardenId}</Typography>
         </Toolbar>
         <Toolbar><Login /></Toolbar>
       </AppBar>
@@ -167,4 +169,11 @@ const useStyles = makeStyles(( theme: Theme ) => ( {
   },
 } ))
 
-export default withLocalize( withRoot( App  ))
+function RootApp() {
+  return <>
+    <Route exact={true} path="/"  component={LandingPage}/>
+    <Route path="/:gardenId" component={App} />
+  </>
+}
+
+export default withLocalize( withRoot( RootApp  ))
