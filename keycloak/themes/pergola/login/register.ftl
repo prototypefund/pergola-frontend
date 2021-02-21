@@ -114,6 +114,8 @@
             </div>  -->
             </#if>
 
+            <small class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent">${msg("requiredFields")?no_esc}</small>
+
             <#if recaptchaRequired??>
             <div class="form-group">
                 <div class="${properties.kcInputWrapperClass!}">

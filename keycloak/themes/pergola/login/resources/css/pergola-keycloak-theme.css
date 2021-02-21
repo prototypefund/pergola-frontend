@@ -45,6 +45,18 @@ body {
   color: rgba(0, 158, 126, .87)
 }
 
+.mdc-text-field--box+.mdc-text-field-helper-text,
+.mdc-text-field--outlined+.mdc-text-field-helper-text {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+
+.register input[required] + div label:after {
+  content: "*";
+  margin-left: 2px;
+}
+
 .template .language-picker:after {
   /* clearfix */
   content: "";
