@@ -60,10 +60,10 @@ function App() {
   function a11yTabProps( index, route ) {
     const linkTo = `${url}/${route}`
     return {
-      selected: pathname.startsWith( linkTo ),
       component: Link,
       to: linkTo,
       value: linkTo,
+      title: pathname,
       id: `scrollable-prevent-tab-${index}`,
       'aria-controls': `scrollable-prevent-tabpanel-${index}`,
     }
@@ -86,7 +86,7 @@ function App() {
         component="footer"
         color="primary"
       >
-        <Tabs centered value={false}>
+        <Tabs centered value={pathname}>
           <Tab
             icon={<HomeIcon/>}
             aria-label="home"
