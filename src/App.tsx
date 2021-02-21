@@ -131,7 +131,7 @@ const useStyles = makeStyles(( theme: Theme ) => ( {
   appBar: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'baseline',
+    alignItems: 'center',
     paddingTop: theme.spacing( 1 ),
     paddingBottom: theme.spacing( 1 ),
     color: theme.palette.primary.contrastText,
