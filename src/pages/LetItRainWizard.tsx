@@ -3,6 +3,7 @@ import {Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButt
 import {ArrowBack as ArrowBackIcon} from '@material-ui/icons'
 import { useKeycloak } from '@react-keycloak/web'
 import dayjs from 'dayjs'
+import path from 'path'
 import * as React from 'react'
 import {useState} from 'react'
 import {Link, useHistory, useParams, useRouteMatch} from 'react-router-dom'
@@ -25,9 +26,10 @@ interface StepDesc {
 const DAYS_COUNT = 14
 
 const SET_USER_AVAILABLITY_FOR_WATERING_PERIOD = gql`
-mutation  setUserAvailability($dates: [_Neo4jDateInput]!) { 
+mutation  setUserAvailability($gardenId: ID!, $dates: [_Neo4jDateInput]!) { 
   setUserAvailability(
-    dates: $dates
+      gardenId: $gardenId
+      dates: $dates
   )
 }
 `
@@ -41,8 +43,8 @@ mutation mergeUserSettings($settings: UserSettingsInput!) {
 `
 
 const ASSIGNABLE_WATERING_PERIOD = gql`
-  query assignableWateringPeriod {
-      assignableWateringPeriod {
+  query assignableWateringPeriod($gardenId: ID!) {
+      assignableWateringPeriod(gardenId: $gardenId) {
           _id
           wateringtasks { _id date { day year month } } 
           from { year, month, day }
@@ -57,15 +59,17 @@ export function LetItRainWizard() {
   const classes = useStyles()
   const history = useHistory()
   const { url } = useRouteMatch()
+  const { gardenId } = useParams<{gardenId: string}>()
   const { stepNumber } = useParams<LetItRainWizardRouterProps>()
   const fullscreenDialog = useMediaQuery( theme.breakpoints.down( 'md' ))
   const [availableDates, setAvailableDates] = useState<Array<Date>>( [] )
   const [userWantsMaximumTasks, setUserWantsMaximumTasks] = useState( 1 )
-  const {data: assignableWateringPeriodData } = useQuery<{assignableWateringPeriod: WateringPeriod}>( ASSIGNABLE_WATERING_PERIOD )
+  const {data: assignableWateringPeriodData } = useQuery<{assignableWateringPeriod: WateringPeriod}>( ASSIGNABLE_WATERING_PERIOD,
+    {variables: {gardenId}} )
 
   const [setUserAvailabilityMutation] =
-      useMutation<boolean, { dates: Array<_Neo4jDateInput> }>( SET_USER_AVAILABLITY_FOR_WATERING_PERIOD,
-        {variables: {dates: availableDates.map( toNeo4jDateInput )}} )
+      useMutation<boolean, { dates: Array<_Neo4jDateInput>, gardenId: string }>( SET_USER_AVAILABLITY_FOR_WATERING_PERIOD,
+        {variables: {dates: availableDates.map( toNeo4jDateInput ), gardenId}} )
 
   const [ mergeUserSettings ] =
       useMutation<UserSettings, {settings: UserSettingsInput}>( MERGE_USER_SETTINGS,
@@ -116,7 +120,7 @@ export function LetItRainWizard() {
     console.log( availableDates )
     await setUserAvailabilityMutation()
     await mergeUserSettings()
-    history.push( '/watering/thanks' )
+    history.push( `/${gardenId}/watering/thanks` )
   }
 
 
@@ -151,7 +155,7 @@ export function LetItRainWizard() {
           </Button>
         ) : (
           <Link
-            to={`${url}/watering/wizard/${currentStepIndex + 1}`}
+            to={path.resolve( `${url}/../${currentStepIndex + 1}` )}
             style={{ width: '100%' }}
           >
             <Button

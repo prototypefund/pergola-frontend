@@ -38,7 +38,7 @@ function Routes() {
   // @ts-ignore
   return (
     <div className={classes.content}>
-      <Route exact={true} path={`${path}/`} component={CalendarAndNotifications} />
+      <Route exact={true} path={`${path}/home`} component={CalendarAndNotifications} />
       <Route path={`${path}/map`} component={GardenOverviewPage} />
       <Route path={`${path}/watering`} component={LetItRainEntry} />
       <Route path={`${path}/notifications`} component={CalendarAndNotifications} />
@@ -58,10 +58,12 @@ function App() {
   const { pathname } = useLocation()
 
   function a11yTabProps( index, route ) {
+    const linkTo = `${url}/${route}`
     return {
+      selected: pathname.startsWith( linkTo ),
       component: Link,
-      to: `${url}/${route}`,
-      value: `${url}/${route}`,
+      to: linkTo,
+      value: linkTo,
       id: `scrollable-prevent-tab-${index}`,
       'aria-controls': `scrollable-prevent-tabpanel-${index}`,
     }
@@ -84,11 +86,11 @@ function App() {
         component="footer"
         color="primary"
       >
-        <Tabs centered value={pathname}>
+        <Tabs centered value={false}>
           <Tab
             icon={<HomeIcon/>}
             aria-label="home"
-            {...a11yTabProps( 0, '' )}
+            {...a11yTabProps( 0, 'home' )}
           />
           <Tab
             icon={<MapIcon />}

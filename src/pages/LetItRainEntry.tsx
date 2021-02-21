@@ -55,7 +55,7 @@ export function LetItRainEntry() {
                   <a href={webdavUrl + '/public/wateringTasks.ics'} target='_blank' rel="noreferrer">{t( 'menu' ).subscribeCalendar}</a>
                 </MenuItem>
                 <MenuItem onClick={handlePrint}>{t( 'menu' ).exportPrint}</MenuItem>
-                {keycloak.hasRealmRole( 'garden_manager' ) && <MenuItem component={Link} to={`${url}/manage`}>{t( 'menu' ).manage}</MenuItem>}
+                {keycloak.hasRealmRole( 'developer' ) && <MenuItem component={Link} to={`${url}/manage`}>{t( 'menu' ).manage}</MenuItem>}
                 <MenuItem onClick={() => setDrawerOpen( true )}>{t( 'menu' ).help}</MenuItem>
               </Menu>
             </div>

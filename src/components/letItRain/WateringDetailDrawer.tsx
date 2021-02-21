@@ -9,7 +9,7 @@ import * as React from 'react'
 import {useEffect, useState} from 'react'
 import {useTranslation} from 'react-i18next'
 import {useSelector} from 'react-redux'
-import {useHistory} from 'react-router-dom'
+import {Link, useHistory, useParams, useRouteMatch} from 'react-router-dom'
 
 import {toNeo4jDateInput} from '../../helper'
 import {RootState} from '../../reducers'
@@ -22,9 +22,12 @@ type Props = {
 };
 
 const GET_WATERING_TASK = gql`
-    query WateringTask($date: _Neo4jDateInput) {
+    query WateringTask($gardenId: ID!, $date: _Neo4jDateInput) {
         WateringTask(filter:
-        { date: $date }
+        {AND: [
+            { wateringperiod: { at: {gardenId: $gardenId } } }
+            { date: $date }
+        ]}
         ) {
             _id
             date { day month year}
@@ -39,14 +42,14 @@ const GET_WATERING_TASK = gql`
 `
 
 const REMOVE_ASSIGNMENT_MUTATION = gql`
-    mutation removeAssignment($date: _Neo4jDateInput!) {
-        removeAssignment(date: $date)
+    mutation removeAssignment($date: _Neo4jDateInput!, $gardenId: ID!) {
+        removeAssignment(date: $date, gardenId: $gardenId)
     }
 `
 
 const ADD_ASSIGNMENT_MUTATION = gql`
-    mutation addAssignment($date: _Neo4jDateInput!) {
-        addAssignment(date: $date)
+    mutation addAssignment($date: _Neo4jDateInput!, $gardenId: ID!) {
+        addAssignment(date: $date, gardenId: $gardenId)
     }
 `
 const WATERING_TASK_CHANGE = gql`
@@ -59,23 +62,27 @@ export function WateringDetailDrawer( {onDrawerClose}: Props ) {
   const {t} = useTranslation( 'letItRain' )
   const classes = useStyles()
   const {keycloak: {subject: userId}} = useKeycloak()
-  const history = useHistory()
+  const { gardenId } = useParams<{gardenId: string}>()
+  const { url } = useRouteMatch()
   const date = useSelector<RootState, Date>(( {letItRain: {selectedDate = new Date()}} ) => selectedDate )
-  const {data: WateringTaskData, loading, refetch} = useQuery<{ WateringTask: WateringTask[] }>( GET_WATERING_TASK, {
+  const {data: WateringTaskData, loading, refetch} = useQuery<{gardenId: string, WateringTask: WateringTask[] }>( GET_WATERING_TASK, {
     variables: {
+      gardenId,
       date: toNeo4jDateInput( date )
     }
   } )
   const { data: WateringTaskChangeData } = useSubscription<{WateringtaskChange: Boolean}>( WATERING_TASK_CHANGE )
   useEffect(() => { WateringTaskData && !loading && refetch() }, [WateringTaskChangeData] )
 
-  const [removeAssignment] = useMutation<boolean, { date: _Neo4jDateInput }>( REMOVE_ASSIGNMENT_MUTATION, {
+  const [removeAssignment] = useMutation<boolean, { date: _Neo4jDateInput, gardenId: string }>( REMOVE_ASSIGNMENT_MUTATION, {
     variables: {
+      gardenId,
       date: toNeo4jDateInput( date )
     }
   } )
-  const [addAssignment] = useMutation<boolean, { date: _Neo4jDateInput }>( ADD_ASSIGNMENT_MUTATION, {
+  const [addAssignment] = useMutation<boolean, { date: _Neo4jDateInput, gardenId: string }>( ADD_ASSIGNMENT_MUTATION, {
     variables: {
+      gardenId,
       date: toNeo4jDateInput( date )
     }
   } )
@@ -147,7 +154,8 @@ export function WateringDetailDrawer( {onDrawerClose}: Props ) {
         <Typography variant='h5' className={classes.detailTitle}>{t( 'watering.planless' )}</Typography>
         <Button
           variant='outlined'
-          onClick={() => history.push( `/watering/availability/${dayjs( date ).format( 'YYYY-MM-DD' )}` )}>
+          component={Link}
+          to={`${url}/availability/${dayjs( date ).format( 'YYYY-MM-DD' )}`} >
           <CornerBadge cornerActive={iAmAvailable} className={classes.cornerButton}>
             <div>
               <Typography

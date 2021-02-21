@@ -10,6 +10,7 @@ import {useHotkeys} from 'react-hotkeys-hook'
 import ScrollContainer from 'react-indiana-drag-scroll'
 import {useDispatch, useSelector} from 'react-redux'
 import {useResizeObserver} from 'react-resize-observer-hook'
+import { useParams } from 'react-router-dom'
 
 import {nextDay, previousDay, selectDay} from '../../actions'
 import {equalsNeo4jDate, toNeo4jDateInput} from '../../helper'
@@ -25,9 +26,10 @@ interface WateringCalendarWeekProps {
   onPrevPageRequested?: () => any;
 }
 const GET_WATERING_TASKS = gql`
-query WateringTask($dateFrom: _Neo4jDateInput, $dateTo: _Neo4jDateInput) {
+query WateringTask($gardenId: ID!, $dateFrom: _Neo4jDateInput, $dateTo: _Neo4jDateInput) {
     WateringTask(filter:
     { AND: [
+        { wateringperiod: { at: {gardenId: $gardenId } } }
         { date_gte: $dateFrom },
         { date_lte: $dateTo } ]
     }) {
@@ -56,12 +58,14 @@ const WateringCalendarWeek = ( {preselectedDate, defaultDayCount = 7 }: Watering
 
   const dispatch = useDispatch()
   const { keycloak: { subject: userId } } = useKeycloak()
+  const { gardenId } = useParams<{gardenId: string}>()
   const selectedDay = useSelector<RootState, Date | undefined | null>(( {letItRain: { selectedDate}} ) => selectedDate ) || preselectedDate
   const [dayCount, setDayCount] = useState( 7 )
   const [{ startDate, endDate}, setTimeWindow] = useState( {
     startDate:  dayjs( preselectedDate ).subtract( dayCount, 'day' ).toDate(), endDate: dayjs( preselectedDate ).add( dayCount, 'day' ).toDate() } )
-  const {data: wateringTasksData, refetch, loading } = useQuery<{WateringTask: WateringTask[]}, { dateFrom: _Neo4jDateInput, dateTo: _Neo4jDateInput}>( GET_WATERING_TASKS, {
+  const {data: wateringTasksData, refetch, loading } = useQuery<{WateringTask: WateringTask[]}, {gardenId: string, dateFrom: _Neo4jDateInput, dateTo: _Neo4jDateInput}>( GET_WATERING_TASKS, {
     variables: {
+      gardenId,
       dateFrom: toNeo4jDateInput( startDate ),
       dateTo: toNeo4jDateInput( endDate  )
     }
