@@ -72,7 +72,7 @@ const WateringCalendarWeek = ( {preselectedDate, defaultDayCount = 7 }: Watering
   } )
 
   const { data: WateringTaskChangeData } = useSubscription<{WateringtaskChange: Boolean}>( WATERING_TASK_CHANGE )
-  useEffect(() => { wateringTasksData && !loading && refetch && refetch() }, [WateringTaskChangeData] )
+  useEffect(() => {WateringTaskChangeData &&  wateringTasksData && !loading && refetch() }, [WateringTaskChangeData] )
 
 
   const defaultCalendarDates = ( _startDate: Date, _endDate: Date ) => [...Array( Math.abs( dayjs( _startDate ).diff( _endDate, 'day' )))]
@@ -160,7 +160,7 @@ const WateringCalendarWeek = ( {preselectedDate, defaultDayCount = 7 }: Watering
         <Box display='flex' flexDirection='row' alignItems='baseline' minHeight={'80px'}>
           {calendarDates.map(( { date, recruiterCount, inPlannedPeriod, inPeriod, itsMyTurn, iAmAvailable } ) => (
             <WateringCalendarTaskItem
-              disabled={dayjs().isAfter( date ) || !inPeriod}
+              disabled={dayjs().startOf( 'day' ).isAfter( date ) || !inPeriod}
               onSelect={() => select( date.toDate())}
               active={selectedDay && date.isSame( selectedDay, 'day' )}
               onActivate={() =>  setScrollBehavior( 'smooth' )}

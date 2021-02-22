@@ -72,7 +72,7 @@ export function WateringDetailDrawer( {onDrawerClose}: Props ) {
     }
   } ) || {}
   const { data: WateringTaskChangeData } = useSubscription<{WateringtaskChange: Boolean}>( WATERING_TASK_CHANGE )
-  useEffect(() => { WateringTaskData && !loading && refetch() }, [WateringTaskChangeData] )
+  useEffect(() => { WateringTaskChangeData && WateringTaskData && !loading && refetch() }, [WateringTaskChangeData] )
 
   const [removeAssignment] = useMutation<boolean, { date: _Neo4jDateInput, gardenId: string }>( REMOVE_ASSIGNMENT_MUTATION, {
     variables: {
@@ -101,7 +101,7 @@ export function WateringDetailDrawer( {onDrawerClose}: Props ) {
   }
 
   const isMe: ( user: User ) => Boolean = user => userId === user.id
-  const taskInPast = dayjs().isAfter( date )
+  const taskInPast = dayjs().startOf( 'day' ).isAfter( date )
 
   const handleConfirmRemoval = async ( remove?: boolean ) => {
     setConfirmRemoveAssignmentDialogOpen( false )
@@ -116,10 +116,9 @@ export function WateringDetailDrawer( {onDrawerClose}: Props ) {
           <Typography variant='h5' className={classes.detailTitle}>{
             inPlannedPeriod ? '' : t( 'watering.planless' )
           }</Typography>
+          {task?.users_assigned?.length === 0 &&
+          <Typography variant="body2">{t( 'watering.noRecruits' )}</Typography>}
           <Box display='flex' flexDirection='row' justifyContent='center' minHeight='130px'>
-            {task?.users_assigned?.length === 0 &&
-            <Typography variant="body2">{t( 'watering.noRecruits' )}</Typography>
-            }
             {( task?.users_assigned || [] )
               .map( user => user && (
                 <Box
