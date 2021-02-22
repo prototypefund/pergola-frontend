@@ -29,7 +29,7 @@ jobs:
           key: nix-{{ checksum "flake.lock" }}-{{ checksum "flake.nix" }}-{{ .BuildNum }}
           paths:
             - /nix/
-  deploy:
+  deploy-tag:
     docker:
       - image: johannesloetzsch/nix-flake:latest
     steps:
@@ -105,15 +105,23 @@ workflows:
           filters:  ## tags+branches
             tags:
               only: /.*/
-      - deploy:
+#      - deploy-master:
+#          requires:
+#            - build
+#          filters:  ## tags+master
+#            tags:
+#              only: /.*/
+#            branches:
+#              only:
+#                - master
+      - deploy-tag:
           requires:
             - build
-          filters:  ## tags+master
+          filters:  ## tags
             tags:
               only: /.*/
             branches:
-              only:
-                - master
+              ignore: /.*/
       - android_build-deploy:
           context: deployment
           requires:
