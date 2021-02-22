@@ -13,11 +13,14 @@
     "help": "help out",
     "uRAvailable": "you are available",
     "uRNotAvailable": "you are not available",
-    "itsMyTurn": "it's your turn"
+    "itsMyTurn": "it's your turn",
+    "isInPast": "this is already in the past, so you cannot change your decisions",
+    "hintNoPeriod": "the planing process has not yet started",
+    "noRecruits": "unfortunately no one is assigned to water the plants"
   },
   "assignment": {
     "confirmRemoveContent": "if you cancel your assignment, other gardeners will get a request for substitution",
-    "confirmRemoveTitle": "Realy cancel your assignement?",
+    "confirmRemoveTitle": "Really cancel your assignment?",
     "callOff": "call off"
   },
   "wizard": {

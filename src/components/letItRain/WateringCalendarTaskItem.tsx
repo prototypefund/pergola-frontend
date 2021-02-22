@@ -5,26 +5,30 @@ import React, {useEffect, useRef} from 'react'
 import {CornerBadge} from '../basic'
 
 interface WateringCalendarTaskItemProps {
+  disabled?: boolean;
   date: Date;
   recruiterCount: number;
   onSelect?: Function;
   active?: boolean;
-  inPeriod?: boolean;
+  inPlannedPeriod?: boolean;
   cornerActive?: boolean;
   optimalRecruiterCount?: number;
   size?: number;
   onActivate?: (  active: boolean,  ref: HTMLElement | null ) => void;
+  scrollBehavior?: 'smooth' | 'auto';
 }
 
 interface WateringCalendarTaskItemStylesProps {
   recruiterMissingCount: number;
   active?: boolean;
-  inPeriod?: boolean;
+  inPlannedPeriod?: boolean;
   size: number;
+  disabled?: boolean;
 }
 
 export const WateringCalendarTaskItem = (
   {
+    disabled,
     date,
     recruiterCount,
     optimalRecruiterCount = 3,
@@ -32,19 +36,28 @@ export const WateringCalendarTaskItem = (
     onSelect,
     onActivate,
     active = false,
-    inPeriod,
-    cornerActive
+    inPlannedPeriod,
+    cornerActive,
+    scrollBehavior
   }: WateringCalendarTaskItemProps ) => {
   const d = dayjs( date )
   const classes = useStyles( {
     recruiterMissingCount: optimalRecruiterCount - recruiterCount,
-    active, size, inPeriod} )
+    active, size, inPlannedPeriod, disabled} )
 
   const ref = useRef<HTMLSpanElement | null>( null )
 
   useEffect(() => {
-    onActivate && active && onActivate( active, ref?.current )
+    if( active ) {
+      ref?.current?.scrollIntoView( {
+        behavior: scrollBehavior,
+        block: 'center',
+        inline: 'center'
+      } )
+      onActivate && onActivate( active, ref?.current )
+    }
   }, [active, ref] )
+
 
 
   return (
@@ -52,8 +65,8 @@ export const WateringCalendarTaskItem = (
       <div className={classes.dayContainer}>
         <CornerBadge className={classes.badge} cornerActive={cornerActive}>
           <Box display="flex" flexDirection="column" justifyContent="center" className='badgeContent'>
-            <Typography className={classes.dayTitle}>{d.format('dd')}</Typography>
-            <Typography className={classes.daySubTitle}>{d.format('DD.M.')}</Typography>
+            <Typography className={classes.dayTitle}>{d.format( 'dd' )}</Typography>
+            <Typography className={classes.daySubTitle}>{d.format( 'DD.M.' )}</Typography>
           </Box>
         </CornerBadge>
       </div>
@@ -63,8 +76,8 @@ export const WateringCalendarTaskItem = (
 
 const useStyles = makeStyles<Theme, WateringCalendarTaskItemStylesProps>(( theme ) => ( {
   badge: {
-    backgroundColor: ( {recruiterMissingCount, inPeriod} ) => (
-      !inPeriod
+    backgroundColor: ( {recruiterMissingCount, inPlannedPeriod} ) => (
+      !inPlannedPeriod
         ? theme.palette.grey['400']
         : ( recruiterMissingCount >= 2
           ? '#FFBD4A'
@@ -73,6 +86,7 @@ const useStyles = makeStyles<Theme, WateringCalendarTaskItemStylesProps>(( theme
             : '#BDE3DC' ))
     )},
   dayContainer:  {
+    opacity: ( {disabled} ) => disabled ? 0.5 : 1.0,
     padding: '2px',
     height: ( {size} ) => `${size +  20}px`,
     '& .badgeContent': {

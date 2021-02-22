@@ -13,7 +13,10 @@
     "help": "hilf aus",
     "uRAvailable": "Du bist verfügbar",
     "uRNotAvailable": "Du bist nicht verfügbar",
-    "itsMyTurn": "Du bist dran"
+    "itsMyTurn": "Du bist dran",
+    "isInPast": "Ist bereits in der Vergangenheit, also kann keine Änderung mehr vorgenommen werden ",
+    "hintNoPeriod": "die Planung hat noch nicht begonnen",
+    "noRecruits": "leider ist an diesem Tag niemand zum Gießen eingeteilt"
   },
   "assignment": {
     "confirmRemoveContent": "Wenn du deiene Einsatz absagst, erhalten andere Gärtner*innen bei Bedarf eine Vertretungsanfrage.",
