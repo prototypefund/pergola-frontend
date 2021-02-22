@@ -48,7 +48,7 @@ export function Calendar( { dates = [], onChange, selectedDates: _selectedDates 
   const [firstDate] = dates
   const lastDate = dates[dates.length - 1]
 
-  const datesByWeeks: Map<number, Array<Date>> = dates.reduce((map, date ) => {
+  const datesByWeeks: Map<number, Array<Date>> = dates.reduce(( map, date ) => {
     const cw = dayjs( date ).week()
     map.has( cw ) || map.set( cw, [] )
     map.get( cw ).push( date )
@@ -232,7 +232,7 @@ export function Calendar( { dates = [], onChange, selectedDates: _selectedDates 
             />
           ))}
         </FormGroup>
-        {Array.from( datesByWeeks.keys()).map(( cw ) => (
+        {Array.from( datesByWeeks.keys()).sort().reverse().map(( cw ) => (
           <FormGroup row key={cw}>
             <FormControlLabel
               classes={{
@@ -244,16 +244,16 @@ export function Calendar( { dates = [], onChange, selectedDates: _selectedDates 
             />
             {[...new Array( 7 )].map(( e, dayOfWeek ) => {
               { // Make sure each day has a date.
-                const datesOfWeek = datesByWeeks.get(cw)
-                if (datesOfWeek) {
-                  let date = datesOfWeek.find(date => dayjs(date).weekday() === dayOfWeek)
+                const datesOfWeek = datesByWeeks.get( cw )
+                if ( datesOfWeek ) {
+                  let date = datesOfWeek.find( date => dayjs( date ).weekday() === dayOfWeek )
                   const dateAvailable = !!date
-                  if (!date) {
+                  if ( !date ) {
                     // Provide missing date by week and day number.
-                    date = dayjs().week(cw).weekday(dayOfWeek).toDate()
+                    date = dayjs().week( cw ).weekday( dayOfWeek ).toDate()
                   }
                   return <FormControlLabel
-                    key={dayjs(date).format('DD-MM-YYYY')}
+                    key={dayjs( date ).format( 'DD-MM-YYYY' )}
                     classes={{
                       root: classes.checkBoxLabel,
                       label: classes.checkBoxLabelText,
