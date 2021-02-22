@@ -1,5 +1,4 @@
-import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql'
-
+import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
@@ -15,7 +14,7 @@ export type Scalars = {
 
 export type Query = {
   __typename?: 'Query';
-  assignableWateringPeriod?: Maybe<WateringPeriod>;
+  assignableWateringPeriod?: Maybe<Array<Maybe<WateringPeriod>>>;
   /** [Generated query](https://grandstack.io/docs/graphql-schema-generation-augmentation#generated-queries) for Garden type nodes. */
   Garden?: Maybe<Array<Maybe<Garden>>>;
   /** [Generated query](https://grandstack.io/docs/graphql-schema-generation-augmentation#generated-queries) for User type nodes. */
@@ -35,6 +34,9 @@ export type Query = {
 
 export type QueryAssignableWateringPeriodArgs = {
   gardenId: Scalars['ID'];
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<Maybe<_WateringPeriodOrdering>>>;
 };
 
 
@@ -120,6 +122,17 @@ export type QueryUserSettingsArgs = {
   orderBy?: Maybe<Array<Maybe<_UserSettingsOrdering>>>;
   filter?: Maybe<_UserSettingsFilter>;
 };
+
+export enum _WateringPeriodOrdering {
+  FromAsc = 'from_asc',
+  FromDesc = 'from_desc',
+  TillAsc = 'till_asc',
+  TillDesc = 'till_desc',
+  HasUsersAssignedAsc = 'hasUsersAssigned_asc',
+  HasUsersAssignedDesc = 'hasUsersAssigned_desc',
+  IdAsc = '_id_asc',
+  IdDesc = '_id_desc'
+}
 
 export type WateringPeriod = {
   __typename?: 'WateringPeriod';
@@ -612,8 +625,8 @@ export enum _UserOrdering {
   Neo4jImportIdDesc = 'neo4jImportId_desc',
   TypeAsc = 'type_asc',
   TypeDesc = 'type_desc',
-  _IdAsc = '_id_asc',
-  _IdDesc = '_id_desc'
+  IdAsc = '_id_asc',
+  IdDesc = '_id_desc'
 }
 
 export type User = {
@@ -767,17 +780,6 @@ export type LogEventRefers_ToArgs = {
   orderBy?: Maybe<Array<Maybe<_WateringTaskOrdering>>>;
   filter?: Maybe<_WateringTaskFilter>;
 };
-
-export enum _WateringPeriodOrdering {
-  FromAsc = 'from_asc',
-  FromDesc = 'from_desc',
-  TillAsc = 'till_asc',
-  TillDesc = 'till_desc',
-  HasUsersAssignedAsc = 'hasUsersAssigned_asc',
-  HasUsersAssignedDesc = 'hasUsersAssigned_desc',
-  IdAsc = '_id_asc',
-  IdDesc = '_id_desc'
-}
 
 export enum _GardenOrdering {
   GardenIdAsc = 'gardenId_asc',
@@ -2125,7 +2127,7 @@ export type SubscriptionObject<TResult, TKey extends string, TParent, TContext, 
   | SubscriptionResolverObject<TResult, TParent, TContext, TArgs>;
 
 export type SubscriptionResolver<TResult, TKey extends string, TParent = {}, TContext = {}, TArgs = {}> =
-  | (( ...args: any[] ) => SubscriptionObject<TResult, TKey, TParent, TContext, TArgs> )
+  | ((...args: any[]) => SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>)
   | SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>;
 
 export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
@@ -2134,7 +2136,7 @@ export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
   info: GraphQLResolveInfo
 ) => Maybe<TTypes> | Promise<Maybe<TTypes>>;
 
-export type IsTypeOfResolverFn<T = {}, TContext = {}> = ( obj: T, context: TContext, info: GraphQLResolveInfo ) => boolean | Promise<boolean>;
+export type IsTypeOfResolverFn<T = {}, TContext = {}> = (obj: T, context: TContext, info: GraphQLResolveInfo) => boolean | Promise<boolean>;
 
 export type NextResolverFn<T> = () => Promise<T>;
 
@@ -2153,6 +2155,7 @@ export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
+  _WateringPeriodOrdering: _WateringPeriodOrdering;
   WateringPeriod: ResolverTypeWrapper<WateringPeriod>;
   _Neo4jDate: ResolverTypeWrapper<_Neo4jDate>;
   _GardenFilter: _GardenFilter;
@@ -2171,7 +2174,6 @@ export type ResolversTypes = {
   ChangeRequest: ResolverTypeWrapper<ChangeRequest>;
   _LogEventOrdering: _LogEventOrdering;
   LogEvent: ResolverTypeWrapper<LogEvent>;
-  _WateringPeriodOrdering: _WateringPeriodOrdering;
   _GardenOrdering: _GardenOrdering;
   _UserSettingsOrdering: _UserSettingsOrdering;
   _UserSettingsFilter: _UserSettingsFilter;
@@ -2351,7 +2353,7 @@ export type ResolversParentTypes = {
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  assignableWateringPeriod?: Resolver<Maybe<ResolversTypes['WateringPeriod']>, ParentType, ContextType, RequireFields<QueryAssignableWateringPeriodArgs, 'gardenId'>>;
+  assignableWateringPeriod?: Resolver<Maybe<Array<Maybe<ResolversTypes['WateringPeriod']>>>, ParentType, ContextType, RequireFields<QueryAssignableWateringPeriodArgs, 'gardenId'>>;
   Garden?: Resolver<Maybe<Array<Maybe<ResolversTypes['Garden']>>>, ParentType, ContextType, RequireFields<QueryGardenArgs, never>>;
   User?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType, RequireFields<QueryUserArgs, never>>;
   WateringTask?: Resolver<Maybe<Array<Maybe<ResolversTypes['WateringTask']>>>, ParentType, ContextType, RequireFields<QueryWateringTaskArgs, never>>;
@@ -2824,7 +2826,7 @@ export type _MergeLogEventRefers_ToPayloadResolvers<ContextType = any, ParentTyp
 };
 
 export type SubscriptionResolvers<ContextType = any, ParentType extends ResolversParentTypes['Subscription'] = ResolversParentTypes['Subscription']> = {
-  WateringTaskChange?: SubscriptionResolver<Maybe<ResolversTypes['Boolean']>, 'WateringTaskChange', ParentType, ContextType>;
+  WateringTaskChange?: SubscriptionResolver<Maybe<ResolversTypes['Boolean']>, "WateringTaskChange", ParentType, ContextType>;
 };
 
 export type _Neo4jTimeResolvers<ContextType = any, ParentType extends ResolversParentTypes['_Neo4jTime'] = ResolversParentTypes['_Neo4jTime']> = {
