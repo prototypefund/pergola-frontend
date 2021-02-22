@@ -49,8 +49,17 @@ export function Home() {
             <ListItemText primary="Lerne mit der interaktiven Karte deinen Garten kennen" />
           </ListItem>
         </List>
-        {!keycloak.authenticated && <Button onClick={() => keycloak.login()} variant="contained" color="primary" className={classes.button}>
-            anmelden</Button>}
+        {!keycloak.authenticated && (
+        <>
+          <Typography variant="h4">Yeah, Demo Time!</Typography>
+          <Box my={2}>
+            <Typography>Um Pergola zu erkunden kannst du dich als <strong>Nutzer "demo"</strong> mit dem <strong>Passwort "demo"</strong> anmelden. 
+          Oder du nutzt deinen Github Account. Und natürlich kannst dich auch im Handumdrehen registrieren.
+          Und keine Sorge: alle Daten werden nach der Prototype Fund Demo Week wieder gelöscht. Viel Spaß!</Typography>
+          </Box>
+          <Button onClick={() => keycloak.login()} variant="contained" color="primary" className={classes.button}>anmelden</Button>
+        </>
+          ) }
       </Paper>
     </Container>
   )
