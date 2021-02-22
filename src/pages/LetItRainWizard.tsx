@@ -5,13 +5,15 @@ import { useKeycloak } from '@react-keycloak/web'
 import dayjs from 'dayjs'
 import path from 'path'
 import * as React from 'react'
-import {useState} from 'react'
+import { useEffect ,useState} from 'react'
 import {Link, useHistory, useParams, useRouteMatch} from 'react-router-dom'
 
 import {Calendar, HorizontalStepper, LetItRainFrequency, NotificationSettings} from '../components'
 import {LoginPrompt} from '../components/LoginPrompt'
 import {fromNeo4jDate, toNeo4jDateInput} from '../helper'
-import {_Neo4jDateInput, UserSettings, UserSettingsInput, WateringPeriod} from '../types/graphql'
+import {_Neo4jDateInput, UserSettings, UserSettingsInput, WateringPeriod, WateringTask} from '../types/graphql'
+
+const flatten = ( a: any[] ) => Array.prototype.concat.apply( [], a )
 
 export interface LetItRainWizardRouterProps {
   stepNumber: string;
@@ -53,8 +55,22 @@ const ASSIGNABLE_WATERING_PERIOD = gql`
   }
 `
 
+const USER_AVAILABLE_TASKS = gql`
+query WateringTask($userId: String, $gardenId: ID!) {
+    WateringTask( filter: {
+        AND: [
+            {wateringperiod: { at: { gardenId: $gardenId } } } ,
+            {users_available_some: { id: $userId } }
+        ]
+    }) {
+        _id
+        date { day month year }
+    }
+}
+`
+
 export function LetItRainWizard() {
-  const { keycloak } = useKeycloak()
+  const { keycloak: { authenticated,  subject: userId } } = useKeycloak()
   const theme = useTheme()
   const classes = useStyles()
   const history = useHistory()
@@ -64,8 +80,21 @@ export function LetItRainWizard() {
   const fullscreenDialog = useMediaQuery( theme.breakpoints.down( 'md' ))
   const [availableDates, setAvailableDates] = useState<Array<Date>>( [] )
   const [userWantsMaximumTasks, setUserWantsMaximumTasks] = useState( 1 )
-  const {data: assignableWateringPeriodData } = useQuery<{assignableWateringPeriod: WateringPeriod}>( ASSIGNABLE_WATERING_PERIOD,
+  const {data: assignableWateringPeriodData } = useQuery<{assignableWateringPeriod: WateringPeriod[]}, {gardenId: string}>(
+    ASSIGNABLE_WATERING_PERIOD,
     {variables: {gardenId}} )
+
+  const {data: availableWateringTasksData } =  userId && useQuery<{WateringTask: WateringTask[]}, {gardenId: string, userId: string}>(
+    USER_AVAILABLE_TASKS,
+    {variables: {gardenId, userId}}
+  ) || {}
+  const availableTasks = availableWateringTasksData?.WateringTask
+
+  useEffect(() => {
+    if( !availableTasks || availableTasks.length <= 0 ) return
+    const _availableDates = availableTasks.map( t => fromNeo4jDate( t.date ))
+    setAvailableDates( _availableDates )
+  }, [availableTasks] )
 
   const [setUserAvailabilityMutation] =
       useMutation<boolean, { dates: Array<_Neo4jDateInput>, gardenId: string }>( SET_USER_AVAILABLITY_FOR_WATERING_PERIOD,
@@ -76,7 +105,7 @@ export function LetItRainWizard() {
         {variables: { settings: { letitrain_maximum_tasks: userWantsMaximumTasks }} } )
 
   const lastMondayDate = dayjs().weekday( -7 )
-  const tasks =  assignableWateringPeriodData?.assignableWateringPeriod?.wateringtasks || []
+  const tasks = flatten( assignableWateringPeriodData?.assignableWateringPeriod?.map(( {wateringtasks} ) => wateringtasks ) || [] )
   const calendarDates = tasks.length === 0
     ? [...Array( DAYS_COUNT )]
       .map(( _, i ) => lastMondayDate.add( i, 'day' ).toDate())
@@ -124,7 +153,7 @@ export function LetItRainWizard() {
   }
 
 
-  return keycloak.authenticated ?
+  return authenticated ?
     ( <Dialog
       fullScreen={fullscreenDialog}
       className={classes.dialog + ( fullscreenDialog ? '' : ' noFullscreen' )}
