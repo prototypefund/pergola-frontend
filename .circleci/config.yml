@@ -87,12 +87,12 @@ jobs:
             cp -r /nix/store/*-www www
             git add -f www
             git commit -m build
-            git remote add deployment deploy-pergola@experimental.pergola.gra.one:~/experimental/frontend
+            git remote add deployment deploy-pergola@experimental.pergola.wald.email:~/experimental/frontend
             git push --force deployment
       - run:
           name: Check Availability
           command: |
-            URL="https://experimental.pergola.gra.one/"
+            URL="https://experimental.pergola.wald.email/"
             TIMEOUT=60
             (for i in $(seq $TIMEOUT); do
               [ $(nix shell nixpkgs#curl --command curl -s -o /dev/null -w "%{http_code}" $URL) = "200" ] && echo online && exit 0
@@ -151,9 +151,9 @@ workflows:
       - deploy-experimental:
           requires:
             - build
-          filters:  ## tags+master
+          filters:  ## master
             tags:
-              only: /.*/
+              ignore: /.*/
             branches:
               only:
                 - master
