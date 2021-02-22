@@ -10,6 +10,7 @@ import {
 } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 import { getMainDefinition } from '@apollo/client/utilities'
+import {Backdrop, CircularProgress } from '@material-ui/core'
 import { ReactKeycloakProvider, useKeycloak } from '@react-keycloak/web'
 import { WebSocketLink } from 'apollo-link-ws'
 import dayjs from 'dayjs'
@@ -18,6 +19,7 @@ import localizedFormat from 'dayjs/plugin/localizedFormat'
 import weekday from 'dayjs/plugin/weekday'
 import Keycloak from 'keycloak-js'
 import * as React from 'react'
+import { useState } from 'react'
 import { Provider, useDispatch } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 
@@ -115,11 +117,15 @@ function ApolloRoot( { persistor } ) {
 
 export function KeycloakRoot( { persistor } ) {
   const dispatch = useDispatch()
+  const [keyCloakReady, setKeyCloakReady] = useState( false )
 
   return (
     <ReactKeycloakProvider
       authClient={keycloak}
       onEvent={( event ) => {
+        if ( event === 'onReady' ) {
+          setKeyCloakReady( true )
+        }
         if ( event === 'onAuthSuccess' ) {
           keycloak.loadUserProfile().then( function ( profile ) {
             dispatch( setUserProfile( profile ))
@@ -127,7 +133,11 @@ export function KeycloakRoot( { persistor } ) {
         }
       }}
     >
-      <ApolloRoot persistor={persistor} />
+      {
+        keyCloakReady
+          ? <ApolloRoot persistor={persistor} />
+          : <Backdrop open> <CircularProgress color='inherit' /></Backdrop>
+      }
     </ReactKeycloakProvider>
   )
 }
