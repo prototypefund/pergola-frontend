@@ -11,7 +11,7 @@ import {useTranslation} from 'react-i18next'
 import {useSelector} from 'react-redux'
 import {Link, useHistory, useParams, useRouteMatch} from 'react-router-dom'
 
-import {toNeo4jDateInput} from '../../helper'
+import {getAvatarPropsForUser, toNeo4jDateInput} from '../../helper'
 import {RootState} from '../../reducers'
 import {_Neo4jDateInput, User, WateringTask} from '../../types/graphql'
 import {ConfirmationDialog,CornerBadge} from '../basic'
@@ -122,6 +122,8 @@ export function WateringDetailDrawer( {onDrawerClose}: Props ) {
             {( task?.users_assigned || [] )
               .map( user => user && (
                 <Box
+                  minHeight='130px'
+                  minWidth='130px'
                   key={user._id}
                   display='flex'
                   flexDirection='column'
@@ -130,10 +132,11 @@ export function WateringDetailDrawer( {onDrawerClose}: Props ) {
                   margin='8px'
                   border={isMe( user ) && 'solid 1px black'} borderRadius='8px'>
                   {isMe( user ) && ( <IconButton
+                    style={{position: 'absolute'}}
                     onClick={() => setConfirmRemoveAssignmentDialogOpen( true )}><RemoveCircleOutlined/></IconButton> )}
                   <AvatarComponent
                     style={{width: '100px', height: '100px'}}
-                    {...randomAvatarProps()}
+                    {...getAvatarPropsForUser( user.id || '' )}
                   />
                   <Typography variant='h5'>{user.label}</Typography>
                 </Box>
@@ -201,58 +204,3 @@ const useStyles = makeStyles(() => ( {
   }
 } ))
 
-const randomAvatarProps = () =>
-  avatars[Math.floor( Math.random() * avatars.length )]
-
-const avatars = [
-  {
-    avatarStyle: 'Circle',
-    topType: 'WinterHat2',
-    accessoriesType: 'Blank',
-    hatColor: 'Pink',
-    facialHairType: 'Blank',
-    clotheType: 'Overall',
-    clotheColor: 'Gray01',
-    eyeType: 'Happy',
-    eyebrowType: 'Default',
-    mouthType: 'Default',
-    skinColor: 'Pale',
-  },
-  {
-    avatarStyle: 'Circle',
-    topType: 'ShortHairShortCurly',
-    accessoriesType: 'Blank',
-    hairColor: 'Platinum',
-    facialHairType: 'Blank',
-    clotheType: 'Overall',
-    clotheColor: 'PastelRed',
-    eyeType: 'Happy',
-    eyebrowType: 'Default',
-    mouthType: 'Default',
-    skinColor: 'Brown',
-  },
-  {
-    avatarStyle: 'Circle',
-    topType: 'Hijab',
-    accessoriesType: 'Blank',
-    hatColor: 'Blue02',
-    clotheType: 'Overall',
-    clotheColor: 'PastelOrange',
-    eyeType: 'WinkWacky',
-    eyebrowType: 'Default',
-    mouthType: 'Tongue',
-    skinColor: 'Brown',
-  },
-  {
-    avatarStyle: 'Circle',
-    topType: 'LongHairStraight',
-    accessoriesType: 'Blank',
-    hairColor: 'BrownDark',
-    facialHairType: 'Blank',
-    clotheType: 'BlazerShirt',
-    eyeType: 'Default',
-    eyebrowType: 'Default',
-    mouthType: 'Default',
-    skinColor: 'Light',
-  }
-]
