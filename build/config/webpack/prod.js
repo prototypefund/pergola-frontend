@@ -11,6 +11,8 @@ function resolvePath( dir ) {
 
 const commonConfig = require( './common' )
 
+const MB = 1024*1024
+
 module.exports = merge( commonConfig, {
   mode: 'production',
   entry: './index.tsx',
@@ -24,6 +26,13 @@ module.exports = merge( commonConfig, {
     !isCordova ? [
       new WorkboxPlugin.InjectManifest( {
         swSrc: resolvePath( 'src/service-worker.js' ),
+	maximumFileSizeToCacheInBytes: 10*MB,
+//	exclude: [
+//	  /.*html/  // this should be a hotfix against the error on updates
+//	],
+//	include: [
+//	  /.*/  // We need include the js. Be aware that this might require `maximumFileSizeToCacheInBytes`
+//	]
       } )
     ] : []
   ,

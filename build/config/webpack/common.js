@@ -3,7 +3,6 @@ const {resolve} = require( 'path' )
 const {CheckerPlugin} = require( 'awesome-typescript-loader' )
 const HtmlWebpackPlugin = require( 'html-webpack-plugin' )
 const CopyWebpackPlugin = require( 'copy-webpack-plugin' )
-const WorkboxPlugin = require( 'workbox-webpack-plugin' )
 const EnvironmentPlugin = require( 'webpack/lib/EnvironmentPlugin' )
 
 const env = process.env.NODE_ENV || 'development'
