@@ -56,7 +56,7 @@ export function LetItRainEntry() {
                 </MenuItem>
                 <MenuItem onClick={handlePrint}>{t( 'menu' ).exportPrint}</MenuItem>
                 {keycloak.hasRealmRole( 'developer' ) && <MenuItem component={Link} to={`${url}/manage`}>{t( 'menu' ).manage}</MenuItem>}
-                <MenuItem onClick={() => setDrawerOpen( true )}>{t( 'menu' ).help}</MenuItem>
+                {/* <MenuItem onClick={() => setDrawerOpen( true )}>{t( 'menu' ).help}</MenuItem> */}
               </Menu>
             </div>
           </Toolbar>
