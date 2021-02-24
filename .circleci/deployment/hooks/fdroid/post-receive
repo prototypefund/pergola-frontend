@@ -9,6 +9,7 @@ ENV=live
 
 pwd
 ( date
+ git checkout -f fdroid; echo
  git log -n2; echo
 
  [ -d fdroid-repo ] || git clone https://github.com/community-garden/fdroid-repo.git
