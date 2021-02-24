@@ -14,8 +14,7 @@
   export FILE="$1"
   export NAME="$2"
 
-  (github-release delete -t $TAG || true
-   github-release release -t $TAG
-   github-release upload -t $TAG -f "$FILE" -n "$NAME"
-  ) 2>/dev/null  ## prevent leakage of $GITHUB_TOKEN
+  github-release delete -t $TAG || true
+  github-release release -t $TAG
+  github-release upload -t $TAG -f "$FILE" -n "$NAME"
 '')

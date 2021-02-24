@@ -148,7 +148,7 @@ jobs:
       - run:
           name: Pure build
           command: echo TODO
-#      - run: nix shell .#deploy --command deploy ./pergola.apk pergola.apk || true  ## TODO once the apk works ; use fixed version of github-release
+      - run: nix shell .#deploy --command deploy ./pergola.apk pergola.apk
       - add_ssh_keys
       - run:
           name: CD
