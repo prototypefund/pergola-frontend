@@ -1,0 +1,26 @@
+{
+  "plants": {
+    "apple": "Apfel",
+    "artichoke": "Artischocke",
+    "bell-pepper-capsicum": "Paprika",
+    "broccoli": "Broccoli",
+    "cherry": "Kirsche",
+    "corn": "Mais",
+    "grapes": "Trauben",
+    "egg-plant": "Aubergine",
+    "raddish": "Rettich",
+    "potato": "kartoffel",
+    "tomato": "Tomate",
+    "wheat": "Getreide",
+    "strawberry": "strawberry",
+    "watermelon": "Wassermelone",
+    "pear": "Birne",
+    "pepper": "Chilli/Pepperoni",
+    "pumpkin": "Kürbis",
+    "peas": "Bohen",
+    "mushroom": "Pilze",
+    "kiwi": "Kiwi",
+    "cauli-flower": "Blumenkohl",
+    "plant": "andere Pflanze"
+  }
+}

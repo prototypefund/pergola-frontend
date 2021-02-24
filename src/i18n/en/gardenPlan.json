@@ -1,0 +1,26 @@
+{
+  "plants": {
+    "apple": "apple",
+    "artichoke": "artichoke",
+    "bell-pepper-capsicum": "pepper cpsicum",
+    "broccoli": "broccoli",
+    "cherry": "cherry",
+    "corn": "corn",
+    "grapes": "grapes",
+    "egg-plant": "egg plant",
+    "raddish": "raddish",
+    "potato": "potato",
+    "tomato": "tomato",
+    "wheat": "wheat",
+    "strawberry": "strawberry",
+    "watermelon": "watermelon",
+    "pear": "pear",
+    "pepper": "pepper",
+    "pumpkin": "pumkin",
+    "peas": "peas",
+    "mushroom": "mushroom",
+    "kiwi": "kiwi",
+    "cauli-flower": "cauli-flower",
+    "plant": "plant"
+  }
+}

@@ -6,15 +6,17 @@ import * as L from 'leaflet'
 import * as React from 'react'
 import {useEffect, useState} from 'react'
 import { useDispatch } from 'react-redux'
+import { useParams } from 'react-router-dom'
 
 import {SelectShape} from '../../actions'
 import {toNeo4jDateInput} from '../../helper'
 import {toNeo4jPointInput} from '../../helper/neo4jpoint'
+import {useSelector} from '../../reducers'
 import {
   GardenLayer,
   MarkerShape,
   MutationCreateGardenLayerArgs,
-  MutationCreateMarkerShapeArgs,
+  MutationCreateMarkerShapeArgs, MutationMergeGardenLayerAtArgs,
   MutationMergeMarkerShapeBelongs_ToArgs, MutationUpdateMarkerShapeArgs
 } from '../../types/graphql'
 
@@ -27,13 +29,22 @@ const CREATE_MARKER_SHAPE_MUTATION = gql`
     }
 `
 const CREATE_LAYER_GROUP_MUTATION = gql`
-    mutation CreateGardenLayer($name: String!, $date: _Neo4jDateInput) {
-        CreateGardenLayer(name: $name, date: $date) {
+    mutation CreateGardenLayer( $name: String!, $date: _Neo4jDateInput) {
+        CreateGardenLayer( name: $name, date: $date) {
             layerId
         }
     }
 `
-const MERGE_MARKER_SHAPE_MUTATION = gql`
+const ADD_GARDEN_LAYER_AT_GARDEN_MUTATION = gql`
+mutation AddGardenLayerAt($from: _GardenLayerInput!, $to:  _GardenInput!) {
+    AddGardenLayerAt(from: $from, to: $to) {
+        from { layerId }
+        to { gardenId }
+    }
+}
+`
+
+const ADD_MARKER_SHAPE_BELONGS_TO_GARDEN_MUTATION = gql`
     mutation AddMarkerShapeBelongs_To($from: _MarkerShapeInput!, $to:  _GardenLayerInput!) {
         AddMarkerShapeBelongs_to(from: $from, to: $to) {
             from { shapeId }
@@ -75,10 +86,12 @@ export function ShapeCreator( {map, editableLayer}: ShapeCreatorProps ) {
 
   const dispatch = useDispatch()
   const [layerId, setLayerId] = useState<string | undefined>()
+  const {gardenId} = useParams<{ gardenId: string }>()
   const [createMarkerShape] = useMutation<{ CreateMarkerShape: { shapeId: string } }, MutationCreateMarkerShapeArgs>( CREATE_MARKER_SHAPE_MUTATION )
   const [updateMarkerShape] = useMutation<{ UpdateMarkerShape: { shapeId: string } }, MutationUpdateMarkerShapeArgs>( UPDATE_MARKER_SHAPE_MUTATION )
   const [createLayerGroup] = useMutation<{ CreateGardenLayer: {layerId: string } }, MutationCreateGardenLayerArgs>( CREATE_LAYER_GROUP_MUTATION )
-  const [mergeMarkerShape] = useMutation<{ mergeMarkerShape: { from: { shapeId: string }, to: { layerId: string } } }, MutationMergeMarkerShapeBelongs_ToArgs>( MERGE_MARKER_SHAPE_MUTATION )
+  const [markerShapeBelongsToLayer] = useMutation<{ AddMarkerShapeBelongs_To: { from: { shapeId: string }, to: { layerId: string } } }, MutationMergeMarkerShapeBelongs_ToArgs>( ADD_MARKER_SHAPE_BELONGS_TO_GARDEN_MUTATION )
+  const [gardenLayerIsAtGarde] = useMutation<{ AddGardenLayerAt: { from: { layerId: string }, to: { gardenId: string } } }, MutationMergeGardenLayerAtArgs >( ADD_GARDEN_LAYER_AT_GARDEN_MUTATION )
   const {data: GardenLayerData, loading} = useQuery<{GardenLayer: GardenLayer[]}>( GET_GARDEN_LAYER_QUERY )
   const {data: markerShapeData} =  useQuery<{MarkerShape: MarkerShape[]}, {layerId: string}>( GET_MARKER_SHAPE_QUERY, {
     variables: {
@@ -96,7 +109,16 @@ export function ShapeCreator( {map, editableLayer}: ShapeCreatorProps ) {
             date: toNeo4jDateInput( new Date())
           }
         } )
-        setLayerId( layerGroupData?.CreateGardenLayer.layerId )
+        const layerId = layerGroupData?.CreateGardenLayer.layerId
+        if( layerId ) {
+          const { data: layerToGardenData } = await gardenLayerIsAtGarde( {
+            variables: {
+              from: { layerId },
+              to: { gardenId }
+            }
+          } )
+          layerToGardenData && setLayerId( layerId )
+        }
       }
       _createLayer()
     } else {
@@ -116,7 +138,7 @@ export function ShapeCreator( {map, editableLayer}: ShapeCreatorProps ) {
         icon: JSON.stringify( layer.getIcon().options ),
       }} )
       const shapeId = markerData?.CreateMarkerShape.shapeId
-      shapeId && await mergeMarkerShape( {variables: {
+      shapeId && await markerShapeBelongsToLayer( {variables: {
         from: {  shapeId },
         to: { layerId: _layerId  }
       }} )

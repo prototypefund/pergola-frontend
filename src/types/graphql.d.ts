@@ -27,6 +27,16 @@ export type Query = {
   ChangeRequest?: Maybe<Array<Maybe<ChangeRequest>>>;
   /** [Generated query](https://grandstack.io/docs/graphql-schema-generation-augmentation#generated-queries) for LogEvent type nodes. */
   LogEvent?: Maybe<Array<Maybe<LogEvent>>>;
+  /** [Generated query](https://grandstack.io/docs/graphql-schema-generation-augmentation#generated-queries) for GeoShape type nodes. */
+  GeoShape?: Maybe<Array<Maybe<GeoShape>>>;
+  /** [Generated query](https://grandstack.io/docs/graphql-schema-generation-augmentation#generated-queries) for GardenLayer type nodes. */
+  GardenLayer?: Maybe<Array<Maybe<GardenLayer>>>;
+  /** [Generated query](https://grandstack.io/docs/graphql-schema-generation-augmentation#generated-queries) for PolygonShape type nodes. */
+  PolygonShape?: Maybe<Array<Maybe<PolygonShape>>>;
+  /** [Generated query](https://grandstack.io/docs/graphql-schema-generation-augmentation#generated-queries) for MarkerShape type nodes. */
+  MarkerShape?: Maybe<Array<Maybe<MarkerShape>>>;
+  /** [Generated query](https://grandstack.io/docs/graphql-schema-generation-augmentation#generated-queries) for GardenFeature type nodes. */
+  GardenFeature?: Maybe<Array<Maybe<GardenFeature>>>;
   /** [Generated query](https://grandstack.io/docs/graphql-schema-generation-augmentation#generated-queries) for UserSettings type nodes. */
   UserSettings?: Maybe<Array<Maybe<UserSettings>>>;
 };
@@ -110,6 +120,68 @@ export type QueryLogEventArgs = {
   offset?: Maybe<Scalars['Int']>;
   orderBy?: Maybe<Array<Maybe<_LogEventOrdering>>>;
   filter?: Maybe<_LogEventFilter>;
+};
+
+
+export type QueryGeoShapeArgs = {
+  shapeId?: Maybe<Scalars['ID']>;
+  points?: Maybe<Array<Maybe<_Neo4jPointInput>>>;
+  _id?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<Maybe<_GeoShapeOrdering>>>;
+  filter?: Maybe<_GeoShapeFilter>;
+};
+
+
+export type QueryGardenLayerArgs = {
+  layerId?: Maybe<Scalars['ID']>;
+  name?: Maybe<Scalars['String']>;
+  date?: Maybe<_Neo4jDateInput>;
+  _id?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<Maybe<_GardenLayerOrdering>>>;
+  filter?: Maybe<_GardenLayerFilter>;
+};
+
+
+export type QueryPolygonShapeArgs = {
+  shapeId?: Maybe<Scalars['ID']>;
+  points?: Maybe<Array<Maybe<_Neo4jPointInput>>>;
+  startPoint?: Maybe<_Neo4jPointInput>;
+  _id?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<Maybe<_PolygonShapeOrdering>>>;
+  filter?: Maybe<_PolygonShapeFilter>;
+};
+
+
+export type QueryMarkerShapeArgs = {
+  shapeId?: Maybe<Scalars['ID']>;
+  points?: Maybe<Array<Maybe<_Neo4jPointInput>>>;
+  icon?: Maybe<Scalars['String']>;
+  point?: Maybe<_Neo4jPointInput>;
+  _id?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<Maybe<_MarkerShapeOrdering>>>;
+  filter?: Maybe<_MarkerShapeFilter>;
+};
+
+
+export type QueryGardenFeatureArgs = {
+  featureId?: Maybe<Scalars['ID']>;
+  infoText?: Maybe<Scalars['String']>;
+  label?: Maybe<Scalars['String']>;
+  featureType?: Maybe<Scalars['String']>;
+  plants?: Maybe<Array<Maybe<Scalars['String']>>>;
+  _id?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<Maybe<_GardenFeatureOrdering>>>;
+  filter?: Maybe<_GardenFeatureFilter>;
 };
 
 
@@ -790,6 +862,396 @@ export enum _GardenOrdering {
   IdDesc = '_id_desc'
 }
 
+/** Generated Point input object for Neo4j [Spatial field arguments](https://grandstack.io/docs/graphql-spatial-types/#point-query-arguments). */
+export type _Neo4jPointInput = {
+  x?: Maybe<Scalars['Float']>;
+  y?: Maybe<Scalars['Float']>;
+  z?: Maybe<Scalars['Float']>;
+  longitude?: Maybe<Scalars['Float']>;
+  latitude?: Maybe<Scalars['Float']>;
+  height?: Maybe<Scalars['Float']>;
+  crs?: Maybe<Scalars['String']>;
+  srid?: Maybe<Scalars['Int']>;
+};
+
+export enum _GeoShapeOrdering {
+  ShapeIdAsc = 'shapeId_asc',
+  ShapeIdDesc = 'shapeId_desc'
+}
+
+export type _GeoShapeFilter = {
+  AND?: Maybe<Array<_GeoShapeFilter>>;
+  OR?: Maybe<Array<_GeoShapeFilter>>;
+  shapeId?: Maybe<Scalars['ID']>;
+  shapeId_not?: Maybe<Scalars['ID']>;
+  shapeId_in?: Maybe<Array<Scalars['ID']>>;
+  shapeId_not_in?: Maybe<Array<Scalars['ID']>>;
+  shapeId_contains?: Maybe<Scalars['ID']>;
+  shapeId_not_contains?: Maybe<Scalars['ID']>;
+  shapeId_starts_with?: Maybe<Scalars['ID']>;
+  shapeId_not_starts_with?: Maybe<Scalars['ID']>;
+  shapeId_ends_with?: Maybe<Scalars['ID']>;
+  shapeId_not_ends_with?: Maybe<Scalars['ID']>;
+  points?: Maybe<Array<_Neo4jPointInput>>;
+  points_not?: Maybe<Array<_Neo4jPointInput>>;
+  points_distance?: Maybe<Array<_Neo4jPointDistanceFilter>>;
+  points_distance_lt?: Maybe<Array<_Neo4jPointDistanceFilter>>;
+  points_distance_lte?: Maybe<Array<_Neo4jPointDistanceFilter>>;
+  points_distance_gt?: Maybe<Array<_Neo4jPointDistanceFilter>>;
+  points_distance_gte?: Maybe<Array<_Neo4jPointDistanceFilter>>;
+  belongs_to?: Maybe<_GardenLayerFilter>;
+  belongs_to_not?: Maybe<_GardenLayerFilter>;
+  belongs_to_in?: Maybe<Array<_GardenLayerFilter>>;
+  belongs_to_not_in?: Maybe<Array<_GardenLayerFilter>>;
+  belongs_to_some?: Maybe<_GardenLayerFilter>;
+  belongs_to_none?: Maybe<_GardenLayerFilter>;
+  belongs_to_single?: Maybe<_GardenLayerFilter>;
+  belongs_to_every?: Maybe<_GardenLayerFilter>;
+};
+
+export type _Neo4jPointDistanceFilter = {
+  point: _Neo4jPointInput;
+  distance: Scalars['Float'];
+};
+
+export type _GardenLayerFilter = {
+  AND?: Maybe<Array<_GardenLayerFilter>>;
+  OR?: Maybe<Array<_GardenLayerFilter>>;
+  layerId?: Maybe<Scalars['ID']>;
+  layerId_not?: Maybe<Scalars['ID']>;
+  layerId_in?: Maybe<Array<Scalars['ID']>>;
+  layerId_not_in?: Maybe<Array<Scalars['ID']>>;
+  layerId_contains?: Maybe<Scalars['ID']>;
+  layerId_not_contains?: Maybe<Scalars['ID']>;
+  layerId_starts_with?: Maybe<Scalars['ID']>;
+  layerId_not_starts_with?: Maybe<Scalars['ID']>;
+  layerId_ends_with?: Maybe<Scalars['ID']>;
+  layerId_not_ends_with?: Maybe<Scalars['ID']>;
+  name?: Maybe<Scalars['String']>;
+  name_not?: Maybe<Scalars['String']>;
+  name_in?: Maybe<Array<Scalars['String']>>;
+  name_not_in?: Maybe<Array<Scalars['String']>>;
+  name_contains?: Maybe<Scalars['String']>;
+  name_not_contains?: Maybe<Scalars['String']>;
+  name_starts_with?: Maybe<Scalars['String']>;
+  name_not_starts_with?: Maybe<Scalars['String']>;
+  name_ends_with?: Maybe<Scalars['String']>;
+  name_not_ends_with?: Maybe<Scalars['String']>;
+  date?: Maybe<_Neo4jDateInput>;
+  date_not?: Maybe<_Neo4jDateInput>;
+  date_in?: Maybe<Array<_Neo4jDateInput>>;
+  date_not_in?: Maybe<Array<_Neo4jDateInput>>;
+  date_lt?: Maybe<_Neo4jDateInput>;
+  date_lte?: Maybe<_Neo4jDateInput>;
+  date_gt?: Maybe<_Neo4jDateInput>;
+  date_gte?: Maybe<_Neo4jDateInput>;
+  at?: Maybe<_GardenFilter>;
+  at_not?: Maybe<_GardenFilter>;
+  at_in?: Maybe<Array<_GardenFilter>>;
+  at_not_in?: Maybe<Array<_GardenFilter>>;
+  has_shape?: Maybe<_GeoShapeFilter>;
+  has_shape_not?: Maybe<_GeoShapeFilter>;
+  has_shape_in?: Maybe<Array<_GeoShapeFilter>>;
+  has_shape_not_in?: Maybe<Array<_GeoShapeFilter>>;
+  has_shape_some?: Maybe<_GeoShapeFilter>;
+  has_shape_none?: Maybe<_GeoShapeFilter>;
+  has_shape_single?: Maybe<_GeoShapeFilter>;
+  has_shape_every?: Maybe<_GeoShapeFilter>;
+};
+
+export type GeoShape = {
+  shapeId: Scalars['ID'];
+  points: Array<Maybe<_Neo4jPoint>>;
+  belongs_to?: Maybe<Array<Maybe<GardenLayer>>>;
+};
+
+
+export type GeoShapeBelongs_ToArgs = {
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<Maybe<_GardenLayerOrdering>>>;
+  filter?: Maybe<_GardenLayerFilter>;
+};
+
+/** Generated Point object type for Neo4j [Spatial fields](https://grandstack.io/docs/graphql-spatial-types#using-point-in-queries). */
+export type _Neo4jPoint = {
+  __typename?: '_Neo4jPoint';
+  x?: Maybe<Scalars['Float']>;
+  y?: Maybe<Scalars['Float']>;
+  z?: Maybe<Scalars['Float']>;
+  longitude?: Maybe<Scalars['Float']>;
+  latitude?: Maybe<Scalars['Float']>;
+  height?: Maybe<Scalars['Float']>;
+  crs?: Maybe<Scalars['String']>;
+  srid?: Maybe<Scalars['Int']>;
+};
+
+export enum _GardenLayerOrdering {
+  LayerIdAsc = 'layerId_asc',
+  LayerIdDesc = 'layerId_desc',
+  NameAsc = 'name_asc',
+  NameDesc = 'name_desc',
+  DateAsc = 'date_asc',
+  DateDesc = 'date_desc',
+  IdAsc = '_id_asc',
+  IdDesc = '_id_desc'
+}
+
+export type GardenLayer = {
+  __typename?: 'GardenLayer';
+  layerId: Scalars['ID'];
+  name: Scalars['String'];
+  date?: Maybe<_Neo4jDate>;
+  at?: Maybe<Garden>;
+  has_shape?: Maybe<Array<Maybe<GeoShape>>>;
+  /** Generated field for querying the Neo4j [system id](https://neo4j.com/docs/cypher-manual/current/functions/scalar/#functions-id) of this node. */
+  _id?: Maybe<Scalars['String']>;
+};
+
+
+export type GardenLayerAtArgs = {
+  filter?: Maybe<_GardenFilter>;
+};
+
+
+export type GardenLayerHas_ShapeArgs = {
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<Maybe<_GeoShapeOrdering>>>;
+  filter?: Maybe<_GeoShapeFilter>;
+};
+
+export enum _PolygonShapeOrdering {
+  ShapeIdAsc = 'shapeId_asc',
+  ShapeIdDesc = 'shapeId_desc',
+  IdAsc = '_id_asc',
+  IdDesc = '_id_desc'
+}
+
+export type _PolygonShapeFilter = {
+  AND?: Maybe<Array<_PolygonShapeFilter>>;
+  OR?: Maybe<Array<_PolygonShapeFilter>>;
+  shapeId?: Maybe<Scalars['ID']>;
+  shapeId_not?: Maybe<Scalars['ID']>;
+  shapeId_in?: Maybe<Array<Scalars['ID']>>;
+  shapeId_not_in?: Maybe<Array<Scalars['ID']>>;
+  shapeId_contains?: Maybe<Scalars['ID']>;
+  shapeId_not_contains?: Maybe<Scalars['ID']>;
+  shapeId_starts_with?: Maybe<Scalars['ID']>;
+  shapeId_not_starts_with?: Maybe<Scalars['ID']>;
+  shapeId_ends_with?: Maybe<Scalars['ID']>;
+  shapeId_not_ends_with?: Maybe<Scalars['ID']>;
+  points?: Maybe<Array<_Neo4jPointInput>>;
+  points_not?: Maybe<Array<_Neo4jPointInput>>;
+  points_distance?: Maybe<Array<_Neo4jPointDistanceFilter>>;
+  points_distance_lt?: Maybe<Array<_Neo4jPointDistanceFilter>>;
+  points_distance_lte?: Maybe<Array<_Neo4jPointDistanceFilter>>;
+  points_distance_gt?: Maybe<Array<_Neo4jPointDistanceFilter>>;
+  points_distance_gte?: Maybe<Array<_Neo4jPointDistanceFilter>>;
+  belongs_to?: Maybe<_GardenLayerFilter>;
+  belongs_to_not?: Maybe<_GardenLayerFilter>;
+  belongs_to_in?: Maybe<Array<_GardenLayerFilter>>;
+  belongs_to_not_in?: Maybe<Array<_GardenLayerFilter>>;
+  belongs_to_some?: Maybe<_GardenLayerFilter>;
+  belongs_to_none?: Maybe<_GardenLayerFilter>;
+  belongs_to_single?: Maybe<_GardenLayerFilter>;
+  belongs_to_every?: Maybe<_GardenLayerFilter>;
+  startPoint?: Maybe<_Neo4jPointInput>;
+  startPoint_not?: Maybe<_Neo4jPointInput>;
+  startPoint_distance?: Maybe<_Neo4jPointDistanceFilter>;
+  startPoint_distance_lt?: Maybe<_Neo4jPointDistanceFilter>;
+  startPoint_distance_lte?: Maybe<_Neo4jPointDistanceFilter>;
+  startPoint_distance_gt?: Maybe<_Neo4jPointDistanceFilter>;
+  startPoint_distance_gte?: Maybe<_Neo4jPointDistanceFilter>;
+};
+
+export type PolygonShape = GeoShape & {
+  __typename?: 'PolygonShape';
+  shapeId: Scalars['ID'];
+  points: Array<Maybe<_Neo4jPoint>>;
+  belongs_to?: Maybe<Array<Maybe<GardenLayer>>>;
+  startPoint?: Maybe<_Neo4jPoint>;
+  /** Generated field for querying the Neo4j [system id](https://neo4j.com/docs/cypher-manual/current/functions/scalar/#functions-id) of this node. */
+  _id?: Maybe<Scalars['String']>;
+};
+
+
+export type PolygonShapeBelongs_ToArgs = {
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<Maybe<_GardenLayerOrdering>>>;
+  filter?: Maybe<_GardenLayerFilter>;
+};
+
+export enum _MarkerShapeOrdering {
+  ShapeIdAsc = 'shapeId_asc',
+  ShapeIdDesc = 'shapeId_desc',
+  IconAsc = 'icon_asc',
+  IconDesc = 'icon_desc',
+  IdAsc = '_id_asc',
+  IdDesc = '_id_desc'
+}
+
+export type _MarkerShapeFilter = {
+  AND?: Maybe<Array<_MarkerShapeFilter>>;
+  OR?: Maybe<Array<_MarkerShapeFilter>>;
+  shapeId?: Maybe<Scalars['ID']>;
+  shapeId_not?: Maybe<Scalars['ID']>;
+  shapeId_in?: Maybe<Array<Scalars['ID']>>;
+  shapeId_not_in?: Maybe<Array<Scalars['ID']>>;
+  shapeId_contains?: Maybe<Scalars['ID']>;
+  shapeId_not_contains?: Maybe<Scalars['ID']>;
+  shapeId_starts_with?: Maybe<Scalars['ID']>;
+  shapeId_not_starts_with?: Maybe<Scalars['ID']>;
+  shapeId_ends_with?: Maybe<Scalars['ID']>;
+  shapeId_not_ends_with?: Maybe<Scalars['ID']>;
+  points?: Maybe<Array<_Neo4jPointInput>>;
+  points_not?: Maybe<Array<_Neo4jPointInput>>;
+  points_distance?: Maybe<Array<_Neo4jPointDistanceFilter>>;
+  points_distance_lt?: Maybe<Array<_Neo4jPointDistanceFilter>>;
+  points_distance_lte?: Maybe<Array<_Neo4jPointDistanceFilter>>;
+  points_distance_gt?: Maybe<Array<_Neo4jPointDistanceFilter>>;
+  points_distance_gte?: Maybe<Array<_Neo4jPointDistanceFilter>>;
+  belongs_to?: Maybe<_GardenLayerFilter>;
+  belongs_to_not?: Maybe<_GardenLayerFilter>;
+  belongs_to_in?: Maybe<Array<_GardenLayerFilter>>;
+  belongs_to_not_in?: Maybe<Array<_GardenLayerFilter>>;
+  belongs_to_some?: Maybe<_GardenLayerFilter>;
+  belongs_to_none?: Maybe<_GardenLayerFilter>;
+  belongs_to_single?: Maybe<_GardenLayerFilter>;
+  belongs_to_every?: Maybe<_GardenLayerFilter>;
+  icon?: Maybe<Scalars['String']>;
+  icon_not?: Maybe<Scalars['String']>;
+  icon_in?: Maybe<Array<Scalars['String']>>;
+  icon_not_in?: Maybe<Array<Scalars['String']>>;
+  icon_contains?: Maybe<Scalars['String']>;
+  icon_not_contains?: Maybe<Scalars['String']>;
+  icon_starts_with?: Maybe<Scalars['String']>;
+  icon_not_starts_with?: Maybe<Scalars['String']>;
+  icon_ends_with?: Maybe<Scalars['String']>;
+  icon_not_ends_with?: Maybe<Scalars['String']>;
+  point?: Maybe<_Neo4jPointInput>;
+  point_not?: Maybe<_Neo4jPointInput>;
+  point_distance?: Maybe<_Neo4jPointDistanceFilter>;
+  point_distance_lt?: Maybe<_Neo4jPointDistanceFilter>;
+  point_distance_lte?: Maybe<_Neo4jPointDistanceFilter>;
+  point_distance_gt?: Maybe<_Neo4jPointDistanceFilter>;
+  point_distance_gte?: Maybe<_Neo4jPointDistanceFilter>;
+};
+
+export type MarkerShape = GeoShape & {
+  __typename?: 'MarkerShape';
+  shapeId: Scalars['ID'];
+  points: Array<Maybe<_Neo4jPoint>>;
+  belongs_to?: Maybe<Array<Maybe<GardenLayer>>>;
+  icon: Scalars['String'];
+  point: _Neo4jPoint;
+  /** Generated field for querying the Neo4j [system id](https://neo4j.com/docs/cypher-manual/current/functions/scalar/#functions-id) of this node. */
+  _id?: Maybe<Scalars['String']>;
+};
+
+
+export type MarkerShapeBelongs_ToArgs = {
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<Maybe<_GardenLayerOrdering>>>;
+  filter?: Maybe<_GardenLayerFilter>;
+};
+
+export enum _GardenFeatureOrdering {
+  FeatureIdAsc = 'featureId_asc',
+  FeatureIdDesc = 'featureId_desc',
+  InfoTextAsc = 'infoText_asc',
+  InfoTextDesc = 'infoText_desc',
+  LabelAsc = 'label_asc',
+  LabelDesc = 'label_desc',
+  FeatureTypeAsc = 'featureType_asc',
+  FeatureTypeDesc = 'featureType_desc',
+  IdAsc = '_id_asc',
+  IdDesc = '_id_desc'
+}
+
+export type _GardenFeatureFilter = {
+  AND?: Maybe<Array<_GardenFeatureFilter>>;
+  OR?: Maybe<Array<_GardenFeatureFilter>>;
+  featureId?: Maybe<Scalars['ID']>;
+  featureId_not?: Maybe<Scalars['ID']>;
+  featureId_in?: Maybe<Array<Scalars['ID']>>;
+  featureId_not_in?: Maybe<Array<Scalars['ID']>>;
+  featureId_contains?: Maybe<Scalars['ID']>;
+  featureId_not_contains?: Maybe<Scalars['ID']>;
+  featureId_starts_with?: Maybe<Scalars['ID']>;
+  featureId_not_starts_with?: Maybe<Scalars['ID']>;
+  featureId_ends_with?: Maybe<Scalars['ID']>;
+  featureId_not_ends_with?: Maybe<Scalars['ID']>;
+  shape?: Maybe<_GeoShapeFilter>;
+  shape_not?: Maybe<_GeoShapeFilter>;
+  shape_in?: Maybe<Array<_GeoShapeFilter>>;
+  shape_not_in?: Maybe<Array<_GeoShapeFilter>>;
+  shape_some?: Maybe<_GeoShapeFilter>;
+  shape_none?: Maybe<_GeoShapeFilter>;
+  shape_single?: Maybe<_GeoShapeFilter>;
+  shape_every?: Maybe<_GeoShapeFilter>;
+  infoText?: Maybe<Scalars['String']>;
+  infoText_not?: Maybe<Scalars['String']>;
+  infoText_in?: Maybe<Array<Scalars['String']>>;
+  infoText_not_in?: Maybe<Array<Scalars['String']>>;
+  infoText_contains?: Maybe<Scalars['String']>;
+  infoText_not_contains?: Maybe<Scalars['String']>;
+  infoText_starts_with?: Maybe<Scalars['String']>;
+  infoText_not_starts_with?: Maybe<Scalars['String']>;
+  infoText_ends_with?: Maybe<Scalars['String']>;
+  infoText_not_ends_with?: Maybe<Scalars['String']>;
+  label?: Maybe<Scalars['String']>;
+  label_not?: Maybe<Scalars['String']>;
+  label_in?: Maybe<Array<Scalars['String']>>;
+  label_not_in?: Maybe<Array<Scalars['String']>>;
+  label_contains?: Maybe<Scalars['String']>;
+  label_not_contains?: Maybe<Scalars['String']>;
+  label_starts_with?: Maybe<Scalars['String']>;
+  label_not_starts_with?: Maybe<Scalars['String']>;
+  label_ends_with?: Maybe<Scalars['String']>;
+  label_not_ends_with?: Maybe<Scalars['String']>;
+  featureType?: Maybe<Scalars['String']>;
+  featureType_not?: Maybe<Scalars['String']>;
+  featureType_in?: Maybe<Array<Scalars['String']>>;
+  featureType_not_in?: Maybe<Array<Scalars['String']>>;
+  featureType_contains?: Maybe<Scalars['String']>;
+  featureType_not_contains?: Maybe<Scalars['String']>;
+  featureType_starts_with?: Maybe<Scalars['String']>;
+  featureType_not_starts_with?: Maybe<Scalars['String']>;
+  featureType_ends_with?: Maybe<Scalars['String']>;
+  featureType_not_ends_with?: Maybe<Scalars['String']>;
+  plants?: Maybe<Array<Scalars['String']>>;
+  plants_not?: Maybe<Array<Scalars['String']>>;
+  plants_contains?: Maybe<Array<Scalars['String']>>;
+  plants_not_contains?: Maybe<Array<Scalars['String']>>;
+  plants_starts_with?: Maybe<Array<Scalars['String']>>;
+  plants_not_starts_with?: Maybe<Array<Scalars['String']>>;
+  plants_ends_with?: Maybe<Array<Scalars['String']>>;
+  plants_not_ends_with?: Maybe<Array<Scalars['String']>>;
+};
+
+export type GardenFeature = {
+  __typename?: 'GardenFeature';
+  featureId: Scalars['ID'];
+  shape?: Maybe<Array<Maybe<GeoShape>>>;
+  infoText?: Maybe<Scalars['String']>;
+  label: Scalars['String'];
+  featureType: Scalars['String'];
+  plants: Array<Maybe<Scalars['String']>>;
+  /** Generated field for querying the Neo4j [system id](https://neo4j.com/docs/cypher-manual/current/functions/scalar/#functions-id) of this node. */
+  _id?: Maybe<Scalars['String']>;
+};
+
+
+export type GardenFeatureShapeArgs = {
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<Maybe<_GeoShapeOrdering>>>;
+  filter?: Maybe<_GeoShapeFilter>;
+};
+
 export enum _UserSettingsOrdering {
   UiLocaleAsc = 'ui_locale_asc',
   UiLocaleDesc = 'ui_locale_desc',
@@ -980,6 +1442,74 @@ export type Mutation = {
   DeleteLogEvent?: Maybe<LogEvent>;
   /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#merge) for [merging](https://neo4j.com/docs/cypher-manual/4.1/clauses/merge/#query-merge-node-derived) a LogEvent node. */
   MergeLogEvent?: Maybe<LogEvent>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##add--remove-relationship) for [creating](https://neo4j.com/docs/cypher-manual/4.1/clauses/create/#create-relationships) the belongs_to relationship. */
+  AddGeoShapeBelongs_to?: Maybe<_AddGeoShapeBelongs_ToPayload>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##add--remove-relationship) for [deleting](https://neo4j.com/docs/cypher-manual/4.1/clauses/delete/#delete-delete-relationships-only) the belongs_to relationship. */
+  RemoveGeoShapeBelongs_to?: Maybe<_RemoveGeoShapeBelongs_ToPayload>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##merge-relationship) for [merging](https://neo4j.com/docs/cypher-manual/4.1/clauses/merge/#query-merge-relationships) the belongs_to relationship. */
+  MergeGeoShapeBelongs_to?: Maybe<_MergeGeoShapeBelongs_ToPayload>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##add--remove-relationship) for [creating](https://neo4j.com/docs/cypher-manual/4.1/clauses/create/#create-relationships) the at relationship. */
+  AddGardenLayerAt?: Maybe<_AddGardenLayerAtPayload>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##add--remove-relationship) for [deleting](https://neo4j.com/docs/cypher-manual/4.1/clauses/delete/#delete-delete-relationships-only) the at relationship. */
+  RemoveGardenLayerAt?: Maybe<_RemoveGardenLayerAtPayload>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##merge-relationship) for [merging](https://neo4j.com/docs/cypher-manual/4.1/clauses/merge/#query-merge-relationships) the at relationship. */
+  MergeGardenLayerAt?: Maybe<_MergeGardenLayerAtPayload>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##add--remove-relationship) for [creating](https://neo4j.com/docs/cypher-manual/4.1/clauses/create/#create-relationships) the belongs_to relationship. */
+  AddGardenLayerHas_shape?: Maybe<_AddGardenLayerHas_ShapePayload>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##add--remove-relationship) for [deleting](https://neo4j.com/docs/cypher-manual/4.1/clauses/delete/#delete-delete-relationships-only) the belongs_to relationship. */
+  RemoveGardenLayerHas_shape?: Maybe<_RemoveGardenLayerHas_ShapePayload>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##merge-relationship) for [merging](https://neo4j.com/docs/cypher-manual/4.1/clauses/merge/#query-merge-relationships) the belongs_to relationship. */
+  MergeGardenLayerHas_shape?: Maybe<_MergeGardenLayerHas_ShapePayload>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#create) for [creating](https://neo4j.com/docs/cypher-manual/4.1/clauses/create/#create-nodes) a GardenLayer node. */
+  CreateGardenLayer?: Maybe<GardenLayer>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#update) for [updating](https://neo4j.com/docs/cypher-manual/4.1/clauses/set/#set-update-a-property) a GardenLayer node. */
+  UpdateGardenLayer?: Maybe<GardenLayer>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#delete) for [deleting](https://neo4j.com/docs/cypher-manual/4.1/clauses/delete/#delete-delete-single-node) a GardenLayer node. */
+  DeleteGardenLayer?: Maybe<GardenLayer>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#merge) for [merging](https://neo4j.com/docs/cypher-manual/4.1/clauses/merge/#query-merge-node-derived) a GardenLayer node. */
+  MergeGardenLayer?: Maybe<GardenLayer>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##add--remove-relationship) for [creating](https://neo4j.com/docs/cypher-manual/4.1/clauses/create/#create-relationships) the belongs_to relationship. */
+  AddPolygonShapeBelongs_to?: Maybe<_AddPolygonShapeBelongs_ToPayload>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##add--remove-relationship) for [deleting](https://neo4j.com/docs/cypher-manual/4.1/clauses/delete/#delete-delete-relationships-only) the belongs_to relationship. */
+  RemovePolygonShapeBelongs_to?: Maybe<_RemovePolygonShapeBelongs_ToPayload>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##merge-relationship) for [merging](https://neo4j.com/docs/cypher-manual/4.1/clauses/merge/#query-merge-relationships) the belongs_to relationship. */
+  MergePolygonShapeBelongs_to?: Maybe<_MergePolygonShapeBelongs_ToPayload>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#create) for [creating](https://neo4j.com/docs/cypher-manual/4.1/clauses/create/#create-nodes) a PolygonShape node. */
+  CreatePolygonShape?: Maybe<PolygonShape>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#update) for [updating](https://neo4j.com/docs/cypher-manual/4.1/clauses/set/#set-update-a-property) a PolygonShape node. */
+  UpdatePolygonShape?: Maybe<PolygonShape>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#delete) for [deleting](https://neo4j.com/docs/cypher-manual/4.1/clauses/delete/#delete-delete-single-node) a PolygonShape node. */
+  DeletePolygonShape?: Maybe<PolygonShape>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#merge) for [merging](https://neo4j.com/docs/cypher-manual/4.1/clauses/merge/#query-merge-node-derived) a PolygonShape node. */
+  MergePolygonShape?: Maybe<PolygonShape>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##add--remove-relationship) for [creating](https://neo4j.com/docs/cypher-manual/4.1/clauses/create/#create-relationships) the belongs_to relationship. */
+  AddMarkerShapeBelongs_to?: Maybe<_AddMarkerShapeBelongs_ToPayload>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##add--remove-relationship) for [deleting](https://neo4j.com/docs/cypher-manual/4.1/clauses/delete/#delete-delete-relationships-only) the belongs_to relationship. */
+  RemoveMarkerShapeBelongs_to?: Maybe<_RemoveMarkerShapeBelongs_ToPayload>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##merge-relationship) for [merging](https://neo4j.com/docs/cypher-manual/4.1/clauses/merge/#query-merge-relationships) the belongs_to relationship. */
+  MergeMarkerShapeBelongs_to?: Maybe<_MergeMarkerShapeBelongs_ToPayload>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#create) for [creating](https://neo4j.com/docs/cypher-manual/4.1/clauses/create/#create-nodes) a MarkerShape node. */
+  CreateMarkerShape?: Maybe<MarkerShape>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#update) for [updating](https://neo4j.com/docs/cypher-manual/4.1/clauses/set/#set-update-a-property) a MarkerShape node. */
+  UpdateMarkerShape?: Maybe<MarkerShape>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#delete) for [deleting](https://neo4j.com/docs/cypher-manual/4.1/clauses/delete/#delete-delete-single-node) a MarkerShape node. */
+  DeleteMarkerShape?: Maybe<MarkerShape>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#merge) for [merging](https://neo4j.com/docs/cypher-manual/4.1/clauses/merge/#query-merge-node-derived) a MarkerShape node. */
+  MergeMarkerShape?: Maybe<MarkerShape>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##add--remove-relationship) for [creating](https://neo4j.com/docs/cypher-manual/4.1/clauses/create/#create-relationships) the has_shape relationship. */
+  AddGardenFeatureShape?: Maybe<_AddGardenFeatureShapePayload>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##add--remove-relationship) for [deleting](https://neo4j.com/docs/cypher-manual/4.1/clauses/delete/#delete-delete-relationships-only) the has_shape relationship. */
+  RemoveGardenFeatureShape?: Maybe<_RemoveGardenFeatureShapePayload>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##merge-relationship) for [merging](https://neo4j.com/docs/cypher-manual/4.1/clauses/merge/#query-merge-relationships) the has_shape relationship. */
+  MergeGardenFeatureShape?: Maybe<_MergeGardenFeatureShapePayload>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#create) for [creating](https://neo4j.com/docs/cypher-manual/4.1/clauses/create/#create-nodes) a GardenFeature node. */
+  CreateGardenFeature?: Maybe<GardenFeature>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#update) for [updating](https://neo4j.com/docs/cypher-manual/4.1/clauses/set/#set-update-a-property) a GardenFeature node. */
+  UpdateGardenFeature?: Maybe<GardenFeature>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#delete) for [deleting](https://neo4j.com/docs/cypher-manual/4.1/clauses/delete/#delete-delete-single-node) a GardenFeature node. */
+  DeleteGardenFeature?: Maybe<GardenFeature>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#merge) for [merging](https://neo4j.com/docs/cypher-manual/4.1/clauses/merge/#query-merge-node-derived) a GardenFeature node. */
+  MergeGardenFeature?: Maybe<GardenFeature>;
   /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#create) for [creating](https://neo4j.com/docs/cypher-manual/4.1/clauses/create/#create-nodes) a UserSettings node. */
   CreateUserSettings?: Maybe<UserSettings>;
   /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#update) for [updating](https://neo4j.com/docs/cypher-manual/4.1/clauses/set/#set-update-a-property) a UserSettings node. */
@@ -1464,6 +1994,227 @@ export type MutationMergeLogEventArgs = {
 };
 
 
+export type MutationAddGeoShapeBelongs_ToArgs = {
+  from: _GeoShapeInput;
+  to: _GardenLayerInput;
+};
+
+
+export type MutationRemoveGeoShapeBelongs_ToArgs = {
+  from: _GeoShapeInput;
+  to: _GardenLayerInput;
+};
+
+
+export type MutationMergeGeoShapeBelongs_ToArgs = {
+  from: _GeoShapeInput;
+  to: _GardenLayerInput;
+};
+
+
+export type MutationAddGardenLayerAtArgs = {
+  from: _GardenLayerInput;
+  to: _GardenInput;
+};
+
+
+export type MutationRemoveGardenLayerAtArgs = {
+  from: _GardenLayerInput;
+  to: _GardenInput;
+};
+
+
+export type MutationMergeGardenLayerAtArgs = {
+  from: _GardenLayerInput;
+  to: _GardenInput;
+};
+
+
+export type MutationAddGardenLayerHas_ShapeArgs = {
+  from: _GeoShapeInput;
+  to: _GardenLayerInput;
+};
+
+
+export type MutationRemoveGardenLayerHas_ShapeArgs = {
+  from: _GeoShapeInput;
+  to: _GardenLayerInput;
+};
+
+
+export type MutationMergeGardenLayerHas_ShapeArgs = {
+  from: _GeoShapeInput;
+  to: _GardenLayerInput;
+};
+
+
+export type MutationCreateGardenLayerArgs = {
+  layerId?: Maybe<Scalars['ID']>;
+  name: Scalars['String'];
+  date?: Maybe<_Neo4jDateInput>;
+};
+
+
+export type MutationUpdateGardenLayerArgs = {
+  layerId: Scalars['ID'];
+  name?: Maybe<Scalars['String']>;
+  date?: Maybe<_Neo4jDateInput>;
+};
+
+
+export type MutationDeleteGardenLayerArgs = {
+  layerId: Scalars['ID'];
+};
+
+
+export type MutationMergeGardenLayerArgs = {
+  layerId: Scalars['ID'];
+  name?: Maybe<Scalars['String']>;
+  date?: Maybe<_Neo4jDateInput>;
+};
+
+
+export type MutationAddPolygonShapeBelongs_ToArgs = {
+  from: _PolygonShapeInput;
+  to: _GardenLayerInput;
+};
+
+
+export type MutationRemovePolygonShapeBelongs_ToArgs = {
+  from: _PolygonShapeInput;
+  to: _GardenLayerInput;
+};
+
+
+export type MutationMergePolygonShapeBelongs_ToArgs = {
+  from: _PolygonShapeInput;
+  to: _GardenLayerInput;
+};
+
+
+export type MutationCreatePolygonShapeArgs = {
+  shapeId?: Maybe<Scalars['ID']>;
+  points: Array<Maybe<_Neo4jPointInput>>;
+  startPoint?: Maybe<_Neo4jPointInput>;
+};
+
+
+export type MutationUpdatePolygonShapeArgs = {
+  shapeId: Scalars['ID'];
+  points?: Maybe<Array<Maybe<_Neo4jPointInput>>>;
+  startPoint?: Maybe<_Neo4jPointInput>;
+};
+
+
+export type MutationDeletePolygonShapeArgs = {
+  shapeId: Scalars['ID'];
+};
+
+
+export type MutationMergePolygonShapeArgs = {
+  shapeId: Scalars['ID'];
+  points?: Maybe<Array<Maybe<_Neo4jPointInput>>>;
+  startPoint?: Maybe<_Neo4jPointInput>;
+};
+
+
+export type MutationAddMarkerShapeBelongs_ToArgs = {
+  from: _MarkerShapeInput;
+  to: _GardenLayerInput;
+};
+
+
+export type MutationRemoveMarkerShapeBelongs_ToArgs = {
+  from: _MarkerShapeInput;
+  to: _GardenLayerInput;
+};
+
+
+export type MutationMergeMarkerShapeBelongs_ToArgs = {
+  from: _MarkerShapeInput;
+  to: _GardenLayerInput;
+};
+
+
+export type MutationCreateMarkerShapeArgs = {
+  shapeId?: Maybe<Scalars['ID']>;
+  points: Array<Maybe<_Neo4jPointInput>>;
+  icon: Scalars['String'];
+  point: _Neo4jPointInput;
+};
+
+
+export type MutationUpdateMarkerShapeArgs = {
+  shapeId: Scalars['ID'];
+  points?: Maybe<Array<Maybe<_Neo4jPointInput>>>;
+  icon?: Maybe<Scalars['String']>;
+  point?: Maybe<_Neo4jPointInput>;
+};
+
+
+export type MutationDeleteMarkerShapeArgs = {
+  shapeId: Scalars['ID'];
+};
+
+
+export type MutationMergeMarkerShapeArgs = {
+  shapeId: Scalars['ID'];
+  points?: Maybe<Array<Maybe<_Neo4jPointInput>>>;
+  icon?: Maybe<Scalars['String']>;
+  point?: Maybe<_Neo4jPointInput>;
+};
+
+
+export type MutationAddGardenFeatureShapeArgs = {
+  from: _GardenFeatureInput;
+  to: _GeoShapeInput;
+};
+
+
+export type MutationRemoveGardenFeatureShapeArgs = {
+  from: _GardenFeatureInput;
+  to: _GeoShapeInput;
+};
+
+
+export type MutationMergeGardenFeatureShapeArgs = {
+  from: _GardenFeatureInput;
+  to: _GeoShapeInput;
+};
+
+
+export type MutationCreateGardenFeatureArgs = {
+  featureId?: Maybe<Scalars['ID']>;
+  infoText?: Maybe<Scalars['String']>;
+  label: Scalars['String'];
+  featureType: Scalars['String'];
+  plants: Array<Maybe<Scalars['String']>>;
+};
+
+
+export type MutationUpdateGardenFeatureArgs = {
+  featureId: Scalars['ID'];
+  infoText?: Maybe<Scalars['String']>;
+  label?: Maybe<Scalars['String']>;
+  featureType?: Maybe<Scalars['String']>;
+  plants?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+
+export type MutationDeleteGardenFeatureArgs = {
+  featureId: Scalars['ID'];
+};
+
+
+export type MutationMergeGardenFeatureArgs = {
+  featureId: Scalars['ID'];
+  infoText?: Maybe<Scalars['String']>;
+  label?: Maybe<Scalars['String']>;
+  featureType?: Maybe<Scalars['String']>;
+  plants?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+
 export type MutationCreateUserSettingsArgs = {
   ui_locale?: Maybe<Scalars['String']>;
   letitrain_maximum_tasks?: Maybe<Scalars['Int']>;
@@ -1908,13 +2659,177 @@ export type _MergeLogEventRefers_ToPayload = {
   to?: Maybe<WateringTask>;
 };
 
-export type Subscription = {
-  __typename?: 'Subscription';
-  WateringTaskChange?: Maybe<Scalars['Boolean']>;
+export type _GeoShapeInput = {
+  shapeId: Scalars['ID'];
+};
+
+export type _GardenLayerInput = {
+  layerId: Scalars['ID'];
+};
+
+export type _AddGeoShapeBelongs_ToPayload = {
+  __typename?: '_AddGeoShapeBelongs_toPayload';
+  /** Field for the GeoShape node this belongs_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<GeoShape>;
+  /** Field for the GardenLayer node this belongs_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<GardenLayer>;
+};
+
+export type _RemoveGeoShapeBelongs_ToPayload = {
+  __typename?: '_RemoveGeoShapeBelongs_toPayload';
+  /** Field for the GeoShape node this belongs_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<GeoShape>;
+  /** Field for the GardenLayer node this belongs_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<GardenLayer>;
+};
+
+export type _MergeGeoShapeBelongs_ToPayload = {
+  __typename?: '_MergeGeoShapeBelongs_toPayload';
+  /** Field for the GeoShape node this belongs_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<GeoShape>;
+  /** Field for the GardenLayer node this belongs_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<GardenLayer>;
 };
 
 export type _GardenInput = {
   gardenId: Scalars['ID'];
+};
+
+export type _AddGardenLayerAtPayload = {
+  __typename?: '_AddGardenLayerAtPayload';
+  /** Field for the GardenLayer node this at [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<GardenLayer>;
+  /** Field for the Garden node this at [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<Garden>;
+};
+
+export type _RemoveGardenLayerAtPayload = {
+  __typename?: '_RemoveGardenLayerAtPayload';
+  /** Field for the GardenLayer node this at [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<GardenLayer>;
+  /** Field for the Garden node this at [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<Garden>;
+};
+
+export type _MergeGardenLayerAtPayload = {
+  __typename?: '_MergeGardenLayerAtPayload';
+  /** Field for the GardenLayer node this at [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<GardenLayer>;
+  /** Field for the Garden node this at [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<Garden>;
+};
+
+export type _AddGardenLayerHas_ShapePayload = {
+  __typename?: '_AddGardenLayerHas_shapePayload';
+  /** Field for the GeoShape node this belongs_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<GeoShape>;
+  /** Field for the GardenLayer node this belongs_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<GardenLayer>;
+};
+
+export type _RemoveGardenLayerHas_ShapePayload = {
+  __typename?: '_RemoveGardenLayerHas_shapePayload';
+  /** Field for the GeoShape node this belongs_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<GeoShape>;
+  /** Field for the GardenLayer node this belongs_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<GardenLayer>;
+};
+
+export type _MergeGardenLayerHas_ShapePayload = {
+  __typename?: '_MergeGardenLayerHas_shapePayload';
+  /** Field for the GeoShape node this belongs_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<GeoShape>;
+  /** Field for the GardenLayer node this belongs_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<GardenLayer>;
+};
+
+export type _PolygonShapeInput = {
+  shapeId: Scalars['ID'];
+};
+
+export type _AddPolygonShapeBelongs_ToPayload = {
+  __typename?: '_AddPolygonShapeBelongs_toPayload';
+  /** Field for the PolygonShape node this belongs_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<PolygonShape>;
+  /** Field for the GardenLayer node this belongs_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<GardenLayer>;
+};
+
+export type _RemovePolygonShapeBelongs_ToPayload = {
+  __typename?: '_RemovePolygonShapeBelongs_toPayload';
+  /** Field for the PolygonShape node this belongs_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<PolygonShape>;
+  /** Field for the GardenLayer node this belongs_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<GardenLayer>;
+};
+
+export type _MergePolygonShapeBelongs_ToPayload = {
+  __typename?: '_MergePolygonShapeBelongs_toPayload';
+  /** Field for the PolygonShape node this belongs_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<PolygonShape>;
+  /** Field for the GardenLayer node this belongs_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<GardenLayer>;
+};
+
+export type _MarkerShapeInput = {
+  shapeId: Scalars['ID'];
+};
+
+export type _AddMarkerShapeBelongs_ToPayload = {
+  __typename?: '_AddMarkerShapeBelongs_toPayload';
+  /** Field for the MarkerShape node this belongs_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<MarkerShape>;
+  /** Field for the GardenLayer node this belongs_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<GardenLayer>;
+};
+
+export type _RemoveMarkerShapeBelongs_ToPayload = {
+  __typename?: '_RemoveMarkerShapeBelongs_toPayload';
+  /** Field for the MarkerShape node this belongs_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<MarkerShape>;
+  /** Field for the GardenLayer node this belongs_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<GardenLayer>;
+};
+
+export type _MergeMarkerShapeBelongs_ToPayload = {
+  __typename?: '_MergeMarkerShapeBelongs_toPayload';
+  /** Field for the MarkerShape node this belongs_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<MarkerShape>;
+  /** Field for the GardenLayer node this belongs_to [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<GardenLayer>;
+};
+
+export type _GardenFeatureInput = {
+  featureId: Scalars['ID'];
+};
+
+export type _AddGardenFeatureShapePayload = {
+  __typename?: '_AddGardenFeatureShapePayload';
+  /** Field for the GardenFeature node this has_shape [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<GardenFeature>;
+  /** Field for the GeoShape node this has_shape [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<GeoShape>;
+};
+
+export type _RemoveGardenFeatureShapePayload = {
+  __typename?: '_RemoveGardenFeatureShapePayload';
+  /** Field for the GardenFeature node this has_shape [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<GardenFeature>;
+  /** Field for the GeoShape node this has_shape [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<GeoShape>;
+};
+
+export type _MergeGardenFeatureShapePayload = {
+  __typename?: '_MergeGardenFeatureShapePayload';
+  /** Field for the GardenFeature node this has_shape [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<GardenFeature>;
+  /** Field for the GeoShape node this has_shape [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<GeoShape>;
+};
+
+export type Subscription = {
+  __typename?: 'Subscription';
+  WateringTaskChange?: Maybe<Scalars['Boolean']>;
 };
 
 export type _UserSettingsInput = {
@@ -2037,36 +2952,6 @@ export type _Neo4jLocalDateTime = {
   formatted?: Maybe<Scalars['String']>;
 };
 
-export type _Neo4jPointDistanceFilter = {
-  point: _Neo4jPointInput;
-  distance: Scalars['Float'];
-};
-
-/** Generated Point input object for Neo4j [Spatial field arguments](https://grandstack.io/docs/graphql-spatial-types/#point-query-arguments). */
-export type _Neo4jPointInput = {
-  x?: Maybe<Scalars['Float']>;
-  y?: Maybe<Scalars['Float']>;
-  z?: Maybe<Scalars['Float']>;
-  longitude?: Maybe<Scalars['Float']>;
-  latitude?: Maybe<Scalars['Float']>;
-  height?: Maybe<Scalars['Float']>;
-  crs?: Maybe<Scalars['String']>;
-  srid?: Maybe<Scalars['Int']>;
-};
-
-/** Generated Point object type for Neo4j [Spatial fields](https://grandstack.io/docs/graphql-spatial-types#using-point-in-queries). */
-export type _Neo4jPoint = {
-  __typename?: '_Neo4jPoint';
-  x?: Maybe<Scalars['Float']>;
-  y?: Maybe<Scalars['Float']>;
-  z?: Maybe<Scalars['Float']>;
-  longitude?: Maybe<Scalars['Float']>;
-  latitude?: Maybe<Scalars['Float']>;
-  height?: Maybe<Scalars['Float']>;
-  crs?: Maybe<Scalars['String']>;
-  srid?: Maybe<Scalars['Int']>;
-};
-
 export enum _RelationDirections {
   In = 'IN',
   Out = 'OUT'
@@ -2175,6 +3060,25 @@ export type ResolversTypes = {
   _LogEventOrdering: _LogEventOrdering;
   LogEvent: ResolverTypeWrapper<LogEvent>;
   _GardenOrdering: _GardenOrdering;
+  _Neo4jPointInput: _Neo4jPointInput;
+  Float: ResolverTypeWrapper<Scalars['Float']>;
+  _GeoShapeOrdering: _GeoShapeOrdering;
+  _GeoShapeFilter: _GeoShapeFilter;
+  _Neo4jPointDistanceFilter: _Neo4jPointDistanceFilter;
+  _GardenLayerFilter: _GardenLayerFilter;
+  GeoShape: ResolversTypes['PolygonShape'] | ResolversTypes['MarkerShape'];
+  _Neo4jPoint: ResolverTypeWrapper<_Neo4jPoint>;
+  _GardenLayerOrdering: _GardenLayerOrdering;
+  GardenLayer: ResolverTypeWrapper<GardenLayer>;
+  _PolygonShapeOrdering: _PolygonShapeOrdering;
+  _PolygonShapeFilter: _PolygonShapeFilter;
+  PolygonShape: ResolverTypeWrapper<PolygonShape>;
+  _MarkerShapeOrdering: _MarkerShapeOrdering;
+  _MarkerShapeFilter: _MarkerShapeFilter;
+  MarkerShape: ResolverTypeWrapper<MarkerShape>;
+  _GardenFeatureOrdering: _GardenFeatureOrdering;
+  _GardenFeatureFilter: _GardenFeatureFilter;
+  GardenFeature: ResolverTypeWrapper<GardenFeature>;
   _UserSettingsOrdering: _UserSettingsOrdering;
   _UserSettingsFilter: _UserSettingsFilter;
   UserSettings: ResolverTypeWrapper<UserSettings>;
@@ -2236,8 +3140,31 @@ export type ResolversTypes = {
   _AddLogEventRefers_toPayload: ResolverTypeWrapper<_AddLogEventRefers_ToPayload>;
   _RemoveLogEventRefers_toPayload: ResolverTypeWrapper<_RemoveLogEventRefers_ToPayload>;
   _MergeLogEventRefers_toPayload: ResolverTypeWrapper<_MergeLogEventRefers_ToPayload>;
-  Subscription: ResolverTypeWrapper<{}>;
+  _GeoShapeInput: _GeoShapeInput;
+  _GardenLayerInput: _GardenLayerInput;
+  _AddGeoShapeBelongs_toPayload: ResolverTypeWrapper<_AddGeoShapeBelongs_ToPayload>;
+  _RemoveGeoShapeBelongs_toPayload: ResolverTypeWrapper<_RemoveGeoShapeBelongs_ToPayload>;
+  _MergeGeoShapeBelongs_toPayload: ResolverTypeWrapper<_MergeGeoShapeBelongs_ToPayload>;
   _GardenInput: _GardenInput;
+  _AddGardenLayerAtPayload: ResolverTypeWrapper<_AddGardenLayerAtPayload>;
+  _RemoveGardenLayerAtPayload: ResolverTypeWrapper<_RemoveGardenLayerAtPayload>;
+  _MergeGardenLayerAtPayload: ResolverTypeWrapper<_MergeGardenLayerAtPayload>;
+  _AddGardenLayerHas_shapePayload: ResolverTypeWrapper<_AddGardenLayerHas_ShapePayload>;
+  _RemoveGardenLayerHas_shapePayload: ResolverTypeWrapper<_RemoveGardenLayerHas_ShapePayload>;
+  _MergeGardenLayerHas_shapePayload: ResolverTypeWrapper<_MergeGardenLayerHas_ShapePayload>;
+  _PolygonShapeInput: _PolygonShapeInput;
+  _AddPolygonShapeBelongs_toPayload: ResolverTypeWrapper<_AddPolygonShapeBelongs_ToPayload>;
+  _RemovePolygonShapeBelongs_toPayload: ResolverTypeWrapper<_RemovePolygonShapeBelongs_ToPayload>;
+  _MergePolygonShapeBelongs_toPayload: ResolverTypeWrapper<_MergePolygonShapeBelongs_ToPayload>;
+  _MarkerShapeInput: _MarkerShapeInput;
+  _AddMarkerShapeBelongs_toPayload: ResolverTypeWrapper<_AddMarkerShapeBelongs_ToPayload>;
+  _RemoveMarkerShapeBelongs_toPayload: ResolverTypeWrapper<_RemoveMarkerShapeBelongs_ToPayload>;
+  _MergeMarkerShapeBelongs_toPayload: ResolverTypeWrapper<_MergeMarkerShapeBelongs_ToPayload>;
+  _GardenFeatureInput: _GardenFeatureInput;
+  _AddGardenFeatureShapePayload: ResolverTypeWrapper<_AddGardenFeatureShapePayload>;
+  _RemoveGardenFeatureShapePayload: ResolverTypeWrapper<_RemoveGardenFeatureShapePayload>;
+  _MergeGardenFeatureShapePayload: ResolverTypeWrapper<_MergeGardenFeatureShapePayload>;
+  Subscription: ResolverTypeWrapper<{}>;
   _UserSettingsInput: _UserSettingsInput;
   _Neo4jTimeInput: _Neo4jTimeInput;
   _Neo4jTime: ResolverTypeWrapper<_Neo4jTime>;
@@ -2247,10 +3174,6 @@ export type ResolversTypes = {
   _Neo4jLocalTime: ResolverTypeWrapper<_Neo4jLocalTime>;
   _Neo4jLocalDateTimeInput: _Neo4jLocalDateTimeInput;
   _Neo4jLocalDateTime: ResolverTypeWrapper<_Neo4jLocalDateTime>;
-  _Neo4jPointDistanceFilter: _Neo4jPointDistanceFilter;
-  Float: ResolverTypeWrapper<Scalars['Float']>;
-  _Neo4jPointInput: _Neo4jPointInput;
-  _Neo4jPoint: ResolverTypeWrapper<_Neo4jPoint>;
   _RelationDirections: _RelationDirections;
 };
 
@@ -2275,6 +3198,20 @@ export type ResolversParentTypes = {
   User: User;
   ChangeRequest: ChangeRequest;
   LogEvent: LogEvent;
+  _Neo4jPointInput: _Neo4jPointInput;
+  Float: Scalars['Float'];
+  _GeoShapeFilter: _GeoShapeFilter;
+  _Neo4jPointDistanceFilter: _Neo4jPointDistanceFilter;
+  _GardenLayerFilter: _GardenLayerFilter;
+  GeoShape: ResolversParentTypes['PolygonShape'] | ResolversParentTypes['MarkerShape'];
+  _Neo4jPoint: _Neo4jPoint;
+  GardenLayer: GardenLayer;
+  _PolygonShapeFilter: _PolygonShapeFilter;
+  PolygonShape: PolygonShape;
+  _MarkerShapeFilter: _MarkerShapeFilter;
+  MarkerShape: MarkerShape;
+  _GardenFeatureFilter: _GardenFeatureFilter;
+  GardenFeature: GardenFeature;
   _UserSettingsFilter: _UserSettingsFilter;
   UserSettings: UserSettings;
   Mutation: {};
@@ -2335,8 +3272,31 @@ export type ResolversParentTypes = {
   _AddLogEventRefers_toPayload: _AddLogEventRefers_ToPayload;
   _RemoveLogEventRefers_toPayload: _RemoveLogEventRefers_ToPayload;
   _MergeLogEventRefers_toPayload: _MergeLogEventRefers_ToPayload;
-  Subscription: {};
+  _GeoShapeInput: _GeoShapeInput;
+  _GardenLayerInput: _GardenLayerInput;
+  _AddGeoShapeBelongs_toPayload: _AddGeoShapeBelongs_ToPayload;
+  _RemoveGeoShapeBelongs_toPayload: _RemoveGeoShapeBelongs_ToPayload;
+  _MergeGeoShapeBelongs_toPayload: _MergeGeoShapeBelongs_ToPayload;
   _GardenInput: _GardenInput;
+  _AddGardenLayerAtPayload: _AddGardenLayerAtPayload;
+  _RemoveGardenLayerAtPayload: _RemoveGardenLayerAtPayload;
+  _MergeGardenLayerAtPayload: _MergeGardenLayerAtPayload;
+  _AddGardenLayerHas_shapePayload: _AddGardenLayerHas_ShapePayload;
+  _RemoveGardenLayerHas_shapePayload: _RemoveGardenLayerHas_ShapePayload;
+  _MergeGardenLayerHas_shapePayload: _MergeGardenLayerHas_ShapePayload;
+  _PolygonShapeInput: _PolygonShapeInput;
+  _AddPolygonShapeBelongs_toPayload: _AddPolygonShapeBelongs_ToPayload;
+  _RemovePolygonShapeBelongs_toPayload: _RemovePolygonShapeBelongs_ToPayload;
+  _MergePolygonShapeBelongs_toPayload: _MergePolygonShapeBelongs_ToPayload;
+  _MarkerShapeInput: _MarkerShapeInput;
+  _AddMarkerShapeBelongs_toPayload: _AddMarkerShapeBelongs_ToPayload;
+  _RemoveMarkerShapeBelongs_toPayload: _RemoveMarkerShapeBelongs_ToPayload;
+  _MergeMarkerShapeBelongs_toPayload: _MergeMarkerShapeBelongs_ToPayload;
+  _GardenFeatureInput: _GardenFeatureInput;
+  _AddGardenFeatureShapePayload: _AddGardenFeatureShapePayload;
+  _RemoveGardenFeatureShapePayload: _RemoveGardenFeatureShapePayload;
+  _MergeGardenFeatureShapePayload: _MergeGardenFeatureShapePayload;
+  Subscription: {};
   _UserSettingsInput: _UserSettingsInput;
   _Neo4jTimeInput: _Neo4jTimeInput;
   _Neo4jTime: _Neo4jTime;
@@ -2346,10 +3306,6 @@ export type ResolversParentTypes = {
   _Neo4jLocalTime: _Neo4jLocalTime;
   _Neo4jLocalDateTimeInput: _Neo4jLocalDateTimeInput;
   _Neo4jLocalDateTime: _Neo4jLocalDateTime;
-  _Neo4jPointDistanceFilter: _Neo4jPointDistanceFilter;
-  Float: Scalars['Float'];
-  _Neo4jPointInput: _Neo4jPointInput;
-  _Neo4jPoint: _Neo4jPoint;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
@@ -2360,6 +3316,11 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   WateringPeriod?: Resolver<Maybe<Array<Maybe<ResolversTypes['WateringPeriod']>>>, ParentType, ContextType, RequireFields<QueryWateringPeriodArgs, never>>;
   ChangeRequest?: Resolver<Maybe<Array<Maybe<ResolversTypes['ChangeRequest']>>>, ParentType, ContextType, RequireFields<QueryChangeRequestArgs, never>>;
   LogEvent?: Resolver<Maybe<Array<Maybe<ResolversTypes['LogEvent']>>>, ParentType, ContextType, RequireFields<QueryLogEventArgs, never>>;
+  GeoShape?: Resolver<Maybe<Array<Maybe<ResolversTypes['GeoShape']>>>, ParentType, ContextType, RequireFields<QueryGeoShapeArgs, never>>;
+  GardenLayer?: Resolver<Maybe<Array<Maybe<ResolversTypes['GardenLayer']>>>, ParentType, ContextType, RequireFields<QueryGardenLayerArgs, never>>;
+  PolygonShape?: Resolver<Maybe<Array<Maybe<ResolversTypes['PolygonShape']>>>, ParentType, ContextType, RequireFields<QueryPolygonShapeArgs, never>>;
+  MarkerShape?: Resolver<Maybe<Array<Maybe<ResolversTypes['MarkerShape']>>>, ParentType, ContextType, RequireFields<QueryMarkerShapeArgs, never>>;
+  GardenFeature?: Resolver<Maybe<Array<Maybe<ResolversTypes['GardenFeature']>>>, ParentType, ContextType, RequireFields<QueryGardenFeatureArgs, never>>;
   UserSettings?: Resolver<Maybe<Array<Maybe<ResolversTypes['UserSettings']>>>, ParentType, ContextType, RequireFields<QueryUserSettingsArgs, never>>;
 };
 
@@ -2437,6 +3398,65 @@ export type LogEventResolvers<ContextType = any, ParentType extends ResolversPar
   type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   triggered_by?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType, RequireFields<LogEventTriggered_ByArgs, never>>;
   refers_to?: Resolver<Maybe<Array<Maybe<ResolversTypes['WateringTask']>>>, ParentType, ContextType, RequireFields<LogEventRefers_ToArgs, never>>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type GeoShapeResolvers<ContextType = any, ParentType extends ResolversParentTypes['GeoShape'] = ResolversParentTypes['GeoShape']> = {
+  __resolveType: TypeResolveFn<'PolygonShape' | 'MarkerShape', ParentType, ContextType>;
+  shapeId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  points?: Resolver<Array<Maybe<ResolversTypes['_Neo4jPoint']>>, ParentType, ContextType>;
+  belongs_to?: Resolver<Maybe<Array<Maybe<ResolversTypes['GardenLayer']>>>, ParentType, ContextType, RequireFields<GeoShapeBelongs_ToArgs, never>>;
+};
+
+export type _Neo4jPointResolvers<ContextType = any, ParentType extends ResolversParentTypes['_Neo4jPoint'] = ResolversParentTypes['_Neo4jPoint']> = {
+  x?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  y?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  z?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  longitude?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  latitude?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  height?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  crs?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  srid?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type GardenLayerResolvers<ContextType = any, ParentType extends ResolversParentTypes['GardenLayer'] = ResolversParentTypes['GardenLayer']> = {
+  layerId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  date?: Resolver<Maybe<ResolversTypes['_Neo4jDate']>, ParentType, ContextType>;
+  at?: Resolver<Maybe<ResolversTypes['Garden']>, ParentType, ContextType, RequireFields<GardenLayerAtArgs, never>>;
+  has_shape?: Resolver<Maybe<Array<Maybe<ResolversTypes['GeoShape']>>>, ParentType, ContextType, RequireFields<GardenLayerHas_ShapeArgs, never>>;
+  _id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PolygonShapeResolvers<ContextType = any, ParentType extends ResolversParentTypes['PolygonShape'] = ResolversParentTypes['PolygonShape']> = {
+  shapeId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  points?: Resolver<Array<Maybe<ResolversTypes['_Neo4jPoint']>>, ParentType, ContextType>;
+  belongs_to?: Resolver<Maybe<Array<Maybe<ResolversTypes['GardenLayer']>>>, ParentType, ContextType, RequireFields<PolygonShapeBelongs_ToArgs, never>>;
+  startPoint?: Resolver<Maybe<ResolversTypes['_Neo4jPoint']>, ParentType, ContextType>;
+  _id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MarkerShapeResolvers<ContextType = any, ParentType extends ResolversParentTypes['MarkerShape'] = ResolversParentTypes['MarkerShape']> = {
+  shapeId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  points?: Resolver<Array<Maybe<ResolversTypes['_Neo4jPoint']>>, ParentType, ContextType>;
+  belongs_to?: Resolver<Maybe<Array<Maybe<ResolversTypes['GardenLayer']>>>, ParentType, ContextType, RequireFields<MarkerShapeBelongs_ToArgs, never>>;
+  icon?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  point?: Resolver<ResolversTypes['_Neo4jPoint'], ParentType, ContextType>;
+  _id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type GardenFeatureResolvers<ContextType = any, ParentType extends ResolversParentTypes['GardenFeature'] = ResolversParentTypes['GardenFeature']> = {
+  featureId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  shape?: Resolver<Maybe<Array<Maybe<ResolversTypes['GeoShape']>>>, ParentType, ContextType, RequireFields<GardenFeatureShapeArgs, never>>;
+  infoText?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  label?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  featureType?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  plants?: Resolver<Array<Maybe<ResolversTypes['String']>>, ParentType, ContextType>;
+  _id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -2527,6 +3547,40 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   UpdateLogEvent?: Resolver<Maybe<ResolversTypes['LogEvent']>, ParentType, ContextType, RequireFields<MutationUpdateLogEventArgs, 'date'>>;
   DeleteLogEvent?: Resolver<Maybe<ResolversTypes['LogEvent']>, ParentType, ContextType, RequireFields<MutationDeleteLogEventArgs, 'date'>>;
   MergeLogEvent?: Resolver<Maybe<ResolversTypes['LogEvent']>, ParentType, ContextType, RequireFields<MutationMergeLogEventArgs, 'date'>>;
+  AddGeoShapeBelongs_to?: Resolver<Maybe<ResolversTypes['_AddGeoShapeBelongs_toPayload']>, ParentType, ContextType, RequireFields<MutationAddGeoShapeBelongs_ToArgs, 'from' | 'to'>>;
+  RemoveGeoShapeBelongs_to?: Resolver<Maybe<ResolversTypes['_RemoveGeoShapeBelongs_toPayload']>, ParentType, ContextType, RequireFields<MutationRemoveGeoShapeBelongs_ToArgs, 'from' | 'to'>>;
+  MergeGeoShapeBelongs_to?: Resolver<Maybe<ResolversTypes['_MergeGeoShapeBelongs_toPayload']>, ParentType, ContextType, RequireFields<MutationMergeGeoShapeBelongs_ToArgs, 'from' | 'to'>>;
+  AddGardenLayerAt?: Resolver<Maybe<ResolversTypes['_AddGardenLayerAtPayload']>, ParentType, ContextType, RequireFields<MutationAddGardenLayerAtArgs, 'from' | 'to'>>;
+  RemoveGardenLayerAt?: Resolver<Maybe<ResolversTypes['_RemoveGardenLayerAtPayload']>, ParentType, ContextType, RequireFields<MutationRemoveGardenLayerAtArgs, 'from' | 'to'>>;
+  MergeGardenLayerAt?: Resolver<Maybe<ResolversTypes['_MergeGardenLayerAtPayload']>, ParentType, ContextType, RequireFields<MutationMergeGardenLayerAtArgs, 'from' | 'to'>>;
+  AddGardenLayerHas_shape?: Resolver<Maybe<ResolversTypes['_AddGardenLayerHas_shapePayload']>, ParentType, ContextType, RequireFields<MutationAddGardenLayerHas_ShapeArgs, 'from' | 'to'>>;
+  RemoveGardenLayerHas_shape?: Resolver<Maybe<ResolversTypes['_RemoveGardenLayerHas_shapePayload']>, ParentType, ContextType, RequireFields<MutationRemoveGardenLayerHas_ShapeArgs, 'from' | 'to'>>;
+  MergeGardenLayerHas_shape?: Resolver<Maybe<ResolversTypes['_MergeGardenLayerHas_shapePayload']>, ParentType, ContextType, RequireFields<MutationMergeGardenLayerHas_ShapeArgs, 'from' | 'to'>>;
+  CreateGardenLayer?: Resolver<Maybe<ResolversTypes['GardenLayer']>, ParentType, ContextType, RequireFields<MutationCreateGardenLayerArgs, 'name'>>;
+  UpdateGardenLayer?: Resolver<Maybe<ResolversTypes['GardenLayer']>, ParentType, ContextType, RequireFields<MutationUpdateGardenLayerArgs, 'layerId'>>;
+  DeleteGardenLayer?: Resolver<Maybe<ResolversTypes['GardenLayer']>, ParentType, ContextType, RequireFields<MutationDeleteGardenLayerArgs, 'layerId'>>;
+  MergeGardenLayer?: Resolver<Maybe<ResolversTypes['GardenLayer']>, ParentType, ContextType, RequireFields<MutationMergeGardenLayerArgs, 'layerId'>>;
+  AddPolygonShapeBelongs_to?: Resolver<Maybe<ResolversTypes['_AddPolygonShapeBelongs_toPayload']>, ParentType, ContextType, RequireFields<MutationAddPolygonShapeBelongs_ToArgs, 'from' | 'to'>>;
+  RemovePolygonShapeBelongs_to?: Resolver<Maybe<ResolversTypes['_RemovePolygonShapeBelongs_toPayload']>, ParentType, ContextType, RequireFields<MutationRemovePolygonShapeBelongs_ToArgs, 'from' | 'to'>>;
+  MergePolygonShapeBelongs_to?: Resolver<Maybe<ResolversTypes['_MergePolygonShapeBelongs_toPayload']>, ParentType, ContextType, RequireFields<MutationMergePolygonShapeBelongs_ToArgs, 'from' | 'to'>>;
+  CreatePolygonShape?: Resolver<Maybe<ResolversTypes['PolygonShape']>, ParentType, ContextType, RequireFields<MutationCreatePolygonShapeArgs, 'points'>>;
+  UpdatePolygonShape?: Resolver<Maybe<ResolversTypes['PolygonShape']>, ParentType, ContextType, RequireFields<MutationUpdatePolygonShapeArgs, 'shapeId'>>;
+  DeletePolygonShape?: Resolver<Maybe<ResolversTypes['PolygonShape']>, ParentType, ContextType, RequireFields<MutationDeletePolygonShapeArgs, 'shapeId'>>;
+  MergePolygonShape?: Resolver<Maybe<ResolversTypes['PolygonShape']>, ParentType, ContextType, RequireFields<MutationMergePolygonShapeArgs, 'shapeId'>>;
+  AddMarkerShapeBelongs_to?: Resolver<Maybe<ResolversTypes['_AddMarkerShapeBelongs_toPayload']>, ParentType, ContextType, RequireFields<MutationAddMarkerShapeBelongs_ToArgs, 'from' | 'to'>>;
+  RemoveMarkerShapeBelongs_to?: Resolver<Maybe<ResolversTypes['_RemoveMarkerShapeBelongs_toPayload']>, ParentType, ContextType, RequireFields<MutationRemoveMarkerShapeBelongs_ToArgs, 'from' | 'to'>>;
+  MergeMarkerShapeBelongs_to?: Resolver<Maybe<ResolversTypes['_MergeMarkerShapeBelongs_toPayload']>, ParentType, ContextType, RequireFields<MutationMergeMarkerShapeBelongs_ToArgs, 'from' | 'to'>>;
+  CreateMarkerShape?: Resolver<Maybe<ResolversTypes['MarkerShape']>, ParentType, ContextType, RequireFields<MutationCreateMarkerShapeArgs, 'points' | 'icon' | 'point'>>;
+  UpdateMarkerShape?: Resolver<Maybe<ResolversTypes['MarkerShape']>, ParentType, ContextType, RequireFields<MutationUpdateMarkerShapeArgs, 'shapeId'>>;
+  DeleteMarkerShape?: Resolver<Maybe<ResolversTypes['MarkerShape']>, ParentType, ContextType, RequireFields<MutationDeleteMarkerShapeArgs, 'shapeId'>>;
+  MergeMarkerShape?: Resolver<Maybe<ResolversTypes['MarkerShape']>, ParentType, ContextType, RequireFields<MutationMergeMarkerShapeArgs, 'shapeId'>>;
+  AddGardenFeatureShape?: Resolver<Maybe<ResolversTypes['_AddGardenFeatureShapePayload']>, ParentType, ContextType, RequireFields<MutationAddGardenFeatureShapeArgs, 'from' | 'to'>>;
+  RemoveGardenFeatureShape?: Resolver<Maybe<ResolversTypes['_RemoveGardenFeatureShapePayload']>, ParentType, ContextType, RequireFields<MutationRemoveGardenFeatureShapeArgs, 'from' | 'to'>>;
+  MergeGardenFeatureShape?: Resolver<Maybe<ResolversTypes['_MergeGardenFeatureShapePayload']>, ParentType, ContextType, RequireFields<MutationMergeGardenFeatureShapeArgs, 'from' | 'to'>>;
+  CreateGardenFeature?: Resolver<Maybe<ResolversTypes['GardenFeature']>, ParentType, ContextType, RequireFields<MutationCreateGardenFeatureArgs, 'label' | 'featureType' | 'plants'>>;
+  UpdateGardenFeature?: Resolver<Maybe<ResolversTypes['GardenFeature']>, ParentType, ContextType, RequireFields<MutationUpdateGardenFeatureArgs, 'featureId'>>;
+  DeleteGardenFeature?: Resolver<Maybe<ResolversTypes['GardenFeature']>, ParentType, ContextType, RequireFields<MutationDeleteGardenFeatureArgs, 'featureId'>>;
+  MergeGardenFeature?: Resolver<Maybe<ResolversTypes['GardenFeature']>, ParentType, ContextType, RequireFields<MutationMergeGardenFeatureArgs, 'featureId'>>;
   CreateUserSettings?: Resolver<Maybe<ResolversTypes['UserSettings']>, ParentType, ContextType, RequireFields<MutationCreateUserSettingsArgs, never>>;
   UpdateUserSettings?: Resolver<Maybe<ResolversTypes['UserSettings']>, ParentType, ContextType, RequireFields<MutationUpdateUserSettingsArgs, 'ui_locale'>>;
   DeleteUserSettings?: Resolver<Maybe<ResolversTypes['UserSettings']>, ParentType, ContextType, RequireFields<MutationDeleteUserSettingsArgs, 'ui_locale'>>;
@@ -2825,6 +3879,114 @@ export type _MergeLogEventRefers_ToPayloadResolvers<ContextType = any, ParentTyp
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type _AddGeoShapeBelongs_ToPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddGeoShapeBelongs_toPayload'] = ResolversParentTypes['_AddGeoShapeBelongs_toPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['GeoShape']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['GardenLayer']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _RemoveGeoShapeBelongs_ToPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveGeoShapeBelongs_toPayload'] = ResolversParentTypes['_RemoveGeoShapeBelongs_toPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['GeoShape']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['GardenLayer']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _MergeGeoShapeBelongs_ToPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeGeoShapeBelongs_toPayload'] = ResolversParentTypes['_MergeGeoShapeBelongs_toPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['GeoShape']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['GardenLayer']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _AddGardenLayerAtPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddGardenLayerAtPayload'] = ResolversParentTypes['_AddGardenLayerAtPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['GardenLayer']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['Garden']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _RemoveGardenLayerAtPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveGardenLayerAtPayload'] = ResolversParentTypes['_RemoveGardenLayerAtPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['GardenLayer']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['Garden']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _MergeGardenLayerAtPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeGardenLayerAtPayload'] = ResolversParentTypes['_MergeGardenLayerAtPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['GardenLayer']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['Garden']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _AddGardenLayerHas_ShapePayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddGardenLayerHas_shapePayload'] = ResolversParentTypes['_AddGardenLayerHas_shapePayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['GeoShape']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['GardenLayer']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _RemoveGardenLayerHas_ShapePayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveGardenLayerHas_shapePayload'] = ResolversParentTypes['_RemoveGardenLayerHas_shapePayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['GeoShape']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['GardenLayer']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _MergeGardenLayerHas_ShapePayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeGardenLayerHas_shapePayload'] = ResolversParentTypes['_MergeGardenLayerHas_shapePayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['GeoShape']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['GardenLayer']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _AddPolygonShapeBelongs_ToPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddPolygonShapeBelongs_toPayload'] = ResolversParentTypes['_AddPolygonShapeBelongs_toPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['PolygonShape']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['GardenLayer']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _RemovePolygonShapeBelongs_ToPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemovePolygonShapeBelongs_toPayload'] = ResolversParentTypes['_RemovePolygonShapeBelongs_toPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['PolygonShape']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['GardenLayer']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _MergePolygonShapeBelongs_ToPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergePolygonShapeBelongs_toPayload'] = ResolversParentTypes['_MergePolygonShapeBelongs_toPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['PolygonShape']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['GardenLayer']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _AddMarkerShapeBelongs_ToPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddMarkerShapeBelongs_toPayload'] = ResolversParentTypes['_AddMarkerShapeBelongs_toPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['MarkerShape']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['GardenLayer']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _RemoveMarkerShapeBelongs_ToPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveMarkerShapeBelongs_toPayload'] = ResolversParentTypes['_RemoveMarkerShapeBelongs_toPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['MarkerShape']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['GardenLayer']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _MergeMarkerShapeBelongs_ToPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeMarkerShapeBelongs_toPayload'] = ResolversParentTypes['_MergeMarkerShapeBelongs_toPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['MarkerShape']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['GardenLayer']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _AddGardenFeatureShapePayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddGardenFeatureShapePayload'] = ResolversParentTypes['_AddGardenFeatureShapePayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['GardenFeature']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['GeoShape']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _RemoveGardenFeatureShapePayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveGardenFeatureShapePayload'] = ResolversParentTypes['_RemoveGardenFeatureShapePayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['GardenFeature']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['GeoShape']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _MergeGardenFeatureShapePayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeGardenFeatureShapePayload'] = ResolversParentTypes['_MergeGardenFeatureShapePayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['GardenFeature']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['GeoShape']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type SubscriptionResolvers<ContextType = any, ParentType extends ResolversParentTypes['Subscription'] = ResolversParentTypes['Subscription']> = {
   WateringTaskChange?: SubscriptionResolver<Maybe<ResolversTypes['Boolean']>, "WateringTaskChange", ParentType, ContextType>;
 };
@@ -2881,18 +4043,6 @@ export type _Neo4jLocalDateTimeResolvers<ContextType = any, ParentType extends R
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type _Neo4jPointResolvers<ContextType = any, ParentType extends ResolversParentTypes['_Neo4jPoint'] = ResolversParentTypes['_Neo4jPoint']> = {
-  x?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  y?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  z?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  longitude?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  latitude?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  height?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  crs?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  srid?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
 export type Resolvers<ContextType = any> = {
   Query?: QueryResolvers<ContextType>;
   WateringPeriod?: WateringPeriodResolvers<ContextType>;
@@ -2902,6 +4052,12 @@ export type Resolvers<ContextType = any> = {
   User?: UserResolvers<ContextType>;
   ChangeRequest?: ChangeRequestResolvers<ContextType>;
   LogEvent?: LogEventResolvers<ContextType>;
+  GeoShape?: GeoShapeResolvers<ContextType>;
+  _Neo4jPoint?: _Neo4jPointResolvers<ContextType>;
+  GardenLayer?: GardenLayerResolvers<ContextType>;
+  PolygonShape?: PolygonShapeResolvers<ContextType>;
+  MarkerShape?: MarkerShapeResolvers<ContextType>;
+  GardenFeature?: GardenFeatureResolvers<ContextType>;
   UserSettings?: UserSettingsResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   JSON?: GraphQLScalarType;
@@ -2953,12 +4109,29 @@ export type Resolvers<ContextType = any> = {
   _AddLogEventRefers_toPayload?: _AddLogEventRefers_ToPayloadResolvers<ContextType>;
   _RemoveLogEventRefers_toPayload?: _RemoveLogEventRefers_ToPayloadResolvers<ContextType>;
   _MergeLogEventRefers_toPayload?: _MergeLogEventRefers_ToPayloadResolvers<ContextType>;
+  _AddGeoShapeBelongs_toPayload?: _AddGeoShapeBelongs_ToPayloadResolvers<ContextType>;
+  _RemoveGeoShapeBelongs_toPayload?: _RemoveGeoShapeBelongs_ToPayloadResolvers<ContextType>;
+  _MergeGeoShapeBelongs_toPayload?: _MergeGeoShapeBelongs_ToPayloadResolvers<ContextType>;
+  _AddGardenLayerAtPayload?: _AddGardenLayerAtPayloadResolvers<ContextType>;
+  _RemoveGardenLayerAtPayload?: _RemoveGardenLayerAtPayloadResolvers<ContextType>;
+  _MergeGardenLayerAtPayload?: _MergeGardenLayerAtPayloadResolvers<ContextType>;
+  _AddGardenLayerHas_shapePayload?: _AddGardenLayerHas_ShapePayloadResolvers<ContextType>;
+  _RemoveGardenLayerHas_shapePayload?: _RemoveGardenLayerHas_ShapePayloadResolvers<ContextType>;
+  _MergeGardenLayerHas_shapePayload?: _MergeGardenLayerHas_ShapePayloadResolvers<ContextType>;
+  _AddPolygonShapeBelongs_toPayload?: _AddPolygonShapeBelongs_ToPayloadResolvers<ContextType>;
+  _RemovePolygonShapeBelongs_toPayload?: _RemovePolygonShapeBelongs_ToPayloadResolvers<ContextType>;
+  _MergePolygonShapeBelongs_toPayload?: _MergePolygonShapeBelongs_ToPayloadResolvers<ContextType>;
+  _AddMarkerShapeBelongs_toPayload?: _AddMarkerShapeBelongs_ToPayloadResolvers<ContextType>;
+  _RemoveMarkerShapeBelongs_toPayload?: _RemoveMarkerShapeBelongs_ToPayloadResolvers<ContextType>;
+  _MergeMarkerShapeBelongs_toPayload?: _MergeMarkerShapeBelongs_ToPayloadResolvers<ContextType>;
+  _AddGardenFeatureShapePayload?: _AddGardenFeatureShapePayloadResolvers<ContextType>;
+  _RemoveGardenFeatureShapePayload?: _RemoveGardenFeatureShapePayloadResolvers<ContextType>;
+  _MergeGardenFeatureShapePayload?: _MergeGardenFeatureShapePayloadResolvers<ContextType>;
   Subscription?: SubscriptionResolvers<ContextType>;
   _Neo4jTime?: _Neo4jTimeResolvers<ContextType>;
   _Neo4jDateTime?: _Neo4jDateTimeResolvers<ContextType>;
   _Neo4jLocalTime?: _Neo4jLocalTimeResolvers<ContextType>;
   _Neo4jLocalDateTime?: _Neo4jLocalDateTimeResolvers<ContextType>;
-  _Neo4jPoint?: _Neo4jPointResolvers<ContextType>;
 };
 
 
