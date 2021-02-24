@@ -33,6 +33,9 @@ pkgs.mkShell {
     [ -d cordova/www ] || mkdir cordova/www
     [ -d cordova/platforms ] && echo 'You might want delete ./cordova/platforms'
     [ -d cordova/platforms/android ] || (cd cordova && npx cordova platform add android)
+    [ -d cordova/plugins ] && echo 'You might want delete ./cordova/plugins'
+    [ -d cordova/plugins/cordova-plugin-inappbrowser ] || (cd cordova && npx cordova plugin add cordova-plugin-inappbrowser)
+    [ -d cordova/plugins/cordova-plugin-whitelist ] || (cd cordova && npx cordova plugin add cordova plugin add cordova-plugin-whitelist)
 
     echo 'You should be able to build the apk:'
     echo '> (cd cordova && npx cordova build android)'

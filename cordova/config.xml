@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.github.communitygarden.ourgarden" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="io.github.communitygarden.ourgarden" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
+
     <name>Our Garden</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
@@ -26,6 +27,9 @@
     <allow-navigation href="*" />
 
     <platform name="android">
+      <gap:plugin name="cordova-plugin-inappbrowser" />
+      <gap:plugin name="cordova-plugin-whitelist" version="1.0.0" source="npm" />
+
       <preference name="StatusBarOverlaysWebView" value="false" />
       <preference name="android-minSdkVersion" value="22" />
       <preference name="SplashScreen" value="none"/>

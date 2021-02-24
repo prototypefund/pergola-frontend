@@ -12,6 +12,7 @@
   in
   rec {
     legacyPackages.x86_64-linux = {
+      inherit pkgs;
       trivial = import ./nix/trivial/shell.nix { inherit pkgs; };
       trivial-android = import ./nix/trivial/android/shell.nix { inherit pkgs; };
 
