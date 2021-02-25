@@ -1,4 +1,17 @@
 {
+  "feature": {
+    "newGardenFeature": "Unbekanntes Ding im Garten",
+    "whatPlanted":  "Was wird hier gepflanzt? ",
+    "whatType": "Was ist hier? ",
+    "moreInfo": "Weiter Informationen",
+    "types": {
+      "beet": "Beet",
+      "garden shed": "Werkzeugschuppen",
+      "hive": "Bienenstock",
+      "fireplace": "Feuerstelle",
+      "greenhouse": "Gewächshaus"
+    }
+  },
   "plants": {
     "apple": "Apfel",
     "artichoke": "Artischocke",

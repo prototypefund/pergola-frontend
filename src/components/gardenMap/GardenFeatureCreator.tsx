@@ -1,16 +1,18 @@
 import {gql, useMutation} from '@apollo/client'
 import {
-  Button,
+  Box,
   Chip,
   FormControl,
-  FormControlLabel,
   FormGroup,
   Icon,
+  IconButton,
   Input,
   makeStyles,
   SvgIcon,
   Theme,
   Typography} from '@material-ui/core'
+import { Save } from '@material-ui/icons'
+import MDEditor from '@uiw/react-md-editor'
 import * as React from 'react'
 import {FunctionComponent, SVGProps, useEffect, useState} from 'react'
 import {useTranslation} from 'react-i18next'
@@ -26,7 +28,7 @@ import {
 
 const featureTypes: FeatureType[] = [
   {
-    name: 'Beet',
+    name: 'beet',
     icon: 'icofont icofont-fruits'
   },
   {
@@ -101,6 +103,7 @@ export function GardenFeatureCreator( {shapeId, gardenFeature, onSave}: Props ) 
   const [selectedFeatureType, setSelectedFeatureType] = useState<FeatureType | undefined | null>( featureTypes.find( _t =>  _t.name === gardenFeature?.featureType ))
   const [plants, setPlants] = useState( gardenFeature?.plants || [] )
   const [featureLabel, setFeatureLabel] = useState( gardenFeature?.label || '' )
+  const [infoText, setInfoText] = useState<string>( gardenFeature?.infoText || '' )
   const [featureId, setFeatureId] = useState<string | undefined | null>( gardenFeature?.featureId )
 
   const [createGardenFeature] =
@@ -109,7 +112,7 @@ export function GardenFeatureCreator( {shapeId, gardenFeature, onSave}: Props ) 
         plants,
         label: featureLabel,
         featureType: selectedFeatureType?.name || 'arbitrary',
-        infoText: ''
+        infoText
       }
     } )
   const [updateGardenFeature] =
@@ -119,7 +122,7 @@ export function GardenFeatureCreator( {shapeId, gardenFeature, onSave}: Props ) 
         featureId: featureId || '',
         label: featureLabel,
         featureType: selectedFeatureType?.name || 'arbitrary',
-        infoText: ''
+        infoText
       }
     } )
   const [addGardenFeatureShape] =
@@ -164,27 +167,33 @@ export function GardenFeatureCreator( {shapeId, gardenFeature, onSave}: Props ) 
   }
 
   return (
-    <div>
+    <Box display='flex' flexDirection='column' alignItems='start' className={classes.mainContainer}>
+      <IconButton onClick={handleSave}>
+        <Save/>
+      </IconButton>
       <FormGroup row>
-        <FormControlLabel
-          labelPlacement='start'
-          label={'Label:'} control={
-            <Input
-              value={featureLabel}
-              onChange={e => setFeatureLabel( e.target.value )}/>}/>
+        <FormControl>
+          <Input
+            placeholder={'Label'}
+            inputProps={{className: classes.labelInput}}
+            value={featureLabel}
+            onChange={e => setFeatureLabel( e.target.value )}/>
+        </FormControl>
       </FormGroup>
+      <Typography variant={'h5'}>
+        {t( 'feature' ).whatType}<br/>
+      </Typography>
       <div className={classes.chipsContainer}>
-        <Typography variant={'body1'}>
-          What is here?:<br/>
-        </Typography>
         {featureTypes.map(( featureType ) => {
           const {name, icon, svgIcon} = featureType
+          // @ts-ignore
+          const label = t( `feature.types.${name}` ) || name
           return (
             <Chip
               onClick={() => setSelectedFeatureType( featureType )}
               color={selectedFeatureType?.name === name && 'primary' || undefined}
               key={name}
-              label={name}
+              label={label}
               icon={icon
                 ? <Icon className={icon}/>
                 : ( svgIcon
@@ -193,32 +202,41 @@ export function GardenFeatureCreator( {shapeId, gardenFeature, onSave}: Props ) 
           )
         } )}
       </div>
-      <div className={classes.chipsContainer}>
-        <Typography variant={'body1'}>
-          What will be planted?<br/>
+      {( selectedFeatureType?.name === 'beet' ) && <>
+        <Typography variant={'h5'}>
+          {t( 'feature' ).whatPlanted}<br/>
         </Typography>
-        {availablePlants.map( plant => {
+        <div className={classes.chipsContainer}>
+          {availablePlants.map( plant => {
           // @ts-ignore
-          const label = t( `plants.${plant}` ) || plant
-          return ( <Chip
-            key={plant}
-            color={plants.includes( plant ) ? 'primary' : undefined}
-            onClick={() => togglePlant( plant )}
-            label={label}
-            icon={<Icon className={'icofont icofont-' + plant}
-            />}/> )
-        } )}
+            const label = t( `plants.${plant}` ) || plant
+            return ( <Chip
+              key={plant}
+              color={plants.includes( plant ) ? 'primary' : undefined}
+              onClick={() => togglePlant( plant )}
+              label={label}
+              icon={<Icon className={'icofont icofont-' + plant}
+              />}/> )
+          } )}
+        </div> </>}
+      <Typography variant={'h5'}>
+        {t( 'feature' ).moreInfo}<br/>
+      </Typography>
+      <div  style={{width: '100%'}}>
+        <MDEditor style={{background: 'none'}}  value={infoText} onChange={v => setInfoText( v || '' )} />
       </div>
-      <Button
-        color={'primary'}
-        variant='outlined'
-        onClick={handleSave}
-      >{tc( 'save' )}</Button>
-    </div>
+
+    </Box>
   )
 }
 
 const useStyles = makeStyles(( theme: Theme ) => ( {
+  mainContainer: {
+    width: '100%',
+    '& > *': {
+      margin: theme.spacing( 1 ),
+    }
+  },
   chipsContainer: {
     display: 'flex',
     justifyContent: 'center',
@@ -226,5 +244,6 @@ const useStyles = makeStyles(( theme: Theme ) => ( {
     '& > *': {
       margin: theme.spacing( 0.5 ),
     },
-  }
+  },
+  labelInput: theme.typography.h4,
 } ))

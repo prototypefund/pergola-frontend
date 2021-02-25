@@ -46,6 +46,7 @@
     "@material-ui/lab": "^4.0.0-alpha.56",
     "@material-ui/styles": "4.11.2",
     "@react-keycloak/web": "^3.4.0",
+    "@uiw/react-md-editor": "^2.1.10",
     "apollo-link-ws": "^1.0.20",
     "avataaars": "^1.2.1",
     "dayjs": "^1.9.7",

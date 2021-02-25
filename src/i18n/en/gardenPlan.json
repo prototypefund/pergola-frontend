@@ -1,4 +1,17 @@
 {
+  "feature": {
+    "newGardenFeature": "Unknown object in the garden",
+    "whatPlanted":  "What is beeing planted? ",
+    "whatType": "What is here? ",
+    "moreInfo": "Further information",
+    "types": {
+      "beet": "beet",
+      "garden shed": "garden shed",
+      "hive": "bee hive",
+      "fireplace": "fireplace",
+      "greenhouse": "greenhouse"
+    }
+  },
   "plants": {
     "apple": "apple",
     "artichoke": "artichoke",

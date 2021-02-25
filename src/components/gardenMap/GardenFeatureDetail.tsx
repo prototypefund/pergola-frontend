@@ -3,11 +3,13 @@ import { Box ,IconButton, makeStyles, Theme, Typography} from '@material-ui/core
 import {Close, Edit } from '@material-ui/icons'
 import * as React from 'react'
 import { useEffect,useState  } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 
 import {DeselectShape} from '../../actions'
 import { GardenFeature } from '../../types/graphql'
 import {GardenFeatureCreator} from './GardenFeatureCreator'
+import { GardenFeatureView } from './GardenFeatureView'
 
 interface Props {
   shapeId: string;
@@ -29,6 +31,7 @@ query GardenFeature($shapeId: ID!) {
 export function GardenFeatureDetail( { shapeId } : Props ) {
   const classes = useStyles()
   const dispatch = useDispatch()
+  const { t } = useTranslation( 'gardenPlan' )
   const {data: featureData, loading, refetch } = useQuery<{GardenFeature: GardenFeature[]}, {shapeId: string}>( GET_FEATURE_FOR_SHAPE, {
     variables: {
       shapeId
@@ -57,14 +60,6 @@ export function GardenFeatureDetail( { shapeId } : Props ) {
     }
   }
 
-  const GardenFeatureView  = () => (
-    <Typography variant='h4' >
-      <IconButton color={editMode ? 'primary' : undefined} onClick={handleEditModeToggle}>
-        <Edit/>
-      </IconButton>
-      {feature?.label || 'new garden feature' }</Typography>
-  )
-
 
   return (
     <Box className={classes.mainContainer}>
@@ -74,7 +69,7 @@ export function GardenFeatureDetail( { shapeId } : Props ) {
       <div className='inner'>
         {editMode
           ? <GardenFeatureCreator shapeId={shapeId} gardenFeature={feature} onSave={handleSave}/>
-          : <GardenFeatureView />}
+          : <GardenFeatureView gardenFeature={feature} onEditToggle={handleEditModeToggle}/>}
       </div>
     </Box>
   )
@@ -86,8 +81,8 @@ const useStyles = makeStyles(( theme: Theme ) => ( {
     maxHeight: '100%',
     maxWidth: '100%',
     '& .inner': {
-      paddingLeft: '16px',
-      paddingRight: '16px',
+      marginLeft: theme.spacing( 4 ),
+      marginRight: theme.spacing( 4 ),
     }
   }
 
