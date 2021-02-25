@@ -61,8 +61,8 @@ const UPDATE_MARKER_SHAPE_MUTATION = gql`
 `
 
 const GET_GARDEN_LAYER_QUERY = gql`
-    query GardenLayer {
-        GardenLayer {
+    query GardenLayer($gardenId: ID!) {
+        GardenLayer(filter: {at: {gardenId: $gardenId}}) {
             layerId,
             name,
         }
@@ -96,7 +96,11 @@ export function ShapeCreator( {map, editableLayer}: ShapeCreatorProps ) {
   const [createLayerGroup] = useMutation<{ CreateGardenLayer: {layerId: string } }, MutationCreateGardenLayerArgs>( CREATE_LAYER_GROUP_MUTATION )
   const [markerShapeBelongsToLayer] = useMutation<{ AddMarkerShapeBelongs_To: { from: { shapeId: string }, to: { layerId: string } } }, MutationMergeMarkerShapeBelongs_ToArgs>( ADD_MARKER_SHAPE_BELONGS_TO_GARDEN_MUTATION )
   const [gardenLayerIsAtGarde] = useMutation<{ AddGardenLayerAt: { from: { layerId: string }, to: { gardenId: string } } }, MutationMergeGardenLayerAtArgs >( ADD_GARDEN_LAYER_AT_GARDEN_MUTATION )
-  const {data: GardenLayerData, loading} = useQuery<{GardenLayer: GardenLayer[]}>( GET_GARDEN_LAYER_QUERY )
+  const {data: GardenLayerData, loading} = useQuery<{GardenLayer: GardenLayer[]}, {gardenId: string}>( GET_GARDEN_LAYER_QUERY, {
+    variables: {
+      gardenId
+    }
+  } )
   const {data: markerShapeData, loading: shapesLoading, refetch} =  useQuery<{MarkerShape: MarkerShape[]}, {layerId: string}>( GET_MARKER_SHAPE_QUERY, {
     variables: {
       layerId: layerId || ''
@@ -154,6 +158,7 @@ export function ShapeCreator( {map, editableLayer}: ShapeCreatorProps ) {
         from: {  shapeId },
         to: { layerId: _layerId  }
       }} )
+      shapeId && layer.on( 'click', () => dispatch( SelectShape( shapeId )))
       layer._shapeId = shapeId
       editableLayer?.addLayer( layer )
 
@@ -217,7 +222,7 @@ export function ShapeCreator( {map, editableLayer}: ShapeCreatorProps ) {
   }, [markerShapeData, map] )
 
   useEffect(() => {
-    if( !map ) return
+    if( !map || !layerId ) return
     // @ts-ignore
     map.on( L.Draw.Event.EDITED, ( e ) => {
       // @ts-ignore
@@ -246,7 +251,7 @@ export function ShapeCreator( {map, editableLayer}: ShapeCreatorProps ) {
       }
 
     } )
-  }, [map] )
+  }, [map, layerId] )
 
 
   return null
