@@ -1,9 +1,11 @@
 import { gql, useQuery } from '@apollo/client'
-import {IconButton, makeStyles, Paper, Theme, Typography} from '@material-ui/core'
-import { Edit } from '@material-ui/icons'
+import { Box ,IconButton, makeStyles, Theme, Typography} from '@material-ui/core'
+import {Close, Edit } from '@material-ui/icons'
 import * as React from 'react'
 import { useEffect,useState  } from 'react'
+import { useDispatch } from 'react-redux'
 
+import {DeselectShape} from '../../actions'
 import { GardenFeature } from '../../types/graphql'
 import {GardenFeatureCreator} from './GardenFeatureCreator'
 
@@ -26,6 +28,7 @@ query GardenFeature($shapeId: ID!) {
 
 export function GardenFeatureDetail( { shapeId } : Props ) {
   const classes = useStyles()
+  const dispatch = useDispatch()
   const {data: featureData, loading, refetch } = useQuery<{GardenFeature: GardenFeature[]}, {shapeId: string}>( GET_FEATURE_FOR_SHAPE, {
     variables: {
       shapeId
@@ -41,7 +44,8 @@ export function GardenFeatureDetail( { shapeId } : Props ) {
   console.log( {feature} )
 
   useEffect(() => {
-    !feature && setEditMode( true )
+    //!feature && setEditMode( true )
+    setEditMode( false )
   }, [feature] )
 
   const handleSave = () => {
@@ -63,17 +67,28 @@ export function GardenFeatureDetail( { shapeId } : Props ) {
 
 
   return (
-    <div className={classes.mainContainer}>
-      {editMode
-        ? <GardenFeatureCreator shapeId={shapeId} gardenFeature={feature} onSave={handleSave}/>
-        : <GardenFeatureView />}
-    </div>
+    <Box className={classes.mainContainer}>
+      <IconButton onClick={() => dispatch( DeselectShape())}>
+        <Close />
+      </IconButton>
+      <div className='inner'>
+        {editMode
+          ? <GardenFeatureCreator shapeId={shapeId} gardenFeature={feature} onSave={handleSave}/>
+          : <GardenFeatureView />}
+      </div>
+    </Box>
   )
 }
 
 const useStyles = makeStyles(( theme: Theme ) => ( {
   mainContainer: {
-    padding: '16px'
+    overflow: 'auto',
+    maxHeight: '100%',
+    maxWidth: '100%',
+    '& .inner': {
+      paddingLeft: '16px',
+      paddingRight: '16px',
+    }
   }
 
 } ))

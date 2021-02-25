@@ -74,6 +74,10 @@ const GET_MARKER_SHAPE_QUERY = gql`query  MarkerShape($layerId: ID!) {
         shapeId
         point { latitude longitude }
         icon
+        feature {
+            featureType
+            plants
+        }
     }
 }`
 
@@ -93,7 +97,7 @@ export function ShapeCreator( {map, editableLayer}: ShapeCreatorProps ) {
   const [markerShapeBelongsToLayer] = useMutation<{ AddMarkerShapeBelongs_To: { from: { shapeId: string }, to: { layerId: string } } }, MutationMergeMarkerShapeBelongs_ToArgs>( ADD_MARKER_SHAPE_BELONGS_TO_GARDEN_MUTATION )
   const [gardenLayerIsAtGarde] = useMutation<{ AddGardenLayerAt: { from: { layerId: string }, to: { gardenId: string } } }, MutationMergeGardenLayerAtArgs >( ADD_GARDEN_LAYER_AT_GARDEN_MUTATION )
   const {data: GardenLayerData, loading} = useQuery<{GardenLayer: GardenLayer[]}>( GET_GARDEN_LAYER_QUERY )
-  const {data: markerShapeData} =  useQuery<{MarkerShape: MarkerShape[]}, {layerId: string}>( GET_MARKER_SHAPE_QUERY, {
+  const {data: markerShapeData, loading: shapesLoading, refetch} =  useQuery<{MarkerShape: MarkerShape[]}, {layerId: string}>( GET_MARKER_SHAPE_QUERY, {
     variables: {
       layerId: layerId || ''
     }} ) || {}
@@ -125,7 +129,15 @@ export function ShapeCreator( {map, editableLayer}: ShapeCreatorProps ) {
       setLayerId( _layerId )
     }
   }, [GardenLayerData, loading] )
-  console.log( {layerId} )
+
+  /*useEffect(() => {
+    const t = setInterval(() => { try { markerShapeData && !shapesLoading && refetch() } catch( e ) {
+      console.error( e )} }, 5000 )
+    return () => {
+      clearInterval( t )
+    }
+  }, [] )*/
+
 
 
   const createShape = async ( layerType: string, layer: any,_layerId?: string ) => {
@@ -189,9 +201,17 @@ export function ShapeCreator( {map, editableLayer}: ShapeCreatorProps ) {
 
   useEffect(() => {
     if( !map || ! editableLayer || !markerShapeData ) return
+    editableLayer.clearLayers()
     for( const shape of markerShapeData.MarkerShape ) {
       const {latitude, longitude} = shape.point || {}
-      latitude && longitude && createOrUpdateMarker( shape.shapeId, [latitude, longitude], JSON.parse( shape.icon ) as L.MarkerOptions )
+      const plant =  shape.feature?.plants?.[0]
+      const markerOptions = plant
+        ? {...JSON.parse( shape.icon ), icon: 'icofont icofont-' + shape.feature?.plants?.[0] }
+        : JSON.parse( shape.icon )
+      latitude && longitude && createOrUpdateMarker(
+        shape.shapeId,
+        [latitude, longitude],
+        markerOptions as L.MarkerOptions )
     }
 
   }, [markerShapeData, map] )
@@ -206,20 +226,20 @@ export function ShapeCreator( {map, editableLayer}: ShapeCreatorProps ) {
         updateShape( shapeId, 'marker', l ).catch( err => {
           console.error( 'cannot update shape', err )
         } )
-        console.log( l )
       } )
     } )
     // @ts-ignore
     map.on( L.Draw.Event.CREATED, ( e ) => {
       // @ts-ignore
       const type = e.layerType
+      console.log( 'create!!' )
 
       const {
         layer
       } = e
 
       if ( type === 'marker' ) {
-        layer.bindPopup( 'A popup!' )
+        //layer.bindPopup( 'A popup!' )
         createShape( type, layer, layerId ).catch( err => {
           console.error( 'cannot save shape', err )
         } )
