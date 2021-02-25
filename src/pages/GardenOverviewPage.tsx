@@ -38,7 +38,7 @@ const useStyles = makeStyles(() => ( {
       '&.mapInfoWrapper': {
         flexDirection: 'column'
       },
-      '& .featureView': { height: '40vw' },
+      '& .featureView': { height: '40vh' },
     }
 
   },
