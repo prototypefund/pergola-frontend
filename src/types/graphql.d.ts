@@ -1,4 +1,5 @@
-import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
+import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql'
+
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
@@ -697,8 +698,8 @@ export enum _UserOrdering {
   Neo4jImportIdDesc = 'neo4jImportId_desc',
   TypeAsc = 'type_asc',
   TypeDesc = 'type_desc',
-  IdAsc = '_id_asc',
-  IdDesc = '_id_desc'
+  _IdAsc = '_id_asc',
+  _IdDesc = '_id_desc'
 }
 
 export type User = {
@@ -3186,7 +3187,7 @@ export type SubscriptionObject<TResult, TKey extends string, TParent, TContext, 
   | SubscriptionResolverObject<TResult, TParent, TContext, TArgs>;
 
 export type SubscriptionResolver<TResult, TKey extends string, TParent = {}, TContext = {}, TArgs = {}> =
-  | ((...args: any[]) => SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>)
+  | (( ...args: any[] ) => SubscriptionObject<TResult, TKey, TParent, TContext, TArgs> )
   | SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>;
 
 export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
@@ -3195,7 +3196,7 @@ export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
   info: GraphQLResolveInfo
 ) => Maybe<TTypes> | Promise<Maybe<TTypes>>;
 
-export type IsTypeOfResolverFn<T = {}, TContext = {}> = (obj: T, context: TContext, info: GraphQLResolveInfo) => boolean | Promise<boolean>;
+export type IsTypeOfResolverFn<T = {}, TContext = {}> = ( obj: T, context: TContext, info: GraphQLResolveInfo ) => boolean | Promise<boolean>;
 
 export type NextResolverFn<T> = () => Promise<T>;
 
@@ -4246,7 +4247,7 @@ export type _MergeGardenFeatureShapePayloadResolvers<ContextType = any, ParentTy
 };
 
 export type SubscriptionResolvers<ContextType = any, ParentType extends ResolversParentTypes['Subscription'] = ResolversParentTypes['Subscription']> = {
-  WateringTaskChange?: SubscriptionResolver<Maybe<ResolversTypes['Boolean']>, "WateringTaskChange", ParentType, ContextType>;
+  WateringTaskChange?: SubscriptionResolver<Maybe<ResolversTypes['Boolean']>, 'WateringTaskChange', ParentType, ContextType>;
 };
 
 export type _Neo4jTimeResolvers<ContextType = any, ParentType extends ResolversParentTypes['_Neo4jTime'] = ResolversParentTypes['_Neo4jTime']> = {
