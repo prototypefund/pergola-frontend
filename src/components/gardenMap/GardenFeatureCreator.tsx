@@ -14,10 +14,10 @@ import {
 import { Save } from '@material-ui/icons'
 import MDEditor from '@uiw/react-md-editor'
 import * as React from 'react'
-import {FunctionComponent, SVGProps, useEffect, useState} from 'react'
+import { useState } from 'react'
 import {useTranslation} from 'react-i18next'
 
-import {ReactComponent as BeehiveOutline} from '../../static/icons/beehive-outline.svg'
+import {availablePlants, FeatureType, featureTypes} from '../../data'
 import {
   GardenFeature,
   MutationAddGardenFeatureShapeArgs,
@@ -26,32 +26,7 @@ import {
 } from '../../types/graphql'
 
 
-const featureTypes: FeatureType[] = [
-  {
-    name: 'beet',
-    icon: 'icofont icofont-fruits'
-  },
-  {
-    name: 'greenhouse',
-    icon: 'icofont icofont-ui-home'
-  },
-  {
-    name: 'garden shed',
-    icon: 'icofont icofont-home'
-  },
-  {
-    name: 'fireplace',
-    icon: 'icofont icofont-fire-burn'
-  },
-  {
-    name: 'hive',
-    svgIcon: BeehiveOutline
-  }
-]
 
-const availablePlants = [
-  'apple', 'artichoke', 'bell-pepper-capsicum', 'broccoli', 'cherry', 'corn', 'grapes', 'egg-plant', 'raddish', 'potato', 'tomato', 'wheat', 'strawberry', 'watermelon', 'pear', 'pepper', 'pumpkin', 'peas', 'mushroom', 'kiwi', 'cauli-flower', 'plant'
-]
 
 interface Props {
   shapeId: string,
@@ -59,11 +34,6 @@ interface Props {
   onSave?: () =>  any
 }
 
-interface FeatureType {
-  name: string;
-  icon?: string;
-  svgIcon?: FunctionComponent<SVGProps<SVGSVGElement>>;
-}
 
 const UPDATE_GARDEN_FEATURE_MUTATION = gql`
 mutation UpdateGardenFeature($featureId: ID!, $featureType: String, $label: String, $infoText: String, $plants: [String]) {
