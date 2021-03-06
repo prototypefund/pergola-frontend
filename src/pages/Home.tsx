@@ -2,84 +2,56 @@ import {
   Box,
   Button,
   Container,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
   makeStyles,
   Paper,
-  Theme,
   Typography,
-} from '@material-ui/core'
-import {
-  EventNote as EventNoteIcon,
-  Map as MapIcon,
-  Opacity as WaterdropIcon,
-} from '@material-ui/icons'
-import {useKeycloak} from '@react-keycloak/web'
-import React, { useState } from 'react'
-import { useTranslation } from 'react-i18next'
+} from "@material-ui/core";
+import { useKeycloak } from "@react-keycloak/web";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
+
+import { LoginFeatures } from "../components/LoginFeatures";
 
 export function Home() {
-  const { t } = useTranslation()
-  const { keycloak } = useKeycloak()
-  const classes = useStyles()
+  const { t } = useTranslation();
+  const { keycloak } = useKeycloak();
+  const { gardenId } = useParams<{ gardenId: string }>();
+  const classes = useStyles();
 
   return (
-    <Container>
+    <Container maxWidth="sm">
+      <Box my={2}>
+        <Typography
+          variant="h1"
+          align="center"
+          style={{ color: "#fff" }}
+          gutterBottom={true}
+        >
+          {gardenId}
+        </Typography>
+      </Box>
       <Paper elevation={0} className={classes.paperContainer}>
-        <Typography variant="h4">{t( 'gardeningTogether' )}</Typography>
-        <List>
-          <ListItem className={classes.listItem}>
-            <ListItemIcon className={classes.listItemIcon}>
-              <WaterdropIcon color="primary" />
-            </ListItemIcon>
-            <ListItemText primary="Erstelle einen Gießplan für euren Garten" />
-          </ListItem>
-          <ListItem className={classes.listItem}>
-            <ListItemIcon className={classes.listItemIcon}>
-              <EventNoteIcon color="primary" />
-            </ListItemIcon>
-            <ListItemText primary="Verschaffe dir einen Überblick über anstehende Termine" />
-          </ListItem>
-          <ListItem className={classes.listItem}>
-            <ListItemIcon className={classes.listItemIcon}>
-              <MapIcon color="primary" />
-            </ListItemIcon>
-            <ListItemText primary="Lerne mit der interaktiven Karte deinen Garten kennen" />
-          </ListItem>
-        </List>
-        {!keycloak.authenticated && (
-        <>
-          <Typography variant="h4">Yeah, Demo Time!</Typography>
-          <Box my={2}>
-            <Typography>Um Pergola zu erkunden kannst du dich als <strong>Nutzer "demo"</strong> mit dem <strong>Passwort "demo"</strong> anmelden. 
-          Oder du nutzt deinen Github Account. Und natürlich kannst dich auch im Handumdrehen registrieren.
-          Und keine Sorge: alle Daten werden nach der Prototype Fund Demo Week wieder gelöscht. Viel Spaß!</Typography>
-          </Box>
-          <Button onClick={() => keycloak.login()} variant="contained" color="primary" className={classes.button}>anmelden</Button>
-        </>
-          ) }
+        <LoginFeatures />
       </Paper>
     </Container>
-  )
+  );
 }
 
-const useStyles = makeStyles(( theme: Theme ) => ( {
+const useStyles = makeStyles(() => ({
   paperContainer: {
-    margin: '3rem 0 1rem 0',
-    padding: '1rem',
+    margin: "1rem 0 1rem 0",
+    padding: "1rem",
   },
   listItem: {
-    padding: '.5rem 0'
+    padding: ".5rem 0",
   },
   listItemIcon: {
-    minWidth: '2.5rem',
+    minWidth: "2.5rem",
   },
   button: {
-    margin: '.5rem 0',
-    '& + &': {
-      marginLeft: '.5rem'
-    }
-  }
-} ))
+    "& + &": {
+      marginLeft: ".5rem",
+    },
+  },
+}));
