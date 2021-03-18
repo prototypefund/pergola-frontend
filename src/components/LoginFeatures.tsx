@@ -8,22 +8,27 @@ import {
   makeStyles,
   Theme,
   Typography,
-} from "@material-ui/core";
+} from '@material-ui/core'
 import {
   EventNote as EventNoteIcon,
   Map as MapIcon,
   Opacity as WaterdropIcon,
-} from "@material-ui/icons";
-import { useKeycloak } from "@react-keycloak/web";
-import { KeycloakProfile } from "keycloak-js";
-import * as React from "react";
-import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+} from '@material-ui/icons'
+import { useKeycloak } from '@react-keycloak/web'
+import { KeycloakProfile } from 'keycloak-js'
+import * as React from 'react'
+import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { RootState } from '../reducers'
 
 export function LoginFeatures() {
-  const { t } = useTranslation();
-  const { keycloak } = useKeycloak();
-  const classes = useStyles();
+  const { t } = useTranslation()
+  const { keycloak } = useKeycloak()
+  const classes = useStyles()
+  const userProfile = useSelector<RootState, KeycloakProfile | null>(
+    ( { userProfile } ) => userProfile
+  )
 
   return !keycloak.authenticated ? (
     <>
@@ -63,7 +68,7 @@ export function LoginFeatures() {
     <>
       <Box my={2}>
         <Typography variant="h4" gutterBottom>
-          Hallo
+          Hallo {userProfile?.username}
         </Typography>
         <Typography variant="body1" gutterBottom>
           Demnächst erfährst du hier Neues über deinen Garten.
@@ -74,15 +79,15 @@ export function LoginFeatures() {
         </Typography>
       </Box>
     </>
-  );
+  )
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(( theme: Theme ) => ( {
   button: {
     color: theme.palette.primary.contrastText,
   },
   listItem: {},
   listItemIcon: {
-    minWidth: "2.5rem",
+    minWidth: '2.5rem',
   },
-}));
+} ))

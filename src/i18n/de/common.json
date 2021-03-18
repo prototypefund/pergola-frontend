@@ -2,10 +2,10 @@
   "welcome": "Willkommen",
   "gardeningTogether": "Gemeinsam gärtnern mit Pergola",
   "user": {
-    "login": "einloggen",
+    "login": "Anmelden",
     "loginPrompt": "Mooooment...",
     "loginPlease": "Bitte melde dich an, um weiterzumachen.",
-    "logout": "ausloggen"
+    "logout": "Abmelden"
   },
   "update": {
     "newUpdateAvailable": "Neue Version verfügbar - bitte neu laden!",

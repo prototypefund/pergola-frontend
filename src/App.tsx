@@ -8,7 +8,7 @@ import {
   Tabs,
   Toolbar,
   Typography,
-  useMediaQuery
+  useMediaQuery,
 } from '@material-ui/core'
 import { Theme } from '@material-ui/core/styles'
 import {
@@ -16,15 +16,26 @@ import {
   Home as HomeIcon,
   Map as MapIcon,
   Opacity as WaterdropIcon,
-  Person as PersonIcon
 } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/styles'
 import * as React from 'react'
-import {withLocalize} from 'react-localize-redux'
-import { Link, Route, useLocation, useParams, useRouteMatch } from 'react-router-dom'
+import { withLocalize } from 'react-localize-redux'
+import {
+  Link,
+  Route,
+  useLocation,
+  useParams,
+  useRouteMatch,
+} from 'react-router-dom'
 
 import { Login } from './components'
-import {GardenOverviewPage, Home, LandingPage, LetItRainEntry, Settings} from './pages'
+import {
+  GardenOverviewPage,
+  Home,
+  LandingPage,
+  LetItRainEntry,
+  Settings,
+} from './pages'
 import { CalendarAndNotifications } from './pages/CalendarAndNotifications'
 import backgroundImage from './static/background_full_grey_01.jpg'
 import title from './static/logo-pergola-title.svg'
@@ -32,7 +43,7 @@ import { withRoot } from './withRoot'
 
 function Routes() {
   const { path } = useRouteMatch()
-  console.log( {path} )
+  console.log( { path } )
   const classes = useStyles()
 
   // @ts-ignore
@@ -41,17 +52,19 @@ function Routes() {
       <Route exact={true} path={`${path}/home`} component={Home} />
       <Route path={`${path}/map`} component={GardenOverviewPage} />
       <Route path={`${path}/watering`} component={LetItRainEntry} />
-      <Route path={`${path}/notifications`} component={CalendarAndNotifications} />
+      <Route
+        path={`${path}/notifications`}
+        component={CalendarAndNotifications}
+      />
       <Route path={`${path}/settings`} component={Settings} />
     </div>
   )
 }
 
-
 function App() {
   const classes = useStyles()
   const { url } = useRouteMatch()
-  const { gardenId } = useParams<{gardenId: string}>()
+  const { gardenId } = useParams<{ gardenId: string }>()
   const isMobile = useMediaQuery(( theme: Theme ) =>
     theme.breakpoints.down( 'sm' )
   )
@@ -74,11 +87,18 @@ function App() {
         <Toolbar className={classes.appBarLeft}>
           <svg className={classes.title} role="img">
             <title>Pergola</title>
-            <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref={title + '#logo'} />
+            <use
+              xmlnsXlink="http://www.w3.org/1999/xlink"
+              xlinkHref={title + '#logo'}
+            />
           </svg>
-          <Typography variant="subtitle1" color="inherit" noWrap={isMobile} >{gardenId}</Typography>
+          <Typography variant="subtitle1" color="inherit" noWrap={isMobile}>
+            {gardenId}
+          </Typography>
         </Toolbar>
-        <Toolbar><Login /></Toolbar>
+        <Toolbar>
+          <Login />
+        </Toolbar>
       </AppBar>
       <Routes />
       <BottomNavigation
@@ -88,7 +108,7 @@ function App() {
       >
         <Tabs centered value={pathname}>
           <Tab
-            icon={<HomeIcon/>}
+            icon={<HomeIcon />}
             aria-label="home"
             {...a11yTabProps( 0, 'home' )}
           />
@@ -106,11 +126,6 @@ function App() {
             icon={<EventNoteIcon />}
             aria-label="mentioned"
             {...a11yTabProps( 3, 'notifications' )}
-          />
-          <Tab
-            icon={<PersonIcon />}
-            aria-label="profile settings"
-            {...a11yTabProps( 4, 'settings' )}
           />
         </Tabs>
       </BottomNavigation>
@@ -145,14 +160,17 @@ const useStyles = makeStyles(( theme: Theme ) => ( {
     background: theme.palette.primary.main,
   },
   appBarLeft: {
-    flexDirection: 'column',
-    alignItems: 'start',
+    position: 'relative',
+    top: '.25rem',
+    flexDirection: 'row',
+    alignItems: 'center',
+    minHeight: 0,
   },
   title: {
-    marginTop: '5px',
-    width: '135px',
-    height: '59px',
-    fill: theme.palette.primary.contrastText
+    marginRight: theme.spacing( 1 ),
+    width: '120px',
+    height: '52px',
+    fill: theme.palette.primary.contrastText,
   },
   navIconHide: {
     [theme.breakpoints.up( 'md' )]: {
@@ -173,10 +191,12 @@ const useStyles = makeStyles(( theme: Theme ) => ( {
 
 function RootApp() {
   const classes = useStyles()
-  return <div className={classes.root}>
-    <Route exact={true} path="/" component={LandingPage}/>
-    <Route path="/:gardenId" component={App} />
-  </div>
+  return (
+    <div className={classes.root}>
+      <Route exact={true} path="/" component={LandingPage} />
+      <Route path="/:gardenId" component={App} />
+    </div>
+  )
 }
 
-export default withLocalize( withRoot( RootApp  ))
+export default withLocalize( withRoot( RootApp ))
