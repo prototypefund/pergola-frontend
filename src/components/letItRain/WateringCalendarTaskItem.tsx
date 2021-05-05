@@ -100,13 +100,13 @@ const useStyles = makeStyles<Theme, WateringCalendarTaskItemStylesProps>(( theme
       fontWeight: ( {active} ) => active ? 'bold' : 'normal',
     }
   },
-  dayTitle: {
-    fontSize: ( {active} ) => active ?  '1.5rem' : '1rem',
-    fontWeight: ( {active} ) => active ? 'bold' : 'normal',
+  dayTitle: ( {active} ) => ( {
+    fontSize:   active ?  '1.5rem' : '1rem',
+    fontWeight:  active ? 'bold' : 'normal',
     textTransform: 'uppercase'
-  },
-  daySubTitle: {
-    fontSize: ( {active} ) => active ?  '1.2rem' : '.9rem',
-    fontWeight: ( {active} ) => active ? 'bold' : 'normal',
-  }
+  } ),
+  daySubTitle: ( {active} ) => ( {
+    fontSize: active ?  '1.2rem' : '.9rem',
+    fontWeight: active ? 'bold' : 'normal',
+  } )
 } ))
