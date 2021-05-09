@@ -4,10 +4,9 @@ import AvatarComponent from 'avataaars'
 import { KeycloakProfile } from 'keycloak-js'
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'react-redux'
-import { useRouteMatch } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import {Link, useRouteMatch } from 'react-router-dom'
 
-import { setUserProfile } from '../actions'
 import { getAvatarPropsForUser } from '../helper'
 import { RootState } from '../reducers'
 
@@ -23,16 +22,15 @@ export function Login() {
   return keycloak.authenticated ? (
     <Box display="flex" flexDirection="row" alignItems="center">
       <Box textAlign="center">
-        <Button
-          className={classes.button}
-          href={url + '/settings'}
+        <Link
+          to={`${url}/settings`}
           title={userProfile?.username}
         >
           <AvatarComponent
             style={{ width: '50px', height: '50px' }}
             {...getAvatarPropsForUser( keycloak.subject || '' )}
           />
-        </Button>
+        </Link>
       </Box>
     </Box>
   ) : (
