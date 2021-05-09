@@ -10,14 +10,14 @@ import {
   Select,
   Theme,
   Typography,
-} from "@material-ui/core";
-import { useKeycloak } from "@react-keycloak/web";
-import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
-import { Link, useRouteMatch } from "react-router-dom";
+} from '@material-ui/core'
+import { useKeycloak } from '@react-keycloak/web'
+import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { Link, useRouteMatch } from 'react-router-dom'
 
-import { LoginFeatures } from "../components/LoginFeatures";
-import title from "../static/logo-pergola-title.svg";
+import { LoginFeatures } from '../components/LoginFeatures'
+import title from '../static/logo-pergola-title.svg'
 
 export interface LandingPage_Garden {
   id: string;
@@ -30,21 +30,21 @@ export interface LandingPage_Info {
 }
 
 export function LandingPage() {
-  const { t } = useTranslation();
-  const { url } = useRouteMatch();
-  console.log({ url });
-  const { keycloak } = useKeycloak();
-  const classes = useStyles();
-  const [selectedGarden, setSelectedGarden] = useState("");
+  const { t } = useTranslation()
+  const { url } = useRouteMatch()
+  console.log( { url } )
+  const { keycloak } = useKeycloak()
+  const classes = useStyles()
+  const [selectedGarden, setSelectedGarden] = useState( '' )
 
-  const handleSelectGarden = (event) => {
-    setSelectedGarden(event.target.value);
-  };
+  const handleSelectGarden = ( event ) => {
+    setSelectedGarden( event.target.value )
+  }
 
   const gardens: LandingPage_Garden[] = [
-    { id: "wurzelwerk", name: "Wurzelwerk" },
-    { id: "pippilotta", name: "Garten Pippilotta" },
-  ];
+    { id: 'wurzelwerk', name: 'Wurzelwerk' },
+    { id: 'pippilotta', name: 'Garten Pippilotta' },
+  ]
 
   return (
     <div>
@@ -54,7 +54,7 @@ export function LandingPage() {
             <title>Pergola</title>
             <use
               xmlnsXlink="http://www.w3.org/1999/xlink"
-              xlinkHref={title + "#logo"}
+              xlinkHref={title + '#logo'}
             />
           </svg>
         </Box>
@@ -62,7 +62,7 @@ export function LandingPage() {
       <Container maxWidth="sm">
         <Paper elevation={0} className={classes.paperContainer}>
           <Typography variant="h4" gutterBottom={true}>
-            {t("gardeningTogether")}
+            {t( 'gardeningTogether' )}
           </Typography>
           <Typography variant="body1" gutterBottom={true}>
             Organisiere dich in deinen Gemeinschaftgarten – für mehr Zeit
@@ -77,7 +77,7 @@ export function LandingPage() {
                 <MenuItem key="none" value="">
                   <em>Erkunde&hellip;</em>
                 </MenuItem>
-                {gardens.map(({ id, name }) => (
+                {gardens.map(( { id, name } ) => (
                   <MenuItem key={id} component={Link} to={`${url}${id}/home`}>
                     {name}
                   </MenuItem>
@@ -107,37 +107,37 @@ export function LandingPage() {
         <Box textAlign="center" my={2} />
       </Container>
     </div>
-  );
+  )
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(( theme: Theme ) => ( {
   title: {
-    width: "200px",
-    maxWidth: "50vw",
-    height: "87px",
+    width: '200px',
+    maxWidth: '50vw',
+    height: '87px',
     fill: theme.palette.primary.contrastText,
   },
   gardenSelectContainer: {
-    marginTop: "23px",
-    marginBottom: "28px",
+    marginTop: '23px',
+    marginBottom: '28px',
   },
   paperContainer: {
-    margin: "1rem 0",
-    padding: "1rem",
+    margin: '1rem 0',
+    padding: '1rem',
   },
   titleAndChooser: {
     color: theme.palette.primary.contrastText,
   },
   listItem: {},
   listItemIcon: {
-    minWidth: "2.5rem",
+    minWidth: '2.5rem',
   },
   button: {
-    [theme.breakpoints.up("sm")]: {
-      width: "auto",
+    [theme.breakpoints.up( 'sm' )]: {
+      width: 'auto',
     },
-    "& + &": {
-      marginLeft: ".5rem",
+    '& + &': {
+      marginLeft: '.5rem',
     },
   },
-}));
+} ))
