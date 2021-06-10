@@ -21,7 +21,6 @@ export function GardenMap() {
     lng: 13.73126,
   } )
 
-  const showGardenMarker = false
 
   const drawCallback = () => {
     return
@@ -99,11 +98,6 @@ export function GardenMap() {
       <WrappedEditableOverlay
         key="editable-overlay"
       />
-      {showGardenMarker && <Marker position={position} icon={fancyI2}>
-        <Popup>
-          Your Garden
-        </Popup>
-      </Marker>}
     </Map>
   ) as JSX.Element
 }

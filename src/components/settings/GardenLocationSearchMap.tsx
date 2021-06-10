@@ -11,39 +11,52 @@ import {LayersControl, Map, Marker, Popup, TileLayer, withLeaflet} from 'react-l
 import {MapRef} from '../leaflet/types'
 import {LocationSearchField} from './LocationSearchField'
 
-export function GardenLocationSearchMap() {
+interface GlyphSettings {
+  prefix: string;
+  glyph: string;
+  glyphSize: string;
+}
+
+interface Props {
+  markerGlyph?:  GlyphSettings;
+  markerPosition?: L.LatLngExpression;
+  onChangeMarkerPosition?: ( lat: number, lng: number ) => void;
+}
+
+export function GardenLocationSearchMap( {markerGlyph, markerPosition, onChangeMarkerPosition}: Props ) {
   const classes = useStyles()
 
   const mapRef: MapRef = useRef()
   const [zoom, setZoom] = useState<number>( 17 )
-  const [position, setPosition] = useState<L.LatLngExpression>( {
+  const [position, setPosition] = useState<L.LatLngExpression>( markerPosition || {
     lat: 51.0833,
     lng: 13.73126,
   } )
-  const [gardenPosition, setGardenPosition] = useState<L.LatLngExpression>( {
+  /*const [markerPosition, setGardenPosition] = useState<L.LatLngExpression>( {
     lat: 51.0833,
     lng: 13.73126,
-  } )
-  const showGardenMarker = true
+  } )*/
+  const showMarker = true
 
   const updateLocation  = useCallback(
     ( lat: number, lng: number ) => {
       setPosition( {lat, lng} )
-      setGardenPosition( {lat, lng} )
+      onChangeMarkerPosition && onChangeMarkerPosition( lat, lng )
       setZoom( 17 )
     },
-    [setPosition, setGardenPosition, setZoom]
+    [setPosition, onChangeMarkerPosition, setZoom]
   )
 
   const onMapClicked = useCallback(
     ( event: L.LeafletMouseEvent ) => {
-      setGardenPosition( event.latlng )
+      const {lat, lng} = event.latlng
+      onChangeMarkerPosition && onChangeMarkerPosition( lat, lng )
     },
-    [setGardenPosition]
+    [onChangeMarkerPosition]
   )
 
   // @ts-ignore
-  const farmerIcon = L.icon.glyph( {
+  const farmerIcon = L.icon.glyph( markerGlyph || {
     prefix: 'icofont',
     glyph: 'icofont-farmer',
     glyphSize: '18px',
@@ -82,7 +95,7 @@ export function GardenLocationSearchMap() {
             />
           </LayersControl.BaseLayer>
         </LayersControl>
-        {showGardenMarker && <Marker position={gardenPosition} icon={farmerIcon}>
+        {showMarker && markerPosition && <Marker position={markerPosition} icon={farmerIcon}>
           <Popup>
             Your Garden
           </Popup>

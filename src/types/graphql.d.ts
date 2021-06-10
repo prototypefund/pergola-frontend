@@ -1,5 +1,4 @@
-import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql'
-
+import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
@@ -18,6 +17,8 @@ export type Query = {
   assignableWateringPeriod?: Maybe<Array<Maybe<WateringPeriod>>>;
   /** [Generated query](https://grandstack.io/docs/graphql-schema-generation-augmentation#generated-queries) for Garden type nodes. */
   Garden?: Maybe<Array<Maybe<Garden>>>;
+  /** [Generated query](https://grandstack.io/docs/graphql-schema-generation-augmentation#generated-queries) for GardenSettings type nodes. */
+  GardenSettings?: Maybe<Array<Maybe<GardenSettings>>>;
   /** [Generated query](https://grandstack.io/docs/graphql-schema-generation-augmentation#generated-queries) for User type nodes. */
   User?: Maybe<Array<Maybe<User>>>;
   /** [Generated query](https://grandstack.io/docs/graphql-schema-generation-augmentation#generated-queries) for WateringTask type nodes. */
@@ -59,6 +60,21 @@ export type QueryGardenArgs = {
   offset?: Maybe<Scalars['Int']>;
   orderBy?: Maybe<Array<Maybe<_GardenOrdering>>>;
   filter?: Maybe<_GardenFilter>;
+};
+
+
+export type QueryGardenSettingsArgs = {
+  name?: Maybe<Scalars['String']>;
+  shortDescription?: Maybe<Scalars['String']>;
+  infoPageMarkdown?: Maybe<Scalars['String']>;
+  homepageUrl?: Maybe<Scalars['String']>;
+  logoUrl?: Maybe<Scalars['String']>;
+  location?: Maybe<_Neo4jPointInput>;
+  _id?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<Maybe<_GardenSettingsOrdering>>>;
+  filter?: Maybe<_GardenSettingsFilter>;
 };
 
 
@@ -264,6 +280,93 @@ export type _GardenFilter = {
   label_not_starts_with?: Maybe<Scalars['String']>;
   label_ends_with?: Maybe<Scalars['String']>;
   label_not_ends_with?: Maybe<Scalars['String']>;
+  settings?: Maybe<_GardenSettingsFilter>;
+  settings_not?: Maybe<_GardenSettingsFilter>;
+  settings_in?: Maybe<Array<_GardenSettingsFilter>>;
+  settings_not_in?: Maybe<Array<_GardenSettingsFilter>>;
+};
+
+export type _GardenSettingsFilter = {
+  AND?: Maybe<Array<_GardenSettingsFilter>>;
+  OR?: Maybe<Array<_GardenSettingsFilter>>;
+  garden?: Maybe<_GardenFilter>;
+  garden_not?: Maybe<_GardenFilter>;
+  garden_in?: Maybe<Array<_GardenFilter>>;
+  garden_not_in?: Maybe<Array<_GardenFilter>>;
+  name?: Maybe<Scalars['String']>;
+  name_not?: Maybe<Scalars['String']>;
+  name_in?: Maybe<Array<Scalars['String']>>;
+  name_not_in?: Maybe<Array<Scalars['String']>>;
+  name_contains?: Maybe<Scalars['String']>;
+  name_not_contains?: Maybe<Scalars['String']>;
+  name_starts_with?: Maybe<Scalars['String']>;
+  name_not_starts_with?: Maybe<Scalars['String']>;
+  name_ends_with?: Maybe<Scalars['String']>;
+  name_not_ends_with?: Maybe<Scalars['String']>;
+  shortDescription?: Maybe<Scalars['String']>;
+  shortDescription_not?: Maybe<Scalars['String']>;
+  shortDescription_in?: Maybe<Array<Scalars['String']>>;
+  shortDescription_not_in?: Maybe<Array<Scalars['String']>>;
+  shortDescription_contains?: Maybe<Scalars['String']>;
+  shortDescription_not_contains?: Maybe<Scalars['String']>;
+  shortDescription_starts_with?: Maybe<Scalars['String']>;
+  shortDescription_not_starts_with?: Maybe<Scalars['String']>;
+  shortDescription_ends_with?: Maybe<Scalars['String']>;
+  shortDescription_not_ends_with?: Maybe<Scalars['String']>;
+  infoPageMarkdown?: Maybe<Scalars['String']>;
+  infoPageMarkdown_not?: Maybe<Scalars['String']>;
+  infoPageMarkdown_in?: Maybe<Array<Scalars['String']>>;
+  infoPageMarkdown_not_in?: Maybe<Array<Scalars['String']>>;
+  infoPageMarkdown_contains?: Maybe<Scalars['String']>;
+  infoPageMarkdown_not_contains?: Maybe<Scalars['String']>;
+  infoPageMarkdown_starts_with?: Maybe<Scalars['String']>;
+  infoPageMarkdown_not_starts_with?: Maybe<Scalars['String']>;
+  infoPageMarkdown_ends_with?: Maybe<Scalars['String']>;
+  infoPageMarkdown_not_ends_with?: Maybe<Scalars['String']>;
+  homepageUrl?: Maybe<Scalars['String']>;
+  homepageUrl_not?: Maybe<Scalars['String']>;
+  homepageUrl_in?: Maybe<Array<Scalars['String']>>;
+  homepageUrl_not_in?: Maybe<Array<Scalars['String']>>;
+  homepageUrl_contains?: Maybe<Scalars['String']>;
+  homepageUrl_not_contains?: Maybe<Scalars['String']>;
+  homepageUrl_starts_with?: Maybe<Scalars['String']>;
+  homepageUrl_not_starts_with?: Maybe<Scalars['String']>;
+  homepageUrl_ends_with?: Maybe<Scalars['String']>;
+  homepageUrl_not_ends_with?: Maybe<Scalars['String']>;
+  logoUrl?: Maybe<Scalars['String']>;
+  logoUrl_not?: Maybe<Scalars['String']>;
+  logoUrl_in?: Maybe<Array<Scalars['String']>>;
+  logoUrl_not_in?: Maybe<Array<Scalars['String']>>;
+  logoUrl_contains?: Maybe<Scalars['String']>;
+  logoUrl_not_contains?: Maybe<Scalars['String']>;
+  logoUrl_starts_with?: Maybe<Scalars['String']>;
+  logoUrl_not_starts_with?: Maybe<Scalars['String']>;
+  logoUrl_ends_with?: Maybe<Scalars['String']>;
+  logoUrl_not_ends_with?: Maybe<Scalars['String']>;
+  location?: Maybe<_Neo4jPointInput>;
+  location_not?: Maybe<_Neo4jPointInput>;
+  location_distance?: Maybe<_Neo4jPointDistanceFilter>;
+  location_distance_lt?: Maybe<_Neo4jPointDistanceFilter>;
+  location_distance_lte?: Maybe<_Neo4jPointDistanceFilter>;
+  location_distance_gt?: Maybe<_Neo4jPointDistanceFilter>;
+  location_distance_gte?: Maybe<_Neo4jPointDistanceFilter>;
+};
+
+/** Generated Point input object for Neo4j [Spatial field arguments](https://grandstack.io/docs/graphql-spatial-types/#point-query-arguments). */
+export type _Neo4jPointInput = {
+  x?: Maybe<Scalars['Float']>;
+  y?: Maybe<Scalars['Float']>;
+  z?: Maybe<Scalars['Float']>;
+  longitude?: Maybe<Scalars['Float']>;
+  latitude?: Maybe<Scalars['Float']>;
+  height?: Maybe<Scalars['Float']>;
+  crs?: Maybe<Scalars['String']>;
+  srid?: Maybe<Scalars['Int']>;
+};
+
+export type _Neo4jPointDistanceFilter = {
+  point: _Neo4jPointInput;
+  distance: Scalars['Float'];
 };
 
 export type Garden = {
@@ -272,6 +375,43 @@ export type Garden = {
   _id?: Maybe<Scalars['String']>;
   gardenId: Scalars['ID'];
   label: Scalars['String'];
+  settings?: Maybe<GardenSettings>;
+};
+
+
+export type GardenSettingsArgs = {
+  filter?: Maybe<_GardenSettingsFilter>;
+};
+
+export type GardenSettings = {
+  __typename?: 'GardenSettings';
+  /** Generated field for querying the Neo4j [system id](https://neo4j.com/docs/cypher-manual/current/functions/scalar/#functions-id) of this node. */
+  _id?: Maybe<Scalars['String']>;
+  garden: Garden;
+  name?: Maybe<Scalars['String']>;
+  shortDescription?: Maybe<Scalars['String']>;
+  infoPageMarkdown?: Maybe<Scalars['String']>;
+  homepageUrl?: Maybe<Scalars['String']>;
+  logoUrl?: Maybe<Scalars['String']>;
+  location?: Maybe<_Neo4jPoint>;
+};
+
+
+export type GardenSettingsGardenArgs = {
+  filter?: Maybe<_GardenFilter>;
+};
+
+/** Generated Point object type for Neo4j [Spatial fields](https://grandstack.io/docs/graphql-spatial-types#using-point-in-queries). */
+export type _Neo4jPoint = {
+  __typename?: '_Neo4jPoint';
+  x?: Maybe<Scalars['Float']>;
+  y?: Maybe<Scalars['Float']>;
+  z?: Maybe<Scalars['Float']>;
+  longitude?: Maybe<Scalars['Float']>;
+  latitude?: Maybe<Scalars['Float']>;
+  height?: Maybe<Scalars['Float']>;
+  crs?: Maybe<Scalars['String']>;
+  srid?: Maybe<Scalars['Int']>;
 };
 
 export enum _WateringTaskOrdering {
@@ -698,8 +838,8 @@ export enum _UserOrdering {
   Neo4jImportIdDesc = 'neo4jImportId_desc',
   TypeAsc = 'type_asc',
   TypeDesc = 'type_desc',
-  _IdAsc = '_id_asc',
-  _IdDesc = '_id_desc'
+  IdAsc = '_id_asc',
+  IdDesc = '_id_desc'
 }
 
 export type User = {
@@ -863,17 +1003,20 @@ export enum _GardenOrdering {
   IdDesc = '_id_desc'
 }
 
-/** Generated Point input object for Neo4j [Spatial field arguments](https://grandstack.io/docs/graphql-spatial-types/#point-query-arguments). */
-export type _Neo4jPointInput = {
-  x?: Maybe<Scalars['Float']>;
-  y?: Maybe<Scalars['Float']>;
-  z?: Maybe<Scalars['Float']>;
-  longitude?: Maybe<Scalars['Float']>;
-  latitude?: Maybe<Scalars['Float']>;
-  height?: Maybe<Scalars['Float']>;
-  crs?: Maybe<Scalars['String']>;
-  srid?: Maybe<Scalars['Int']>;
-};
+export enum _GardenSettingsOrdering {
+  NameAsc = 'name_asc',
+  NameDesc = 'name_desc',
+  ShortDescriptionAsc = 'shortDescription_asc',
+  ShortDescriptionDesc = 'shortDescription_desc',
+  InfoPageMarkdownAsc = 'infoPageMarkdown_asc',
+  InfoPageMarkdownDesc = 'infoPageMarkdown_desc',
+  HomepageUrlAsc = 'homepageUrl_asc',
+  HomepageUrlDesc = 'homepageUrl_desc',
+  LogoUrlAsc = 'logoUrl_asc',
+  LogoUrlDesc = 'logoUrl_desc',
+  IdAsc = '_id_asc',
+  IdDesc = '_id_desc'
+}
 
 export enum _GeoShapeOrdering {
   ShapeIdAsc = 'shapeId_asc',
@@ -912,11 +1055,6 @@ export type _GeoShapeFilter = {
   feature_not?: Maybe<_GardenFeatureFilter>;
   feature_in?: Maybe<Array<_GardenFeatureFilter>>;
   feature_not_in?: Maybe<Array<_GardenFeatureFilter>>;
-};
-
-export type _Neo4jPointDistanceFilter = {
-  point: _Neo4jPointInput;
-  distance: Scalars['Float'];
 };
 
 export type _GardenLayerFilter = {
@@ -1043,19 +1181,6 @@ export type GeoShapeBelongs_ToArgs = {
 
 export type GeoShapeFeatureArgs = {
   filter?: Maybe<_GardenFeatureFilter>;
-};
-
-/** Generated Point object type for Neo4j [Spatial fields](https://grandstack.io/docs/graphql-spatial-types#using-point-in-queries). */
-export type _Neo4jPoint = {
-  __typename?: '_Neo4jPoint';
-  x?: Maybe<Scalars['Float']>;
-  y?: Maybe<Scalars['Float']>;
-  z?: Maybe<Scalars['Float']>;
-  longitude?: Maybe<Scalars['Float']>;
-  latitude?: Maybe<Scalars['Float']>;
-  height?: Maybe<Scalars['Float']>;
-  crs?: Maybe<Scalars['String']>;
-  srid?: Maybe<Scalars['Int']>;
 };
 
 export enum _GardenLayerOrdering {
@@ -1326,6 +1451,7 @@ export type UserSettings = {
 export type Mutation = {
   __typename?: 'Mutation';
   ownMergeUserSettings?: Maybe<UserSettings>;
+  mergeGardenSettings?: Maybe<Scalars['JSON']>;
   seedNeo4jFromJSON?: Maybe<Scalars['Boolean']>;
   setUserAvailability?: Maybe<Scalars['Boolean']>;
   seedAvailabilitiesFromTests?: Maybe<Scalars['Boolean']>;
@@ -1335,6 +1461,12 @@ export type Mutation = {
   pushSubscribe?: Maybe<Scalars['Boolean']>;
   publishToAll?: Maybe<Scalars['Boolean']>;
   sendWelcomeMail?: Maybe<Scalars['Boolean']>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##add--remove-relationship) for [creating](https://neo4j.com/docs/cypher-manual/4.1/clauses/create/#create-relationships) the of relationship. */
+  AddGardenSettings?: Maybe<_AddGardenSettingsPayload>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##add--remove-relationship) for [deleting](https://neo4j.com/docs/cypher-manual/4.1/clauses/delete/#delete-delete-relationships-only) the of relationship. */
+  RemoveGardenSettings?: Maybe<_RemoveGardenSettingsPayload>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##merge-relationship) for [merging](https://neo4j.com/docs/cypher-manual/4.1/clauses/merge/#query-merge-relationships) the of relationship. */
+  MergeGardenSettings?: Maybe<_MergeGardenSettingsPayload>;
   /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#create) for [creating](https://neo4j.com/docs/cypher-manual/4.1/clauses/create/#create-nodes) a Garden node. */
   CreateGarden?: Maybe<Garden>;
   /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#update) for [updating](https://neo4j.com/docs/cypher-manual/4.1/clauses/set/#set-update-a-property) a Garden node. */
@@ -1343,6 +1475,18 @@ export type Mutation = {
   DeleteGarden?: Maybe<Garden>;
   /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#merge) for [merging](https://neo4j.com/docs/cypher-manual/4.1/clauses/merge/#query-merge-node-derived) a Garden node. */
   MergeGarden?: Maybe<Garden>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##add--remove-relationship) for [creating](https://neo4j.com/docs/cypher-manual/4.1/clauses/create/#create-relationships) the of relationship. */
+  AddGardenSettingsGarden?: Maybe<_AddGardenSettingsGardenPayload>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##add--remove-relationship) for [deleting](https://neo4j.com/docs/cypher-manual/4.1/clauses/delete/#delete-delete-relationships-only) the of relationship. */
+  RemoveGardenSettingsGarden?: Maybe<_RemoveGardenSettingsGardenPayload>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##merge-relationship) for [merging](https://neo4j.com/docs/cypher-manual/4.1/clauses/merge/#query-merge-relationships) the of relationship. */
+  MergeGardenSettingsGarden?: Maybe<_MergeGardenSettingsGardenPayload>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#create) for [creating](https://neo4j.com/docs/cypher-manual/4.1/clauses/create/#create-nodes) a GardenSettings node. */
+  CreateGardenSettings?: Maybe<GardenSettings>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#update) for [updating](https://neo4j.com/docs/cypher-manual/4.1/clauses/set/#set-update-a-property) a GardenSettings node. */
+  UpdateGardenSettings?: Maybe<GardenSettings>;
+  /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/#delete) for [deleting](https://neo4j.com/docs/cypher-manual/4.1/clauses/delete/#delete-delete-single-node) a GardenSettings node. */
+  DeleteGardenSettings?: Maybe<GardenSettings>;
   /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##add--remove-relationship) for [creating](https://neo4j.com/docs/cypher-manual/4.1/clauses/create/#create-relationships) the assigned relationship. */
   AddUserAssigned?: Maybe<_AddUserAssignedPayload>;
   /** [Generated mutation](https://grandstack.io/docs/graphql-schema-generation-augmentation/##add--remove-relationship) for [deleting](https://neo4j.com/docs/cypher-manual/4.1/clauses/delete/#delete-delete-relationships-only) the assigned relationship. */
@@ -1575,6 +1719,11 @@ export type MutationOwnMergeUserSettingsArgs = {
 };
 
 
+export type MutationMergeGardenSettingsArgs = {
+  settings?: Maybe<GardenSettingsInput>;
+};
+
+
 export type MutationSetUserAvailabilityArgs = {
   gardenId: Scalars['ID'];
   dates: Array<Maybe<_Neo4jDateInput>>;
@@ -1613,6 +1762,24 @@ export type MutationPublishToAllArgs = {
 };
 
 
+export type MutationAddGardenSettingsArgs = {
+  from: _GardenSettingsInput;
+  to: _GardenInput;
+};
+
+
+export type MutationRemoveGardenSettingsArgs = {
+  from: _GardenSettingsInput;
+  to: _GardenInput;
+};
+
+
+export type MutationMergeGardenSettingsArgs = {
+  from: _GardenSettingsInput;
+  to: _GardenInput;
+};
+
+
 export type MutationCreateGardenArgs = {
   gardenId?: Maybe<Scalars['ID']>;
   label: Scalars['String'];
@@ -1633,6 +1800,49 @@ export type MutationDeleteGardenArgs = {
 export type MutationMergeGardenArgs = {
   gardenId: Scalars['ID'];
   label?: Maybe<Scalars['String']>;
+};
+
+
+export type MutationAddGardenSettingsGardenArgs = {
+  from: _GardenSettingsInput;
+  to: _GardenInput;
+};
+
+
+export type MutationRemoveGardenSettingsGardenArgs = {
+  from: _GardenSettingsInput;
+  to: _GardenInput;
+};
+
+
+export type MutationMergeGardenSettingsGardenArgs = {
+  from: _GardenSettingsInput;
+  to: _GardenInput;
+};
+
+
+export type MutationCreateGardenSettingsArgs = {
+  name?: Maybe<Scalars['String']>;
+  shortDescription?: Maybe<Scalars['String']>;
+  infoPageMarkdown?: Maybe<Scalars['String']>;
+  homepageUrl?: Maybe<Scalars['String']>;
+  logoUrl?: Maybe<Scalars['String']>;
+  location?: Maybe<_Neo4jPointInput>;
+};
+
+
+export type MutationUpdateGardenSettingsArgs = {
+  name: Scalars['String'];
+  shortDescription?: Maybe<Scalars['String']>;
+  infoPageMarkdown?: Maybe<Scalars['String']>;
+  homepageUrl?: Maybe<Scalars['String']>;
+  logoUrl?: Maybe<Scalars['String']>;
+  location?: Maybe<_Neo4jPointInput>;
+};
+
+
+export type MutationDeleteGardenSettingsArgs = {
+  name: Scalars['String'];
 };
 
 
@@ -2345,6 +2555,16 @@ export type UserSettingsInput = {
   letitrain_maximum_tasks?: Maybe<Scalars['Int']>;
 };
 
+export type GardenSettingsInput = {
+  gardenId: Scalars['ID'];
+  name?: Maybe<Scalars['String']>;
+  infoPageMarkdown?: Maybe<Scalars['String']>;
+  shortDescription?: Maybe<Scalars['String']>;
+  homepageUrl?: Maybe<Scalars['String']>;
+  logoUrl?: Maybe<Scalars['String']>;
+  location?: Maybe<_Neo4jPointInput>;
+};
+
 
 export type PushSubscriptionInput = {
   endpoint: Scalars['String'];
@@ -2360,6 +2580,62 @@ export type PushKeyInput = {
 export type PushMessageInput = {
   title: Scalars['String'];
   message?: Maybe<Scalars['String']>;
+};
+
+export type _GardenSettingsInput = {
+  name: Scalars['String'];
+};
+
+export type _GardenInput = {
+  gardenId: Scalars['ID'];
+};
+
+export type _AddGardenSettingsPayload = {
+  __typename?: '_AddGardenSettingsPayload';
+  /** Field for the GardenSettings node this of [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<GardenSettings>;
+  /** Field for the Garden node this of [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<Garden>;
+};
+
+export type _RemoveGardenSettingsPayload = {
+  __typename?: '_RemoveGardenSettingsPayload';
+  /** Field for the GardenSettings node this of [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<GardenSettings>;
+  /** Field for the Garden node this of [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<Garden>;
+};
+
+export type _MergeGardenSettingsPayload = {
+  __typename?: '_MergeGardenSettingsPayload';
+  /** Field for the GardenSettings node this of [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<GardenSettings>;
+  /** Field for the Garden node this of [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<Garden>;
+};
+
+export type _AddGardenSettingsGardenPayload = {
+  __typename?: '_AddGardenSettingsGardenPayload';
+  /** Field for the GardenSettings node this of [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<GardenSettings>;
+  /** Field for the Garden node this of [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<Garden>;
+};
+
+export type _RemoveGardenSettingsGardenPayload = {
+  __typename?: '_RemoveGardenSettingsGardenPayload';
+  /** Field for the GardenSettings node this of [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<GardenSettings>;
+  /** Field for the Garden node this of [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<Garden>;
+};
+
+export type _MergeGardenSettingsGardenPayload = {
+  __typename?: '_MergeGardenSettingsGardenPayload';
+  /** Field for the GardenSettings node this of [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
+  from?: Maybe<GardenSettings>;
+  /** Field for the Garden node this of [relationship](https://grandstack.io/docs/graphql-relationship-types) is going to. */
+  to?: Maybe<Garden>;
 };
 
 export type _UserInput = {
@@ -2822,10 +3098,6 @@ export type _MergeGeoShapeFeaturePayload = {
   to?: Maybe<GeoShape>;
 };
 
-export type _GardenInput = {
-  gardenId: Scalars['ID'];
-};
-
 export type _AddGardenLayerAtPayload = {
   __typename?: '_AddGardenLayerAtPayload';
   /** Field for the GardenLayer node this at [relationship](https://grandstack.io/docs/graphql-relationship-types) is coming from. */
@@ -3187,7 +3459,7 @@ export type SubscriptionObject<TResult, TKey extends string, TParent, TContext, 
   | SubscriptionResolverObject<TResult, TParent, TContext, TArgs>;
 
 export type SubscriptionResolver<TResult, TKey extends string, TParent = {}, TContext = {}, TArgs = {}> =
-  | (( ...args: any[] ) => SubscriptionObject<TResult, TKey, TParent, TContext, TArgs> )
+  | ((...args: any[]) => SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>)
   | SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>;
 
 export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
@@ -3196,7 +3468,7 @@ export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
   info: GraphQLResolveInfo
 ) => Maybe<TTypes> | Promise<Maybe<TTypes>>;
 
-export type IsTypeOfResolverFn<T = {}, TContext = {}> = ( obj: T, context: TContext, info: GraphQLResolveInfo ) => boolean | Promise<boolean>;
+export type IsTypeOfResolverFn<T = {}, TContext = {}> = (obj: T, context: TContext, info: GraphQLResolveInfo) => boolean | Promise<boolean>;
 
 export type NextResolverFn<T> = () => Promise<T>;
 
@@ -3219,7 +3491,13 @@ export type ResolversTypes = {
   WateringPeriod: ResolverTypeWrapper<WateringPeriod>;
   _Neo4jDate: ResolverTypeWrapper<_Neo4jDate>;
   _GardenFilter: _GardenFilter;
+  _GardenSettingsFilter: _GardenSettingsFilter;
+  _Neo4jPointInput: _Neo4jPointInput;
+  Float: ResolverTypeWrapper<Scalars['Float']>;
+  _Neo4jPointDistanceFilter: _Neo4jPointDistanceFilter;
   Garden: ResolverTypeWrapper<Garden>;
+  GardenSettings: ResolverTypeWrapper<GardenSettings>;
+  _Neo4jPoint: ResolverTypeWrapper<_Neo4jPoint>;
   _WateringTaskOrdering: _WateringTaskOrdering;
   _WateringTaskFilter: _WateringTaskFilter;
   _Neo4jDateInput: _Neo4jDateInput;
@@ -3235,15 +3513,12 @@ export type ResolversTypes = {
   _LogEventOrdering: _LogEventOrdering;
   LogEvent: ResolverTypeWrapper<LogEvent>;
   _GardenOrdering: _GardenOrdering;
-  _Neo4jPointInput: _Neo4jPointInput;
-  Float: ResolverTypeWrapper<Scalars['Float']>;
+  _GardenSettingsOrdering: _GardenSettingsOrdering;
   _GeoShapeOrdering: _GeoShapeOrdering;
   _GeoShapeFilter: _GeoShapeFilter;
-  _Neo4jPointDistanceFilter: _Neo4jPointDistanceFilter;
   _GardenLayerFilter: _GardenLayerFilter;
   _GardenFeatureFilter: _GardenFeatureFilter;
   GeoShape: ResolversTypes['PolygonShape'] | ResolversTypes['MarkerShape'];
-  _Neo4jPoint: ResolverTypeWrapper<_Neo4jPoint>;
   _GardenLayerOrdering: _GardenLayerOrdering;
   GardenLayer: ResolverTypeWrapper<GardenLayer>;
   GardenFeature: ResolverTypeWrapper<GardenFeature>;
@@ -3259,10 +3534,19 @@ export type ResolversTypes = {
   UserSettings: ResolverTypeWrapper<UserSettings>;
   Mutation: ResolverTypeWrapper<{}>;
   UserSettingsInput: UserSettingsInput;
+  GardenSettingsInput: GardenSettingsInput;
   JSON: ResolverTypeWrapper<Scalars['JSON']>;
   PushSubscriptionInput: PushSubscriptionInput;
   PushKeyInput: PushKeyInput;
   PushMessageInput: PushMessageInput;
+  _GardenSettingsInput: _GardenSettingsInput;
+  _GardenInput: _GardenInput;
+  _AddGardenSettingsPayload: ResolverTypeWrapper<_AddGardenSettingsPayload>;
+  _RemoveGardenSettingsPayload: ResolverTypeWrapper<_RemoveGardenSettingsPayload>;
+  _MergeGardenSettingsPayload: ResolverTypeWrapper<_MergeGardenSettingsPayload>;
+  _AddGardenSettingsGardenPayload: ResolverTypeWrapper<_AddGardenSettingsGardenPayload>;
+  _RemoveGardenSettingsGardenPayload: ResolverTypeWrapper<_RemoveGardenSettingsGardenPayload>;
+  _MergeGardenSettingsGardenPayload: ResolverTypeWrapper<_MergeGardenSettingsGardenPayload>;
   _UserInput: _UserInput;
   _WateringTaskInput: _WateringTaskInput;
   _AddUserAssignedPayload: ResolverTypeWrapper<_AddUserAssignedPayload>;
@@ -3324,7 +3608,6 @@ export type ResolversTypes = {
   _AddGeoShapeFeaturePayload: ResolverTypeWrapper<_AddGeoShapeFeaturePayload>;
   _RemoveGeoShapeFeaturePayload: ResolverTypeWrapper<_RemoveGeoShapeFeaturePayload>;
   _MergeGeoShapeFeaturePayload: ResolverTypeWrapper<_MergeGeoShapeFeaturePayload>;
-  _GardenInput: _GardenInput;
   _AddGardenLayerAtPayload: ResolverTypeWrapper<_AddGardenLayerAtPayload>;
   _RemoveGardenLayerAtPayload: ResolverTypeWrapper<_RemoveGardenLayerAtPayload>;
   _MergeGardenLayerAtPayload: ResolverTypeWrapper<_MergeGardenLayerAtPayload>;
@@ -3371,7 +3654,13 @@ export type ResolversParentTypes = {
   WateringPeriod: WateringPeriod;
   _Neo4jDate: _Neo4jDate;
   _GardenFilter: _GardenFilter;
+  _GardenSettingsFilter: _GardenSettingsFilter;
+  _Neo4jPointInput: _Neo4jPointInput;
+  Float: Scalars['Float'];
+  _Neo4jPointDistanceFilter: _Neo4jPointDistanceFilter;
   Garden: Garden;
+  GardenSettings: GardenSettings;
+  _Neo4jPoint: _Neo4jPoint;
   _WateringTaskFilter: _WateringTaskFilter;
   _Neo4jDateInput: _Neo4jDateInput;
   _UserFilter: _UserFilter;
@@ -3382,14 +3671,10 @@ export type ResolversParentTypes = {
   User: User;
   ChangeRequest: ChangeRequest;
   LogEvent: LogEvent;
-  _Neo4jPointInput: _Neo4jPointInput;
-  Float: Scalars['Float'];
   _GeoShapeFilter: _GeoShapeFilter;
-  _Neo4jPointDistanceFilter: _Neo4jPointDistanceFilter;
   _GardenLayerFilter: _GardenLayerFilter;
   _GardenFeatureFilter: _GardenFeatureFilter;
   GeoShape: ResolversParentTypes['PolygonShape'] | ResolversParentTypes['MarkerShape'];
-  _Neo4jPoint: _Neo4jPoint;
   GardenLayer: GardenLayer;
   GardenFeature: GardenFeature;
   _PolygonShapeFilter: _PolygonShapeFilter;
@@ -3400,10 +3685,19 @@ export type ResolversParentTypes = {
   UserSettings: UserSettings;
   Mutation: {};
   UserSettingsInput: UserSettingsInput;
+  GardenSettingsInput: GardenSettingsInput;
   JSON: Scalars['JSON'];
   PushSubscriptionInput: PushSubscriptionInput;
   PushKeyInput: PushKeyInput;
   PushMessageInput: PushMessageInput;
+  _GardenSettingsInput: _GardenSettingsInput;
+  _GardenInput: _GardenInput;
+  _AddGardenSettingsPayload: _AddGardenSettingsPayload;
+  _RemoveGardenSettingsPayload: _RemoveGardenSettingsPayload;
+  _MergeGardenSettingsPayload: _MergeGardenSettingsPayload;
+  _AddGardenSettingsGardenPayload: _AddGardenSettingsGardenPayload;
+  _RemoveGardenSettingsGardenPayload: _RemoveGardenSettingsGardenPayload;
+  _MergeGardenSettingsGardenPayload: _MergeGardenSettingsGardenPayload;
   _UserInput: _UserInput;
   _WateringTaskInput: _WateringTaskInput;
   _AddUserAssignedPayload: _AddUserAssignedPayload;
@@ -3465,7 +3759,6 @@ export type ResolversParentTypes = {
   _AddGeoShapeFeaturePayload: _AddGeoShapeFeaturePayload;
   _RemoveGeoShapeFeaturePayload: _RemoveGeoShapeFeaturePayload;
   _MergeGeoShapeFeaturePayload: _MergeGeoShapeFeaturePayload;
-  _GardenInput: _GardenInput;
   _AddGardenLayerAtPayload: _AddGardenLayerAtPayload;
   _RemoveGardenLayerAtPayload: _RemoveGardenLayerAtPayload;
   _MergeGardenLayerAtPayload: _MergeGardenLayerAtPayload;
@@ -3504,6 +3797,7 @@ export type ResolversParentTypes = {
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   assignableWateringPeriod?: Resolver<Maybe<Array<Maybe<ResolversTypes['WateringPeriod']>>>, ParentType, ContextType, RequireFields<QueryAssignableWateringPeriodArgs, 'gardenId'>>;
   Garden?: Resolver<Maybe<Array<Maybe<ResolversTypes['Garden']>>>, ParentType, ContextType, RequireFields<QueryGardenArgs, never>>;
+  GardenSettings?: Resolver<Maybe<Array<Maybe<ResolversTypes['GardenSettings']>>>, ParentType, ContextType, RequireFields<QueryGardenSettingsArgs, never>>;
   User?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType, RequireFields<QueryUserArgs, never>>;
   WateringTask?: Resolver<Maybe<Array<Maybe<ResolversTypes['WateringTask']>>>, ParentType, ContextType, RequireFields<QueryWateringTaskArgs, never>>;
   WateringPeriod?: Resolver<Maybe<Array<Maybe<ResolversTypes['WateringPeriod']>>>, ParentType, ContextType, RequireFields<QueryWateringPeriodArgs, never>>;
@@ -3539,6 +3833,31 @@ export type GardenResolvers<ContextType = any, ParentType extends ResolversParen
   _id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   gardenId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   label?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  settings?: Resolver<Maybe<ResolversTypes['GardenSettings']>, ParentType, ContextType, RequireFields<GardenSettingsArgs, never>>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type GardenSettingsResolvers<ContextType = any, ParentType extends ResolversParentTypes['GardenSettings'] = ResolversParentTypes['GardenSettings']> = {
+  _id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  garden?: Resolver<ResolversTypes['Garden'], ParentType, ContextType, RequireFields<GardenSettingsGardenArgs, never>>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  shortDescription?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  infoPageMarkdown?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  homepageUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  logoUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  location?: Resolver<Maybe<ResolversTypes['_Neo4jPoint']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _Neo4jPointResolvers<ContextType = any, ParentType extends ResolversParentTypes['_Neo4jPoint'] = ResolversParentTypes['_Neo4jPoint']> = {
+  x?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  y?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  z?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  longitude?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  latitude?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  height?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  crs?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  srid?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -3602,18 +3921,6 @@ export type GeoShapeResolvers<ContextType = any, ParentType extends ResolversPar
   feature?: Resolver<Maybe<ResolversTypes['GardenFeature']>, ParentType, ContextType, RequireFields<GeoShapeFeatureArgs, never>>;
 };
 
-export type _Neo4jPointResolvers<ContextType = any, ParentType extends ResolversParentTypes['_Neo4jPoint'] = ResolversParentTypes['_Neo4jPoint']> = {
-  x?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  y?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  z?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  longitude?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  latitude?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  height?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  crs?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  srid?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
 export type GardenLayerResolvers<ContextType = any, ParentType extends ResolversParentTypes['GardenLayer'] = ResolversParentTypes['GardenLayer']> = {
   layerId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -3665,6 +3972,7 @@ export type UserSettingsResolvers<ContextType = any, ParentType extends Resolver
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   ownMergeUserSettings?: Resolver<Maybe<ResolversTypes['UserSettings']>, ParentType, ContextType, RequireFields<MutationOwnMergeUserSettingsArgs, never>>;
+  mergeGardenSettings?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType, RequireFields<MutationMergeGardenSettingsArgs, never>>;
   seedNeo4jFromJSON?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   setUserAvailability?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationSetUserAvailabilityArgs, 'gardenId' | 'dates'>>;
   seedAvailabilitiesFromTests?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
@@ -3674,10 +3982,19 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   pushSubscribe?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationPushSubscribeArgs, never>>;
   publishToAll?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationPublishToAllArgs, never>>;
   sendWelcomeMail?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  AddGardenSettings?: Resolver<Maybe<ResolversTypes['_AddGardenSettingsPayload']>, ParentType, ContextType, RequireFields<MutationAddGardenSettingsArgs, 'from' | 'to'>>;
+  RemoveGardenSettings?: Resolver<Maybe<ResolversTypes['_RemoveGardenSettingsPayload']>, ParentType, ContextType, RequireFields<MutationRemoveGardenSettingsArgs, 'from' | 'to'>>;
+  MergeGardenSettings?: Resolver<Maybe<ResolversTypes['_MergeGardenSettingsPayload']>, ParentType, ContextType, RequireFields<MutationMergeGardenSettingsArgs, 'from' | 'to'>>;
   CreateGarden?: Resolver<Maybe<ResolversTypes['Garden']>, ParentType, ContextType, RequireFields<MutationCreateGardenArgs, 'label'>>;
   UpdateGarden?: Resolver<Maybe<ResolversTypes['Garden']>, ParentType, ContextType, RequireFields<MutationUpdateGardenArgs, 'gardenId'>>;
   DeleteGarden?: Resolver<Maybe<ResolversTypes['Garden']>, ParentType, ContextType, RequireFields<MutationDeleteGardenArgs, 'gardenId'>>;
   MergeGarden?: Resolver<Maybe<ResolversTypes['Garden']>, ParentType, ContextType, RequireFields<MutationMergeGardenArgs, 'gardenId'>>;
+  AddGardenSettingsGarden?: Resolver<Maybe<ResolversTypes['_AddGardenSettingsGardenPayload']>, ParentType, ContextType, RequireFields<MutationAddGardenSettingsGardenArgs, 'from' | 'to'>>;
+  RemoveGardenSettingsGarden?: Resolver<Maybe<ResolversTypes['_RemoveGardenSettingsGardenPayload']>, ParentType, ContextType, RequireFields<MutationRemoveGardenSettingsGardenArgs, 'from' | 'to'>>;
+  MergeGardenSettingsGarden?: Resolver<Maybe<ResolversTypes['_MergeGardenSettingsGardenPayload']>, ParentType, ContextType, RequireFields<MutationMergeGardenSettingsGardenArgs, 'from' | 'to'>>;
+  CreateGardenSettings?: Resolver<Maybe<ResolversTypes['GardenSettings']>, ParentType, ContextType, RequireFields<MutationCreateGardenSettingsArgs, never>>;
+  UpdateGardenSettings?: Resolver<Maybe<ResolversTypes['GardenSettings']>, ParentType, ContextType, RequireFields<MutationUpdateGardenSettingsArgs, 'name'>>;
+  DeleteGardenSettings?: Resolver<Maybe<ResolversTypes['GardenSettings']>, ParentType, ContextType, RequireFields<MutationDeleteGardenSettingsArgs, 'name'>>;
   AddUserAssigned?: Resolver<Maybe<ResolversTypes['_AddUserAssignedPayload']>, ParentType, ContextType, RequireFields<MutationAddUserAssignedArgs, 'from' | 'to'>>;
   RemoveUserAssigned?: Resolver<Maybe<ResolversTypes['_RemoveUserAssignedPayload']>, ParentType, ContextType, RequireFields<MutationRemoveUserAssignedArgs, 'from' | 'to'>>;
   MergeUserAssigned?: Resolver<Maybe<ResolversTypes['_MergeUserAssignedPayload']>, ParentType, ContextType, RequireFields<MutationMergeUserAssignedArgs, 'from' | 'to'>>;
@@ -3795,6 +4112,42 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 export interface JsonScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['JSON'], any> {
   name: 'JSON';
 }
+
+export type _AddGardenSettingsPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddGardenSettingsPayload'] = ResolversParentTypes['_AddGardenSettingsPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['GardenSettings']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['Garden']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _RemoveGardenSettingsPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveGardenSettingsPayload'] = ResolversParentTypes['_RemoveGardenSettingsPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['GardenSettings']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['Garden']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _MergeGardenSettingsPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeGardenSettingsPayload'] = ResolversParentTypes['_MergeGardenSettingsPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['GardenSettings']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['Garden']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _AddGardenSettingsGardenPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddGardenSettingsGardenPayload'] = ResolversParentTypes['_AddGardenSettingsGardenPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['GardenSettings']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['Garden']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _RemoveGardenSettingsGardenPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_RemoveGardenSettingsGardenPayload'] = ResolversParentTypes['_RemoveGardenSettingsGardenPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['GardenSettings']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['Garden']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type _MergeGardenSettingsGardenPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_MergeGardenSettingsGardenPayload'] = ResolversParentTypes['_MergeGardenSettingsGardenPayload']> = {
+  from?: Resolver<Maybe<ResolversTypes['GardenSettings']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['Garden']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
 
 export type _AddUserAssignedPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['_AddUserAssignedPayload'] = ResolversParentTypes['_AddUserAssignedPayload']> = {
   from?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
@@ -4247,7 +4600,7 @@ export type _MergeGardenFeatureShapePayloadResolvers<ContextType = any, ParentTy
 };
 
 export type SubscriptionResolvers<ContextType = any, ParentType extends ResolversParentTypes['Subscription'] = ResolversParentTypes['Subscription']> = {
-  WateringTaskChange?: SubscriptionResolver<Maybe<ResolversTypes['Boolean']>, 'WateringTaskChange', ParentType, ContextType>;
+  WateringTaskChange?: SubscriptionResolver<Maybe<ResolversTypes['Boolean']>, "WateringTaskChange", ParentType, ContextType>;
 };
 
 export type _Neo4jTimeResolvers<ContextType = any, ParentType extends ResolversParentTypes['_Neo4jTime'] = ResolversParentTypes['_Neo4jTime']> = {
@@ -4307,12 +4660,13 @@ export type Resolvers<ContextType = any> = {
   WateringPeriod?: WateringPeriodResolvers<ContextType>;
   _Neo4jDate?: _Neo4jDateResolvers<ContextType>;
   Garden?: GardenResolvers<ContextType>;
+  GardenSettings?: GardenSettingsResolvers<ContextType>;
+  _Neo4jPoint?: _Neo4jPointResolvers<ContextType>;
   WateringTask?: WateringTaskResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
   ChangeRequest?: ChangeRequestResolvers<ContextType>;
   LogEvent?: LogEventResolvers<ContextType>;
   GeoShape?: GeoShapeResolvers<ContextType>;
-  _Neo4jPoint?: _Neo4jPointResolvers<ContextType>;
   GardenLayer?: GardenLayerResolvers<ContextType>;
   GardenFeature?: GardenFeatureResolvers<ContextType>;
   PolygonShape?: PolygonShapeResolvers<ContextType>;
@@ -4320,6 +4674,12 @@ export type Resolvers<ContextType = any> = {
   UserSettings?: UserSettingsResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   JSON?: GraphQLScalarType;
+  _AddGardenSettingsPayload?: _AddGardenSettingsPayloadResolvers<ContextType>;
+  _RemoveGardenSettingsPayload?: _RemoveGardenSettingsPayloadResolvers<ContextType>;
+  _MergeGardenSettingsPayload?: _MergeGardenSettingsPayloadResolvers<ContextType>;
+  _AddGardenSettingsGardenPayload?: _AddGardenSettingsGardenPayloadResolvers<ContextType>;
+  _RemoveGardenSettingsGardenPayload?: _RemoveGardenSettingsGardenPayloadResolvers<ContextType>;
+  _MergeGardenSettingsGardenPayload?: _MergeGardenSettingsGardenPayloadResolvers<ContextType>;
   _AddUserAssignedPayload?: _AddUserAssignedPayloadResolvers<ContextType>;
   _RemoveUserAssignedPayload?: _RemoveUserAssignedPayloadResolvers<ContextType>;
   _MergeUserAssignedPayload?: _MergeUserAssignedPayloadResolvers<ContextType>;

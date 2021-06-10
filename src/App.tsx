@@ -16,6 +16,7 @@ import {
   Home as HomeIcon,
   Map as MapIcon,
   Opacity as WaterdropIcon,
+  Settings as SettingsIcon
 } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/styles'
 import * as React from 'react'
@@ -30,7 +31,7 @@ import {
 
 import { Login } from './components'
 import {
-  GardenOverviewPage,
+  GardenOverviewPage, GardenSettingsPage,
   Home,
   LandingPage,
   LetItRainEntry,
@@ -43,7 +44,6 @@ import { withRoot } from './withRoot'
 
 function Routes() {
   const { path } = useRouteMatch()
-  console.log( { path } )
   const classes = useStyles()
 
   // @ts-ignore
@@ -57,6 +57,7 @@ function Routes() {
         component={CalendarAndNotifications}
       />
       <Route path={`${path}/settings`} component={Settings} />
+      <Route path={`${path}/garden-settings`} component={GardenSettingsPage} />
     </div>
   )
 }
@@ -126,6 +127,11 @@ function App() {
             icon={<EventNoteIcon />}
             aria-label="mentioned"
             {...a11yTabProps( 3, 'notifications' )}
+          />
+          <Tab
+            icon={<SettingsIcon />}
+            aria-label="settings"
+            {...a11yTabProps( 4, 'garden-settings' )}
           />
         </Tabs>
       </BottomNavigation>

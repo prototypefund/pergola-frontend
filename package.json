@@ -68,6 +68,7 @@
     "pixi.js": "^5.3.3",
     "prop-types": "^15.7.2",
     "pushkit": "^3.2.1",
+    "rambda": "^6.7.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-hotkeys-hook": "^3.0.3",

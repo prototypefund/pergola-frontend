@@ -13,6 +13,18 @@
     "refresh": "refresh",
     "later": "later"
   },
+  "settings": {
+    "title": "garden settings",
+    "gardenName": "garden name",
+    "gardenShortDesc": "short description",
+    "gardenHomepage": "homepage",
+    "gardenInfoPage": "informative page",
+    "gardenLogo": "garden logo",
+    "gardenLogoHelp": "paste a url to the logo",
+    "gardenMaintainer": "administrative maintainer of the garden",
+    "gardenLocation": "location",
+    "gardenShape": "geographical shape"
+  },
   "cancel": "cancel",
   "okay": "okay",
   "save": "save",

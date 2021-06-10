@@ -128,6 +128,7 @@ export function KeycloakRoot( { persistor } ) {
         }
         if ( event === 'onAuthSuccess' ) {
           keycloak.loadUserProfile().then( function ( profile ) {
+
             dispatch( setUserProfile( profile ))
           } )
         }
