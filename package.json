@@ -49,6 +49,7 @@
     "@uiw/react-md-editor": "^2.1.10",
     "apollo-link-ws": "^1.0.20",
     "avataaars": "^1.2.1",
+    "date-fns": "^2.22.1",
     "dayjs": "^1.9.7",
     "dotenv": "^8.2.0",
     "git": "^0.1.5",
