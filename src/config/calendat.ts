@@ -1,1 +1,1 @@
-export const webdavUrl = process.env.WEBDAV_URL || 'http://localhost:4001/calendar'
+export const webdavUrl = process.env.REACT_APP_WEBDAV__URL || 'http://localhost:4001/calendar'

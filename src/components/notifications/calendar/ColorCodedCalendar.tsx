@@ -69,7 +69,7 @@ export function ColorCodedCalendar( {jcalData}:any ) {
 export function PersonalCalendar() {
   return (
     <>
-      <CalDav root={process.env.WEBDAV_URL || 'http://localhost:4001/calendar'}
+      <CalDav root={process.env.REACT_APP_WEBDAV__URL || 'http://localhost:4001/calendar'}
         path={'/public/example.ics'} >
         <ColorCodedCalendar />
       </CalDav>

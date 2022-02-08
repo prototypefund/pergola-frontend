@@ -43,7 +43,7 @@ const keycloak = Keycloak( {
     'keycloak-connect-graphql-public',
 } )
 
-const uri = process.env.PERGOLA_API_URL || 'http://localhost:4001/graphql'
+const uri = process.env.REACT_APP_PERGOLA_API_URL || 'http://localhost:4001/graphql'
 const wsUri = uri.replace( /^http(s?)/, 'ws$1' )
 const cache = new InMemoryCache()
 

@@ -28,7 +28,7 @@ export function ExampleCalendar() {
         {'@media print {.rs-calendar-header-forward, .rs-calendar-header-backward, .rs-calendar-btn-today {display: none} .rs-calendar-panel .rs-calendar-table-cell-selected .rs-calendar-table-cell-content {border: none;}.rs-calendar-panel .rs-calendar-table-cell-is-today .rs-calendar-table-cell-day{color: inherit; background: none;}}' }
       </style>
       <CalDav
-        root={process.env.WEBDAV_URL || 'http://localhost:4001/calendar'}
+        root={process.env.REACT_APP_WEBDAV__URL || 'http://localhost:4001/calendar'}
         path={'/public/wateringTasks.ics'}
       >
         <Calendar bordered renderCell={renderCell} isoWeek={true} />

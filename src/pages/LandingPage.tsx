@@ -32,7 +32,6 @@ export interface LandingPage_Info {
 export function LandingPage() {
   const { t } = useTranslation()
   const { url } = useRouteMatch()
-  console.log( { url } )
   const { keycloak } = useKeycloak()
   const classes = useStyles()
   const [selectedGarden, setSelectedGarden] = useState( '' )
